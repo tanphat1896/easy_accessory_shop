@@ -20,6 +20,9 @@ Route::get('/cart', function() {
 Route::get('/checkout', function() {
 	return view('frontend.cart.checkout');
 });
+Route::get('/detail', function() {
+	return view('frontend.product_viewer.detail_view');
+});
 
 Auth::routes();
 

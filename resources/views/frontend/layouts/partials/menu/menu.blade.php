@@ -1,5 +1,5 @@
 <div class="ui six item square-border no-margin menu">
-    <a class="item">
+    <a class="item" href="/">
         <i class="home icon"></i> Home
     </a>
     <a class="item">

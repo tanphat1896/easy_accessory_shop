@@ -2,8 +2,8 @@
 <div class="ui attached segment">
     <div class="ui six column computer four column tablet stackable grid">
         <div class="column">
-            <div class="ui fluid link card">
-                <div class="dimmable image">
+            <div class="ui fluid link card" onclick="window.location.href='/detail'">
+                <div class="image">
                     <div class="ui red right corner  label">Mới</div>
                     <div class="ui dimmer">
                         <div class="content">
