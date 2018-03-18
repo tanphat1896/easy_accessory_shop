@@ -23,6 +23,11 @@ Route::get('/checkout', function() {
 Route::get('/detail', function() {
 	return view('frontend.product_viewer.detail_view');
 });
+Route::post('/cart/addproduct/{id?}', 'CardController@addProductToCart');
+
+Route::get('/hdd', function() {
+    return view('frontend.product_category.hdd');
+});
 
 Auth::routes();
 

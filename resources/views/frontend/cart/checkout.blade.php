@@ -41,7 +41,7 @@
                 <strong>Đã có tài khoản?</strong>
             </button>
 
-            <form action="" class="ui basic form segment">
+            <form action="" class="ui basic form segment no-lr-padding">
                 <div class="two fields">
                     <div class="field required">
                         <label for="name">Họ và tên</label>

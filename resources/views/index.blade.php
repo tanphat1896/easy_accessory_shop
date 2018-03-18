@@ -7,7 +7,7 @@
 
 
     <div class="ui basic segment">
-        @include('frontend.products.usb')
+        @include('frontend.product_category.usb')
 
         <div class="ui top attached segment"> Sản phẩm hot </div>
         <div class="ui attached segment">

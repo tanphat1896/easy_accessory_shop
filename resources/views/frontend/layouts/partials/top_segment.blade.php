@@ -33,10 +33,20 @@
             <i class="user icon"></i><strong> Đăng nhập</strong>
         </div>
 
+        <div class="ui white small dropdown button">
+            <i class="user icon"></i><strong> Mr. Blabla</strong>
+            <div class="menu">
+                <div class="item">
+                    <i class="history icon"></i>
+                    Lịch sử mua hàng
+                </div>
+            </div>
+        </div>
+
         <a href="cart" class="ui white small button" style="position:relative;">
             <i class="cart icon"></i>
             <strong>Giỏ hàng</strong>
-            <span class="ui red mini floating label">1</span>
+            <span class="ui red mini floating label">{{ count(Session::get('products')) }}</span>
         </a>
     </div>
 </div>

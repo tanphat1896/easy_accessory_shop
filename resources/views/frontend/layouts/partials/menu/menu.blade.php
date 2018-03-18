@@ -2,7 +2,7 @@
     <a class="item" href="/">
         <i class="home icon"></i> Home
     </a>
-    <a class="item">
+    <a class="item" href="/hdd">
         <i class="hdd outline icon"></i> HDD
     </a>
     <a class="item">

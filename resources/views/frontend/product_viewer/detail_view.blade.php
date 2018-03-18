@@ -35,7 +35,8 @@
 
                         <div class="ui divider hidden"></div>
 
-                        <form action="" class="ui form">
+                        <form action="{{ action('CardController@addProductToCart', [1]) }}" class="ui form" method="post">
+                            {{ csrf_field() }}
                             <div class="four fields">
                                 <div class="field">
                                     <label for="">Số lượng</label>

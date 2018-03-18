@@ -31,3 +31,7 @@
 .card .corner.label {
     padding: 8px 5px 0 20px;
 }
+.no-lr-padding {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
