@@ -31,20 +31,20 @@
                     <input type="text" id="name" name="name">
                 </div>
                 <div class="inline field required">
-                    <label for="name">Email</label>
-                    <input type="text" id="name" name="name">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email">
                 </div>
                 <div class="inline field required">
-                    <label for="name">Mật khẩu</label>
-                    <input type="text" id="name" name="name">
+                    <label for="password">Mật khẩu</label>
+                    <input type="password" id="password" name="password" oninput="testStrength()">
                 </div>
                 <div class="inline field required">
-                    <label for="name">Nhập lại mật khẩu</label>
-                    <input type="text" id="name" name="name">
+                    <label for="password_confirmation">Nhập lại mật khẩu</label>
+                    <input type="password" id="password_confirmation" name="password_confirmation">
                 </div>
                 <div class="inline field">
-                    <label for="name">Địa chỉ</label>
-                    <input type="text" id="name" name="name">
+                    <label for="address">Địa chỉ</label>
+                    <input type="text" id="address" name="address">
                 </div>
                 <div class="inline field">
                     <button class="ui blue button">
@@ -56,6 +56,16 @@
         </div>
 @endsection
 
+@push('script')
+    <script type="text/javascript">
+        var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+                var mediumRegex = new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})");
+
+        function testStrength() {
+            let pwd = $('#password').text();
+        }
+    </script>
+@endpush
 
 {{--<div class="container">--}}
 {{--<div class="row">--}}

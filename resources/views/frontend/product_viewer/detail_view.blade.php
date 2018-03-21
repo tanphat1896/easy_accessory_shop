@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="{{ asset('plugin/fotorama/fotorama.css') }}">
 @endpush
 @push('script')
-    <script src="{{ asset('plugin/fotorama/fotorama.js') }}"></script>
+    
 @endpush
 
 @section('content')
@@ -18,10 +18,10 @@
         <div class="ui divider hidden"></div>
 
         <div class="ui grid stackable">
-            <div class="four wide column">
+            <div class="five wide column">
                 @include('frontend.product_viewer.slider')
             </div>
-            <div class="twelve wide column">
+            <div class="eleven wide column">
 
                 <h3 class="ui dividing header">
                     USB Apacer 8GB

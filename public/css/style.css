@@ -61,7 +61,15 @@
     margin-left: 5px;
     color: red;
 }
-
+/*
 .fotorama > div {
+    width: 100% !important;
+}*/
+
+.fotorama {
+    width: 100% !important;
+}
+
+.fotorama img {
     width: 100% !important;
 }
