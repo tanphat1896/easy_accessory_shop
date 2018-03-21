@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    $ssds = \App\SanPham::whereLoaiSanPhamId(1)->get();
+    $ssds = \App\SanPham::whereLoaiSanPhamId(1)->limit(12)->get();
 
     return view('index', compact('ssds'));
 });

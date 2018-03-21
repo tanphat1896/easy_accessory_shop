@@ -11,5 +11,6 @@
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}">
     @include('sharing.stylesheet')
 
+    <link rel="stylesheet" href="{{ asset('plugin/fotorama/fotorama.css') }}">
 
 </head>

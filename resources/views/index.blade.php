@@ -3,10 +3,10 @@
 @section('title', 'Trang chủ')
 
 @section('content')
-
-
-
     <div class="ui basic segment">
+        
+        @include('frontend.layouts.partials.slider_news')
+
         @include('frontend.product_category.ssd')
 
         @include('frontend.product_category.usb')
@@ -17,11 +17,6 @@
         </div>
 
         <div class="ui top attached segment"> Khuyen mai </div>
-        <div class="ui attached segment">
-            blblablabal
-        </div>
-
-        <div class="ui top attached segment"> blabla</div>
         <div class="ui attached segment">
             blblablabal
         </div>

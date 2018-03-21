@@ -24,4 +24,3 @@
         <img src="{{ asset('assets/images/uploaded/products/usb/kingston16gapts.jpg') }}">
     </a>
 </div>
-<script src="{{ asset('plugin/fotorama/fotorama.js') }}"></script>

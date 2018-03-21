@@ -2,13 +2,6 @@
 
 @section('title', 'Chi tiết mặt hàng')
 
-@push('style')
-    <link rel="stylesheet" href="{{ asset('plugin/fotorama/fotorama.css') }}">
-@endpush
-@push('script')
-    
-@endpush
-
 @section('content')
 <div class="ui basic segment no-margin-top">
     <div class="ui container">
