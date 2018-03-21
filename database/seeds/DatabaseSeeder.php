@@ -11,6 +11,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('thuong_hieus')->insert([
+            'ten_thuong_hieu' => 'Samsung',
+            'logo' => 1
+        ]);
+        DB::table('loai_san_phams')->insert([
+            ['ten_loai' => 'SSD'],
+            ['ten_loai' => 'Keyboard']
+        ]);
          $this->call(SanPhamTableSeeder::class);
     }
 }

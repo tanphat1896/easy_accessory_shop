@@ -1,5 +1,6 @@
 .search {
     margin-left: 5%;
+    margin-top: 5px;
 }
 .search input.prompt{
     border-radius: 3px !important;

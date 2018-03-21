@@ -21,7 +21,7 @@
                     </div>
                     <div class="content">
                         <p>{{ $ssd->ten_san_pham }}</p>
-                        <p>2.000.000</p>
+                        <p>{{ number_format($ssd->gia()->first()->gia) }} đ</p>
                         <div class="ui star rating disabled" data-rating="4"></div>
                     </div>
                 </div>
