@@ -1,6 +1,6 @@
 <div class="ui top blue attached segment"><strong>USB</strong></div>
 <div class="ui attached segment">
-    <div class="ui six column computer four column tablet stackable grid">
+    <div class="ui six divided column computer four column tablet stackable  grid">
         <div class="column">
             <div class="ui fluid link card" onclick="window.location.href='/detail'">
                 <div class="image">
@@ -57,11 +57,3 @@
         </div>
     </div>
 </div>
-
-@push('script')
-    <script>
-        $('.ui.card .image').dimmer({
-            on: 'hover'
-        });
-    </script>
-@endpush

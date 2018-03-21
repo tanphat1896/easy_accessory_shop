@@ -46,7 +46,13 @@
         <a href="cart" class="ui white small button" style="position:relative;">
             <i class="cart icon"></i>
             <strong>Giỏ hàng</strong>
-            <span class="ui red mini floating label">{{ count(Session::get('products')) }}</span>
+            <span class="ui red mini floating label">
+                @if(Session::has('products'))
+                    {{ count(Session::get('products')) }}
+                @else
+                    {{ 0 }}
+                @endif
+            </span>
         </a>
     </div>
 </div>

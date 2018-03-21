@@ -9,7 +9,7 @@
             {{ csrf_field() }}
 
             <div class="field">
-                <label for="name">Tài khoản</label>
+                <label for="name">Email/Tài khoản</label>
                 <input type="text" name="username" placeholder="Nhập tên tài khoản">
             </div>
 
@@ -23,7 +23,7 @@
             </div>
 
             <div class="field">
-                <button class="ui fluid blue button">Đăng nhập</button>
+                <button class="ui fluid blue button"><strong>Đăng nhập</strong></button>
             </div>
 
             <div class="field center-aligned">

@@ -12,7 +12,9 @@
 */
 
 Route::get('/', function () {
-    return view('index');
+    $ssds = \App\SanPham::whereLoaiSanPhamId(2)->get();
+
+    return view('index', compact('ssds'));
 });
 Route::get('/cart', function() {
 	return view('frontend.cart.index');

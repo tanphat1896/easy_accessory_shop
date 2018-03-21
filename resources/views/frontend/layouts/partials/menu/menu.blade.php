@@ -1,4 +1,4 @@
-<div class="ui six item square-border no-margin menu">
+<div class="ui square-border no-margin menu">
     <a class="item" href="/">
         <i class="home icon"></i> Home
     </a>
@@ -16,5 +16,11 @@
     </a>
     <a class="item">
         <i class="usb icon"></i> USB
+    </a>
+    <a class="item">
+        <i class="headphone icon"></i> Headphone
+    </a>
+    <a class="item">
+        <i class="keyboard icon"></i> Bàn phím
     </a>
 </div>

@@ -7,6 +7,8 @@
 
 
     <div class="ui basic segment">
+        @include('frontend.product_category.ssd')
+
         @include('frontend.product_category.usb')
 
         <div class="ui top attached segment"> Sản phẩm hot </div>
@@ -38,5 +40,7 @@
                 {title: 'Blabla fds fsda fdsa', price: "100.000 VND", image: '{{ asset('assets/images/uploaded/products/usb/usb-sandisk-sdcz50-8gb-20-xanh-duong-200x200.jpg') }}'},
             ]
         });
+
+        $('.ui.rating').rating('disable');
     </script>
 @endpush
