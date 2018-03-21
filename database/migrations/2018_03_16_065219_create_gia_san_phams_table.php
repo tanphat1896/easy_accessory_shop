@@ -17,7 +17,7 @@ class CreateGiaSanPhamsTable extends Migration
             $table->increments('id');
             $table->integer('san_pham_id')->unsigned();
             $table->dateTime('ngay_cap_nhat');
-            $table->float('gia');
+            $table->double('gia');
             $table->foreign('san_pham_id','fk_gsp_sp')->references('id')->on('san_phams');
         });
     }

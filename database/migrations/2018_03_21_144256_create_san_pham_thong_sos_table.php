@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateThongSoKyThuatsTable extends Migration
+class CreateSanPhamThongSosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateThongSoKyThuatsTable extends Migration
      */
     public function up()
     {
-        Schema::create('thong_so_ky_thuats', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('ten_thong_so',50);
+        Schema::create('san_pham_thong_sos', function (Blueprint $table) {
+            $table->integer('san_pham_id')->unsigned();
+            $table->integer('thong_so_id')->unsigned();
+            $table->string('gia_tri',255);
         });
     }
 
@@ -26,6 +27,6 @@ class CreateThongSoKyThuatsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('thong_so_ky_thuats');
+        Schema::dropIfExists('san_pham_thong_sos');
     }
 }

@@ -19,7 +19,7 @@ class CreateDonHangsTable extends Migration
             $table->string('email_nguoi_nhan',100);
             $table->string('sdt_nguoi_nhan',11);
             $table->integer('tai_khoan_id')->nullable()->unsigned();
-            $table->float('tong_tien');
+            $table->double('tong_tien');
             $table->string('ghi_chu',500);
             $table->string('tinh_trang',255);
             $table->dateTime('ngay_dat_hang');
