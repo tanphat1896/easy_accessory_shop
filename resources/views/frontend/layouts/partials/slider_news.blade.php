@@ -10,12 +10,21 @@
 @endpush
 <div class="ui grid stackable computer only">
     <div class="ten wide column">
-        <div class="fotorama" data-autoplay="true">
+        <div class="fotorama" data-autoplay="3s">
             <a href="{{ asset('assets/images/slider/1.png') }}">
                 <img src="{{ asset('assets/images/slider/1.png') }}">
             </a>
-            <a href="{{ asset('assets/images/slider/2.jpg') }}">
-                <img src="{{ asset('assets/images/slider/2.jpg') }}">
+            <a href="{{ asset('assets/images/slider/22.jpg') }}">
+                <img src="{{ asset('assets/images/slider/22.jpg') }}">
+            </a>
+            <a href="{{ asset('assets/images/slider/2.png') }}">
+                <img src="{{ asset('assets/images/slider/2.png') }}">
+            </a>
+            <a href="{{ asset('assets/images/slider/33.jpg') }}">
+                <img src="{{ asset('assets/images/slider/33.jpg') }}">
+            </a>
+            <a href="{{ asset('assets/images/slider/4.jpg') }}">
+                <img src="{{ asset('assets/images/slider/4.jpg') }}">
             </a>
         </div>
     </div>
