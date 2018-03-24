@@ -24,14 +24,13 @@ class ThuongHieuFormRequest extends FormRequest
     public function rules()
     {
         return [
-//            'ten-thuong-hieu' => 'unique|required|max:255'
+            'ten-thuong-hieu' => 'required|max:255'
         ];
     }
 
     public function messages() {
         return [
             'ten-thuong-hieu.required' => 'Tên thương hiệu không được bỏ trống',
-            'ten-thuong-hieu.unique' => 'Tên thương hiệu đã tồn tại rồi',
             'ten-thuong-hieu.max' => 'Tên thương hiệu phải ít hơn 255 ký tự'
         ];
     }

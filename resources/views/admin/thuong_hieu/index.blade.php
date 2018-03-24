@@ -7,7 +7,7 @@
     @if(Session::has('success'))
         <div class="ui small positive message">
             {{ Session::get('success') }}
-            <i class="close icon" onclick="$(this).closest('.message').transition('slide')"></i>
+            <i class="close icon" onclick="$(this).closest('.message').transition('fade')"></i>
         </div>
     @endif
     @if(Session::has('errors'))
@@ -18,7 +18,7 @@
                     <li>{{ $error }}</li>
                 @endforeach
             </ul>
-            <i class="close icon" onclick="$(this).closest('.message').transition('slide')"></i>
+            <i class="close icon" onclick="$(this).closest('.message').transition('fade')"></i>
         </div>
     @endif
     <form action="{{ route('thuong_hieu.destroy', [0]) }}" method="post">

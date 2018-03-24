@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ThuongHieu extends Model
 {
-    protected $fillable = ['ten_thuong_hieu', 'logo'];
+    protected $fillable = ['ten_thuong_hieu', 'slug'];
 
     public $timestamps = [];
 
@@ -16,5 +16,9 @@ class ThuongHieu extends Model
 
     public function khongCoSanPham() {
         return $this->sanPhams->isEmpty();
+    }
+
+    public static function daTonTai($slug) {
+        return !self::whereSlug($slug)->get()->isEmpty();
     }
 }

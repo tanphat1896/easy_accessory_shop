@@ -7,7 +7,7 @@
 
             <div class="field">
                 <label for="ten-thuong-hieu">Tên thương hiệu</label>
-                <input type="text" id="ten-thuong-hieu" name="ten-thuong-hieu">
+                <input type="text" id="ten-thuong-hieu" name="ten-thuong-hieu" required>
             </div>
             <div class="field">
                 <button class="ui blue fluid button"><strong>Lưu</strong></button>
@@ -28,7 +28,7 @@
 
                 <div class="field">
                     <label for="">Tên thương hiệu</label>
-                    <input type="text" value="{{ $brand->ten_thuong_hieu }}" name="ten-thuong-hieu">
+                    <input type="text" value="{{ $brand->ten_thuong_hieu }}" name="ten-thuong-hieu" required>
                 </div>
                 <div class="field">
                     <button class="ui basic blue fluid button"><strong>Lưu</strong></button>

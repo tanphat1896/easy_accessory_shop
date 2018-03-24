@@ -40,11 +40,16 @@ class ThuongHieuController extends Controller
      */
     public function store(ThuongHieuFormRequest $request)
     {
-        $brand = new ThuongHieu();
-        $brand->ten_thuong_hieu = $request->get('ten-thuong-hieu');
-        $brand->slug = StringHelper::toSlug($brand->ten_thuong_hieu);
+        $name = $request->get('ten-thuong-hieu');
+        $slug = StringHelper::toSlug($name);
 
-        $brand->save();
+        if (ThuongHieu::daTonTai($slug))
+            return back()->with('errors', ["$name đã tồn tại"]);
+
+        ThuongHieu::create([
+            'ten_thuong_hieu' => $name,
+            'slug' => $slug
+        ]);
 
         return back()->with('success', 'Thêm thành công');
     }
