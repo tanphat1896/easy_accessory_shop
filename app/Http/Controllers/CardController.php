@@ -14,6 +14,7 @@ class CardController extends Controller
 
         session(['products' => $products]);
 
+        
         return back();
     }
 }
