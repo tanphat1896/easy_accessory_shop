@@ -11,6 +11,8 @@
 
     @include('sharing.stylesheet')
 
+    {{--<link rel="stylesheet" href="{{ asset('plugin/datatable/dataTables.semanticui.min.css') }}">--}}
+
 {{--    <link href="{{ asset('assets/admin/plugins/chartist/chartist.css') }}" rel="stylesheet" />--}}
 {{--    <link href="{{ asset('assets/admin/plugins/datepicker/css/bootstrap-datepicker3.css') }}" rel="stylesheet" />--}}
 

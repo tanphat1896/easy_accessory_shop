@@ -25,7 +25,7 @@
                 <i class="edit icon"></i>
                 Đăng ký tài khoản
             </h2>
-            <form action="" class="ui form center-aligned" id="register-form">
+            <form action="{{ route('register') }}" class="ui form center-aligned" id="register-form">
                 <div class="inline field required">
                     <label for="name">Họ và tên</label>
                     <input type="text" id="name" name="name">

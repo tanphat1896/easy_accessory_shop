@@ -1,23 +1,48 @@
+{{--<script src="{{ asset('plugin/datatable/jquery.dataTables.min.js') }}"></script>--}}
+{{--<script src="{{ asset('plugin/datatable/dataTables.semanticui.min.js') }}"></script>--}}
 <script>
-    $('#btn-toggle-menu').click(function(){
 
-        let wideMenu = $('#wide-menu');
-        let thinMenu = $('#thin-menu');
+    function toggleSidebar() {
+        let collapsed = false;
+        let sidebar = $('#sidebar');
+        let mainContainer = $('#main-container');
+        let logo = $('#logo');
+        return function () {
+            if (collapsed) {
+                loadWideSidebar(sidebar, mainContainer, logo);
+                collapsed = false;
+                return;
+            }
+            loadThinSidebar(sidebar, mainContainer, logo);
+            collapsed = true;
+        };
+    }
 
-        $(thinMenu).transition('slide right', 500);
-        $(wideMenu).transition('slide right', 500);
-        if ($(this).data('menu') === "wide") {
-            $('#main-container').animate({marginLeft: 50}, 300);
-            $(this).data('menu', "thin");
-            $('#logo').animate({width: 50}, 300, function() {
-                $('#logo').find('img').attr('src', "{{ asset('assets/images/thumb.png') }}");
-            });
+    function loadWideSidebar(sidebar, mainContainer, logo) {
+        let width = 220;
+        let margin = 220;
+        let duration = 250;
+        $(logo).find('img').attr('src', "{{ asset('assets/images/logo.png') }}");
+        $(logo).animate({width: width}, duration);
+        animating(sidebar, mainContainer, width, margin, duration);
+        $(sidebar).load('/admin/sidebar-wide').removeClass('icon');
+    }
+    function loadThinSidebar(sidebar, mainContainer, logo) {
+        let width = 50;
+        let margin = 50;
+        let duration = 250;
+        $(logo).animate({width: width}, duration, function() {
+            $(logo).find('img').attr('src', "{{ asset('assets/images/thumb.png') }}");
+        });
+        animating(sidebar, mainContainer, width, margin, duration);
+        $(sidebar).load('/admin/sidebar-thin').addClass('icon');
+    }
 
-        } else {
-            $('#main-container').animate({marginLeft: 220}, 300);
-            $(this).data('menu', "wide");
-            $('#logo').animate({width: 220}, 300);
-            $('#logo').find('img').attr('src', "{{ asset('assets/images/logo.png') }}");
-        }
-    });
+    function animating(sidebar, mainContainer, width, marginLeft, duration) {
+        $(sidebar).animate({width: width}, duration);
+        $(mainContainer).animate({marginLeft: marginLeft}, duration);
+    }
+
+    $('#btn-toggle-menu').click(toggleSidebar());
+
 </script>

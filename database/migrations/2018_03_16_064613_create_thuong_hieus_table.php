@@ -16,7 +16,7 @@ class CreateThuongHieusTable extends Migration
         Schema::create('thuong_hieus', function (Blueprint $table) {
             $table->increments('id');
             $table->string('ten_thuong_hieu',255);
-            $table->string('logo',100);
+            $table->string('slug',255);
         });
     }
 

@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
     {
         DB::table('thuong_hieus')->insert([
             'ten_thuong_hieu' => 'Samsung',
-            'logo' => 1
+            'slug' => 'samsung'
         ]);
         DB::table('loai_san_phams')->insert([
             ['ten_loai' => 'SSD'],

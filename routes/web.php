@@ -50,3 +50,13 @@ Route::get('/admin', function(){
 Route::get('/products', function () {
 	return view('admin.products.index');
 });
+
+
+Route::resource('/admin/thuong_hieu', 'Admin\ThuongHieuController');
+
+Route::get('/admin/sidebar-wide', function() {
+    return view('admin.layouts.components.sidebar_wide');
+});
+Route::get('/admin/sidebar-thin', function() {
+    return view('admin.layouts.components.sidebar_thin');
+});

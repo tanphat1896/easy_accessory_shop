@@ -40,3 +40,12 @@
 .left-aligned {
     text-align: left !important;
 }
+
+.accordion .menu .title.item {
+    padding-left: 35px !important;
+    font-size: 13px !important;
+}
+
+.accordion .menu .title.item:before {
+    content: '+' !important;
+}
