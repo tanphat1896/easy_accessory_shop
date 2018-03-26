@@ -49,3 +49,7 @@
 .accordion .menu .title.item:before {
     content: '+' !important;
 }
+
+#admin-avt {
+    margin-right: 5px;
+}

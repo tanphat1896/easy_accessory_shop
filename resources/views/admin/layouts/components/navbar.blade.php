@@ -19,8 +19,9 @@
             </div>
         </div>
         <div href="" class="ui dropdown item">
-            <img src="{{ asset('assets/admin/img/avatar/people/Rick.png') }}" alt="" class="ui mini circular image">
-            Nguyễn Văn A
+            <img id="admin-avt" src="{{ asset('assets/images/uploaded/avt/steve.jpg') }}" class="ui mini circular image">
+            <strong>Nguyễn Văn A</strong>
+            <i class="dropdown icon"></i>
             <div class="menu">
                 <a href="" class="item">Đăng xuất</a>
                 <a href="" class="item">Thông tin</a>
