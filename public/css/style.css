@@ -69,3 +69,14 @@
 .fotorama img {
     width: 100% !important;
 }
+
+.icon-left {
+    float: unset !important;
+    margin-right: 8px !important;
+    margin-left: 0 !important;
+    width: 15px !important;
+}
+
+.icon-accordion {
+    margin-right: 5px !important;
+}

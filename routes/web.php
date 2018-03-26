@@ -33,28 +33,23 @@ Route::get('/hdd', function() {
 
 Auth::routes();
 
-
-
-
-
-
-
-
-
-
-Route::get('/admin', function(){
-	return view('admin');
-});
-
+// admin routes
 
 Route::get('/products', function () {
 	return view('admin.products.index');
 });
 
 
-Route::resource('/admin/thuong_hieu', 'Admin\ThuongHieuController', ["except" => ["create", "show", "edit"]]);
-Route::resource('/admin/loai_sp', 'Admin\LoaiSanPhamController', ["except" => ["create", "show", "edit"]]);
-Route::resource('/admin/nha_cung_cap', 'Admin\NhaCungCapController', ["except" => ["create", "show", "edit"]]);
+Route::group(['prefix' => 'admin'], function() {
+    Route::get('/', function(){
+        return view('admin');
+    });
+    Route::resource('thuong_hieu', 'Admin\ThuongHieuController', ["except" => ["create", "show", "edit"]]);
+    Route::resource('loai_sp', 'Admin\LoaiSanPhamController', ["except" => ["create", "show", "edit"]]);
+    Route::resource('nha_cung_cap', 'Admin\NhaCungCapController', ["except" => ["create", "show", "edit"]]);
+    Route::resource('noi_dung/slider', 'Admin\SliderController');
+
+});
 
 Route::get('/admin/sidebar-wide', function() {
     return view('admin.layouts.components.sidebar_wide');
