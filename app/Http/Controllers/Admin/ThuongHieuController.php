@@ -10,11 +10,7 @@ use App\Http\Controllers\Controller;
 
 class ThuongHieuController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $brands = ThuongHieu::paginate(5);
@@ -22,22 +18,6 @@ class ThuongHieuController extends Controller
         return view('admin.thuong_hieu.index')->withBrands($brands);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(ThuongHieuFormRequest $request)
     {
         $name = $request->get('ten-thuong-hieu');
@@ -54,35 +34,6 @@ class ThuongHieuController extends Controller
         return back()->with('success', 'Thêm thành công');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $brand = ThuongHieu::findOrFail($id);

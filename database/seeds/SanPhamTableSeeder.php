@@ -30,13 +30,16 @@ class SanPhamTableSeeder extends Seeder
                 'ngay_tao' => date('Y-m-d H:i:s'),
                 'ngay_cap_nhat' => date('Y-m-d H:i:s'),
                 'tinh_trang' => 1,
-                'anh_dai_dien' => 'assets/images/uploaded/products/ssd/' . $ssd->img
-
+                'anh_dai_dien' => 'assets/images/uploaded/products/ssd/' . $ssd->img,
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
             ]);
             DB::table('gia_san_phams')->insert([
                 'san_pham_id' => $idx + 1,
                 'ngay_cap_nhat' => date('Y-m-d H:i:s'),
-                'gia' => (float)$ssd->price
+                'gia' => (float)$ssd->price,
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
             ]);
         }
     }
@@ -49,13 +52,15 @@ class SanPhamTableSeeder extends Seeder
                 'ten_san_pham' => $keyboard->name,
                 'so_luong' => random_int(0, 10),
                 'mo_ta' => 'Keyboard',
-                'diem_danh_gia' => 0,
+                'diem_danh_gia' => random_int(0, 5),
                 'loai_san_pham_id' => 2,
                 'thuong_hieu_id' => 1,
                 'ngay_tao' => date('Y-m-d H:i:s'),
                 'ngay_cap_nhat' => date('Y-m-d H:i:s'),
                 'tinh_trang' => 1,
-                'anh_dai_dien' => 'assets/images/uploaded/products/keyboard/' . $keyboard->img
+                'anh_dai_dien' => 'assets/images/uploaded/products/keyboard/' . $keyboard->img,
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
 
             ]);
         }

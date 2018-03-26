@@ -29,7 +29,9 @@
         @include('admin.thuong_hieu.table')
 
         <button type="submit" class="ui red delete button"
-                data-content="Xóa các mục vừa chọn">
+                data-content="Xóa các mục vừa chọn"
+                onclick="return confirm('Bạn chắc chắn xóa các mục vừa chọn')"
+                >
             <i class="delete icon"></i>
             <strong>Xóa </strong>
         </button>

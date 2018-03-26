@@ -52,7 +52,9 @@ Route::get('/products', function () {
 });
 
 
-Route::resource('/admin/thuong_hieu', 'Admin\ThuongHieuController');
+Route::resource('/admin/thuong_hieu', 'Admin\ThuongHieuController', ["except" => ["create", "show", "edit"]]);
+Route::resource('/admin/loai_sp', 'Admin\LoaiSanPhamController', ["except" => ["create", "show", "edit"]]);
+Route::resource('/admin/nha_cung_cap', 'Admin\NhaCungCapController', ["except" => ["create", "show", "edit"]]);
 
 Route::get('/admin/sidebar-wide', function() {
     return view('admin.layouts.components.sidebar_wide');

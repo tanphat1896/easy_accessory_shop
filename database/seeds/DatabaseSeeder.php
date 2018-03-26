@@ -16,8 +16,8 @@ class DatabaseSeeder extends Seeder
             'slug' => 'samsung'
         ]);
         DB::table('loai_san_phams')->insert([
-            ['ten_loai' => 'SSD'],
-            ['ten_loai' => 'Keyboard']
+            ['ten_loai' => 'SSD', 'slug' => 'ssd'],
+            ['ten_loai' => 'Keyboard', 'slug' => 'keyboard']
         ]);
          $this->call(SanPhamTableSeeder::class);
     }
