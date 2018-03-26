@@ -17,6 +17,7 @@ class CreateSanPhamThongSosTable extends Migration
             $table->integer('san_pham_id')->unsigned();
             $table->integer('thong_so_id')->unsigned();
             $table->string('gia_tri',255);
+            $table->timestamps();
         });
     }
 

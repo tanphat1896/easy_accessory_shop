@@ -26,6 +26,7 @@ class CreateDonHangsTable extends Migration
             $table->dateTime('ngay_duyet_don');
             $table->string('hinh_thuc_thanh_toan',100);
             $table->foreign('tai_khoan_id','fk_dh_tk')->references('id')->on('tai_khoans');
+            $table->timestamps();
         });
     }
 

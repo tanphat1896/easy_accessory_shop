@@ -27,6 +27,7 @@ class CreateSanPhamsTable extends Migration
             $table->string('anh_dai_dien');
             $table->foreign('loai_san_pham_id','fk_sp_lsp')->references('id')->on('loai_san_phams');
             $table->foreign('thuong_hieu_id','fk_sp_th')->references('id')->on('thuong_hieus');
+            $table->timestamps();
         });
     }
 

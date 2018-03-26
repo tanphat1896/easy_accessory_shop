@@ -18,6 +18,7 @@ class CreateNhaCungCapsTable extends Migration
             $table->string('ten_ncc',255);
             $table->string('dia_chi',255);
             $table->string('so_dien_thoai',11);
+            $table->timestamps();
         });
     }
 

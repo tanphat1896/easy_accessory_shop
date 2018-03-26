@@ -17,6 +17,7 @@ class CreateThuongHieusTable extends Migration
             $table->increments('id');
             $table->string('ten_thuong_hieu',255);
             $table->string('slug',255);
+            $table->timestamps();
         });
     }
 

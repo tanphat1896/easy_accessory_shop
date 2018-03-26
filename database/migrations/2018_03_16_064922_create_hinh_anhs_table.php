@@ -18,6 +18,7 @@ class CreateHinhAnhsTable extends Migration
             $table->integer('san_pham_id')->unsigned();
             $table->string('liet_ket',255);
             $table->foreign('san_pham_id','fk_ha_sp')->references('id')->on('san_phams');
+            $table->timestamps();
         });
     }
 
