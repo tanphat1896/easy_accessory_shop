@@ -20,6 +20,7 @@ class CreatePhieuNhapsTable extends Migration
             $table->integer('ncc_id')->unsigned();
             $table->foreign('tai_khoan_id','fk_pn_tk')->references('id')->on('tai_khoans');
             $table->foreign('ncc_id','fk_pn_ncc')->references('id')->on('nha_cung_caps');
+            $table->timestamps();
         });
     }
 

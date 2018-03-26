@@ -22,6 +22,7 @@ class CreateBinhLuansTable extends Migration
             $table->integer('san_pham_id')->unsigned();
             $table->foreign('tai_khoan_id','fk_bl_tk')->references('id')->on('tai_khoans');
             $table->foreign('san_pham_id','fk_bl_sp')->references('id')->on('san_phams');
+            $table->timestamps();
         });
     }
 

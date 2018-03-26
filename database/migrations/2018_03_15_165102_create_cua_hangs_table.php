@@ -19,6 +19,7 @@ class CreateCuaHangsTable extends Migration
             $table->string('so_dien_thoai',11);
             $table->string('dia_chi',255);
             $table->string('logo',100);
+            $table->timestamps();
         });
     }
 

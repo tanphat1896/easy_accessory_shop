@@ -16,6 +16,7 @@ class CreateThongSoKyThuatsTable extends Migration
         Schema::create('thong_so_ky_thuats', function (Blueprint $table) {
             $table->increments('id');
             $table->string('ten_thong_so',50);
+            $table->timestamps();
         });
     }
 

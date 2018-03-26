@@ -20,6 +20,7 @@ class CreateDanhGiasTable extends Migration
             $table->primary(['tai_khoan_id','san_pham_id'],'pk_tksp_tk_sp');
             $table->foreign('tai_khoan_id','fk_dg_tk')->references('id')->on('tai_khoans');
             $table->foreign('san_pham_id','fk_dg_sp')->references('id')->on('san_phams');
+            $table->timestamps();
         });
     }
 

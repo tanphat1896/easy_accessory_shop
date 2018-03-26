@@ -20,6 +20,7 @@ class CreateTinTucsTable extends Migration
             $table->dateTime('ngay_dang');
             $table->integer('tai_khoan_id')->unsigned();
             $table->foreign('tai_khoan_id','fk_tt_tk')->references('id')->on('tai_khoans');
+            $table->timestamps();
         });
     }
 

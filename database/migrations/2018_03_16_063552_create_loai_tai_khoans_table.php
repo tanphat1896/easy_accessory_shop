@@ -17,6 +17,7 @@ class CreateLoaiTaiKhoansTable extends Migration
             $table->increments('id');
             $table->string('ten_loai_tk',255);
             $table->string('mo_ta',500)->nullable();
+            $table->timestamps();
         });
     }
 

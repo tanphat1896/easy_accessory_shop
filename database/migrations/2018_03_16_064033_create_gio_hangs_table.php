@@ -17,6 +17,7 @@ class CreateGioHangsTable extends Migration
             $table->increments('id');
             $table->integer('tai_khoan_id')->unsigned();
             $table->foreign('tai_khoan_id','fk_gh_tk')->references('id')->on('tai_khoans');
+            $table->timestamps();
         });
     }
 

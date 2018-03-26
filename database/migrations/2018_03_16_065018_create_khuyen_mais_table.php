@@ -20,6 +20,7 @@ class CreateKhuyenMaisTable extends Migration
             $table->date('ngay_ket_thuc');
             $table->integer('san_pham_id')->unsigned();
             $table->foreign('san_pham_id','fk_km_sp')->references('id')->on('san_phams');
+            $table->timestamps();
         });
     }
 

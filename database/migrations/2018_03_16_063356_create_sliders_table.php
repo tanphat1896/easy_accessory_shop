@@ -17,6 +17,7 @@ class CreateSlidersTable extends Migration
             $table->increments('id');
             $table->string('tieu_de',255);
             $table->string('hinh_anh',255);
+            $table->timestamps();
         });
     }
 

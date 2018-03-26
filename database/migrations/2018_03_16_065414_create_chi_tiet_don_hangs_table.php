@@ -21,6 +21,7 @@ class CreateChiTietDonHangsTable extends Migration
             $table->primary(['don_hang_id','san_pham_id'],'pk_dhsp_dh_sp');
             $table->foreign('don_hang_id','fk_ctdh_dh')->references('id')->on('don_hangs');
             $table->foreign('san_pham_id','fk_ctdh_sp')->references('id')->on('san_phams');
+            $table->timestamps();
         });
     }
 
