@@ -53,3 +53,9 @@
 #admin-avt {
     margin-right: 5px;
 }
+
+.ui.modal > .close {
+    top: .5rem!important;
+    right: .5rem!important;
+    color: rgba(0,0,0,.87) !important;
+}

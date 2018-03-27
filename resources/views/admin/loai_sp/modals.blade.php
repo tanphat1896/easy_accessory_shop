@@ -1,4 +1,5 @@
 <div class="ui mini vertical flip modal" id="modal-them-loai-sp">
+    <i class="close icon"></i>
     <div class="blue header">Thêm mới loại sản phẩm</div>
     <div class="content">
         <form action="{{ route('loai_sp.store') }}" class="ui form" method="post">
@@ -18,6 +19,7 @@
 
 @foreach($loaiSanPhams as $stt => $loaiSanPham)
     <div class="ui mini vertical flip modal" id="{{ "modal-sua-" . $loaiSanPham->id }}">
+        <i class="close icon"></i>
         <div class="blue header">Sửa tên loại sản phẩm</div>
         <div class="content">
             <form action="{{ route('loai_sp.update', [$loaiSanPham->id]) }}" class="ui form" method="post">
@@ -31,7 +33,7 @@
                     <input type="text" value="{{ $loaiSanPham->ten_loai }}" name="ten-loai" required>
                 </div>
                 <div class="field">
-                    <button class="ui basic blue fluid button"><strong>Lưu</strong></button>
+                    <button class="ui blue fluid button"><strong>Lưu</strong></button>
                 </div>
             </form>
         </div>

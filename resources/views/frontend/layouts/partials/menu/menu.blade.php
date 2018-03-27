@@ -6,19 +6,19 @@
         <i class="hdd outline icon"></i> HDD
     </a>
     <a class="item">
-        <i class="hdd outline icon"></i> SSD
+        <i class="hdd icon"></i> SSD
     </a>
     <a class="item">
         <i class="microchip icon"></i> RAM
     </a>
     <a class="item">
-        <i class="headphone icon"></i> Tai nghe
+        <i class="headphones icon"></i> Tai nghe
     </a>
     <a class="item">
         <i class="usb icon"></i> USB
     </a>
     <a class="item">
-        <i class="headphone icon"></i> Headphone
+        <i class="headphones icon"></i> Headphone
     </a>
     <a class="item">
         <i class="keyboard icon"></i> Bàn phím

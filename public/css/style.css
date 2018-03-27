@@ -14,6 +14,33 @@
     margin-right: 0 !important;
 }
 
+.no-lr-margin {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+.small-margin {
+    margin: 5px !important;
+}
+.small-lr-margin {
+    margin: 0 5px 0 5px !important;
+}
+.small-td-margin {
+    margin: 5px 0 5px 0 !important;
+}
+.normal-margin {
+    margin: 10px !important;
+}
+.normal-lr-margin {
+    margin: 0 10px 0 10px !important;
+}
+.normal-td-margin {
+    margin: 10px 0 10px 0 !important;
+}
+.big-margin {
+    margin: 15px !important;
+}
+
 .square-border {
     border-radius: 0 !important;
 }

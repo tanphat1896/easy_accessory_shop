@@ -12,7 +12,8 @@
     </div>
 </div>
 
-<a class="item"><i class="box icon icon-left"></i>Sản phẩm</a>
+<a class="item {{ Request::is('*san_pham*') ? 'active': '' }}" href="{{ route('san_pham.index') }}">
+    <i class="box icon icon-left"></i>Sản phẩm</a>
 
 <a class="item {{ Request::is('*/thuong_hieu') ? 'active': '' }}" href="/admin/thuong_hieu">
     <i class="trophy icon icon-left"></i>Thương hiệu</a>

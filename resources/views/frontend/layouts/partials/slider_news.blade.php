@@ -11,21 +11,11 @@
 <div class="ui grid stackable computer only">
     <div class="ten wide column">
         <div class="fotorama" data-autoplay="3s">
-            <a href="{{ asset('assets/images/slider/1.png') }}">
-                <img src="{{ asset('assets/images/slider/1.png') }}">
-            </a>
-            <a href="{{ asset('assets/images/slider/22.jpg') }}">
-                <img src="{{ asset('assets/images/slider/22.jpg') }}">
-            </a>
-            <a href="{{ asset('assets/images/slider/2.png') }}">
-                <img src="{{ asset('assets/images/slider/2.png') }}">
-            </a>
-            <a href="{{ asset('assets/images/slider/33.jpg') }}">
-                <img src="{{ asset('assets/images/slider/33.jpg') }}">
-            </a>
-            <a href="{{ asset('assets/images/slider/4.jpg') }}">
-                <img src="{{ asset('assets/images/slider/4.jpg') }}">
-            </a>
+            @foreach($sliders as $slider)
+                <a href="{{ asset($slider->hinh_anh) }}">
+                    <img src="{{ asset($slider->hinh_anh) }}">
+                </a>
+            @endforeach
         </div>
     </div>
     <div class="six wide column">

@@ -1,33 +1,48 @@
-<table class="ui table very compact striped celled selectable" id="bang-slider">
+<table class="ui table striped celled selectable" id="bang-slider">
     <thead>
     <tr>
-        <th><input type="checkbox" id="chon-het-slider" onclick="chonHet()"></th>
-        <th>STT</th>
+        <th class="collapsing">
+            <div class="ui checkbox" id="chon-het-slider">
+                <input type="checkbox" class="hidden">
+            </div>
+        </th>
+        <th class="collapsing">STT</th>
+        <th>Hình ảnh (Click để phóng to)</th>
+        <th class="collapsing">STT</th>
         <th>Hình ảnh</th>
-        {{--<th>Từ khóa tìm kiếm</th>--}}
-        <th>Hành động</th>
+        <th class="collapsing">Chọn</th>
     </tr>
     </thead>
     <tbody>
-    @foreach($brands as $stt => $brand)
+    @php $total = count($sliders); @endphp
+    @for($i = 0; $i < $total; $i += 2)
         <tr>
-            <td class="collapsing"><input type="checkbox" name="thuong-hieu-id[]" value="{{ $brand->id }}"></td>
-            <td>{{ $stt + 1 }}</td>
-            <td>{{ $brand->ten_thuong_hieu }}</td>
-            {{--<td>{{ $brand->slug }}</td>--}}
-            <td class="collapsing">
-                <button type="button" class="ui green mini button"
-                        onclick="$('{{ "#modal-sua-" . $brand->id }}').modal('show')">
-                    <i class="edit icon"></i>
-                    <strong>Sửa</strong>
-                </button>
+            <td>
+                <div class="ui child checkbox">
+                    <input type="checkbox" class="hidden" name="slider-id[]" value="{{ $sliders[$i]->id }}">
+                </div>
             </td>
+            <td>{{ $i + 1 }}</td>
+            <td><a href="#" onclick="$('{{ '#modal-xem-' . $sliders[$i]->id }}').modal('show')">
+                    <img class="ui small image" src="{{ asset($sliders[$i]->hinh_anh) }}">
+                </a>
+            </td>
+            @if (!empty($sliders[$i+1]))
+                <td>{{ $i + 2 }}</td>
+                <td>
+                    <a href="#" onclick="$('{{ '#modal-xem-' . $sliders[$i+1]->id }}').modal('show')">
+                        <img class="ui small image" src="{{ asset($sliders[$i+1]->hinh_anh) }}">
+                    </a>
+                </td>
+                <td>
+                    <div class="ui child checkbox">
+                        <input type="checkbox" class="hidden" name="slider-id[]" value="{{ $sliders[$i+1]->id }}">
+                    </div>
+                </td>
+            @else
+                <td></td><td></td><td></td>
+            @endif
         </tr>
-    @endforeach
+    @endfor
     </tbody>
-    <tfoot>
-    <tr class="right aligned">
-        <th colspan="4">{{ $brands->render('vendor.pagination.smui') }}</th>
-    </tr>
-    </tfoot>
 </table>

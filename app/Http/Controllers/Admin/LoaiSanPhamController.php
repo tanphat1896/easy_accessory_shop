@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 class LoaiSanPhamController extends Controller
 {
     public function index() {
-        $loaiSanPhams = LoaiSanPham::paginate(5);
+        $loaiSanPhams = LoaiSanPham::all();
 
         return view('admin.loai_sp.index', compact('loaiSanPhams'));
     }

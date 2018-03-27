@@ -2,9 +2,10 @@
 
 namespace App;
 
+use App\Acme\Contract\CommonGetter;
 use Illuminate\Database\Eloquent\Model;
 
-class LoaiSanPham extends Model
+class LoaiSanPham extends Model implements CommonGetter
 {
     protected $fillable = ['ten_loai', 'slug'];
 
@@ -18,5 +19,9 @@ class LoaiSanPham extends Model
 
     public function khongCoSanPham() {
         return $this->sanPhams->isEmpty();
+    }
+
+    public function getName() {
+        return $this->ten_loai;
     }
 }

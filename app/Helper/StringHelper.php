@@ -10,6 +10,8 @@ namespace App\Helper;
 
 
 class StringHelper {
+    const IMG_DIR = 'assets/images';
+
     public static function toSlug($str) {
         $str = trim(mb_strtolower($str));
 
@@ -24,5 +26,17 @@ class StringHelper {
         $str = preg_replace('/([\s]+)/', '-', $str);
 
         return $str;
+    }
+
+    public static function buildImageRelativePath($folder, $filename) {
+        $relativePath = self::IMG_DIR .
+            DIRECTORY_SEPARATOR . $folder .
+            DIRECTORY_SEPARATOR . $filename;
+
+        return $relativePath;
+    }
+
+    public static function absolutePath($relative) {
+        return public_path($relative);
     }
 }

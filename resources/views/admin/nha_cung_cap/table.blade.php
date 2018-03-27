@@ -1,19 +1,26 @@
 <table class="ui table very compact striped celled selectable" id="bang-nha-cung-cap">
     <thead>
     <tr>
-        <th><input type="checkbox" id="chon-het-nha-cung-cap" onclick="chonHet()"></th>
-        <th>STT</th>
+        <th class="collapsing">
+            <div class="ui checkbox" id="chon-het-nha-cung-cap" >
+                <input type="checkbox" class="hidden">
+            </div>
+        </th>
+        <th class="collapsing">STT</th>
         <th>Tên nhà cung cấp</th>
         <th>Địa chỉ</th>
         <th>Số điện thoại</th>
         {{--<th>Từ khóa tìm kiếm</th>--}}
-        <th>Hành động</th>
+        <th class="collapsing">Hành động</th>
     </tr>
     </thead>
     <tbody>
     @foreach($nhaCungCaps as $stt => $nhaCungCap)
         <tr>
-            <td class="collapsing"><input type="checkbox" name="nha-cung-cap-id[]" value="{{ $nhaCungCap->id }}"></td>
+            <td class="collapsing">
+                <div class="ui child checkbox">
+                    <input type="checkbox" class="hidden" name="nha-cung-cap-id[]" value="{{ $nhaCungCap->id }}">
+                </div></td>
             <td>{{ $stt + 1 }}</td>
             <td>{{ $nhaCungCap->ten_ncc }}</td>
             <td>{{ $nhaCungCap->dia_chi }}</td>
@@ -29,9 +36,5 @@
         </tr>
     @endforeach
     </tbody>
-    <tfoot>
-    <tr class="right aligned">
-        <th colspan="6">{{ $nhaCungCaps->render('vendor.pagination.smui') }}</th>
-    </tr>
-    </tfoot>
 </table>
+

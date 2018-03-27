@@ -1,11 +1,11 @@
 <body>
-@include ('admin.layouts.components.navbar')
+@include ('admin.layouts.partials.navbar')
 
 {{--@include ('admin.layouts.components.sidebar_thin')--}}
 
 {{--@include ('admin.layouts.components.sidebar_wide')--}}
 
-@include('admin.layouts.components.sidebar')
+@include('admin.layouts.partials.sidebar')
 
 <div class="ui basic segment" id="main-container">
 

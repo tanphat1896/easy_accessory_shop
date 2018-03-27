@@ -14,7 +14,9 @@
 Route::get('/', function () {
     $ssds = \App\SanPham::whereLoaiSanPhamId(1)->limit(12)->get();
 
-    return view('index', compact('ssds'));
+    $sliders = \App\Slider::all();
+
+    return view('index', compact('ssds', 'sliders'));
 });
 Route::get('/cart', function() {
 	return view('frontend.cart.index');
@@ -48,6 +50,7 @@ Route::group(['prefix' => 'admin'], function() {
     Route::resource('loai_sp', 'Admin\LoaiSanPhamController', ["except" => ["create", "show", "edit"]]);
     Route::resource('nha_cung_cap', 'Admin\NhaCungCapController', ["except" => ["create", "show", "edit"]]);
     Route::resource('noi_dung/slider', 'Admin\SliderController');
+    Route::resource('san_pham', 'Admin\SanPhamController');
 
 });
 

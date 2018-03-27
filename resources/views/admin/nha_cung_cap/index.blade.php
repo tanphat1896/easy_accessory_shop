@@ -28,7 +28,7 @@
 
         @include('admin.nha_cung_cap.table')
 
-        <button type="submit" class="ui red delete button"
+        <button type="submit" class="ui red delete button need-popup"
                 data-content="Xóa các mục vừa chọn"
                 onclick="return confirmDelete()"
         >
@@ -46,20 +46,8 @@
 
 @push('script')
     <script>
-        // $('#bang-thuong-hieu').DataTable();
+        bindSelectAll('chon-het-nha-cung-cap');
 
-        $('.ui.delete.button').popup({position: 'bottom left'});
-
-        function chonHet() {
-            $('input[name="nha-cung-cap-id[]"]').attr('checked', $('#chon-het-nha-cung-cap').prop('checked'));
-        }
-
-        function confirmDelete() {
-            if ($('input[name="nha-cung-cap-id[]"]:checked').length < 1)
-                return false;
-
-            return confirm('Bạn chắc chắn xóa các mục vừa chọn')
-        }
-
+        bindDataTable('bang-nha-cung-cap');
     </script>
 @endpush

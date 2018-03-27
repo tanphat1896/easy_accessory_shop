@@ -28,7 +28,7 @@
 
         @include('admin.loai_sp.table')
 
-        <button type="submit" class="ui red delete button"
+        <button type="submit" class="ui red delete button need-popup"
                 data-content="Xóa các mục vừa chọn"
                 onclick="return confirmDelete()"
         >
@@ -46,20 +46,8 @@
 
 @push('script')
     <script>
-        // $('#bang-thuong-hieu').DataTable();
+        bindSelectAll('chon-het-loai-sp');
 
-        $('.ui.delete.button').popup({position: 'bottom left'});
-
-        function chonHet() {
-            $('input[name="loai-sp-id[]"]').attr('checked', $('#chon-het-loai-sp').prop('checked'));
-        }
-
-        function confirmDelete() {
-            if ($('input[name="loai-sp-id[]"]:checked').length < 1)
-                return false;
-
-            return confirm('Bạn chắc chắn xóa các mục vừa chọn')
-        }
-
+        bindDataTable('bang-loai-sp');
     </script>
 @endpush

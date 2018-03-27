@@ -28,9 +28,9 @@
 
         @include('admin.thuong_hieu.table')
 
-        <button type="submit" class="ui red delete button"
+        <button type="submit" class="ui red delete button need-popup"
                 data-content="Xóa các mục vừa chọn"
-                onclick="return confirm('Bạn chắc chắn xóa các mục vừa chọn')"
+                onclick="return confirmDelete()"
                 >
             <i class="delete icon"></i>
             <strong>Xóa </strong>
@@ -46,13 +46,9 @@
 
 @push('script')
     <script>
-        // $('#bang-thuong-hieu').DataTable();
+        bindDataTable('bang-thuong-hieu');
 
-        $('.ui.delete.button').popup({position: 'bottom left'});
-
-        function chonHet() {
-            $('input[name="thuong-hieu-id[]"]').attr('checked', $('#chon-het-thuong-hieu').prop('checked'));
-        }
+        bindSelectAll('chon-het-thuong-hieu');
 
     </script>
 @endpush

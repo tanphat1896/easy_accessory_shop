@@ -21,12 +21,13 @@ class SanPhamTableSeeder extends Seeder
         foreach ($ssdGroups as $idx => $ssd) {
             DB::table('san_phams')->insert([
                 'id' => $idx + 1,
+                'ma_san_pham' => 'SSD' . $idx,
                 'ten_san_pham' => $ssd->name,
                 'so_luong' => random_int(0, 10),
                 'mo_ta' => 'SSD',
                 'diem_danh_gia' => 0,
-                'loai_san_pham_id' => 1,
-                'thuong_hieu_id' => 1,
+                'loai_san_pham_id' => random_int(1, 100)%2 + 1,
+                'thuong_hieu_id' => random_int(1, 100)%3 + 1,
                 'ngay_tao' => date('Y-m-d H:i:s'),
                 'ngay_cap_nhat' => date('Y-m-d H:i:s'),
                 'tinh_trang' => 1,

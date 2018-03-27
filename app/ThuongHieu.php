@@ -2,9 +2,10 @@
 
 namespace App;
 
+use App\Acme\Contract\CommonGetter;
 use Illuminate\Database\Eloquent\Model;
 
-class ThuongHieu extends Model
+class ThuongHieu extends Model implements CommonGetter
 {
     protected $fillable = ['ten_thuong_hieu', 'slug'];
 
@@ -20,5 +21,9 @@ class ThuongHieu extends Model
 
     public static function daTonTai($slug) {
         return !self::whereSlug($slug)->get()->isEmpty();
+    }
+
+    public function getName() {
+        return $this->ten_thuong_hieu;
     }
 }

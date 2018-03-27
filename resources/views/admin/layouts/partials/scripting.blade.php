@@ -1,7 +1,10 @@
-{{--<script src="{{ asset('plugin/datatable/jquery.dataTables.min.js') }}"></script>--}}
-{{--<script src="{{ asset('plugin/datatable/dataTables.semanticui.min.js') }}"></script>--}}
-<script>
+<script src="{{ asset('plugin/datatable/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('plugin/datatable/dataTables.semanticui.min.js') }}"></script>
+<script src="{{ asset('js/admin-script.js') }}"></script>
 
+
+<script>
+    // script đặc biệt cần sử dụng blade
     function toggleSidebar() {
         let collapsed = false;
         let sidebar = $('#sidebar');
@@ -27,6 +30,7 @@
         animating(sidebar, mainContainer, width, margin, duration);
         $(sidebar).load('/admin/sidebar-wide').removeClass('icon');
     }
+
     function loadThinSidebar(sidebar, mainContainer, logo) {
         let width = 50;
         let margin = 50;

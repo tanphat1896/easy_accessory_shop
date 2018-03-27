@@ -3,25 +3,26 @@
 @section('title', 'Sản phẩm')
 
 @section('content')
-    <div class="ui dividing header">Quản lý sản phẩm</div>
-    <table class="ui table">
-        <thead>
-        <tr>
-            <th>#</th>
-            <th>Mặt hàng</th>
-            <th>Số lượng</th>
-            <th>Ngày thêm</th>
-            <th>Chi tiết</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>1</td>
-            <td>USB</td>
-            <td>100</td>
-            <td>22/2/2222</td>
-            <td><a href="">Xem</a></td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="ui dividing header center aligned no-margin-bottom">Quản lý sản phẩm</div>
+
+    @include('admin.san_pham.filter')
+
+    @include('admin.san_pham.table')
 @endsection
+
+@push('script')
+    <script>
+        bindDataTable('bang-sp');
+
+        $('#sp-filter').popup({
+            inline     : true,
+            hoverable  : true,
+            position   : 'bottom left',
+            on: 'click',
+            delay: {
+                show: 300,
+                hide: 2000
+            }
+        });
+    </script>
+@endpush

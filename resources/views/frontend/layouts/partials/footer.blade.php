@@ -1,2 +1,1 @@
 @include('sharing.scripting')
-</html>

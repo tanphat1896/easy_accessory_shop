@@ -13,7 +13,7 @@ class ThuongHieuController extends Controller
 
     public function index()
     {
-        $brands = ThuongHieu::paginate(5);
+        $brands = ThuongHieu::all();
 
         return view('admin.thuong_hieu.index')->withBrands($brands);
     }
