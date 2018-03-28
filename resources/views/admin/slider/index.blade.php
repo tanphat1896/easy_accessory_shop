@@ -24,14 +24,12 @@
         </div>
     @endif
 
-    <div id="dropzone-message"></div>
+    <div id="dropzone-message" class="normal-td-margin"></div>
 
     <form action="{{ route('slider.destroy', [0]) }}" method="post">
 
         {{ method_field('DELETE') }}
         {{ csrf_field() }}
-
-        @include('admin.slider.table')
 
         <button type="submit" class="ui red delete button need-popup"
                 data-content="Xóa các mục vừa chọn"
@@ -45,7 +43,22 @@
             <i class="add icon"></i>
             <strong>Thêm mới </strong>
         </button>
+
+        @include('admin.slider.table')
+
     </form>
+
+    <div class="ui dividing header">Xem trước</div>
+
+    <div class="ui basic segment center aligned">
+        <div class="fotorama" data-autoplay="3s">
+            @foreach($sliders as $slider)
+                <a href="{{ asset($slider->hinh_anh) }}">
+                     <img src="{{ asset($slider->hinh_anh) }}">
+                </a>
+            @endforeach
+        </div>
+    </div>
 
     @include('admin.slider.modals')
 @endsection

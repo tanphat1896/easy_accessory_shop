@@ -31,10 +31,10 @@ class ImageHelper {
     public static function deleteSlidersFromStorage($sliderIds) {
         $sliders = Slider::select('hinh_anh')->whereIn('id', $sliderIds)->get();
 
-        $paths = $sliders->map(function($slider) {
-             return ($slider->hinh_anh);
-        });
+        $realPaths = $sliders->filter(function($slider) {
+            return file_exists($slider->hinh_anh);
+        })->map(function($slider) { return $slider->hinh_anh; });
 
-        return Storage::delete($paths->toArray());
+        return Storage::delete($realPaths->toArray());
     }
 }

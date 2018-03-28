@@ -22,4 +22,13 @@ class SanPhamController extends Controller {
         return view('admin.san_pham.index', $data);
     }
 
+    public function  show($id) {
+        $sanPham = SanPham::findOrFail($id);
+
+        $thuongHieus = ThuongHieu::all();
+
+        $loaiSanPhams = LoaiSanPham::all();
+
+        return view('admin.san_pham_chi_tiet.index', compact('sanPham', 'thuongHieus', 'loaiSanPhams'));
+    }
 }

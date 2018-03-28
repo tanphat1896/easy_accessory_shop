@@ -7,44 +7,42 @@
     // script đặc biệt cần sử dụng blade
     function toggleSidebar() {
         let collapsed = false;
-        let sidebar = $('#sidebar');
+        let sidebarWide = $('#sidebar-wide');
+        let sidebarThin = $('#sidebar-thin');
         let mainContainer = $('#main-container');
         let logo = $('#logo');
         return function () {
             if (collapsed) {
-                loadWideSidebar(sidebar, mainContainer, logo);
+                loadWideSidebar(sidebarWide, sidebarThin, mainContainer, logo);
                 collapsed = false;
                 return;
             }
-            loadThinSidebar(sidebar, mainContainer, logo);
+            loadThinSidebar(sidebarWide, sidebarThin, mainContainer, logo);
             collapsed = true;
         };
     }
 
-    function loadWideSidebar(sidebar, mainContainer, logo) {
+    function loadWideSidebar(sidebarWide, sidebarThin, mainContainer, logo) {
         let width = 220;
         let margin = 220;
         let duration = 250;
         $(logo).find('img').attr('src', "{{ asset('assets/images/logo.png') }}");
         $(logo).animate({width: width}, duration);
-        animating(sidebar, mainContainer, width, margin, duration);
-        $(sidebar).load('/admin/sidebar-wide').removeClass('icon');
+        $(mainContainer).animate({marginLeft: margin}, duration);
+        $(sidebarWide).transition('slide right', duration);
+        $(sidebarThin).transition('slide right', duration);
     }
 
-    function loadThinSidebar(sidebar, mainContainer, logo) {
+    function loadThinSidebar(sidebarWide, sidebarThin, mainContainer, logo) {
         let width = 50;
         let margin = 50;
         let duration = 250;
         $(logo).animate({width: width}, duration, function() {
             $(logo).find('img').attr('src', "{{ asset('assets/images/thumb.png') }}");
         });
-        animating(sidebar, mainContainer, width, margin, duration);
-        $(sidebar).load('/admin/sidebar-thin').addClass('icon');
-    }
-
-    function animating(sidebar, mainContainer, width, marginLeft, duration) {
-        $(sidebar).animate({width: width}, duration);
-        $(mainContainer).animate({marginLeft: marginLeft}, duration);
+        $(mainContainer).animate({marginLeft: margin}, duration);
+        $(sidebarWide).transition('slide right', duration);
+        $(sidebarThin).transition('slide right', duration);
     }
 
     $('#btn-toggle-menu').click(toggleSidebar());

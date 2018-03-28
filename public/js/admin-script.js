@@ -22,8 +22,8 @@ function bindDataTable(tableId) {
         "language": {
             "lengthMenu": "Hiển thị _MENU_ dòng mỗi trang",
             "zeroRecords": "Không có dữ liệu",
-            "info": "Trang _PAGE_ / _PAGES_",
-            "infoEmpty": "Không có dữ liệu",
+            "info": "<strong>Trang _PAGE_ / _PAGES_</strong>",
+            "infoEmpty": "<strong>Không có dữ liệu</strong>",
             "infoFiltered": "(lọc từ _MAX_ dòng)",
             "search": "",
             "paginate": {

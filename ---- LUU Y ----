@@ -1,0 +1,14 @@
+Khi lưu hình ảnh trên 000webhost app phải chỉnh thành relative path nếu không sẽ bị lỗi not writable 
+
+Ham xoa hinh anh tren 000webhost
+
+public static function deleteSlidersFromStorage($sliderIds) {
+        $sliders = Slider::select('hinh_anh')->whereIn('id', $sliderIds)->get();
+
+        
+        $results = $sliders->filter(function($slider) {
+            return file_exists($slider->hinh_anh);
+        })->map(function($slider) { return unlink($slider->hinh_anh); });
+
+        return count(array_unique($results->toArray())) < 2;
+    }

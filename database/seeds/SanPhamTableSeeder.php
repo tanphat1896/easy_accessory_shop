@@ -25,7 +25,7 @@ class SanPhamTableSeeder extends Seeder
                 'ten_san_pham' => $ssd->name,
                 'so_luong' => random_int(0, 10),
                 'mo_ta' => 'SSD',
-                'diem_danh_gia' => 0,
+                'diem_danh_gia' => (float)random_int(0, 10)/2.0,
                 'loai_san_pham_id' => random_int(1, 100)%2 + 1,
                 'thuong_hieu_id' => random_int(1, 100)%3 + 1,
                 'ngay_tao' => date('Y-m-d H:i:s'),

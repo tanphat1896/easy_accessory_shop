@@ -9,6 +9,7 @@
     </style>
 @endpush
 <div class="ui grid stackable computer only">
+    
     <div class="ten wide column">
         <div class="fotorama" data-autoplay="3s">
             @foreach($sliders as $slider)
@@ -18,6 +19,7 @@
             @endforeach
         </div>
     </div>
+
     <div class="six wide column">
         <div class="ui basic segment no-padding" id="news">
             <div class="ui blue ribbon label">

@@ -53,10 +53,3 @@ Route::group(['prefix' => 'admin'], function() {
     Route::resource('san_pham', 'Admin\SanPhamController');
 
 });
-
-Route::get('/admin/sidebar-wide', function() {
-    return view('admin.layouts.components.sidebar_wide');
-});
-Route::get('/admin/sidebar-thin', function() {
-    return view('admin.layouts.components.sidebar_thin');
-});

@@ -28,7 +28,7 @@
     </div>
 
     <div class="ui inverted blue basic segment right floated no-margin">
-
+        <a href="/admin" class="ui white button">Admin page</a>
         <div class="ui white small button" onclick="$('.ui.modal').modal('show')">
             <i class="user icon"></i><strong> Đăng nhập</strong>
         </div>

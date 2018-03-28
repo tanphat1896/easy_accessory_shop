@@ -21,8 +21,14 @@
                     </div>
                     <div class="content">
                         <p>{{ $ssd->ten_san_pham }}</p>
-                        <p>{{ number_format($ssd->gia()->first()->gia) }} đ</p>
-                        <div class="ui star rating disabled" data-rating="4"></div>
+                        <p class="no-margin"><strong>{{ number_format($ssd->gia()->first()->gia) }} đ</strong>
+                            @if (empty($ssd->so_luong))
+                                <span class="ui red label">Hết hàng</span>
+                            @endif
+                        </p>
+                        @component('frontend.product_category.components.star')
+                            {{ $ssd->diem_danh_gia }}
+                        @endcomponent
                     </div>
                 </div>
             </div>

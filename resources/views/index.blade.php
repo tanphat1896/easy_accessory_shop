@@ -35,7 +35,5 @@
                 {title: 'Blabla fds fsda fdsa', price: "100.000 VND", image: '{{ asset('assets/images/uploaded/products/usb/usb-sandisk-sdcz50-8gb-20-xanh-duong-200x200.jpg') }}'},
             ]
         });
-
-        $('.ui.rating').rating('disable');
     </script>
 @endpush

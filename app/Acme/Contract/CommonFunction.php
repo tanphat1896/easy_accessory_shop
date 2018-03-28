@@ -9,6 +9,8 @@
 namespace App\Acme\Contract;
 
 
-interface CommonGetter {
+interface CommonFunction {
     public function getName();
+
+    public function matchedId($id);
 }

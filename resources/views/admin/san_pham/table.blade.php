@@ -19,7 +19,9 @@
             <td>{{ $sanPham->so_luong }}</td>
             <td>{{ \Carbon\Carbon::parse($sanPham->ngay_tao)->format('d/m/Y') }}</td>
             <td>{{ $sanPham->tinh_trang }}</td>
-            <td></td>
+            <td>
+                <a href="{{ route('san_pham.show', [$sanPham->id]) }}" class="ui tiny blue label ">Xem</a>
+            </td>
         </tr>
     @endforeach
     </tbody>
