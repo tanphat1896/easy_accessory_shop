@@ -1,12 +1,17 @@
-.search {
+
+.mobile.search input.prompt {
+    /*border-radius: 7px !important;*/
+}
+
+.computer.search {
     margin-left: 5%;
     margin-top: 5px;
 }
-.search input.prompt{
+.computer.search input.prompt{
     border-radius: 3px !important;
     width: 350px !important;
 }
-.search .results {
+.computer.search .results {
     margin-top: 0 !important;
     width: 350px !important;
 }

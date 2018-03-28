@@ -13,7 +13,7 @@
                             </div>
                         </div>
                     </div>
-                    <img src="{{ asset('assets/images/uploaded/products/usb/usb-31-16gb-apacer-ah356-anhava-200x200.jpg') }}">
+                    {{-- <img src="{{ asset('assets/images/uploaded/products/usb/usb-31-16gb-apacer-ah356-anhava-200x200.jpg') }}"> --}}
                 </div>
                 <div class="content">
                     <p>USB Apacer</p>
@@ -25,7 +25,7 @@
         <div class="column">
             <div class="ui fluid link card">
                 <div class="image">
-                    <img src="{{ asset('assets/images/uploaded/products/usb/usb-apacer-ah175-otg-8gb-20-7-nowatermark-200x200.jpg') }}">
+                    {{-- <img src="{{ asset('assets/images/uploaded/products/usb/usb-apacer-ah175-otg-8gb-20-7-nowatermark-200x200.jpg') }}"> --}}
                 </div>
                 <div class="content">
                     <span>USB Apacer 8GB</span><span class="ui mini red label"> -30% </span>
@@ -37,7 +37,7 @@
         <div class="column">
             <div class="ui fluid link card">
                 <div class="image">
-                    <img src="{{ asset('assets/images/uploaded/products/usb/USB-stranscend-8G2-nowatermark-200x200.jpg') }}">
+                    {{-- <img src="{{ asset('assets/images/uploaded/products/usb/USB-stranscend-8G2-nowatermark-200x200.jpg') }}"> --}}
                 </div>
                 <div class="content">
                     <p>USB Transcend 8GB</p>
@@ -48,7 +48,7 @@
         <div class="column">
             <div class="ui fluid link card">
                 <div class="image">
-                    <img src="{{ asset('assets/images/uploaded/products/usb/usb-transcend-jetflash-340-otg-8gb-20-dd-200x200.jpg') }}">
+                    {{-- <img src="{{ asset('assets/images/uploaded/products/usb/usb-transcend-jetflash-340-otg-8gb-20-dd-200x200.jpg') }}"> --}}
                 </div>
                 <div class="content">
                     <span>USB Transcend OTG</span>

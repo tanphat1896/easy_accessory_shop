@@ -18,7 +18,7 @@
     </div>
 
     <div class="ui basic segment left floated no-margin">
-        <div class="ui search">
+        <div class="ui computer search">
             <div class="ui icon small input">
                 <input type="text" class="prompt" placeholder="Nhập từ khóa tìm kiếm">
                 <i class="search icon"></i>

@@ -48,6 +48,10 @@
     padding: 0 !important;
 }
 
+.small-padding {
+    padding: 5px !important;
+}
+
 .white {
     background-color: #fff !important;
 }
