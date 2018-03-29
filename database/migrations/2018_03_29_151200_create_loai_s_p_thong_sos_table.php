@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSanPhamThongSosTable extends Migration
+class CreateLoaiSPThongSosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateSanPhamThongSosTable extends Migration
      */
     public function up()
     {
-        Schema::create('san_pham_thong_sos', function (Blueprint $table) {
-            $table->integer('san_pham_id')->unsigned();
+        Schema::create('loai_s_p_thong_sos', function (Blueprint $table) {
+            $table->integer('loai_sp_id')->unsigned();
             $table->integer('thong_so_id')->unsigned();
-            $table->string('gia_tri',255);
             $table->timestamps();
-            $table->primary(['san_pham_id','thong_so_id']);
+            $table->primary(['loai_sp_id','thong_so_id']);
         });
     }
 
@@ -29,6 +28,6 @@ class CreateSanPhamThongSosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('san_pham_thong_sos');
+        Schema::dropIfExists('loai_s_p_thong_sos');
     }
 }
