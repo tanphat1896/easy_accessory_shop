@@ -17,18 +17,30 @@ class SanPhamController extends Controller {
     }
 
     public function index(Request $request) {
-        $data = $this->sanPhamRepository->getSanPham($request);
+        $data = $this->sanPhamRepository->getSanPhams($request);
 
-        return view('admin.san_pham.index', $data);
+        return view('admin.san_pham.index.index', $data);
     }
 
     public function  show($id) {
-        $sanPham = SanPham::findOrFail($id);
+        $neededData = $this->sanPhamRepository->getSanPham($id);
 
-        $thuongHieus = ThuongHieu::all();
+        return view('admin.san_pham.show.index', $neededData);
+    }
 
-        $loaiSanPhams = LoaiSanPham::all();
+    public function  edit($id) {
+        $neededData = $this->sanPhamRepository->getSanPham($id);
 
-        return view('admin.san_pham_chi_tiet.index', compact('sanPham', 'thuongHieus', 'loaiSanPhams'));
+        return view('admin.san_pham.edit.index', $neededData);
+    }
+
+    public function update(Request $request, $id) {
+        $anhDaiDien = $request->file('anh-dai-dien');
+        $success = $this->sanPhamRepository->updateSanPham($id, $request->all(), $anhDaiDien);
+
+        if (!$success)
+            return back()->with('errors', ["Có lỗi, hãy thử lại sau"]);
+
+        return back()->with('success', 'Cập nhật thành công');
     }
 }

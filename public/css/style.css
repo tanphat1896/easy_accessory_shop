@@ -61,6 +61,7 @@
 
 .full-height {
     height: 100%;
+    overflow: auto;
 }
 .thin-menu {
     width: 50px !important;
@@ -73,6 +74,10 @@
 }
 #logo {
     width: 220px;
+}
+.menu .item-padded {
+    padding-top: 50px !important;
+    padding-bottom: 50px !important;
 }
 
 

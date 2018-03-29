@@ -1,4 +1,4 @@
-<div class="ui fixed vertical inverted menu full-height under-navbar hidden" style="width: 220px" id="sidebar-wide">
+<div class="ui fixed vertical inverted menu full-height under-navbar hidden" style="width: 220px; " id="sidebar-wide">
     <div class="ui accordion item no-padding">
         <div class="title item menu-item-padding color-white">
             <i class="dashboard icon icon-left icon-accordion"></i>
@@ -42,14 +42,16 @@
             <div class="menu">
                 <a  class="title item {{ Request::is('*slider') ? 'active': '' }}" 
                     href="{{ route('slider.index') }}">
-                    <i class="asterisk icon icon-left"></i>Slide quảng cáo</a>
+                    <i class="certificate icon icon-left"></i>Slide quảng cáo</a>
 
                 <a class="title item"><i class="info icon icon-left"></i>Thông tin cửa hàng</a>
-                
+
                 <a class="title item"><i class="newspaper icon icon-left"></i>Tin tức</a>
             </div>
         </div>
     </div>
+
+    <div class="item item-padded"></div>
 </div>
 
 

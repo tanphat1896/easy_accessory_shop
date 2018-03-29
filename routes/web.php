@@ -51,5 +51,6 @@ Route::group(['prefix' => 'admin'], function() {
     Route::resource('nha_cung_cap', 'Admin\NhaCungCapController', ["except" => ["create", "show", "edit"]]);
     Route::resource('noi_dung/slider', 'Admin\SliderController');
     Route::resource('san_pham', 'Admin\SanPhamController');
+    Route::resource('anh_san_pham', 'Admin\AnhSanPhamController', ['only' => ['store', 'destroy']]);
 
 });

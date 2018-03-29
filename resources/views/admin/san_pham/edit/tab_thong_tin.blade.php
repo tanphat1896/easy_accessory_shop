@@ -13,26 +13,32 @@
 
         .static-input {
             display: inline-block;
-            padding: 0.67em 0em;
+            padding: 0.67em 0;
         }
     </style>
 @endpush
 <div class="ui bottom attached tab segment active" data-tab="first">
 
-    <form action="" class="ui form" id="form-thong-tin-san-pham">
-        <div class="ui padded grid">
+    <form action="{{ route('san_pham.update', [$sanPham->id]) }}" method="post" enctype="multipart/form-data"
+          class="ui form" id="form-thong-tin-san-pham">
+
+        {{ csrf_field() }}
+
+        {{ method_field('PUT') }}
+
+        <div class="ui padded stackable grid">
             <div class="ten wide column">
                 <div class="inline field">
                     <label for="" class="label-fixed">Mã sản phẩm</label>
-                    <input type="text" value="{{ $sanPham->ma_san_pham }}">
+                    <input type="text" name="ma-san-pham" value="{{ $sanPham->ma_san_pham }}">
                 </div>
                 <div class="inline field">
                     <label class="label-fixed">Tên sản phẩm</label>
-                    <input type="text" value="{{ $sanPham->getName() }}">
+                    <input type="text" name="ten-san-pham" value="{{ $sanPham->getName() }}">
                 </div>
                 <div class="inline field">
                     <label class="label-fixed">Loại sản phẩm</label>
-                    <select name="loai-san-pham"  class="ui dropdown">
+                    <select name="loai-san-pham" class="ui dropdown">
                         @foreach($loaiSanPhams as $loaiSanPham)
                             <option value="{{ $loaiSanPham->id }}"
                                     {{ $loaiSanPham->matchedId($sanPham->loai_san_pham_id) ? 'selected': '' }}>
@@ -54,9 +60,7 @@
                 </div>
                 <div class="inline field">
                     <label class="label-fixed">Giá</label>
-                    <div class="static-input"><strong>{{ number_format($sanPham->giaMoiNhat()) }} đ</strong>
-                        <a href="#" class="ui blue label">Lịch sử</a>
-                    </div>
+                    <input type="text" name="gia" value="{{ number_format($sanPham->giaMoiNhat()) }}">
                 </div>
                 <div class="inline field">
                     <label class="label-fixed">Tình trạng</label>
@@ -69,35 +73,25 @@
                         </option>
                     </select>
                 </div>
-                <div class="inline field">
-                    <label class="label-fixed">Ngày thêm</label>
-                    <div class="static-input">{{ $sanPham->ngay_tao }}</div>
-                </div>
-                <div class="inline field">
-                    <label class="label-fixed">Ngày cập nhật</label>
-                    <div class="static-input">{{ $sanPham->ngay_cap_nhat }}</div>
-                </div>
             </div>
-
 
             <div class="six wide column">
                 <div class="field">
-                    <label for="">Ảnh hiển thị</label>
-                    <img src="/{{ $sanPham->anh_dai_dien }}" class="ui bordered image">
-                </div>
-
-                <div class="inline field">
-                    <label for="">Điểm đánh giá trung bình: {{ $sanPham->diem_danh_gia }} sao</label>
-                    @component('frontend.product_category.components.star')
-                        {{ $sanPham->diem_danh_gia }}
-                    @endcomponent
+                    <label>Ảnh đại diện</label>
+                    <label for="anh-dai-dien">
+                        <span class="ui blue compact label">Chọn file</span>
+                        <span id="anh-dai-dien-name"></span>
+                    </label>
+                    <input type="file" name="anh-dai-dien" id="anh-dai-dien" style="display: none;"
+                        onchange="$('#anh-dai-dien-name').text($('#anh-dai-dien')[0].files[0].name)">
+                    <img src="/{{ $sanPham->anh_dai_dien }}" class="ui small bordered image">
                 </div>
             </div>
             <div class="row">
                 <div class="sixteen wide column">
-                    <button class="ui blue button">
-                        <i class="save icon"></i>
-                        Lưu lại thông tin
+                    <button class="ui blue button" type="submit">
+                        <i class="save fitted icon"></i>
+                        Lưu lại thay đổi
                     </button>
                 </div>
             </div>

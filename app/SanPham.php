@@ -3,10 +3,14 @@
 namespace App;
 
 use App\Acme\Contract\CommonFunction;
+use App\Acme\Behavior\CommonBehavior;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class SanPham extends Model implements CommonFunction
 {
+    use CommonBehavior;
+
     public function giaMoiNhat() {
         return $this->gia()->first()->gia;
     }
@@ -21,6 +25,14 @@ class SanPham extends Model implements CommonFunction
 
     public function thuongHieu() {
         return $this->belongsTo(ThuongHieu::class);
+    }
+
+    public function hinhAnhs() {
+        return $this->hasMany(HinhAnh::class);
+    }
+
+    public function tinhTrang() {
+        return $this->tinh_trang === 1 ? 'Đang bán': 'Ngừng bán';
     }
 
     public function getName() {

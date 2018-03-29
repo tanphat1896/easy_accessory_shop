@@ -3,11 +3,13 @@
 @section('title', 'Sản phẩm')
 
 @section('content')
-    <div class="ui dividing header center aligned no-margin-bottom">Quản lý sản phẩm</div>
+    <div class="ui blue raised segment">
+        <div class="ui dividing header center aligned no-margin-bottom">Quản lý sản phẩm</div>
 
-    @include('admin.san_pham.filter')
+        @include('admin.san_pham.index.filter')
 
-    @include('admin.san_pham.table')
+        @include('admin.san_pham.index.table')
+    </div>
 @endsection
 
 @push('script')

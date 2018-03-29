@@ -9,7 +9,6 @@
 namespace App\Helper;
 
 
-use App\HinhAnh;
 use App\Slider;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -37,25 +36,5 @@ class ImageHelper {
         })->map(function($slider) { return $slider->hinh_anh; });
 
         return Storage::delete($realPaths->toArray());
-    }
-
-    public static function deleteAnhChiTietFromStorage($ids) {
-        $hinhAnhs = HinhAnh::select('lien_ket')->whereIn('id', $ids)->get();
-
-//      dùng cách này vì giải quyết lỗi không dùng được Storage trên hosting
-        $deleted = $hinhAnhs->filter(function($hinhAnh) {
-            return file_exists($hinhAnh->lien_ket);
-        })->map(function($hinhAnh) {
-            return unlink($hinhAnh->lien_ket);
-        });
-
-        return count(array_unique($deleted->toArray())) < 2;
-    }
-
-    public static function deleteImageFromStorage($relativePath) {
-        if (file_exists($relativePath))
-            unlink($relativePath);
-
-        return true;
     }
 }

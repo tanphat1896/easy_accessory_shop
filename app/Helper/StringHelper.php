@@ -9,6 +9,8 @@
 namespace App\Helper;
 
 
+use App\LoaiSanPham;
+
 class StringHelper {
     const IMG_DIR = 'assets/images';
 
@@ -38,5 +40,21 @@ class StringHelper {
 
     public static function absolutePath($relative) {
         return public_path($relative);
+    }
+
+    public static function buildImageRelativePathFromProductType($productId) {
+        $name = LoaiSanPham::findOrFail($productId)->getName();
+
+        $name = str_replace(' ', "_", $name);
+
+        $pathFromImageDir = "uploaded/products" . DIRECTORY_SEPARATOR . strtolower($name);
+
+        $fullPath = self::IMG_DIR . DIRECTORY_SEPARATOR .
+            "uploaded/products" . DIRECTORY_SEPARATOR . strtolower($name);
+
+        if (!file_exists($fullPath))
+            mkdir($fullPath, 0777, true);
+
+        return $pathFromImageDir;
     }
 }
