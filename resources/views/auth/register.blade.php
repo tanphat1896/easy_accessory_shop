@@ -25,9 +25,7 @@
                 <i class="edit icon"></i>
                 Đăng ký tài khoản
             </h2>
-            <form action="{{ route('register') }}" method="post"
-                  class="ui form center-aligned" id="register-form">
-
+            <form action="{{ route('register') }}" class="ui form center-aligned" id="register-form" method="post">
                 {{ csrf_field() }}
 
                 <div class="inline field required">
@@ -47,11 +45,11 @@
                     <input type="password" id="password_confirmation" name="password_confirmation">
                 </div>
                 <div class="inline field">
-                    <label for="address">Địa chỉ</label>
-                    <input type="text" id="address" name="address">
+                    <label for="phone">Số điện thoại</label>
+                    <input type="text" id="phone" name="phone">
                 </div>
                 <div class="inline field">
-                    <button class="ui blue button">
+                    <button type="submit" class="ui blue button">
                         <i class="edit icon"></i>
                         <strong>Đăng ký</strong>
                     </button>
@@ -63,7 +61,7 @@
 @push('script')
     <script type="text/javascript">
         var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
-                var mediumRegex = new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})");
+        var mediumRegex = new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})");
 
         function testStrength() {
             let pwd = $('#password').text();

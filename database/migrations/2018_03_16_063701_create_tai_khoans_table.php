@@ -19,7 +19,7 @@ class CreateTaiKhoansTable extends Migration
             $table->string('email',100);
             $table->string('so_dien_thoai',11);
             $table->string('ten_dang_nhap',16);
-            $table->string('mat_khau',30);
+            $table->string('mat_khau');
             $table->integer('loai_tk_id')->unsigned();
             $table->foreign('loai_tk_id','fk_tk_ltk')->references('id')->on('loai_tai_khoans');
             $table->timestamps();
