@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TaiKhoan extends Model
+class LoaiSPThongSo extends Model
 {
-    protected $table = 'tai_khoans';
+    //
 }

@@ -25,7 +25,8 @@
                 <i class="edit icon"></i>
                 Đăng ký tài khoản
             </h2>
-            <form action="{{ route('register') }}" class="ui form center-aligned" id="register-form">
+            <form action="{{ route('register') }}" class="ui form center-aligned" id="register-form" method="post">
+                {{ csrf_field() }}
                 <div class="inline field required">
                     <label for="name">Họ và tên</label>
                     <input type="text" id="name" name="name">
@@ -43,11 +44,11 @@
                     <input type="password" id="password_confirmation" name="password_confirmation">
                 </div>
                 <div class="inline field">
-                    <label for="address">Địa chỉ</label>
+                    <label for="phone">Số điện thoại</label>
                     <input type="text" id="address" name="address">
                 </div>
                 <div class="inline field">
-                    <button class="ui blue button">
+                    <button type="submit" class="ui blue button">
                         <i class="edit icon"></i>
                         <strong>Đăng ký</strong>
                     </button>
