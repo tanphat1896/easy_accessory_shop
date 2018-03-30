@@ -78,4 +78,8 @@ class SanPham extends Model implements CommonFunction
     public function matchedId($id) {
         return $id == $this->id;
     }
+
+    public function chiTietPhieuNhaps() {
+        return $this->belongsToMany(ChiTietPhieuNhap::class);
+    }
 }

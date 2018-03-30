@@ -30,8 +30,9 @@
                 <td>{{ $phieuNhap->ngay_nhap }}</td>
                 <td>{{ \App\PhieuNhap::find($phieuNhap->id)->NhaCungCap->ten_ncc }}</td>
                 <td>
-                    <a href="#" class="ui small blue label ">Xem</a>
-                    <a href="#" class="ui small teal label ">Sửa</a>
+                    <a href="{{ route('nhap_hang.show',[$phieuNhap]) }}" class="ui small blue label ">Xem</a>
+                    <a href="#" class="ui small teal label "
+                       onclick="$( '{{ '#modal-sua-'.$phieuNhap->id }}' ).modal('show')">Sửa</a>
                 </td>
             </tr>
         @endforeach
