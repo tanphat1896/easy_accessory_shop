@@ -18,7 +18,7 @@
 
             <div class="field">
                 <label for="dia-chi">Ngày nhập</label>
-                <input type="date" id="ngay-nhap" name="ngay-nhap" required>
+                <input type="date" id="ngay-nhap" name="ngay-nhap" required value="{{ date('Y-m-d') }}">
             </div>
 
             <div class="field">

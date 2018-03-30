@@ -4,6 +4,7 @@ namespace App;
 
 use App\Acme\Contract\CommonFunction;
 use App\Acme\Behavior\CommonBehavior;
+use App\Helper\StringHelper;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
@@ -20,6 +21,7 @@ class SanPham extends Model implements CommonFunction
         $sanPham->loai_san_pham_id = $data['loai-san-pham'];
         $sanPham->ngay_tao = date('Y-m-d H:i:s');
         $sanPham->ngay_cap_nhat = date('Y-m-d H:i:s');
+        $sanPham->slug = StringHelper::toSlug($sanPham->ten_san_pham) . (SanPham::all()->count() + 1);
 
         return $sanPham;
 
@@ -34,6 +36,7 @@ class SanPham extends Model implements CommonFunction
         $sanPham->thuong_hieu_id = $data['thuong-hieu'];
         $sanPham->tinh_trang = $data['tinh-trang']%2;
         $sanPham->ngay_cap_nhat = date('Y-m-d H:i:s');
+        $sanPham->slug = StringHelper::toSlug($sanPham->ten_san_pham) . "-$id";
 
         return $sanPham;
     }
