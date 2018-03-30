@@ -18,6 +18,8 @@ use App\SanPham;
 use App\ThuongHieu;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Log;
+use PharIo\Manifest\Email;
 
 class SanPhamRepository {
     private $reflectKey = ['th' => 'thuong_hieu_id', 'lsp' => 'loai_san_pham_id'];
@@ -130,6 +132,7 @@ class SanPhamRepository {
         $sanPham->loai_san_pham_id = $data['loai-san-pham'];
         $sanPham->thuong_hieu_id = $data['thuong-hieu'];
         $sanPham->tinh_trang = $data['tinh-trang']%2;
+        $sanPham->ngay_cap_nhat = date('Y-m-d H:i:s');
 
         if (!empty($anhDaiDien)){
             $storePath = StringHelper::buildImageRelativePathFromProductType($sanPham->loai_san_pham_id);
@@ -141,9 +144,52 @@ class SanPhamRepository {
             $sanPham->anh_dai_dien = $relativePath;
         }
 
-        if (! $sanPham->gia()->save(GiaSanPham::fromCurrency($data['gia'])))
-            return false;
+        if (GiaSanPham::giaThayDoi($data['gia'])){
+            $sanPham->gia()->save(GiaSanPham::fromCurrency($data['gia']));
+        }
 
         return $sanPham->update();
     }
+
+    public function themSanPham(array $data, $anhDaiDien, $anhChiTiets) {
+
+        $errors = [];
+        $sanPham = new SanPham();
+
+        $sanPham->ma_san_pham = $data['ma-san-pham'];
+        $sanPham->ten_san_pham = $data['ten-san-pham'];
+        $sanPham->thuong_hieu_id = $data['thuong-hieu'];
+        $sanPham->loai_san_pham_id = $data['loai-san-pham'];
+        $sanPham->ngay_tao = date('Y-m-d H:i:s');
+        $sanPham->ngay_cap_nhat = date('Y-m-d H:i:s');
+
+
+        if (!empty($anhDaiDien))
+            $sanPham->anh_dai_dien = ImageHelper::storeImageToStorage(
+                $anhDaiDien,
+                StringHelper::buildImageRelativePathFromProductType($sanPham->loai_san_pham_id));
+
+        if(!$sanPham->save())
+            return false;
+        if (!$sanPham->gia()->save(GiaSanPham::fromCurrency($data['gia'])))
+            return false;
+
+        if (!empty($anhChiTiets))
+            return $this->storeAndAttachWith($sanPham, $anhChiTiets);
+
+        return $sanPham->id;
+    }
+
+    private function storeAndAttachWith($sanPham, $anhs) {
+        foreach ($anhs as $anh) {
+            $link = ImageHelper::storeImageToStorage($anh, $this->folderAnhSanPham);
+
+            if (!$sanPham->hinhAnhs()->save(new HinhAnh(['lien_ket' => $link])))
+                return false;
+        }
+
+        return $sanPham->id;
+    }
+
+
 }

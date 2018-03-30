@@ -27,7 +27,10 @@ class LoginController extends Controller
      */
     protected $redirectTo = '/';
 
-
+    public function authenticate(array $data) {
+        if (Auth::attempt(['email' => $data['username'], 'mat_khau' => $data['password']]))
+            return $this->redirectTo('/');
+    }
 
     /**
      * Create a new controller instance.

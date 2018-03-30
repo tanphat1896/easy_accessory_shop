@@ -25,7 +25,8 @@
     <a class="item {{ Request::is('*/nha_cung_cap') ? 'active': '' }}" href="/admin/nha_cung_cap">
         <i class="building icon icon-left"></i>Nhà cung cấp</a>
 
-    <div class="item"><i class="dolly icon icon-left"></i>Nhập hàng </div>
+    <a class="item {{Request::is('*/nhap_hang') ? 'active': '' }}" href="/admin/nhap_hang">
+        <i class="dolly icon icon-left"></i>Nhập hàng </a>
 
     <div class="item"><i class="clipboard list icon icon-left"></i>Đơn hàng </div>
 

@@ -16,5 +16,14 @@ class TaiKhoan extends Authenticatable
         'mat_khau',
         'so_dien_thoai',
         'ten_dang_nhap',
-        'loai_tk_id'];
+        'loai_tk_id'
+    ];
+
+    public function loaiTaiKhoan() {
+        return $this->belongsTo(LoaiTaiKhoan::class);
+    }
+
+    public function phieuNhap() {
+        return $this->hasMany(PhieuNhap::class);
+    }
 }

@@ -53,6 +53,11 @@
                 <div class="inline field required">
                     <label for="password_confirmation">Nhập lại mật khẩu</label>
                     <input type="password" id="password_confirmation" name="password_confirmation">
+                    @if ($errors->has('password'))
+                        <span>
+                            <strong>{{ $errors->first('password') }}</strong>
+                        </span>
+                    @endif
                 </div>
                 <div class="inline field">
                     <label for="phone">Số điện thoại</label>

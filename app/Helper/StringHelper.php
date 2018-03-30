@@ -57,4 +57,8 @@ class StringHelper {
 
         return $pathFromImageDir;
     }
+
+    public static function getNumberFromCurrency($currencyString) {
+        return preg_replace('/[.,\sđA-Za-z]/im', '', $currencyString);
+    }
 }

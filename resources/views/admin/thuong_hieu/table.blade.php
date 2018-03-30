@@ -24,11 +24,10 @@
             <td>{{ $brand->ten_thuong_hieu }}</td>
             {{--<td>{{ $brand->slug }}</td>--}}
             <td>
-                <button type="button" class="ui green mini button"
+                <a href="#" class="ui green label"
                         onclick="$('{{ "#modal-sua-" . $brand->id }}').modal('show')">
-                    <i class="edit icon"></i>
-                    <strong>Sửa</strong>
-                </button>
+                    <i class="edit fitted icon"></i>
+                </a>
             </td>
         </tr>
     @endforeach

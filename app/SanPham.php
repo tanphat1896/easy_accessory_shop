@@ -31,8 +31,17 @@ class SanPham extends Model implements CommonFunction
         return $this->hasMany(HinhAnh::class);
     }
 
+    public function thongSos() {
+        return $this->belongsToMany(
+            ThongSoKyThuat::class,
+            'san_pham_thong_sos',
+            'san_pham_id',
+            'thong_so_id'
+        )->withPivot('gia_tri');
+    }
+
     public function tinhTrang() {
-        return $this->tinh_trang === 1 ? 'Đang bán': 'Ngừng bán';
+        return (int)$this->tinh_trang === 1 ? 'Đang bán': 'Ngừng bán';
     }
 
     public function getName() {

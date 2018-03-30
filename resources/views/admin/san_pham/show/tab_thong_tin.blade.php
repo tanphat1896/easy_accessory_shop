@@ -1,22 +1,3 @@
-@push('style')
-    <style>
-        .static .label-fixed {
-            width: 200px !important;
-            /*text-align: left !important;*/
-        }
-
-        .static input,
-        .ui.form .inline.field > .selection.dropdown,
-        .ui.form .inline.fields .field > .selection.dropdown {
-            width: calc(100% - 250px) !important;
-        }
-
-        .static-input {
-            display: inline-block;
-            padding: 0.67em 0;
-        }
-    </style>
-@endpush
 <div class="ui bottom attached tab segment active" data-tab="first">
     <form action="" class="ui form static">
         <div class="ui padded grid">
@@ -47,9 +28,12 @@
                     <div class="static-input"><strong>{{ number_format($sanPham->giaMoiNhat()) }} đ</strong>
 
                         {{--ăn gian code --}}
-                        <a href="#" class="ui blue label"
+                        <a href="#" class="ui label"
                            onclick="$('#lich-su-gia').modal('show');"
                         >Lịch sử</a>
+                        <a href="#" class="ui blue label"
+                           onclick="$('#cap-nhat-gia').modal('show');"
+                        >Cập nhật</a>
                     </div>
                 </div>
 
@@ -65,6 +49,8 @@
                     <label class="label-fixed">Ngày cập nhật</label>
                     <div class="static-input">{{ $sanPham->formatDate('ngay_cap_nhat') }}</div>
                 </div>
+
+                @include('admin.san_pham.show.thong_so')
             </div>
 
 
@@ -85,9 +71,9 @@
                 <div class="field">
                     <label for="">Ảnh chi tiết</label>
                     <div class="ui tiny bordered images">
-                        <img src="/{{ $sanPham->anh_dai_dien }}" class="ui image">
-                        <img src="/{{ $sanPham->anh_dai_dien }}" class="ui image">
-                        <img src="/{{ $sanPham->anh_dai_dien }}" class="ui image">
+                        @foreach($sanPham->hinhAnhs as $anh)
+                            <img src="/{{ $anh->lien_ket }}" class="ui image">
+                        @endforeach
                     </div>
                 </div>
 
@@ -96,20 +82,4 @@
     </form>
 </div>
 
-<div class="ui mini fade modal" id="lich-su-gia">
-    <i class="close icon"></i>
-    <div class="content">
-        <h3 class="ui dividing header">Lịch sử giá</h3>
-        <table class="ui very compact striped table">
-            <thead><tr><th>Ngày cập nhật</th><th>Giá thành</th></tr></thead>
-            <tbody>
-            @foreach($sanPham->gia as $gia)
-                <tr>
-                    <td>{{ $gia->formatDate('ngay_cap_nhat') }}</td>
-                    <td><strong>{{ number_format($gia->gia) }} đ</strong></td>
-                </tr>
-            @endforeach
-            </tbody>
-        </table>
-    </div>
-</div>
+@include('admin.san_pham.show.modals')

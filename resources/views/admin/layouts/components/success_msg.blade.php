@@ -9,7 +9,7 @@
                 heading: 'Thông báo',
                 text: '{{ Session::get('success') }}',
                 icon: 'success',
-                position: 'top-right',
+                position: 'bottom-right',
                 loader: false
             });
         </script>

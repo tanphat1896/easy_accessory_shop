@@ -14,11 +14,12 @@ class CreateSanPhamThongSosTable extends Migration
     public function up()
     {
         Schema::create('san_pham_thong_sos', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('san_pham_id')->unsigned();
             $table->integer('thong_so_id')->unsigned();
             $table->string('gia_tri',255);
             $table->timestamps();
-            $table->primary(['san_pham_id','thong_so_id']);
+            $table->unique(['san_pham_id','thong_so_id']);
         });
     }
 

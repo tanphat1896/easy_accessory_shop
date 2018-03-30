@@ -14,10 +14,11 @@ class CreateLoaiSPThongSosTable extends Migration
     public function up()
     {
         Schema::create('loai_s_p_thong_sos', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('loai_sp_id')->unsigned();
             $table->integer('thong_so_id')->unsigned();
             $table->timestamps();
-            $table->primary(['loai_sp_id','thong_so_id']);
+            $table->unique(['loai_sp_id','thong_so_id']);
         });
     }
 

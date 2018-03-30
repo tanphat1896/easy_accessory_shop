@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class NhaCungCap extends Model
 {
+    protected $table = 'nha_cung_caps';
     public function phieuNhaps() {
         return $this->hasMany(PhieuNhap::class);
     }
