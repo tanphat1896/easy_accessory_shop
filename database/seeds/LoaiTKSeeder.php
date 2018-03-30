@@ -13,7 +13,7 @@ class LoaiTKSeeder extends Seeder
     {
         DB::table('loai_tai_khoans')->insert([
             'id'=>1,
-            'ten_loai_tk'=>'Khách hàng'
+            'ten_loai_tk'=>'Khách hàng',
         ]);
     }
 }
