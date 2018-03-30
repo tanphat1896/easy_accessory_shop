@@ -15,19 +15,33 @@
             {{ method_field('DELETE') }}
             {{ csrf_field() }}
 
-            @include('admin.nhap_hang.table')
-
-            <button type="submit" class="ui red delete button need-popup"
+            <button type="submit" class="ui small red delete button need-popup"
                     data-content="Xóa các mục vừa chọn"
                     onclick="return confirmDelete()"
             >
-                <i class="delete icon"></i>
+                <i class="delete fitted icon"></i>
                 <strong>Xóa </strong>
             </button>
-            <button type="button" class="ui blue button" onclick="$('#modal-them-phieu-nhap').modal('show')">
-                <i class="add icon"></i>
+            <button type="button" class="ui small blue button" onclick="$('#modal-them-nha-cung-cap').modal('show')">
+                <i class="add fitted icon"></i>
+                <strong>Thêm mới </strong>
+            </button>
+
+            @include('admin.nhap_hang.table')
+
+            <button type="submit" class="ui small red delete button need-popup"
+                    data-content="Xóa các mục vừa chọn"
+                    onclick="return confirmDelete()"
+            >
+                <i class="delete fitted icon"></i>
+                <strong>Xóa </strong>
+            </button>
+            <button type="button" class="ui small blue button" onclick="$('#modal-them-phieu-nhap').modal('show')">
+                <i class="add fitted icon"></i>
                 <strong>Thêm mới </strong>
             </button>
         </form>
+
+        @include('admin.nhap_hang.modals')
     </div>
 @endsection
