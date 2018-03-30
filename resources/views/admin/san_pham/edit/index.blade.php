@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 
-@section('title', 'Chi tiết sản phẩm ')
+@section('title', 'Sửa sản phẩm ')
 
 @section('content')
     @include('admin.layouts.components.error_msg')
@@ -18,14 +18,14 @@
         <div class="ui top attached tabular menu">
             <a class="item active" data-tab="first">Thông tin</a>
             <a class="item" data-tab="second">Ảnh chi tiết ({{ $sanPham->hinhAnhs->count() }})</a>
-            <a class="item" data-tab="third">Mô tả sản phẩm</a>
+            {{--<a class="item" data-tab="third">Thông số kỹ thuật</a>--}}
         </div>
 
         @include('admin.san_pham.edit.tab_thong_tin')
 
-        @include('admin.san_pham.edit.tab_anh')
+        {{--@include('admin.san_pham.edit.tab_thong_so')--}}
 
-        @include('admin.san_pham.edit.tab_bai_viet')
+        @include('admin.san_pham.edit.tab_anh')
     </div>
 @endsection
 

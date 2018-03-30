@@ -1,44 +1,28 @@
-@push('style')
-    <style>
-        #form-thong-tin-san-pham .label-fixed {
-            width: 200px !important;
-            /*text-align: left !important;*/
-        }
-
-        #form-thong-tin-san-pham input,
-        .ui.form .inline.field>.selection.dropdown,
-        .ui.form .inline.fields .field>.selection.dropdown {
-            width: calc(100% - 250px) !important;
-        }
-
-        .static-input {
-            display: inline-block;
-            padding: 0.67em 0;
-        }
-    </style>
-@endpush
 <div class="ui bottom attached tab segment active" data-tab="first">
 
     <form action="{{ route('san_pham.update', [$sanPham->id]) }}" method="post" enctype="multipart/form-data"
-          class="ui form" id="form-thong-tin-san-pham">
+          class="ui form static" id="form-thong-tin-san-pham">
 
         {{ csrf_field() }}
 
         {{ method_field('PUT') }}
 
         <div class="ui padded stackable grid">
+
             <div class="ten wide column">
                 <div class="inline field">
                     <label for="" class="label-fixed">Mã sản phẩm</label>
                     <input type="text" name="ma-san-pham" value="{{ $sanPham->ma_san_pham }}">
                 </div>
+
                 <div class="inline field">
                     <label class="label-fixed">Tên sản phẩm</label>
                     <input type="text" name="ten-san-pham" value="{{ $sanPham->getName() }}">
                 </div>
+
                 <div class="inline field">
                     <label class="label-fixed">Loại sản phẩm</label>
-                    <select name="loai-san-pham" class="ui dropdown">
+                    <select name="loai-san-pham" class="ui search dropdown">
                         @foreach($loaiSanPhams as $loaiSanPham)
                             <option value="{{ $loaiSanPham->id }}"
                                     {{ $loaiSanPham->matchedId($sanPham->loai_san_pham_id) ? 'selected': '' }}>
@@ -47,9 +31,10 @@
                         @endforeach
                     </select>
                 </div>
+
                 <div class="inline field">
                     <label class="label-fixed">Thương hiệu</label>
-                    <select name="thuong-hieu" class="ui dropdown">
+                    <select name="thuong-hieu" class="ui search dropdown">
                         @foreach($thuongHieus as $thuongHieu)
                             <option value="{{ $thuongHieu->id }}"
                                 {{ $thuongHieu->matchedId($sanPham->thuong_hieu_id) ? 'selected': '' }}>
@@ -58,10 +43,12 @@
                         @endforeach
                     </select>
                 </div>
+
                 <div class="inline field">
                     <label class="label-fixed">Giá</label>
                     <input type="text" name="gia" value="{{ number_format($sanPham->giaMoiNhat()) }}">
                 </div>
+
                 <div class="inline field">
                     <label class="label-fixed">Tình trạng</label>
                     <select name="tinh-trang" class="ui dropdown">
@@ -87,6 +74,7 @@
                     <img src="/{{ $sanPham->anh_dai_dien }}" class="ui small bordered image">
                 </div>
             </div>
+
             <div class="row">
                 <div class="sixteen wide column">
                     <button class="ui blue button" type="submit">
@@ -96,7 +84,5 @@
                 </div>
             </div>
         </div>
-
-
     </form>
 </div>

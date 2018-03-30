@@ -26,7 +26,8 @@
     margin: 0 5px 0 5px !important;
 }
 .small-td-margin {
-    margin: 5px 0 5px 0 !important;
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
 }
 .normal-margin {
     margin: 10px !important;
@@ -115,4 +116,28 @@
 
 .icon-accordion {
     margin-right: 5px !important;
+}
+
+.static-input {
+    display: inline-block;
+    padding: 0.67em 0;
+}
+
+.static .label-fixed {
+    width: 200px !important;
+    /*text-align: left !important;*/
+}
+
+.static input,
+.ui.form .inline.field > .selection.dropdown,
+.ui.form .inline.fields .field > .selection.dropdown {
+    width: calc(100% - 250px) !important;
+}
+
+.help-text {
+    margin-top: 5px;
+}
+
+.force-inline {
+    display: inline-block ;
 }

@@ -27,11 +27,10 @@
             <td>{{ $nhaCungCap->so_dien_thoai }}</td>
             {{--<td>{{ $brand->slug }}</td>--}}
             <td class="collapsing">
-                <button type="button" class="ui green mini button"
+                <a href="#" class="ui green label"
                         onclick="$('{{ "#modal-sua-" . $nhaCungCap->id }}').modal('show')">
-                    <i class="edit icon"></i>
-                    <strong>Sửa</strong>
-                </button>
+                    <i class="edit fitted icon"></i>
+                </a>
             </td>
         </tr>
     @endforeach

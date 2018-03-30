@@ -13,12 +13,26 @@ class LoaiSanPham extends Model implements CommonFunction
         return $this->hasMany(SanPham::class);
     }
 
+    public function thongSos() {
+        return $this->belongsToMany(
+            ThongSoKyThuat::class,
+            'loai_s_p_thong_sos',
+            'loai_sp_id',
+            'thong_so_id');
+    }
+
     public static function daTonTai($slug) {
         return !self::whereSlug($slug)->get()->isEmpty();
     }
 
     public function khongCoSanPham() {
         return $this->sanPhams->isEmpty();
+    }
+
+    public function deleteWithAllAssociate() {
+        $this->thongSos()->detach();
+
+        return $this->delete();
     }
 
     public function getName() {

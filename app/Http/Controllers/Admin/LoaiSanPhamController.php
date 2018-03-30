@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Helper\StringHelper;
 use App\LoaiSanPham;
+use App\ThongSoKyThuat;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -12,7 +13,9 @@ class LoaiSanPhamController extends Controller
     public function index() {
         $loaiSanPhams = LoaiSanPham::all();
 
-        return view('admin.loai_sp.index', compact('loaiSanPhams'));
+        $thongSos = ThongSoKyThuat::all();
+
+        return view('admin.loai_sp.index', compact('loaiSanPhams', 'thongSos'));
     }
 
     public function store(Request $request) {
@@ -28,6 +31,9 @@ class LoaiSanPhamController extends Controller
 
         $loaiSanPham->save();
 
+        $thongSoIds = $request->get('thong-so');
+        $loaiSanPham->thongSos()->sync($thongSoIds);
+
         return back()->with('success', "Thêm $ten_loai thành công");
     }
 
@@ -38,6 +44,9 @@ class LoaiSanPhamController extends Controller
         $loaiSanPham->slug = StringHelper::toSlug($loaiSanPham->ten_loai);
 
         $loaiSanPham->update();
+
+        $thongSoIds = $request->get('thong-so');
+        $loaiSanPham->thongSos()->sync($thongSoIds);
 
         return back()->with('success', 'Cập nhật thành công');
     }
@@ -53,7 +62,11 @@ class LoaiSanPhamController extends Controller
         if (!empty($errors))
             return back()->with('errors', $errors);
 
-        LoaiSanPham::destroy($ids);
+
+        foreach ($ids as $id) {
+            $loaiSanPham = LoaiSanPham::find($id);
+            $loaiSanPham->deleteWithAllAssociate();
+        }
 
         return back()->with('success', 'Xóa thành công');
     }

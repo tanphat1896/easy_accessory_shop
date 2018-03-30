@@ -7,3 +7,5 @@ $('#toggle-sidebar').click(function() {
         mobileTransition: 'overlay'
     }).sidebar('toggle')
 });
+
+$('.need-popup').popup({position: 'bottom left'});

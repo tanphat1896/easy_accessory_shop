@@ -1,4 +1,5 @@
-<a class="ui blue label normal-td-margin" id="sp-filter">Bộ lọc</a>
+<a class="ui green small button normal-td-margin" id="sp-filter">
+    <i class="filter icon"></i>Bộ lọc</a>
 
 @if($filtered)
     @foreach($filterData as $datum)
@@ -49,7 +50,7 @@
         </div>
 
         <div class="field">
-            <button class="ui fluid blue button">Lọc</button>
+            <button class="ui fluid green button">Lọc</button>
         </div>
     </form>
 </div>

@@ -1,5 +1,3 @@
-$('.need-popup').popup({position: 'bottom left'});
-
 function confirmDelete() {
     if ($('.ui.child.checkbox input:checked').length < 1)
         return false;

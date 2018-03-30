@@ -22,6 +22,26 @@ class SanPhamController extends Controller {
         return view('admin.san_pham.index.index', $data);
     }
 
+    public function create() {
+        $thuongHieus = ThuongHieu::all();
+
+        $loaiSanPhams = LoaiSanPham::all();
+
+        return view('admin.san_pham.create.index', compact('sanPham', 'thuongHieus', 'loaiSanPhams'));
+    }
+
+    public function store(Request $request) {
+        $id = $this->sanPhamRepository->themSanPham(
+            $request->all(),
+            $request->file('anh-dai-dien'),
+            $request->file('anh-chi-tiet'));
+
+        if (empty($id))
+            return back()->with('errors', ['Thêm thất bại, hãy thử lại sau']);
+
+        return redirect()->route('san_pham.show', [$id]);
+    }
+
     public function  show($id) {
         $neededData = $this->sanPhamRepository->getSanPham($id);
 
@@ -42,5 +62,23 @@ class SanPhamController extends Controller {
             return back()->with('errors', ["Có lỗi, hãy thử lại sau"]);
 
         return back()->with('success', 'Cập nhật thành công');
+    }
+
+    public function destroy($id) {
+        $sanPham = SanPham::findOrFail($id);
+
+        $sanPham->tinh_trang = 0;
+        $sanPham->update();
+
+        return response()->json(['success' => true]);
+    }
+
+    public function resume($id) {
+        $sanPham = SanPham::findOrFail($id);
+
+        $sanPham->tinh_trang = 1;
+        $sanPham->update();
+
+        return response()->json(['success' => true]);
     }
 }

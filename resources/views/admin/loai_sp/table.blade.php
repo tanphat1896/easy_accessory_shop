@@ -8,7 +8,7 @@
         </th>
         <th class="collapsing">STT</th>
         <th>Tên loại sản phẩm</th>
-        {{--<th>Từ khóa tìm kiếm</th>--}}
+        <th>Thông số kỹ thuật liên quan</th>
         <th class="collapsing">Hành động</th>
     </tr>
     </thead>
@@ -22,13 +22,16 @@
             </td>
             <td>{{ $stt + 1 }}</td>
             <td>{{ $loaiSanPham->ten_loai }}</td>
-            {{--<td>{{ $brand->slug }}</td>--}}
             <td>
-                <button type="button" class="ui green mini button"
+                @foreach($loaiSanPham->thongSos as $thongSo)
+                    <span class="ui blue basic small label small-td-margin">{{ $thongSo->getName() }}</span>
+                @endforeach
+            </td>
+            <td>
+                <a href="#" class="ui green icon label"
                         onclick="$('{{ "#modal-sua-" . $loaiSanPham->id }}').modal('show')">
-                    <i class="edit icon"></i>
-                    <strong>Sửa</strong>
-                </button>
+                    <i class="edit fitted icon"></i>
+                </a>
             </td>
         </tr>
     @endforeach

@@ -10,6 +10,16 @@
                 <label for="ten-loai">Tên loại sản phẩm</label>
                 <input type="text" id="ten-loai" name="ten-loai" required>
             </div>
+
+            <div class="field">
+                <label for="thong-so">Thông số liên quan</label>
+                <select name="thong-so[]" multiple id="thong-so" class="ui search dropdown">
+                    @foreach($thongSos as $thongSo)
+                        <option value="{{ $thongSo->id }}">{{ $thongSo->getName() }}</option>
+                    @endforeach
+                </select>
+
+            </div>
             <div class="field">
                 <button class="ui blue fluid button"><strong>Lưu</strong></button>
             </div>
@@ -30,8 +40,23 @@
 
                 <div class="field">
                     <label for="">Tên loại sản phẩm</label>
-                    <input type="text" value="{{ $loaiSanPham->ten_loai }}" name="ten-loai" required>
+                    <input type="text" value="{{ $loaiSanPham->getName() }}" name="ten-loai" required>
                 </div>
+
+                <div class="field">
+                    <label for="thong-so">Thông số liên quan</label>
+                    <select name="thong-so[]" multiple id="thong-so" class="ui search dropdown">
+                        @foreach($thongSos as $thongSo)
+                            <option value="{{ $thongSo->id }}"
+                                    {{ $thongSo->matchedIds($loaiSanPham->thongSos)
+                                        ? 'selected': '' }} >
+                                {{ $thongSo->getName() }}
+                            </option>
+                        @endforeach
+                    </select>
+
+                </div>
+
                 <div class="field">
                     <button class="ui blue fluid button"><strong>Lưu</strong></button>
                 </div>
