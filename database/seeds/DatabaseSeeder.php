@@ -21,6 +21,6 @@ class DatabaseSeeder extends Seeder
             ['ten_loai' => 'HDD', 'slug' => 'hdd'],
             ['ten_loai' => 'Keyboard', 'slug' => 'keyboard']
         ]);
-         $this->call(SanPhamTableSeeder::class);
+         $this->call([LoaiTKSeeder::class,SanPhamTableSeeder::class, ThongSoKyThuatSeeder::class]);
     }
 }

@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class ThongSoKyThuat extends Seeder
+class ThongSoKyThuatSeeder extends Seeder
 {
     /**
      * Run the database seeds.
