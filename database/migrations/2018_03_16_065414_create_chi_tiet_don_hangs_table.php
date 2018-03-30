@@ -14,11 +14,12 @@ class CreateChiTietDonHangsTable extends Migration
     public function up()
     {
         Schema::create('chi_tiet_don_hangs', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('don_hang_id')->unsigned();
             $table->integer('san_pham_id')->unsigned();
             $table->integer('so_luong');
             $table->double('don_gia');
-            $table->primary(['don_hang_id','san_pham_id'],'pk_dhsp_dh_sp');
+            $table->unique(['don_hang_id','san_pham_id']);
             $table->foreign('don_hang_id','fk_ctdh_dh')->references('id')->on('don_hangs');
             $table->foreign('san_pham_id','fk_ctdh_sp')->references('id')->on('san_phams');
             $table->timestamps();

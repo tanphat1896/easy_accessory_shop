@@ -1,4 +1,4 @@
-@extends('admin/layouts/master')
+@extends('admin.layouts.master')
 
 @section('title','Quản lý nhập hàng')
 
@@ -22,12 +22,12 @@
                 <i class="delete fitted icon"></i>
                 <strong>Xóa </strong>
             </button>
-            <button type="button" class="ui small blue button" onclick="$('#modal-them-nha-cung-cap').modal('show')">
+            <button type="button" class="ui small blue button" onclick="$('#modal-them-phieu-nhap').modal('show')">
                 <i class="add fitted icon"></i>
                 <strong>Thêm mới </strong>
             </button>
 
-            @include('admin.nhap_hang.table')
+            @include('admin.nhap_hang.index.table')
 
             <button type="submit" class="ui small red delete button need-popup"
                     data-content="Xóa các mục vừa chọn"
@@ -42,6 +42,6 @@
             </button>
         </form>
 
-        @include('admin.nhap_hang.modals')
+        @include('admin.nhap_hang.index.modals')
     </div>
 @endsection

@@ -13,4 +13,8 @@ class NhaCungCap extends Model
     public function khongCoPhieuNhap() {
         return $this->phieuNhaps->isEmpty();
     }
+
+    public function matchedID($id) {
+        return $id == $this->id;
+    }
 }

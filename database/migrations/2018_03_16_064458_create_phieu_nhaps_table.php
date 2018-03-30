@@ -15,7 +15,7 @@ class CreatePhieuNhapsTable extends Migration
     {
         Schema::create('phieu_nhaps', function (Blueprint $table) {
             $table->increments('id');
-            $table->dateTime('ngay_nhap');
+            $table->date('ngay_nhap');
             $table->integer('tai_khoan_id')->unsigned();
             $table->integer('nha_cung_cap_id')->unsigned();
             $table->foreign('tai_khoan_id','fk_pn_tk')->references('id')->on('tai_khoans');

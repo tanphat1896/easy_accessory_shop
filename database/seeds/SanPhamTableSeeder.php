@@ -28,6 +28,7 @@ class SanPhamTableSeeder extends Seeder
                 'diem_danh_gia' => (float)random_int(0, 10)/2.0,
                 'loai_san_pham_id' => random_int(1, 100)%2 + 1,
                 'thuong_hieu_id' => random_int(1, 100)%3 + 1,
+                'slug' => \App\Helper\StringHelper::toSlug($ssd->name),
                 'ngay_tao' => date('Y-m-d H:i:s'),
                 'ngay_cap_nhat' => date('Y-m-d H:i:s'),
                 'tinh_trang' => 1,

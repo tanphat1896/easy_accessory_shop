@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\ChiTietPhieuNhap;
 use App\NhaCungCap;
 use App\PhieuNhap;
 use Illuminate\Http\Request;
@@ -18,7 +19,7 @@ class NhapHangController extends Controller
     {
         $phieuNhaps = PhieuNhap::all();
         $nhaCungCaps = NhaCungCap::all();
-        return view('admin.nhap_hang.index', compact(['phieuNhaps','nhaCungCaps']));
+        return view('admin.nhap_hang.index.index', compact(['phieuNhaps','nhaCungCaps']));
     }
 
     /**
@@ -57,7 +58,8 @@ class NhapHangController extends Controller
      */
     public function show($id)
     {
-        //
+        $chiTietPhieuNhaps = ChiTietPhieuNhap::where('phieu_nhap_id',$id)->get();
+        return view('admin.nhap_hang.san_pham.index', compact('chiTietPhieuNhaps'));
     }
 
     /**
@@ -81,6 +83,13 @@ class NhapHangController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $phieuNhap = PhieuNhap::findOrFail($id);
+        $phieuNhap->nha_cung_cap_id = $request->get('ten-ncc');
+        $phieuNhap->ngay_nhap = $request->get('ngay-nhap');
+        $phieuNhap->tai_khoan_id = 2;
+        $phieuNhap->update();
+
+        return back()->with('success', 'Cập nhật thành công');
     }
 
     /**

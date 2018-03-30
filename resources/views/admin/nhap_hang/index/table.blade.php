@@ -11,7 +11,6 @@
         <th>Người nhập hàng</th>
         <th>Ngày nhập</th>
         <th>Nhà cung cấp</th>
-        {{--<th>Từ khóa tìm kiếm</th>--}}
         <th>Thao tác</th>
     </tr>
     </thead>
@@ -29,9 +28,10 @@
                 <td>{{ \App\PhieuNhap::find($phieuNhap->id)->TaiKhoan->ten }}</td>
                 <td>{{ $phieuNhap->ngay_nhap }}</td>
                 <td>{{ \App\PhieuNhap::find($phieuNhap->id)->NhaCungCap->ten_ncc }}</td>
-                <td>
-                    <a href="#" class="ui small blue label ">Xem</a>
-                    <a href="#" class="ui small teal label ">Sửa</a>
+                <td  class="collapsing">
+                    <a href="{{ route('nhap_hang.show',[$phieuNhap->id]) }}" class="ui small blue label">Xem</a>
+                    <a href="#" class="ui small teal label"
+                       onclick="$( '{{ '#modal-sua-'.$phieuNhap->id }}' ).modal('show')">Sửa</a>
                 </td>
             </tr>
         @endforeach
@@ -39,3 +39,9 @@
     </tbody>
 
 </table>
+
+@push('script')
+    <script>
+        // bindDataTable('bang-nhap-hang');
+    </script>
+@endpush
