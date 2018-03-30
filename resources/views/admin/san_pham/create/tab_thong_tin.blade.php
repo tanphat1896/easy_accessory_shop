@@ -41,7 +41,7 @@
 
                 <div class="inline required field">
                     <label class="label-fixed">Giá</label>
-                    <input type="text" name="gia" id="gia" placeholder="Giá thành">
+                    <input type="text" name="gia" value="0" id="gia" placeholder="Giá thành">
                 </div>
 
                 <div class="inline required field">

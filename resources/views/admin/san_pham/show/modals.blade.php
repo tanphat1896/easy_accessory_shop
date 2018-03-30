@@ -43,6 +43,30 @@
     </div>
 </div>
 
+
+{{--modal thong so ky thuat--}}
+<div class="ui mini fade modal" id="modal-cap-nhat-tskt">
+    <i class="close icon"></i>
+    <div class="content">
+        <h3 class="ui dividing header">Cập nhật thông số kỹ thuật</h3>
+        <form action="{{ route('thong_so_ky_thuat', [$sanPham->id]) }}" method="post" class="ui form" id="form-gia">
+            {{ csrf_field() }}
+
+            @foreach($sanPham->thongSos as $stt => $thongSo)
+                <div class="inline field">
+                    <label style="width: 100px">{{ $thongSo->getName() }}:</label>
+                    <input type="text" name="{{ $thongSo->id }}" value="{{ random_int(1, 100) }}">
+                </div>
+            @endforeach
+            <div class="field">
+                <div class="ui basic segment right aligned no-margin no-padding">
+                    <button class="ui blue small button">Lưu lại</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
 @push('script')
     <script>
         $('#form-gia').form({

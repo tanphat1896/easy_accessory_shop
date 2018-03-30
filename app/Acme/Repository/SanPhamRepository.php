@@ -22,6 +22,10 @@ use Illuminate\Support\Facades\Log;
 use PharIo\Manifest\Email;
 
 class SanPhamRepository {
+    private $sanPham;
+
+    private $sanPhams;
+
     private $reflectKey = ['th' => 'thuong_hieu_id', 'lsp' => 'loai_san_pham_id'];
 
     private $reflectClass = ['th' => 'ThuongHieu', 'lsp' => 'LoaiSanPham'];
@@ -46,9 +50,9 @@ class SanPhamRepository {
 
         $filterData = $this->getFilterDataFrom($filters);
 
-        $sanPhams = SanPham::where($condition)->get();
+        $this->sanPhams = SanPham::where($condition)->get();
 
-        return $this->indexDataFiltered($sanPhams, $filterData);
+        return $this->indexDataFiltered($filterData);
     }
 
     private function buildWhereCondition($filters) {
@@ -79,8 +83,10 @@ class SanPhamRepository {
         return $filterData;
     }
 
-    private function indexDataFiltered($sanPhams, $filterData) {
+    private function indexDataFiltered($filterData) {
         $filtered = true;
+
+        $sanPhams = $this->sanPhams;
 
         $thuongHieus = ThuongHieu::all();
 
@@ -125,70 +131,66 @@ class SanPhamRepository {
     }
 
     public function updateSanPham($id, $data, $anhDaiDien) {
-        $sanPham = SanPham::findOrFail($id);
-
-        $sanPham->ma_san_pham = $data['ma-san-pham'];
-        $sanPham->ten_san_pham = $data['ten-san-pham'];
-        $sanPham->loai_san_pham_id = $data['loai-san-pham'];
-        $sanPham->thuong_hieu_id = $data['thuong-hieu'];
-        $sanPham->tinh_trang = $data['tinh-trang']%2;
-        $sanPham->ngay_cap_nhat = date('Y-m-d H:i:s');
+        $this->sanPham = SanPham::capNhatThongTin($id, $data);
 
         if (!empty($anhDaiDien)){
-            $storePath = StringHelper::buildImageRelativePathFromProductType($sanPham->loai_san_pham_id);
+            $storePath = StringHelper::buildImageRelativePathFromProductType($this->sanPham->loai_san_pham_id);
 
             $relativePath = ImageHelper::storeImageToStorage($anhDaiDien, $storePath);
 
-            ImageHelper::deleteImageFromStorage($sanPham->anh_dai_dien);
+            ImageHelper::deleteImageFromStorage($this->sanPham->anh_dai_dien);
 
-            $sanPham->anh_dai_dien = $relativePath;
+            $this->sanPham->anh_dai_dien = $relativePath;
         }
 
         if (GiaSanPham::giaThayDoi($data['gia'])){
-            $sanPham->gia()->save(GiaSanPham::fromCurrency($data['gia']));
+            $this->sanPham->gia()->save(GiaSanPham::fromCurrency($data['gia']));
         }
 
-        return $sanPham->update();
+        $this->themThongSoKyThuat();
+
+        return $this->sanPham->update();
     }
 
     public function themSanPham(array $data, $anhDaiDien, $anhChiTiets) {
-
-        $errors = [];
-        $sanPham = new SanPham();
-
-        $sanPham->ma_san_pham = $data['ma-san-pham'];
-        $sanPham->ten_san_pham = $data['ten-san-pham'];
-        $sanPham->thuong_hieu_id = $data['thuong-hieu'];
-        $sanPham->loai_san_pham_id = $data['loai-san-pham'];
-        $sanPham->ngay_tao = date('Y-m-d H:i:s');
-        $sanPham->ngay_cap_nhat = date('Y-m-d H:i:s');
-
+        $this->sanPham = SanPham::taoMoiThongTin($data);
 
         if (!empty($anhDaiDien))
-            $sanPham->anh_dai_dien = ImageHelper::storeImageToStorage(
+            $this->sanPham->anh_dai_dien = ImageHelper::storeImageToStorage(
                 $anhDaiDien,
-                StringHelper::buildImageRelativePathFromProductType($sanPham->loai_san_pham_id));
+                StringHelper::buildImageRelativePathFromProductType($this->sanPham->loai_san_pham_id));
 
-        if(!$sanPham->save())
+        if(!$this->sanPham->save())
             return false;
-        if (!$sanPham->gia()->save(GiaSanPham::fromCurrency($data['gia'])))
+
+        if (!$this->sanPham->gia()->save(GiaSanPham::fromCurrency($data['gia'])))
             return false;
+
+        $this->themThongSoKyThuat();
 
         if (!empty($anhChiTiets))
-            return $this->storeAndAttachWith($sanPham, $anhChiTiets);
+            return $this->storeAndAttachWith($anhChiTiets);
 
-        return $sanPham->id;
+        return $this->sanPham->id;
     }
 
-    private function storeAndAttachWith($sanPham, $anhs) {
+    private function themThongSoKyThuat() {
+        $this->sanPham->thongSos()->detach();
+
+        $loaiSanPham = LoaiSanPham::findOrFail($this->sanPham->loai_san_pham_id);
+
+        $this->sanPham->thongSos()->sync($loaiSanPham->thongSoIds());
+    }
+
+    private function storeAndAttachWith($anhs) {
         foreach ($anhs as $anh) {
             $link = ImageHelper::storeImageToStorage($anh, $this->folderAnhSanPham);
 
-            if (!$sanPham->hinhAnhs()->save(new HinhAnh(['lien_ket' => $link])))
+            if (!$this->sanPham->hinhAnhs()->save(new HinhAnh(['lien_ket' => $link])))
                 return false;
         }
 
-        return $sanPham->id;
+        return $this->sanPham->id;
     }
 
 

@@ -1,5 +1,5 @@
 <h5 class="ui dividing header">Thông số kỹ thuật
-    <a href="#" onclick="$('modal-cap-nhat-tskt').modal('show')" class="ui blue label">Cập nhật</a>
+    <a href="#" onclick="$('#modal-cap-nhat-tskt').modal('show')" class="ui blue label">Cập nhật</a>
 </h5>
 
 <table class="ui blue striped table">

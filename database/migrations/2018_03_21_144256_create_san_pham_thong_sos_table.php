@@ -17,7 +17,7 @@ class CreateSanPhamThongSosTable extends Migration
             $table->increments('id');
             $table->integer('san_pham_id')->unsigned();
             $table->integer('thong_so_id')->unsigned();
-            $table->string('gia_tri',255);
+            $table->string('gia_tri',255)->default('Chưa cập nhật');
             $table->timestamps();
             $table->unique(['san_pham_id','thong_so_id']);
         });
