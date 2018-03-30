@@ -22,7 +22,8 @@
 
                 <div class="inline field">
                     <label class="label-fixed">Loại sản phẩm</label>
-                    <select name="loai-san-pham" class="ui search dropdown">
+                    <select name="loai-san-pham" class="ui search dropdown"
+                            onchange="warningMessage('Cảnh báo', 'Tất cả các thông số kỹ thuật sẽ bị thay đổi')">
                         @foreach($loaiSanPhams as $loaiSanPham)
                             <option value="{{ $loaiSanPham->id }}"
                                     {{ $loaiSanPham->matchedId($sanPham->loai_san_pham_id) ? 'selected': '' }}>

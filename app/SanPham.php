@@ -11,6 +11,33 @@ class SanPham extends Model implements CommonFunction
 {
     use CommonBehavior;
 
+    public static function taoMoiThongTin(array $data) {
+        $sanPham = new self();
+
+        $sanPham->ma_san_pham = $data['ma-san-pham'];
+        $sanPham->ten_san_pham = $data['ten-san-pham'];
+        $sanPham->thuong_hieu_id = $data['thuong-hieu'];
+        $sanPham->loai_san_pham_id = $data['loai-san-pham'];
+        $sanPham->ngay_tao = date('Y-m-d H:i:s');
+        $sanPham->ngay_cap_nhat = date('Y-m-d H:i:s');
+
+        return $sanPham;
+
+    }
+
+    public static function capNhatThongTin($id, array $data) {
+        $sanPham = SanPham::findOrFail($id);
+
+        $sanPham->ma_san_pham = $data['ma-san-pham'];
+        $sanPham->ten_san_pham = $data['ten-san-pham'];
+        $sanPham->loai_san_pham_id = $data['loai-san-pham'];
+        $sanPham->thuong_hieu_id = $data['thuong-hieu'];
+        $sanPham->tinh_trang = $data['tinh-trang']%2;
+        $sanPham->ngay_cap_nhat = date('Y-m-d H:i:s');
+
+        return $sanPham;
+    }
+
     public function giaMoiNhat() {
         return $this->gia()->first()->gia;
     }

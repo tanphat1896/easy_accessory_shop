@@ -21,6 +21,10 @@ class LoaiSanPham extends Model implements CommonFunction
             'thong_so_id');
     }
 
+    public function thongSoIds() {
+        return array_column($this->thongSos->toArray(), 'id');
+    }
+
     public static function daTonTai($slug) {
         return !self::whereSlug($slug)->get()->isEmpty();
     }

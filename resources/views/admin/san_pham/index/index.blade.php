@@ -4,7 +4,14 @@
 
 @section('content')
     <div class="ui blue raised segment">
-        <div class="ui dividing header center aligned no-margin-bottom">Quản lý sản phẩm</div>
+        <div class="ui dividing header center aligned no-margin-bottom">Quản lý sản phẩm
+            <span class="ui tiny label need-popup right floated"
+                  data-html='<span class="ui small blue label small-td-margin"> <i class="eye open fitted icon"></i></span> Xem chi tiết <br>
+    <span class="ui small green label"><i class="edit fitted icon"></i></span> Sửa sản phẩm <br>
+    <span class="ui small orange label small-td-margin" ><i class="pause fitted icon"></i></span> Ngừng kinh doanh <br>
+    <span class="ui small teal label" ><i class="play fitted icon"></i></span> Kinh doanh lại <br>'>
+                <i class="question fitted icon"></i></span>
+        </div>
 
         <a class="ui blue small button" href="{{ route('san_pham.create') }}">
             <i class="plus icon fitted"></i>

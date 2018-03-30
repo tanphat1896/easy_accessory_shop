@@ -19,23 +19,21 @@
             <td id="{{ 'status' . $sanPham->id }}">{{ $sanPham->tinhTrang() }}</td>
             <td>
                 <a href="{{ route('san_pham.show', [$sanPham->id]) }}"
-                   class="ui small blue label" data-tooltip="Xem chi tiết">
+                   class="ui small blue label">
                     <i class="eye open fitted icon"></i>
                 </a>
                 <a href="{{ route('san_pham.edit', [$sanPham->id]) }}"
-                   class="ui small green label" data-tooltip="Sửa sản phẩm">
+                   class="ui small green label">
                     <i class="edit fitted icon"></i>
                 </a>
 
                     <a  onclick="stopSale({{ $sanPham->id }})" id="{{ 'stop-' . $sanPham->id }}" 
-                        class="ui small orange label" data-tooltip="Ngừng kinh doanh"
-                        style="display: {{ $sanPham->tinh_trang ? '': 'none' }}" >
+                        class="ui small orange label" style="display: {{ $sanPham->tinh_trang ? '': 'none' }}" >
                         <i class="pause fitted icon"></i>
                     </a>
 
                     <a  onclick="resumeSale({{ $sanPham->id }})" id="{{ 'resume-' . $sanPham->id }}" 
-                        class="ui small teal label" data-tooltip="Kinh doanh lại"
-                        style="display: {{ $sanPham->tinh_trang ? 'none': '' }}"  >
+                        class="ui small teal label" style="display: {{ $sanPham->tinh_trang ? 'none': '' }}"  >
                         <i class="play fitted icon"></i>
                     </a>
             </td>
