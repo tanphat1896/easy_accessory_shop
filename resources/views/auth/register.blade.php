@@ -31,10 +31,20 @@
                 <div class="inline field required">
                     <label for="name">Họ và tên</label>
                     <input type="text" id="name" name="name">
+                    @if ($errors->has('name'))
+                        <span>
+                            <strong>{{ $errors->first('name') }}</strong>
+                        </span>
+                    @endif
                 </div>
                 <div class="inline field required">
                     <label for="email">Email</label>
                     <input type="email" id="email" name="email">
+                    @if ($errors->has('email'))
+                        <span>
+                            <strong>{{ $errors->first('email') }}</strong>
+                        </span>
+                    @endif
                 </div>
                 <div class="inline field required">
                     <label for="password">Mật khẩu</label>
@@ -47,6 +57,11 @@
                 <div class="inline field">
                     <label for="phone">Số điện thoại</label>
                     <input type="text" id="phone" name="phone">
+                    @if ($errors->has('phone'))
+                        <span>
+                            <strong>{{ $errors->first('phone') }}</strong>
+                        </span>
+                    @endif
                 </div>
                 <div class="inline field">
                     <button type="submit" class="ui blue button">

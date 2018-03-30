@@ -16,9 +16,9 @@ class CreateTaiKhoansTable extends Migration
         Schema::create('tai_khoans', function (Blueprint $table) {
             $table->increments('id');
             $table->string('ten',50);
-            $table->string('email',100);
+            $table->string('email',100)->unique();
             $table->string('so_dien_thoai',11);
-            $table->string('ten_dang_nhap',16);
+            $table->string('ten_dang_nhap',16)->unique();
             $table->string('mat_khau');
             $table->integer('loai_tk_id')->unsigned();
             $table->foreign('loai_tk_id','fk_tk_ltk')->references('id')->on('loai_tai_khoans');
