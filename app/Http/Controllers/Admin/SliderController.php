@@ -42,7 +42,6 @@ class SliderController extends Controller
         if (empty($ids))
             return back();
 
-
         $deleted = ImageHelper::deleteSlidersFromStorage($ids);
 
         if (!$deleted)

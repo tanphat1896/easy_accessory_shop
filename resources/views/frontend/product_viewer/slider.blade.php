@@ -1,26 +1,11 @@
-<div class="fotorama" data-nav="thumbs">
-    <a href="{{ asset('assets/images/uploaded/products/usb/adapter-the-nho.jpg') }}">
-        <img src="{{ asset('assets/images/uploaded/products/usb/adapter-the-nho.jpg') }}">
+<div class="fotorama" data-nav="thumbs" data-width="100%">
+    <a href="/{{ $product->anh_dai_dien }}">
+        <img src="/{{ $product->anh_dai_dien }}" alt="{{ $product->getName() }}">
     </a>
-    <a href="{{ asset('assets/images/uploaded/products/usb/dato8gpts.jpg') }}">
-        <img src="{{ asset('assets/images/uploaded/products/usb/dato8gpts.jpg') }}">
-    </a>
-    <a href="{{ asset('assets/images/uploaded/products/usb/kingston16gapts.jpg') }}">
-        <img src="{{ asset('assets/images/uploaded/products/usb/kingston16gapts.jpg') }}">
-    </a>
-    <a href="{{ asset('assets/images/uploaded/products/usb/kingston16gapts.jpg') }}">
-        <img src="{{ asset('assets/images/uploaded/products/usb/kingston16gapts.jpg') }}">
-    </a>
-    <a href="{{ asset('assets/images/uploaded/products/usb/kingston16gapts.jpg') }}">
-        <img src="{{ asset('assets/images/uploaded/products/usb/kingston16gapts.jpg') }}">
-    </a>
-    <a href="{{ asset('assets/images/uploaded/products/usb/kingston16gapts.jpg') }}">
-        <img src="{{ asset('assets/images/uploaded/products/usb/kingston16gapts.jpg') }}">
-    </a>
-    <a href="{{ asset('assets/images/uploaded/products/usb/kingston16gapts.jpg') }}">
-        <img src="{{ asset('assets/images/uploaded/products/usb/kingston16gapts.jpg') }}">
-    </a>
-    <a href="{{ asset('assets/images/uploaded/products/usb/kingston16gapts.jpg') }}">
-        <img src="{{ asset('assets/images/uploaded/products/usb/kingston16gapts.jpg') }}">
-    </a>
+
+    @foreach($product->hinhAnhs as $anh)
+        <a href="/{{ $anh->lien_ket }}">
+            <img src="/{{ $anh->lien_ket }}" alt="{{ $product->getName() }}">
+        </a>
+    @endforeach
 </div>

@@ -4,3 +4,4 @@
 {{-- <script src="{{ asset('plugin/pace/pace.min.js') }}"></script> --}}
 <script src="{{ asset('plugin/fotorama/fotorama.js') }}"></script>
 <script src="{{ asset('plugin/jq-toast/jquery.toast.min.js') }}"></script>
+<script src="{{ asset('plugin/barrating/jquery.barrating.min.js') }}"></script>

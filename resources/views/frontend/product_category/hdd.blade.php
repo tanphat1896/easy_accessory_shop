@@ -3,6 +3,6 @@
 @section('title', 'HDD')
 
 @section('content')
-    @include('frontend.product_category.filter.hdd_filter')
+    @include('frontend.product_category.filter.hdd')
 
 @endsection

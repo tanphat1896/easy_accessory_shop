@@ -9,3 +9,4 @@ $('#toggle-sidebar').click(function() {
 });
 
 $('.need-popup').popup({position: 'bottom left'});
+$('.ui.rating').rating();

@@ -11,13 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    $ssds = \App\SanPham::whereLoaiSanPhamId(1)->limit(12)->get();
+Route::get('/', 'Frontend\IndexController@index');
+Route::get('/san-pham/ssd', 'Frontend\SanPhamController@showSsd');
+Route::get('/chi-tiet/{slug}', 'Frontend\SanPhamController@show');
 
-    $sliders = \App\Slider::all();
 
-    return view('index', compact('ssds', 'sliders'));
-});
 Route::get('/cart', function() {
 	return view('frontend.cart.index');
 });
@@ -35,11 +33,6 @@ Route::get('/hdd', function() {
 
 Auth::routes();
 
-// admin routes
-
-Route::get('/products', function () {
-	return view('admin.products.index');
-});
 
 
 Route::group(['prefix' => 'admin'], function() {

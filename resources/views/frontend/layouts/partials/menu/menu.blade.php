@@ -5,7 +5,7 @@
     <a class="item" href="/hdd">
         <i class="hdd outline icon"></i> HDD
     </a>
-    <a class="item">
+    <a class="item" href="/san-pham/ssd">
         <i class="hdd icon"></i> SSD
     </a>
     <a class="item">

@@ -22,6 +22,7 @@ class CreateSanPhamsTable extends Migration
             $table->float('diem_danh_gia')->default(0.0);
             $table->integer('loai_san_pham_id')->unsigned();
             $table->integer('thuong_hieu_id')->unsigned();
+            $table->string('slug');
             $table->dateTime('ngay_tao');
             $table->dateTime('ngay_cap_nhat');
             $table->tinyInteger('tinh_trang')->default(1);

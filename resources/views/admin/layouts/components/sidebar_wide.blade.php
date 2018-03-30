@@ -1,4 +1,4 @@
-<div class="ui fixed vertical inverted menu full-height under-navbar hidden" style="width: 220px; " id="sidebar-wide">
+<div class="ui fixed vertical inverted borderless menu full-height under-navbar hidden" style="width: 220px; " id="sidebar-wide">
     <div class="ui accordion item no-padding">
         <div class="title item menu-item-padding color-white">
             <i class="dashboard icon icon-left icon-accordion"></i>

@@ -59,6 +59,12 @@
 .color-white {
     color: #fff !important;
 }
+.red-text {
+    color: red;
+}
+.blue-text {
+    color: #0d71bb;
+}
 
 .full-height {
     height: 100%;

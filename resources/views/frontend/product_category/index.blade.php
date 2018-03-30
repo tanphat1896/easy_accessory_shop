@@ -1,7 +1,45 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: TanPhat
- * Date: 30/03/2018
- * Time: 8:05 PM
- */
+@extends('frontend.layouts.master')
+
+{{--@section('title', )--}}
+
+@section('content')
+    <div class="ui basic segment">
+        <div class="ui top blue attached segment"><strong>SSD</strong></div>
+        <div class="ui attached segment">
+            <div class="ui six column computer four column tablet stackable grid">
+                @foreach($products as $product)
+                    <div class="column">
+                        <div class="ui fluid link card" onclick="window.location.href='{{ '/chi-tiet/' . $product->slug }}'">
+                            <div class="image">
+                                @if($product->so_luong > 5)
+                                    {{--<div class="ui red right corner  label">Mới</div>--}}
+                                    <div class="ui red right ribbon  label">Mới</div>
+                                @endif
+                                {{--<div class="ui dimmer">--}}
+                                {{--<div class="content">--}}
+                                {{--<div class="center">--}}
+                                {{--<a class="ui icon inverted button"><i class="cart icon"></i></a>--}}
+                                {{--<a class="ui icon inverted button"><i class="eye icon"></i></a>--}}
+                                {{--</div>--}}
+                                {{--</div>--}}
+                                {{--</div>--}}
+                                <img src="{{ asset($product->anh_dai_dien) }}">
+                            </div>
+                            <div class="content">
+                                <p>{{ $product->ten_san_pham }}</p>
+                                <p class="no-margin"><strong>{{ number_format($product->gia()->first()->gia) }} đ</strong>
+                                    @if (empty($product->so_luong))
+                                        <span class="ui red label">Hết hàng</span>
+                                    @endif
+                                </p>
+                                @component('frontend.product_category.components.star')
+                                    {{ $product->diem_danh_gia }}
+                                @endcomponent
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+@endsection
