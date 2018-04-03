@@ -37,7 +37,7 @@
     <div class="ui mini vertical flip modal" id="{{ "modal-sua-" . $chiTietPhieuNhap->id }}">
         <div class="blue header">Sửa chi tiết phiếu nhập</div>
         <div class="content">
-            <form action="{{ route('chi_tiet_nhap_hang_update/'.$chiTietPhieuNhap->id, [$chiTietPhieuNhap->id]) }}"
+            <form action="{{ route('chi_tiet_nhap_hang.update', [$chiTietPhieuNhap->id]) }}"
                   class="ui form" method="post">
 
                 {{ csrf_field() }}
