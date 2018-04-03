@@ -10,7 +10,7 @@
 
         @include('admin.layouts.components.error_msg')
 
-        <form action="" method="post">
+        <form action="{{ route('chi_tiet_nhap_hang.destroy', [0]) }}" method="post">
 
             {{ method_field('DELETE') }}
             {{ csrf_field() }}
@@ -47,3 +47,11 @@
         @include('admin.nhap_hang.san_pham.modal')
     </div>
 @endsection
+
+@push('script')
+    <script>
+        bindSelectAll('chon-het-san-pham-phieu-nhap');
+
+        // bindDataTable('bang-nha-cung-cap');
+    </script>
+@endpush

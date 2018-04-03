@@ -59,7 +59,7 @@ class NhapHangController extends Controller
     public function show($id)
     {
         $chiTietPhieuNhaps = ChiTietPhieuNhap::where('phieu_nhap_id',$id)->get();
-        return view('admin.nhap_hang.san_pham.index', compact('chiTietPhieuNhaps'));
+        return view('admin.nhap_hang.san_pham.index', compact(['chiTietPhieuNhaps','id']));
     }
 
     /**

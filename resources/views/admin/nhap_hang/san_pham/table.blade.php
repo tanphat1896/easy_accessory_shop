@@ -3,7 +3,7 @@
     <thead>
     <tr>
         <th class="collapsing">
-            <div class="ui checkbox" id="chon-het-san-pham" >
+            <div class="ui checkbox" id="chon-het-san-pham-phieu-nhap" >
                 <input type="checkbox" class="hidden">
             </div>
         </th>
@@ -22,14 +22,15 @@
         <tr>
             <td class="collapsing">
                 <div class="ui child checkbox">
-                    <input type="checkbox" class="hidden" name="chi-tiet-phieu-nhap-id[]" value="{{ $chiTietPhieuNhap->san_pham_id }}">
+                    <input type="checkbox" class="hidden" name="chi-tiet-phieu-nhap-id[]"
+                           value="{{ $chiTietPhieuNhap->id }}">
                 </div>
             </td>
             <td>{{ $stt + 1 }}</td>
             <td>{{ \App\ChiTietPhieuNhap::find($chiTietPhieuNhap->id)->SanPham->ten_san_pham }}</td>
             <td>{{ $chiTietPhieuNhap->so_luong }}</td>
             <td>{{ $chiTietPhieuNhap->don_gia }}</td>
-            <td>
+            <td class="collapsing">
                 <a href="{{ route('san_pham.show',[$chiTietPhieuNhap->san_pham_id]) }}" class="ui small blue label ">Xem</a>
                 <a href="#" class="ui small teal label "
                    onclick="$( '{{ '#modal-sua-'.$chiTietPhieuNhap->id }}' ).modal('show')">Sửa</a>

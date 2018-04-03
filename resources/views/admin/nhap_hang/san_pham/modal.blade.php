@@ -1,14 +1,25 @@
 <div class="ui mini modal" id="modal-them-phieu-nhap-san-pham">
     <div class="blue header">Thêm mới sản phẩm</div>
     <div class="content">
-        <form action="" class="ui form" method="post">
+        <form action="{{ route('chi_tiet_nhap_hang.store') }}" class="ui form" method="post">
 
             {{ csrf_field() }}
+
+            <input type="hidden" id="phieu-nhap-id" name="phieu-nhap-id" value="{{ $id }}">
 
             <label for="ten-san-pham">Sản phẩm</label>
             <div class="field">
                 <select id="ten-san-pham" name="ten-san-pham" class="ui dropdown">
                     @foreach(\App\SanPham::all() as $sanPham)
+                        {{ $check = false }}
+                        @foreach($chiTietPhieuNhaps as $chiTietPhieuNhap)
+                            @if($chiTietPhieuNhap->san_pham_id == $sanPham->id)
+                                {{$check = true}}
+                            @endif
+                        @endforeach
+                        @if ($check == true)
+                            @continue
+                        @endif
                         <option value="{{ $sanPham->id }}">
                             {{ $sanPham->ten_san_pham }}
                         </option>
@@ -47,12 +58,29 @@
                 <label for="ten-san-pham">Sản phẩm</label>
                 <div class="field">
                     <select id="ten-san-pham" name="ten-san-pham" class="ui dropdown">
+                        <option value="{{ $chiTietPhieuNhap->san_pham_id }} 'selected'">
+                            {{ \App\SanPham::find($chiTietPhieuNhap->san_pham_id)->ten_san_pham }}
+                        </option>
                         @foreach(\App\SanPham::all() as $sanPham)
-                            <option value="{{ $sanPham->id }}"
-                                    {{ ($chiTietPhieuNhap->san_pham_id == $sanPham->id) ? 'selected' : '' }}>
+                            {{ $check = false }}
+                            @foreach($chiTietPhieuNhaps as $chiTietPhieuNhap)
+                                @if($chiTietPhieuNhap->san_pham_id == $sanPham->id)
+                                    {{$check = true}}
+                                @endif
+                            @endforeach
+                            @if ($check == true)
+                                @continue
+                            @endif
+                            <option value="{{ $sanPham->id }}">
                                 {{ $sanPham->ten_san_pham }}
                             </option>
                         @endforeach
+                        {{--@foreach(\App\SanPham::all() as $sanPham)--}}
+                            {{--<option value="{{ $sanPham->id }}"--}}
+                                    {{--{{ ($chiTietPhieuNhap->san_pham_id == $sanPham->id) ? 'selected' : '' }}>--}}
+                                {{--{{ $sanPham->ten_san_pham }}--}}
+                            {{--</option>--}}
+                        {{--@endforeach--}}
                     </select>
                 </div>
 
