@@ -20,7 +20,7 @@ class CreateChiTietPhieuNhapsTable extends Migration
             $table->integer('so_luong');
             $table->double('don_gia');
             $table->unique(['phieu_nhap_id','san_pham_id']);
-            $table->foreign('phieu_nhap_id','fk_ctpn_pn')->references('id')->on('phieu_nhaps');
+            $table->foreign('phieu_nhap_id','fk_ctpn_pn')->references('id')->on('phieu_nhaps')->onDelete('cascade');
             $table->foreign('san_pham_id','fk_ctpn_sp')->references('id')->on('san_phams');
             $table->timestamps();
         });
