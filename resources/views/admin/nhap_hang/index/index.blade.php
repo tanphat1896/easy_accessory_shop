@@ -10,7 +10,7 @@
 
         @include('admin.layouts.components.error_msg')
 
-        <form action="" method="post">
+        <form action="{{ route('nhap_hang.destroy', [0]) }}" method="post">
 
             {{ method_field('DELETE') }}
             {{ csrf_field() }}

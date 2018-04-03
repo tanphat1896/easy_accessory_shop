@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="ui blue raised segment">
-        <h3 class="ui dividing header center aligned">Chi tiết đơn hàng</h3>
+        <h3 class="ui dividing header center aligned">Chi tiết nhập hàng</h3>
 
         @include('admin.layouts.components.success_msg')
 
