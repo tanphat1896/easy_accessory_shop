@@ -1,15 +1,42 @@
 <div class="ui fixed borderless menu" style="height: 50px;">
-    <div class="item " id="logo" >
-        <img class="ui small image" src="{{ asset('assets/images/logo.png') }}" alt="Logo">
-    </div>
-    <a class="icon item" id="btn-toggle-menu" data-menu="wide">
-        <i class="sidebar icon"></i>
-    </a>
+    @if($wideMenu)
+        <a class="item header" id="logo" href='/admin'>
+            {{-- <img class="ui small image" src="{{ asset('assets/images/logo.png') }}" alt="Logo"> --}}
+        </a>
+
+        <a class="icon item" id="btn-toggle-menu">
+            <i class="double angle left icon"></i>
+        </a>
+    @else
+        <a class="item header" id="logo" href="/admin" style="width: 50px">
+            {{-- <img class="ui small image" src="{{ asset('assets/images/logo.png') }}" alt="Logo"> --}}
+        </a>    
+
+        <a class="icon item" id="btn-toggle-menu">
+            <i class="double angle right icon"></i>
+        </a>
+    @endif
+
+    <a href="/" class="icon item need-popup" target="_blank" 
+        data-content="Trang khách hàng" 
+        data-position="bottom left">
+        <i class="home icon"></i></a>
 
     <div class="right menu">
         <div href="" class="ui dropdown icon item">
-            <i class="bell icon"></i>
+            <i class="yellow bell icon"></i>
             <span class="ui floating red circular label">5</span>
+            <div class="menu">
+                <div class="item">Thông báo fsdfsafd safds fdsaf dsad fsdf dsad sad<br>
+                fsafdsa</div>
+                <div class="item">Thông báo</div>
+                <div class="item">Thông báo</div>
+                <div class="item">Thông báo</div>
+            </div>
+        </div>
+        <div href="" class="ui dropdown icon item">
+            <i class="blue mail icon"></i>
+            <span class="ui floating red circular label">7</span>
             <div class="menu">
                 <div class="item">Thông báo fsdfsafd safds fdsaf dsad fsdf dsad sad<br>
                 fsafdsa</div>

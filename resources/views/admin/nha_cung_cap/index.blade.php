@@ -52,6 +52,6 @@
     <script>
         bindSelectAll('chon-het-nha-cung-cap');
 
-        bindDataTable('bang-nha-cung-cap');
+        // bindDataTable('bang-nha-cung-cap');
     </script>
 @endpush

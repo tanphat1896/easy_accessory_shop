@@ -1,6 +1,6 @@
 <table class="ui celled striped table" id="bang-sp">
     <thead>
-    <tr>
+    <tr class="center aligned">
         <th class="collapsing">STT</th>
         <th class="collapsing">Mã SP</th>
         <th>Tên SP</th>
@@ -16,8 +16,8 @@
             <td>{{ $sanPham->ma_san_pham }}</td>
             <td>{{ $sanPham->ten_san_pham }}</td>
             <td>{{ $sanPham->so_luong }}</td>
-            <td id="{{ 'status' . $sanPham->id }}">{{ $sanPham->tinhTrang() }}</td>
-            <td>
+            <td class="collapsing" id="{{ 'status' . $sanPham->id }}">{{ $sanPham->tinhTrang() }}</td>
+            <td class="collapsing">
                 <a href="{{ route('san_pham.show', [$sanPham->id]) }}"
                    class="ui small blue label">
                     <i class="eye open fitted icon"></i>
@@ -53,7 +53,7 @@
                     loader: false, position: 'bottom-right'});
                 $(`#stop-${id}`).hide();
                 $(`#resume-${id}`).show();
-                $('#status' + id).text("Ngừng bán");
+                $('#status' + id).text("Ngừng k.doanh");
             }).catch(err => $.toast({text: 'Lỗi! Hãy thử lại sau', icon: 'error', 
                     loader: false, position: 'bottom-right'}));
         }
@@ -65,7 +65,7 @@
                     loader: false, position: 'bottom-right'});
                 $(`#stop-${id}`).show();
                 $(`#resume-${id}`).hide();
-                $('#status' + id).text("Đang bán");
+                $('#status' + id).text("Kinh doanh");
             }).catch(err => $.toast({text: 'Lỗi! Hãy thử lại sau', icon: 'error', 
                     loader: false, position: 'bottom-right'}));
         }

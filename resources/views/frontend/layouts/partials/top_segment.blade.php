@@ -43,12 +43,12 @@
             </div>
         </div>
 
-        <a href="cart" class="ui white small button" style="position:relative;">
+        <a href="{{ route('cart.index') }}" class="ui white small button" style="position:relative;">
             <i class="cart icon"></i>
             <strong>Giỏ hàng</strong>
             <span class="ui red mini floating label">
-                @if(Session::has('products'))
-                    {{ count(Session::get('products')) }}
+                @if(Session::has('cart'))
+                    {{ count(Session::get('cart')) }}
                 @else
                     {{ 0 }}
                 @endif

@@ -7,9 +7,9 @@
         
         @include('frontend.layouts.partials.slider_news')
 
-        @include('frontend.product_category.ssd')
+        {{--@include('frontend.product_category.ssd')--}}
 
-        @include('frontend.product_category.usb')
+        {{--@include('frontend.product_category.usb')--}}
 
         <div class="ui top attached segment"> Sản phẩm hot </div>
         <div class="ui attached segment">

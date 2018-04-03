@@ -50,7 +50,7 @@
 
 @push('script')
     <script>
-        bindDataTable('bang-thuong-hieu');
+        // bindDataTable('bang-thuong-hieu');
 
         bindSelectAll('chon-het-thuong-hieu');
 

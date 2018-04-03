@@ -30,7 +30,7 @@
                 <strong>Thêm mới </strong>
             </button>
 
-            @include('admin.slider.table')
+            @include('admin.content.slider.table')
 
         </form>
 
@@ -46,7 +46,7 @@
             </div>
         </div>
 
-        @include('admin.slider.modals')
+        @include('admin.content.slider.modals')
     </div>
 @endsection
 

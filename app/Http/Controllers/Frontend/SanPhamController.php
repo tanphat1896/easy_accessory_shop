@@ -9,11 +9,11 @@ use App\Http\Controllers\Controller;
 
 class SanPhamController extends Controller
 {
-    public function showSsd() {
-        $productType = LoaiSanPham::whereSlug('ssd-mlc')->firstOrFail();
-        $products = $productType->sanPhams;
+    public function showGroup($slug) {
+        $productType = LoaiSanPham::whereSlug($slug)->firstOrFail();
+        $products = $productType->sanPhams()->paginate(12);
 
-        return view('frontend.product_category.index', compact('products'));
+        return view('frontend.product_category.index', compact('products', 'productType'));
     }
 
     public function show($slug) {

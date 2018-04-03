@@ -58,7 +58,7 @@
 
                 <div class="inline field">
                     <label for="">Điểm đánh giá trung bình: {{ $sanPham->diem_danh_gia }} sao</label>
-                    @component('frontend.product_category.components.star')
+                    @component('sharing.components.star')
                         {{ $sanPham->diem_danh_gia }}
                     @endcomponent
                 </div>

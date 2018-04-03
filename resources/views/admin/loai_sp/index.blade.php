@@ -52,6 +52,6 @@
     <script>
         bindSelectAll('chon-het-loai-sp');
 
-        bindDataTable('bang-loai-sp');
+        // bindDataTable('bang-loai-sp');
     </script>
 @endpush

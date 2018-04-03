@@ -1,17 +1,17 @@
 <div class="ui small borderless menu no-margin square-border">
-    <div class="item header">Bộ lọc</div>
     <div class="item">128GB</div>
     <div class="item">256GB</div>
     <div class="item">1TB</div>
     <div class="item">Samsung</div>
     <div class="item">Sandisk</div>
     <div class="ui item dropdown">
-        Tất cả giá
+        <div class="text">Tất cả giá</div>
         <div class="menu">
-            <a href="" onclick="filtering('price', 'desc');"></a>
+            <a href="" onclick="filtering('price', 'desc');">Giá giảm dần</a>
+            <a href="" onclick="filtering('price', 'desc');">Giá tăng dần</a>
         </div>
     </div>
-    <div class="item" id="option">Tùy chọn</div>
+    <div class="item pointer" id="option">Tùy chọn<i class="dropdown icon"></i></div>
     <div class="ui flowing popup bottom center hidden">
         <div class="ui three column divided grid">
             <div class="row">

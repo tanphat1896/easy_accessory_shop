@@ -48,9 +48,11 @@
 .no-padding {
     padding: 0 !important;
 }
-
 .small-padding {
     padding: 5px !important;
+}
+.normal-padding {
+    padding: 10px !important;
 }
 
 .white {
@@ -70,14 +72,8 @@
     height: 100%;
     overflow: auto;
 }
-.thin-menu {
-    width: 50px !important;
-}
-.wide-menu {
-    width: 220px !important;
-}
 .under-navbar {
-    top: 50px !important;
+    /*top: 50px !important;*/
 }
 #logo {
     width: 220px;
@@ -90,7 +86,7 @@
 
 #main-container {
     margin-top: 50px;
-    margin-left: 220px;
+    /*margin-left: 220px;*/
 }
 
 .menu-item-padding {
@@ -115,13 +111,13 @@
 
 .icon-left {
     float: unset !important;
-    margin-right: 8px !important;
+    margin-right: 15px !important;
     margin-left: 0 !important;
     width: 15px !important;
 }
 
 .icon-accordion {
-    margin-right: 5px !important;
+    margin-right: 13px !important;
 }
 
 .static-input {
@@ -146,4 +142,18 @@
 
 .force-inline {
     display: inline-block ;
+}
+
+.active-bar {
+    background: rgba(255,255,255,.15) !important;
+    color: #fff!important;
+    border-left: 2px solid #2185d0;
+}
+
+.pointer {
+    cursor: pointer !important;
+}
+
+.force-hidden{
+    display: none !important;
 }

@@ -10,7 +10,6 @@
 
             <div class="ui grid stackable">
 
-
                 <div class="four wide column">
                     @include('frontend.product_viewer.slider')
                 </div>
@@ -32,7 +31,7 @@
 
                             <div class="ui divider hidden"></div>
 
-                            <form action="{{ action('CardController@addProductToCart', [$product->id]) }}"
+                            <form action="{{ route('cart.add', [$product->slug]) }}"
                                   class="ui form" method="post">
                                 {{ csrf_field() }}
 
@@ -60,7 +59,7 @@
                             Đánh giá:
 
                             @guest
-                                @component('frontend.product_category.components.star')
+                                @component('sharing.components.star')
                                     {{ $product->diem_danh_gia }}
                                 @endcomponent
                                 (2 đánh giá)

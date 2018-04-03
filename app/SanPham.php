@@ -71,7 +71,11 @@ class SanPham extends Model implements CommonFunction
     }
 
     public function tinhTrang() {
-        return (int)$this->tinh_trang === 1 ? 'Đang bán': 'Ngừng bán';
+        return (int)$this->tinh_trang === 1 ? 'Kinh doanh': 'Ngừng k.doanh';
+    }
+
+    public static function getFromSlug($slug) {
+        return self::whereSlug($slug)->first();
     }
 
     public function getName() {

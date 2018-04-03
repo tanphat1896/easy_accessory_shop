@@ -28,7 +28,7 @@
 
 @push('script')
     <script>
-        bindDataTable('bang-sp');
+        // bindDataTable('bang-sp');
 
         $('#sp-filter').popup({
             inline     : true,

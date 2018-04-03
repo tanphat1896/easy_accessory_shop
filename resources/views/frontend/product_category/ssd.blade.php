@@ -26,7 +26,7 @@
                                 <span class="ui red label">Hết hàng</span>
                             @endif
                         </p>
-                        @component('frontend.product_category.components.star')
+                        @component('sharing.components.star')
                             {{ $ssd->diem_danh_gia }}
                         @endcomponent
                     </div>

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCuaHangsTable extends Migration
+class CreateMenusTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,12 @@ class CreateCuaHangsTable extends Migration
      */
     public function up()
     {
-        Schema::create('cua_hangs', function (Blueprint $table) {
+        Schema::create('menus', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('ten_cua_hang',100);
-            $table->string('email',100);
-            $table->string('so_dien_thoai',11);
-            $table->string('dia_chi',255);
-            $table->string('logo',100);
-            $table->integer('wide_menu');
+            $table->string('name');
+            $table->string('link');
+            $table->integer('loai_san_pham_id')->unsigned()->nullable();
+            $table->string('icon');
             $table->timestamps();
         });
     }
@@ -32,6 +30,6 @@ class CreateCuaHangsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cua_hangs');
+        Schema::dropIfExists('menus');
     }
 }
