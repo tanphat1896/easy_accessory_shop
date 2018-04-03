@@ -58,7 +58,7 @@
 
                 <div class="field">
                     <label for="so-luong">Số lượng</label>
-                    <input type="text" id="so-luong" name="so-luong" value="{{ $chiTietPhieuNhap->so_luong }}" required>
+                    <input type="text" id="so-luong" name="so-luong" value="{{ $chiTietPhieuNhap->so_luong }}" required autofocus>
                 </div>
 
                 <div class="field">
