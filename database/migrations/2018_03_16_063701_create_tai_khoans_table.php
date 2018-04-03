@@ -21,6 +21,7 @@ class CreateTaiKhoansTable extends Migration
             $table->string('ten_dang_nhap',16)->unique();
             $table->string('mat_khau');
             $table->integer('loai_tk_id')->unsigned();
+            $table->rememberToken();
             $table->foreign('loai_tk_id','fk_tk_ltk')->references('id')->on('loai_tai_khoans');
             $table->timestamps();
         });

@@ -4,7 +4,7 @@
         Đăng nhập hệ thống
     </div>
     <div class="content">
-        <form action="" class="ui form" method="post">
+        <form action="{{ route('check_login') }}" class="ui form" method="post">
 
             {{ csrf_field() }}
 
