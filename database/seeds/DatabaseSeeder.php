@@ -41,7 +41,9 @@ class DatabaseSeeder extends Seeder
              SanPhamTableSeeder::class,
              ThongSoKyThuatSeeder::class,
              TaiKhoanSeeder::class,
-             NhaCungCapSeeder::class
+             NhaCungCapSeeder::class,
+             NhapHangSeeder::class,
+             ChiTietNhapHangSeeder::class
          ]);
     }
 }

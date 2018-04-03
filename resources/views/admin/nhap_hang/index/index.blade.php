@@ -45,3 +45,11 @@
         @include('admin.nhap_hang.index.modals')
     </div>
 @endsection
+
+@push('script')
+    <script>
+        bindSelectAll('chon-het-phieu-nhap');
+
+        // bindDataTable('bang-nha-cung-cap');
+    </script>
+@endpush

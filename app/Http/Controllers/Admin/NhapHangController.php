@@ -82,7 +82,6 @@ class NhapHangController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
         $phieuNhap = PhieuNhap::findOrFail($id);
         $phieuNhap->nha_cung_cap_id = $request->get('ten-ncc');
         $phieuNhap->ngay_nhap = $request->get('ngay-nhap');
@@ -98,8 +97,11 @@ class NhapHangController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $ids = $request->get('phieu-nhap-id');
+        PhieuNhap::destroy($ids);
+
+        return back()->with('success', 'Xóa thành công');
     }
 }

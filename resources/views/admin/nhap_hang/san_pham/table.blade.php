@@ -30,9 +30,9 @@
             <td>{{ $chiTietPhieuNhap->so_luong }}</td>
             <td>{{ $chiTietPhieuNhap->don_gia }}</td>
             <td>
-                {{--<a href="{{ route('nhap_hang.show',[$phieuNhap->id]) }}" class="ui small blue label ">Xem</a>--}}
-                {{--<a href="#" class="ui small teal label "--}}
-                   {{--onclick="$( '{{ '#modal-sua-'.$phieuNhap->id }}' ).modal('show')">Sửa</a>--}}
+                <a href="{{ route('san_pham.show',[$chiTietPhieuNhap->san_pham_id]) }}" class="ui small blue label ">Xem</a>
+                <a href="#" class="ui small teal label "
+                   onclick="$( '{{ '#modal-sua-'.$chiTietPhieuNhap->id }}' ).modal('show')">Sửa</a>
             </td>
         </tr>
     @endforeach
