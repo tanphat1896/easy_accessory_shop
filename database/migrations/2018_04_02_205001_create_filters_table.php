@@ -16,8 +16,8 @@ class CreateFiltersTable extends Migration
         Schema::create('filters', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('loai_san_pham_id')->unsigned();
-            $table->json('single_criterion');
-            $table->json('multiple_criterion');
+            $table->text('single_criterion');
+            $table->text('multiple_criterion');
             $table->timestamps();
         });
     }
