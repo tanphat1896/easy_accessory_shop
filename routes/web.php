@@ -34,6 +34,7 @@ Route::post('/cart/addproduct/{id?}', 'CardController@addProductToCart');
 Route::get('/hdd', function() {
     return view('frontend.product_category.hdd');
 });
+Route::post('check_login', 'Auth\CheckLoginController@check')->name('check_login');
 
 Auth::routes();
 
@@ -64,7 +65,7 @@ Route::group(['prefix' => 'admin'], function() {
 
 
     Route::resource('nhap_hang','Admin\NhapHangController');
-    Route::resource('chi_tiet_nhap_hang', 'Admin\CTNHController', ['only' => ['update', 'destroy']]);
+    Route::resource('chi_tiet_nhap_hang', 'Admin\CTNHController', ['only' => ['update', 'store', 'destroy']]);
 
 
     Route::get('menu_state/{state}', function($state) {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -25,11 +26,15 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    //protected $redirectTo = '/admin';
 
-    public function authenticate(array $data) {
-        if (Auth::attempt(['email' => $data['username'], 'mat_khau' => $data['password']]))
-            return $this->redirectTo('/');
+    public function authenticate(Request $data) {
+        dd($data);
+        if (Auth::attempt([
+            'email' => $data['username'],
+            'mat_khau' => $data['password']
+        ]))
+            return $this->redirectTo('/admin');
     }
 
     /**

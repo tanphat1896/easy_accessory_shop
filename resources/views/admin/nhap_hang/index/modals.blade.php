@@ -1,7 +1,7 @@
 <div class="ui mini modal" id="modal-them-phieu-nhap">
     <div class="blue header">Thêm mới phiếu nhập</div>
     <div class="content">
-        <form action="" class="ui form" method="post">
+        <form action="{{ route('nhap_hang.store') }}" class="ui form" method="post">
 
             {{ csrf_field() }}
 
