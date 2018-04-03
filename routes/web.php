@@ -61,6 +61,7 @@ Route::group(['prefix' => 'admin'], function() {
     Route::resource('anh_san_pham', 'Admin\AnhSanPhamController', ['only' => ['store', 'destroy']]);
 
     Route::resource('nhap_hang','Admin\NhapHangController');
+    Route::post('chi_tiet_nhap_hang_update/{id}', 'Admin\CTNhapHangController@update')->name('chi_tiet_nhap_hang_update');
 
     Route::get('menu_state/{state}', function($state) {
         $store = App\CuaHang::first();
