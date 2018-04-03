@@ -11,7 +11,9 @@ class SanPhamController extends Controller
 {
     public function showGroup($slug) {
         $productType = LoaiSanPham::whereSlug($slug)->firstOrFail();
-        $products = $productType->sanPhams()->paginate(12);
+        $products = $productType->sanPhams()->with('sales')->paginate(12);
+//        dd($products);
+        $products->load('sales');
 
         return view('frontend.product_category.index', compact('products', 'productType'));
     }

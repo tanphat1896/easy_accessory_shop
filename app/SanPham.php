@@ -70,6 +70,16 @@ class SanPham extends Model implements CommonFunction
         )->withPivot('gia_tri');
     }
 
+    public function sales() {
+        return $this->belongsToMany(
+            KhuyenMai::class,
+            'chi_tiet_khuyen_mais',
+            'san_pham_id',
+            'khuyen_mai_id'
+        )->orderBy('ngay_ket_thuc', 'desc');//->first();
+
+    }
+
     public function tinhTrang() {
         return (int)$this->tinh_trang === 1 ? 'Kinh doanh': 'Ngừng k.doanh';
     }
