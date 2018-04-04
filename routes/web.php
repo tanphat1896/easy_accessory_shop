@@ -34,7 +34,6 @@ Route::post('/cart/addproduct/{id?}', 'CardController@addProductToCart');
 Route::get('/hdd', function() {
     return view('frontend.product_category.hdd');
 });
-Route::post('check_login', 'Auth\CheckLoginController@check')->name('check_login');
 
 Auth::routes();
 

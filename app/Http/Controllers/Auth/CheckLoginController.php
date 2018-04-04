@@ -13,7 +13,7 @@ class CheckLoginController extends Controller
 
     protected $redirectTo = '/';
 
-    public function check(Request $request) {
+    public function checkLogin(Request $request) {
         $data = [
             'email' => $request->get('username'),
             'mat_khau' => bcrypt($request->get('password'))

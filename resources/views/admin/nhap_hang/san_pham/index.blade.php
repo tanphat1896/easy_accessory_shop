@@ -23,7 +23,7 @@
                 <strong>Xóa </strong>
             </button>
             <button type="button" class="ui small blue button"
-                    onclick = "$('#modal-them-phieu-nhap-san-pham').modal('show')">
+                    onclick = "$('#modal-them-phieu-nhap').modal('show')">
                 <i class="add fitted icon"></i>
                 <strong>Thêm mới </strong>
             </button>

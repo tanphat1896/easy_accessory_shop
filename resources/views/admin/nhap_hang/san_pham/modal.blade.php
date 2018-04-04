@@ -63,8 +63,8 @@
                         </option>
                         @foreach(\App\SanPham::all() as $sanPham)
                             {{ $check = false }}
-                            @foreach($chiTietPhieuNhaps as $chiTietPhieuNhap)
-                                @if($chiTietPhieuNhap->san_pham_id == $sanPham->id)
+                            @foreach($chiTietPhieuNhaps as $CTPhieuNhap)
+                                @if($CTPhieuNhap->san_pham_id == $sanPham->id)
                                     {{$check = true}}
                                 @endif
                             @endforeach
