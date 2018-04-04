@@ -3,7 +3,7 @@
     <div class="ui six column computer four column tablet stackable grid">
         @foreach($ssds as $ssd)
             <div class="column">
-                <div class="ui fluid link card" onclick="window.location.href='/detail'">
+                <div class="ui fluid link card" onclick="window.location.href='/show'">
                     <div class="image">
                         @if($ssd->so_luong > 5)
                             {{--<div class="ui red right corner  label">Mới</div>--}}

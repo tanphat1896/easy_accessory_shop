@@ -22,7 +22,6 @@
             </td>
             <td>{{ $stt + 1 }}</td>
             <td>{{ $brand->ten_thuong_hieu }}</td>
-            {{--<td>{{ $brand->slug }}</td>--}}
             <td>
                 <a href="#" class="ui green label"
                         onclick="$('{{ "#modal-sua-" . $brand->id }}').modal('show')">

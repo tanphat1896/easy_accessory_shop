@@ -42,5 +42,13 @@ class ThongSoKyThuatSeeder extends Seeder
         DB::table('thong_so_ky_thuats')->insert(
             ['ten_thong_so' => 'Số nút bấm']
         );
+        DB::table('loai_s_p_thong_sos')->insert([
+        
+            ['loai_sp_id' => 1, 'thong_so_id' => 1],
+            ['loai_sp_id' => 1, 'thong_so_id' => 2],
+            ['loai_sp_id' => 1, 'thong_so_id' => 3],
+            ['loai_sp_id' => 1, 'thong_so_id' => 4],
+            ['loai_sp_id' => 1, 'thong_so_id' => 5],]
+        );
     }
 }

@@ -39,7 +39,8 @@
 
     <div class="item"><i class="clipboard list icon icon-left"></i>Đơn hàng </div>
 
-    <div class="item"><i class="certificate icon icon-left"></i>Khuyến mãi </div>
+    <a class="item {{Request::is('*/khuyen_mai') ? 'active-bar': '' }}" href="/admin/khuyen_mai">
+        <i class="certificate icon icon-left"></i>Khuyến mãi </a>
 
     <div class="ui accordion item no-padding">
         <div class="title item menu-item-padding color-white {{ Request::is('*noi_dung*') ? 'active-bar': ''}}">

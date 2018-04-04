@@ -33,6 +33,9 @@
                                 @if (empty($product->so_luong))
                                     <span class="ui red label">Hết hàng</span>
                                 @endif
+                                @if (!empty($product->sales()->first()))
+                                    {{--<span class="ui small red label"> -{{ $product->sale()->percent() }}%</span>--}}
+                                @endif
                             </p>
                             @component('sharing.components.star')
                                 {{ $product->diem_danh_gia }}

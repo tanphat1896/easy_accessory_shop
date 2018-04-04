@@ -157,3 +157,9 @@
 .force-hidden{
     display: none !important;
 }
+.force-left {
+    float: left !important;
+}
+.force-right {
+    float: right !important;
+}

@@ -26,7 +26,7 @@ Route::get('/cart', function() {
 Route::get('/checkout', function() {
 	return view('frontend.cart.checkout');
 });
-Route::get('/detail', function() {
+Route::get('/show', function() {
 	return view('frontend.product_viewer.detail_view');
 });
 Route::post('/cart/addproduct/{id?}', 'CardController@addProductToCart');
@@ -34,6 +34,8 @@ Route::post('/cart/addproduct/{id?}', 'CardController@addProductToCart');
 Route::get('/hdd', function() {
     return view('frontend.product_category.hdd');
 });
+
+Route::post('check_login', 'Auth\CheckLoginController@check')->name('check_login');
 
 Auth::routes();
 
@@ -44,9 +46,12 @@ Route::group(['prefix' => 'admin'], function() {
         return view('admin');
     });
     
+
     Route::resource('thuong_hieu', 'Admin\ThuongHieuController', ["except" => ["create", "show", "edit"]]);
     Route::resource('loai_sp', 'Admin\LoaiSanPhamController', ["except" => ["create", "show", "edit"]]);
     Route::resource('nha_cung_cap', 'Admin\NhaCungCapController', ["except" => ["create", "show", "edit"]]);
+    Route::resource('khuyen_mai', 'Admin\KhuyenMaiController', ["except" => ["create", "edit"]]);
+    Route::resource('chi_tiet_km', 'Admin\ChiTietKMController', ["only" => ["store", "destroy"]]);
 
 
     Route::resource('noi_dung/slider', 'Admin\SliderController', ['only' => ['index', 'store', 'destroy']]);
@@ -57,15 +62,22 @@ Route::group(['prefix' => 'admin'], function() {
     Route::post('san_pham/{id}/resume', 'Admin\SanPhamController@resume')->name('san_pham.resume');
     Route::post('gia_san_pham/{sanpham_id}', 'Admin\GiaSanPhamController@store')->name('gia_san_pham.store');
     Route::post('thong_so_ky_thuat/{sanpham_id}', 'Admin\ThongSoKyThuatController@update')->name('thong_so_ky_thuat');
-
     Route::resource('anh_san_pham', 'Admin\AnhSanPhamController', ['only' => ['store', 'destroy']]);
+
 
     Route::resource('nhap_hang','Admin\NhapHangController');
     Route::resource('chi_tiet_nhap_hang', 'Admin\CTNHController', ['only' => ['update', 'store', 'destroy']]);
+
 
     Route::get('menu_state/{state}', function($state) {
         $store = App\CuaHang::first();
         $store->wide_menu = $state%2;
         $store->save();
+    });
+
+
+    Route::get('ajax-request/products/search/{query}', 'Admin\SanPhamController@search');
+
+    Route::get('/blabla', function() {
     });
 });
