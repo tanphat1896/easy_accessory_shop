@@ -19,19 +19,9 @@ Route::get('/gio-hang', 'Frontend\CartController@index')->name('cart.index');
 Route::delete('/gio-hang/{slug}', 'Frontend\CartController@removeProduct')->name('cart.remove');
 Route::put('/gio-hang/{slug}', 'Frontend\CartController@updateAmount')->name('cart.update');
 Route::resource('/checkout', 'Frontend\CheckoutController', ['only' => ['index', 'store']]);
-
-
-Route::get('/cart', function() {
-	return view('frontend.cart.index');
-});
-Route::get('/show', function() {
-	return view('frontend.product_viewer.detail_view');
-});
-Route::post('/cart/addproduct/{id?}', 'CardController@addProductToCart');
-
-Route::get('/hdd', function() {
-    return view('frontend.product_category.hdd');
-});
+Route::get('/checkout-result', function() {
+    return view('frontend.cart.checkout_result');
+})->name('checkout.result');
 
 Route::post('check_login', 'Auth\CheckLoginController@check')->name('check_login');
 
