@@ -22,16 +22,16 @@ class TaiKhoanSeeder extends Seeder
             'mat_khau' => bcrypt('111111'),
             'loai_tk_id' => 1
         ]);
-        DB::table('users')->insert([
-            'name' => 'blabla',
-            'email' => 'blabla@gmail.com',
-            'password' => bcrypt('111111')
-        ]);
-        DB::table('users')->insert([
-            'name' => 'blabla1',
-            'email' => 'blabla1@gmail.com',
-            'password' => bcrypt('111111')
-        ]);
+//        DB::table('users')->insert([
+//            'name' => 'blabla',
+//            'email' => 'blabla@gmail.com',
+//            'password' => bcrypt('111111')
+//        ]);
+//        DB::table('users')->insert([
+//            'name' => 'blabla1',
+//            'email' => 'blabla1@gmail.com',
+//            'password' => bcrypt('111111')
+//        ]);
         DB::table('tai_khoans')->insert([
             'ten' => 'Nguyễn Tấn Phát',
             'email' => 'tanphatct@gmail.com',

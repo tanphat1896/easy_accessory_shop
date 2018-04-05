@@ -20,9 +20,13 @@ class RedirectIfAuthenticated
                     return redirect()->route('admin.dashboard');
                 }
                 break;
+            case 'customer':
+                if (Auth::guard($guard)->check()) {
+                    return redirect('/san-pham/ssd');
+                }
             default:
                 if (Auth::guard($guard)->check()) {
-                    return redirect('/home');
+                    return redirect('/');
                 }
                 break;
         }

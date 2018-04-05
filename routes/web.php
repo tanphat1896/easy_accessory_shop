@@ -35,9 +35,12 @@ Route::get('/hdd', function() {
     return view('frontend.product_category.hdd');
 });
 
-Route::post('check_login', 'Auth\CheckLoginController@check')->name('check_login');
+//Route::post('check_login', 'Auth\CheckLoginController@check')->name('check_login');
 
 Auth::routes();
+
+Route::get('customer/login', 'Auth\CustomerLoginController@showLoginForm')->name('customer.login');
+Route::post('customer/login', 'Auth\CustomerLoginController@login')->name('customer.login.submit');
 
 
 
