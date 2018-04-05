@@ -18,13 +18,11 @@ Route::post('/gio-hang/{slug}', 'Frontend\CartController@addProductToCart')->nam
 Route::get('/gio-hang', 'Frontend\CartController@index')->name('cart.index');
 Route::delete('/gio-hang/{slug}', 'Frontend\CartController@removeProduct')->name('cart.remove');
 Route::put('/gio-hang/{slug}', 'Frontend\CartController@updateAmount')->name('cart.update');
+Route::resource('/checkout', 'Frontend\CheckoutController', ['only' => ['index', 'store']]);
 
 
 Route::get('/cart', function() {
 	return view('frontend.cart.index');
-});
-Route::get('/checkout', function() {
-	return view('frontend.cart.checkout');
 });
 Route::get('/show', function() {
 	return view('frontend.product_viewer.detail_view');
