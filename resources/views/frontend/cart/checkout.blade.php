@@ -5,81 +5,123 @@
 @section('content')
     <div class="ui segment basic">
         <div class="ui container">
-            <h1 class="ui dividing header">Thanh toán</h1>
+            <h2 class="ui dividing header">
+                Thanh toán
+                <span class="ui blue label pointer" onclick="$('#order-detail').modal('show')">
+                    Xem đơn hàng
+                </span>
+            </h2>
 
-            <div class="ui blue horizontal divider header">Phương thức thanh toán</div>
-            <div class="ui big positive message">
-                Tổng số tiền: <strong>1.370.000</strong> VND
-            </div>
-            <div class="ui form">
-                <div class="four fields">
+            <form action="{{ route('checkout.store') }}" method="post"
+                  class="ui basic form segment no-lr-padding">
+
+                <h4 class="ui blue-text dividing header">Phương thức thanh toán</h4>
+
+                <div class="three fields">
+
+                    {{ csrf_field() }}
+
+                    <input type="hidden" name="total-cost" value="{{ $totalCost }}">
+
                     <div class="field">
                         <div class="ui radio checkbox">
-                            <input type="radio" name="type-checkout" id="cash" checked>
-                            <label for="cash"><strong>Tiền mặt khi nhận hàng</strong></label>
+                            <input type="radio" name="type-checkout" value="cash" id="cash" checked>
+                            <label for="cash">Tiền mặt khi nhận hàng</label>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="ui radio checkbox">
+                            <input type="radio" name="type-checkout" value="ngan-luong" id="ngan-luong">
+                            <label for="online">Thanh toán qua Ngân lượng</label>
                         </div>
                     </div>
                     <div class="field">
                         <div class="ui radio checkbox">
-                            <input type="radio" name="type-checkout" id="ngan-luong">
-                            <label for="online"><strong>Thanh toán qua Ngân lượng</strong></label>
-                        </div>
-                    </div>
-                    <div class="field">
-                        <div class="ui radio checkbox">
-                            <input type="radio" name="type-checkout" id="bao-kim">
-                            <label for="online"><strong>Thanh toán qua Bảo kim</strong></label>
+                            <input type="radio" name="type-checkout" value="bao-kim" id="bao-kim">
+                            <label for="online">Thanh toán qua Bảo kim</label>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="ui blue horizontal divider clearing header">Thông tin khách hàng</div>
+                <h4 class="ui blue-text dividing header">
+                    Thông tin khách hàng
 
-            <button class="ui basic blue button"
-                    onclick="$('#modal-auth').modal('show');">
-                <strong>Đã có tài khoản?</strong>
-            </button>
+                    @if (! Auth::guard('customer')->check())
+                        <button type="button" class="ui basic orange label pointer"
+                                onclick="$('#modal-auth').modal('show');">
+                            <strong>Đã có tài khoản?</strong>
+                        </button>
+                    @endif
 
-            <form action="" class="ui basic form segment no-lr-padding">
-                <div class="two fields">
+                </h4>
+
+                <div class="three fields">
+
                     <div class="field required">
                         <label for="name">Họ và tên</label>
-                        <input type="text" id="name">
-                    </div>
-                    <div class="field required">
-                        <label for="email">Email</label>
-                        <input type="text" id="email">
-                    </div>
-                </div>
-                <div class="two fields">
-                    <div class="field required">
-                        <label for="phone">Số điện thoại</label>
-                        <input type="text" id="phone">
+                        <input type="text" id="name" name="name" value="Nguyen Van A" required>
                     </div>
 
                     <div class="field required">
-                        <label for="city">Tỉnh/Thành phố</label>
-                        <select name="city" id="city" class="ui search dropdown no-margin ">
-                            <option value="ct">Cần Thơ</option>
-                            <option value="dt">Đồng Tháp</option>
-                            <option value="vl">Vĩnh Long</option>
-                            <option value="vl">TP. HCM</option>
-                            <option value="vl">TP. Đà Năng</option>
-                            <option value="vl">Hà Nội</option>
-                        </select>
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email"  value="nva@gmail.com" required>
+                    </div>
+
+                    <div class="field required">
+                        <label for="phone">Số điện thoại</label>
+                        <input type="text" id="phone" name="phone" value="0969696969" required>
                     </div>
                 </div>
 
                 <div class="field required">
                     <label for="address">Địa chỉ nhận hàng</label>
-                    <input type="text" id="address">
+                    <textarea name="address" id="address" rows="3" required>Ninh Kieu, Can Tho</textarea>
+
                 </div>
 
                 <div class="field">
-                    <button class="ui large fluid blue button"><strong>Đặt hàng</strong></button>
+                    <button class="ui large fluid blue button">
+                        <i class="cart arrow down fitted icon"></i>
+                        <strong>Đặt hàng</strong>
+                    </button>
                 </div>
             </form>
+        </div>
+    </div>
+
+    <div class="ui scrolling modal" id="order-detail">
+        <div class="content">
+            <h3 class="ui blue-text dividing header">Thông tin đơn hàng</h3>
+
+            <table class="ui compact table square-border">
+                <thead>
+                <tr class="center aligned">
+                    <th>Mặt hàng</th>
+                    <th>Số lượng</th>
+                    <th>Thành tiền</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($products as $product)
+                    <tr>
+                        <td>
+                            <img src="/{{ $product['product']->anh_dai_dien }}" class="ui mini image spaced">
+                            {{ $product['product']->getName() }}
+                        </td>
+                        <td class="center aligned">{{ $product['amount'] }}</td>
+                        <td>{{ number_format($product['cost']) }}</td>
+                    </tr>
+                @endforeach
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th class="right aligned"><strong>Tổng cộng</strong></th>
+                    <th class="center aligned">{{ $totalAmount }}</th>
+                    <th><span class="ui red label">{{ number_format($totalCost) }}đ</span></th>
+                </tr>
+                </tfoot>
+            </table>
         </div>
     </div>
 @endsection

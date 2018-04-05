@@ -19,7 +19,7 @@
 
                 </thead>
                 <tbody>
-                @php $idx = 1; $total = 0; @endphp
+                @php $idx = 1; $total = 0;@endphp
                 @foreach($products as $slug => $productBunch)
                     <tr>
                         <td class="center aligned">{{ $idx++ }}</td>
@@ -32,18 +32,14 @@
                                 {{ method_field('PUT') }}
                                 <div class="field">
                                     <input type="number" value="{{ $productBunch['amount'] }}"
-                                           name="amount"
+                                           name="amount" min="1" max="20"
                                            onchange="$('#{{ 'form-update-amount' . $idx }}').submit()">
                                 </div>
                             </form>
                         </td>
                         <td>
-                            @php
-                                $eachTotal = $productBunch['product']->giaMoiNhat() *
-                                            $productBunch['amount'];
-                                $total += $eachTotal;
-                            @endphp
-                            {{ number_format($eachTotal) }}
+                            @php $total += $productBunch['cost']; @endphp
+                            {{ number_format($productBunch['cost']) }}
                         </td>
                         <td class="center-aligned">
                             <form action="{{ route('cart.remove', [$slug]) }}"
@@ -74,11 +70,21 @@
                     <i class="backward icon"></i>
                     <strong>Tiếp tục mua sắm</strong>
                 </a>
-                <a href="/checkout" class="ui blue icon button">
-                    <strong>Thanh toán</strong>
-                    <i class="forward right icon"></i>
-                </a>
+
+                @if (!empty($products))
+                    <a href="{{ route('checkout.index') }}" class="ui blue icon button">
+                        <strong>Thanh toán</strong>
+                        <i class="forward right icon"></i>
+                    </a>
+                @endif
             </div>
         </div>
+        <div class="ui divider hidden"></div>
     </div>
 @endsection
+
+@push('script')
+    <script type="text/javascript">
+        $('#id cua cai modal').modal('show');
+    </script>
+@endpush

@@ -18,7 +18,7 @@ class CartController extends Controller
     }
 
     public function indexGuestCart() {
-        $products = session('cart');
+        $products = session('cart') ?: [];
 
         return view('frontend.cart.index', compact('products'));
     }
@@ -42,18 +42,39 @@ class CartController extends Controller
     private function guestAddProductToCart($product, $amount) {
         $products = session('cart');
 
-        if (!empty($products[$product->slug])){
-            $amount = $amount + $products[$product->slug]["amount"];
-        }
+        $amount = $this->increaseAmountIfProductExist($products, $product, $amount);
 
-        $products[$product->slug] = compact('product', 'amount');
+        $cost = $this->calcCostOfEachProduct($product, $amount);
+
+        $products[$product->slug] = compact('product', 'amount' ,'cost');
 
         session(['cart' => $products]);
 
         return back();
     }
 
+    private function increaseAmountIfProductExist($products, $product, $amount) {
+        if (!empty($products[$product->slug]))
+            $amount = $amount + $products[$product->slug]["amount"];
+
+        return $amount;
+    }
+
+    private function calcCostOfEachProduct($product, $amount) {
+        return $amount * $product->giaMoiNhat();
+    }
+
     private function memberAddProductToCart($product, $amount) {
+        return back();
+    }
+
+    public function removeProduct($slug) {
+        $products = session('cart');
+
+        unset($products[$slug]);
+
+        session(['cart' => $products]);
+
         return back();
     }
 
@@ -66,17 +87,13 @@ class CartController extends Controller
         if (empty($request->get('amount')))
             return back();
 
-        $products[$slug]['amount'] =  (int)$request->get('amount');
+        $amount = (int)$request->get('amount');
 
-        session(['cart' => $products]);
+        $productBunch = $products[$slug];
 
-        return back();
-    }
-
-    public function removeProduct($slug) {
-        $products = session('cart');
-
-        unset($products[$slug]);
+        $productBunch['amount'] = $amount;
+        $productBunch['cost'] = $this->calcCostOfEachProduct($productBunch['product'], $amount);
+        $products[$slug] = $productBunch;
 
         session(['cart' => $products]);
 

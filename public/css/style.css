@@ -62,10 +62,16 @@
     color: #fff !important;
 }
 .red-text {
-    color: red;
+    color: #C6000B !important;
 }
 .blue-text {
-    color: #0d71bb;
+    color: #004D85 !important;
+}
+.green-text {
+    color: #004A20 !important;
+}
+.orange-text {
+    color: #E15100 !important;
 }
 
 .full-height {
