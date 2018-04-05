@@ -44,7 +44,8 @@ class DatabaseSeeder extends Seeder
              NhaCungCapSeeder::class,
              NhapHangSeeder::class,
              ChiTietNhapHangSeeder::class,
-             AdminSeeder::class
+             AdminSeeder::class,
+             CustomerSeeder::class
          ]);
     }
 }

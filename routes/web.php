@@ -23,9 +23,12 @@ Route::get('/checkout-result', function() {
     return view('frontend.cart.checkout_result');
 })->name('checkout.result');
 
-Route::post('check_login', 'Auth\CheckLoginController@check')->name('check_login');
+//Route::post('check_login', 'Auth\CheckLoginController@check')->name('check_login');
 
 Auth::routes();
+
+Route::get('customer/login', 'Auth\CustomerLoginController@showLoginForm')->name('customer.login');
+Route::post('customer/login', 'Auth\CustomerLoginController@login')->name('customer.login.submit');
 
 
 
