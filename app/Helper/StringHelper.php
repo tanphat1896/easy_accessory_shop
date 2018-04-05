@@ -32,8 +32,12 @@ class StringHelper {
 
     public static function buildImageRelativePath($folder, $filename) {
         $relativePath = self::IMG_DIR .
-            DIRECTORY_SEPARATOR . $folder .
-            DIRECTORY_SEPARATOR . $filename;
+            DIRECTORY_SEPARATOR . $folder;
+
+        if (!file_exists($relativePath))
+            mkdir($relativePath, 0777, true);
+
+        $relativePath .= DIRECTORY_SEPARATOR . $filename;
 
         return $relativePath;
     }

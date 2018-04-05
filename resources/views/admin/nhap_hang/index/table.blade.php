@@ -29,9 +29,17 @@
                 <td>{{ $phieuNhap->ngay_nhap }}</td>
                 <td>{{ \App\PhieuNhap::find($phieuNhap->id)->NhaCungCap->ten_ncc }}</td>
                 <td  class="collapsing">
-                    <a href="{{ route('nhap_hang.show',[$phieuNhap->id]) }}" class="ui small blue label">Xem</a>
-                    <a href="#" class="ui small teal label"
-                       onclick="$( '{{ '#modal-sua-'.$phieuNhap->id }}' ).modal('show')">Sửa</a>
+                    <a href="{{ route('nhap_hang.show',[$phieuNhap->id]) }}"
+                       class="ui small blue label">
+                        <i class="eye open fitted icon"></i>
+                    </a>
+                    <a href="#" onclick="$( '{{ '#modal-sua-'.$phieuNhap->id }}' ).modal('show')"
+                       class="ui small green label">
+                        <i class="edit fitted icon"></i>
+                    </a>
+                    {{--<a href="{{ route('nhap_hang.show',[$phieuNhap->id]) }}" class="ui small blue label">Xem</a>--}}
+                    {{--<a href="#" class="ui small teal label"--}}
+                       {{--onclick="$( '{{ '#modal-sua-'.$phieuNhap->id }}' ).modal('show')">Sửa</a>--}}
                 </td>
             </tr>
         @endforeach

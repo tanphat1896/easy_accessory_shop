@@ -19,7 +19,7 @@ class TaiKhoanSeeder extends Seeder
             'email' => 'nguyentrongcp@gmail.com',
             'so_dien_thoai' => '01639883047',
             'ten_dang_nhap' => 'nguyentrong',
-            'mat_khau' => bcrypt('654321'),
+            'mat_khau' => bcrypt('111111'),
             'loai_tk_id' => 1
         ]);
         DB::table('users')->insert([

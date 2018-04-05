@@ -24,7 +24,7 @@ class ImageHelper {
 
         $image = Image::make($file);
 
-        $image->save(StringHelper::absolutePath($relativePath));
+        $image->save($relativePath);
 
         return $relativePath;
     }
