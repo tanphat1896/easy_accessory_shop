@@ -10,7 +10,7 @@
 
             <div class="field">
                 <label for="name">Email/Tài khoản</label>
-                <input type="text" name="username" placeholder="Nhập tên tài khoản">
+                <input type="text" name="email" placeholder="Nhập tên tài khoản">
             </div>
 
             <div class="field">

@@ -28,6 +28,7 @@ Route::get('/checkout-result', function() {
 Auth::routes();
 
 Route::get('customer/login', 'Auth\CustomerLoginController@showLoginForm')->name('customer.login');
+Route::post('customer/logout', 'Auth\CustomerLoginController@logout')->name('customer.logout');
 Route::post('customer/login', 'Auth\CustomerLoginController@login')->name('customer.login.submit');
 
 

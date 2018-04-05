@@ -28,20 +28,28 @@
     </div>
 
     <div class="ui inverted blue basic segment right floated no-margin">
-        <a href="/admin" class="ui small white button">Admin page</a>
-        <div class="ui white small button" onclick="$('.ui.modal').modal('show')">
-            <i class="user icon"></i><strong> Đăng nhập</strong>
-        </div>
 
-        <div class="ui white small dropdown button">
-            <i class="user icon"></i><strong> Mr. Blabla</strong>
-            <div class="menu">
-                <div class="item">
-                    <i class="history icon"></i>
-                    Lịch sử mua hàng
+        @if (Auth::guard('customer')->check())
+            <div class="ui white small dropdown button">
+                <i class="user icon"></i><strong>{{ Auth::guard('customer')->user()->name }}</strong>
+                <div class="menu">
+
+                    <a class="item">
+                        <i class="history icon"></i>
+                        Lịch sử mua hàng
+                    </a>
+                    <a href="#" class="item" onclick="$('#form-logout').submit()">
+                        <i class="log out icon"></i>Đăng xuất</a>
+                    <form class="force-hidden" method="post" action="{{ route('customer.logout') }}" id="form-logout">
+                        {{ csrf_field() }}
+                    </form>
                 </div>
             </div>
-        </div>
+        @else
+            <div class="ui white small button" onclick="$('#modal-auth').modal('show')">
+                <i class="user icon"></i><strong> Đăng nhập</strong>
+            </div>
+        @endif
 
         <a href="{{ route('cart.index') }}" class="ui white small button" style="position:relative;">
             <i class="cart icon"></i>
