@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Acme\Behavior\GetProduct;
 use App\LoaiSanPham;
 use App\SanPham;
 use Illuminate\Http\Request;
@@ -9,11 +10,12 @@ use App\Http\Controllers\Controller;
 
 class SanPhamController extends Controller
 {
+    use GetProduct;
+
     public function showGroup($slug) {
         $productType = LoaiSanPham::whereSlug($slug)->firstOrFail();
-        $products = $productType->sanPhams()->with('sales')->paginate(12);
-//        dd($products);
-        $products->load('sales');
+
+        $products = $this->getProducts($productType->id, 12);
 
         return view('frontend.product_category.index', compact('products', 'productType'));
     }

@@ -29,13 +29,13 @@
                         </div>
                         <div class="content">
                             <p>{{ $product->ten_san_pham }}</p>
-                            <p class="no-margin"><strong>{{ number_format($product->giaMoiNhat()) }} đ</strong>
+                            <p class="no-margin"><strong>{{ number_format($product->gia) }} đ</strong>
                                 @if (empty($product->so_luong))
                                     <span class="ui red label">Hết hàng</span>
                                 @endif
-                                @if (!empty($product->sales()->first()))
+                                {{--@if (!empty($product->sales()->first()))--}}
                                     {{--<span class="ui small red label"> -{{ $product->sale()->percent() }}%</span>--}}
-                                @endif
+                                {{--@endif--}}
                             </p>
                             @component('sharing.components.star')
                                 {{ $product->diem_danh_gia }}
