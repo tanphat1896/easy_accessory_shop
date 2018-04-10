@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Acme\Behavior\GetProduct;
+use App\DanhGia;
+use App\Helper\AuthHelper;
 use App\LoaiSanPham;
 use App\SanPham;
 use Illuminate\Http\Request;
@@ -21,8 +23,13 @@ class SanPhamController extends Controller
     }
 
     public function show($slug) {
-        $product = SanPham::whereSlug($slug)->firstOrFail();
+        $product = $this->getProduct($slug);
 
-        return view('frontend.product_viewer.index', compact('product'));
+        $myStar = DanhGia::where([
+            ['customer_id', AuthHelper::userId()],
+            ['san_pham_id', $product->id]
+        ])->first();
+
+        return view('frontend.product_viewer.index', compact('product', 'myStar'));
     }
 }

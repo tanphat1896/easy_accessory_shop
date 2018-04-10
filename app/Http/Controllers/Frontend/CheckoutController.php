@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Acme\Behavior\ProcessOrder;
+use App\Acme\Repository\Cart\CartRepository;
 use App\DonHang;
+use App\Helper\AuthHelper;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -11,8 +13,26 @@ class CheckoutController extends Controller
 {
     use ProcessOrder;
 
+    private $cartRepository;
+
+    public function __construct(CartRepository $cartRepository) {
+        $this->cartRepository = $cartRepository;
+
+        // từ lar5.3 không cho dùng session trong constructor,
+        // nên phải thông qua middleware
+        $this->middleware(function ($request, $next) {
+            $this->cartRepository->injectCart(AuthHelper::userLogged());
+            return $next($request);
+        });
+    }
+
     public function index() {
-        $products = session('cart');
+
+        $products = $this->cartRepository->getProducts();
+
+        if (empty($products))
+            return back()->with('message', 'Giỏ hàng rỗng');
+
         $totalCost = 0;
         $totalAmount = 0;
         foreach ($products as $product) {
@@ -27,13 +47,18 @@ class CheckoutController extends Controller
 
         $orderCode = $this->saveOrder($data);
 
-        $this->cleanCart();
+        if (!empty($orderCode))
+            $this->cleanCart();
 
-        return redirect()->route('checkout.result')->with('orderCode', $orderCode);
+        return redirect()->route('checkout.result')
+            ->with([
+                'orderCode' => $orderCode,
+                'name' => $data['ten_nguoi_nhan']
+            ]);
     }
 
     private function neededData(Request $request) {
-        $cartProducts = $this->cartProducts();
+        $cartProducts = $this->cartProductsForSync();
         $orderDate = date('Y-m-d H:i:s');
         $name = $request->get('name');
         $email = $request->get('email');
@@ -50,12 +75,12 @@ class CheckoutController extends Controller
             'tinh_trang' => 0,
             'ngay_dat_hang' => $orderDate,
             'hinh_thuc_thanh_toan' => $typeCheckout,
-            'products' => $cartProducts
+            'syncingProducts' => $cartProducts
         ];
     }
 
-    private function cartProducts() {
-        $cart = session('cart') ?: [];
+    private function cartProductsForSync() {
+        $cart = $this->cartRepository->getProducts();
         $products = [];
 
         foreach ($cart as $bunch){
@@ -63,7 +88,7 @@ class CheckoutController extends Controller
 
             $products[$productId] = [
                 'so_luong' => $bunch['amount'],
-                'don_gia' => 1
+                'don_gia' => $bunch['product']->giaMoiNhat()
             ];
         }
 
@@ -71,6 +96,6 @@ class CheckoutController extends Controller
     }
 
     private function cleanCart() {
-        session(['cart' => []]);
+        $this->cartRepository->cleanCart();
     }
 }

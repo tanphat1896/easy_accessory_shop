@@ -1,16 +1,15 @@
 <div class="ui square-border no-margin borderless menu">
-    <a class="item" href="/">
+    <a class="item normal-padding" href="/">
         <img src="{{ asset('assets/images/favicon.png') }}" class="ui mini image">
     </a>
     <div class="item no-padding">
-        <div class="ui mobile search">
-            <div class="ui icon input">
-                <input type="text" class="prompt" name="search" placeholder="Nhập từ khóa tìm kiếm" style="">
-                <i class="search icon"></i>
-            </div>
-        </div>
+        @include('frontend.layouts.partials.search_mobile')
     </div>
     <div class="right menu">
-        <div class="item" id="toggle-sidebar"><i class="sidebar icon"></i></div>
+        <a class="normal-padding item" href="{{ route('cart.index') }}">
+            <i class="cart icon"></i>
+            <span class="ui red circular tiny floating label" style="top: 3px !important; right: 2px !important;">1</span>
+        </a>
+        <div class="normal-padding item" id="toggle-sidebar"><i class="sidebar icon"></i></div>
     </div>
 </div>

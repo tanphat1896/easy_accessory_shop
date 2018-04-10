@@ -21,7 +21,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Log;
 use PharIo\Manifest\Email;
 
-class SanPhamRepository {
+class ProductRepository {
     private $sanPham;
 
     private $sanPhams;

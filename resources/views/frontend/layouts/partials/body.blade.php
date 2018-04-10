@@ -1,5 +1,7 @@
 <body>
 
+@include('sharing.components.message')
+
 <div class="ui grid tablet computer only">
     <div class="sixteen wide column">
         @include('frontend.layouts.partials.top_segment')

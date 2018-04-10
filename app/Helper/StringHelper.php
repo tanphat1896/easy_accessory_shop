@@ -10,6 +10,7 @@ namespace App\Helper;
 
 
 use App\LoaiSanPham;
+use Carbon\Carbon;
 
 class StringHelper {
     const IMG_DIR = 'assets/images';
@@ -64,5 +65,21 @@ class StringHelper {
 
     public static function getNumberFromCurrency($currencyString) {
         return preg_replace('/[.,\sđA-Za-z]/im', '', $currencyString);
+    }
+
+    public static function toCurrencyString($number, $unit = 'đ') {
+        return number_format($number) . $unit;
+    }
+
+    public static function shortDate($dateString) {
+        return Carbon::parse($dateString)->format('d-m-Y');
+    }
+
+    public static function longDate($dateString) {
+        return Carbon::parse($dateString)->format('d-m-Y \l\ú\c H:i:s');
+    }
+
+    public static function removeRedundantSpace($str) {
+        return preg_replace('/\s\s/', ' ', $str);
     }
 }

@@ -10,12 +10,12 @@
 
             <div class="field">
                 <label for="name">Email/Tài khoản</label>
-                <input type="text" name="email" placeholder="Nhập tên tài khoản">
+                <input type="text" name="email" placeholder="Nhập tên tài khoản" value="ntp@gmail.com">
             </div>
 
             <div class="field">
                 <label for="name">Mật khẩu</label>
-                <input type="password" name="password" placeholder="Tối thiểu 4 ký tự">
+                <input type="password" name="password" placeholder="Tối thiểu 4 ký tự" value="111111">
             </div>
 
             <div class="field center-aligned">

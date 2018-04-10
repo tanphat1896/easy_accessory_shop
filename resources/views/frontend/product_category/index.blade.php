@@ -30,7 +30,7 @@
                         <div class="content">
                             <p>{{ $product->ten_san_pham }}</p>
                             <p class="no-margin"><strong>{{ number_format($product->gia) }} đ</strong>
-                                @if (empty($product->so_luong))
+                                @if ($product->so_luong < 1)
                                     <span class="ui red label">Hết hàng</span>
                                 @endif
                                 {{--@if (!empty($product->sales()->first()))--}}

@@ -17,4 +17,12 @@ trait CommonBehavior {
     public function formatDate($key) {
         return Carbon::parse($this->{$key})->format($this->format);
     }
+
+    public function getShortDate($key) {
+        return Carbon::parse($this->{$key})->format('d-m-Y');
+    }
+
+    public function getLongDate($key) {
+        return Carbon::parse($this->{$key})->format('d-m-Y \l\ú\c H:i:s');
+    }
 }

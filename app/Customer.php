@@ -28,4 +28,12 @@ class Customer extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function carts() {
+        return $this->hasMany(GioHang::class);
+    }
+
+    public function activeCart() {
+        return $this->carts()->where('was_checkout', 0)->first();
+    }
 }

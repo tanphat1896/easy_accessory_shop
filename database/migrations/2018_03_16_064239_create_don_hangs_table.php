@@ -19,14 +19,15 @@ class CreateDonHangsTable extends Migration
             $table->string('ten_nguoi_nhan',50);
             $table->string('email_nguoi_nhan',100);
             $table->string('sdt_nguoi_nhan',11);
-            $table->integer('tai_khoan_id')->nullable()->unsigned();
+            $table->integer('customer_id')->nullable()->unsigned();
             $table->double('tong_tien');
             $table->string('ghi_chu',500)->nullable();
             $table->string('tinh_trang',255);
             $table->dateTime('ngay_dat_hang');
             $table->dateTime('ngay_duyet_don')->nullable();
             $table->enum('hinh_thuc_thanh_toan',['cash', 'baokim', 'nganluong']);
-            $table->foreign('tai_khoan_id','fk_dh_tk')->references('id')->on('tai_khoans');
+            $table->foreign('customer_id','fk_customer_donhang')
+                ->references('id')->on('tai_khoans');
             $table->timestamps();
         });
     }

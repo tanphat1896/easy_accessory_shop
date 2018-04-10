@@ -14,11 +14,12 @@ class CreateDanhGiasTable extends Migration
     public function up()
     {
         Schema::create('danh_gias', function (Blueprint $table) {
-            $table->integer('tai_khoan_id')->unsigned();
+            $table->increments('id');
+            $table->integer('customer_id')->unsigned();
             $table->integer('san_pham_id')->unsigned();
             $table->integer('diem_danh_gia');
-            $table->primary(['tai_khoan_id','san_pham_id'],'pk_tksp_tk_sp');
-            $table->foreign('tai_khoan_id','fk_dg_tk')->references('id')->on('tai_khoans');
+            $table->unique(['customer_id','san_pham_id'],'pk_tksp_tk_sp');
+            $table->foreign('customer_id','fk_dg_th')->references('id')->on('customers');
             $table->foreign('san_pham_id','fk_dg_sp')->references('id')->on('san_phams');
             $table->timestamps();
         });

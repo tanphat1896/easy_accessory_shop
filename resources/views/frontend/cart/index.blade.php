@@ -3,11 +3,18 @@
 @section('title', 'Giỏ hàng')
 
 @section('content')
-    <div class="ui segment basic">
-        <div class="ui container">
-            <h3 class="ui dividing header">Giỏ hàng của bạn</h3>
 
-            <table class="ui celled striped table">
+    <div class="ui segment basic">
+        <div class="ui blue segment clearing">
+            <h3 class="ui dividing header">Giỏ hàng của bạn
+                @if(! Auth::guard('customer')->check())
+                    <button type="button" class="ui blue basic label pointer small-td-margin no-lr-margin"
+                            onclick="$('#modal-auth').modal('show')">
+                        Đăng nhập để lưu giỏ hàng của bạn!</button>
+                @endif
+            </h3>
+
+            <table class="ui celled striped table center aligned">
                 <thead>
                 <tr>
                     <th class="center aligned collapsing">STT</th>
@@ -58,7 +65,11 @@
                 <tfoot>
                 <tr>
                     <th colspan="3" class="center aligned"><strong>Tổng tiền</strong></th>
-                    <th colspan="2"><span class="red text"><strong>{{ number_format($total) }} đ</strong></span></th>
+                    <th colspan="2" class="center aligned">
+                        <span class="ui basic red large label">
+                            <strong>{{ number_format($total) }}đ</strong>
+                        </span>
+                    </th>
                 </tr>
                 </tfoot>
             </table>
@@ -68,7 +79,7 @@
             <div class="ui basic segment right floated no-padding no-margin">
                 <a href="/" class="ui icon button">
                     <i class="backward icon"></i>
-                    <strong>Tiếp tục mua sắm</strong>
+                    <strong>Trở lại</strong>
                 </a>
 
                 @if (!empty($products))
@@ -82,9 +93,3 @@
         <div class="ui divider hidden"></div>
     </div>
 @endsection
-
-@push('script')
-    <script type="text/javascript">
-        $('#id cua cai modal').modal('show');
-    </script>
-@endpush

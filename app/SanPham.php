@@ -7,6 +7,7 @@ use App\Acme\Behavior\CommonBehavior;
 use App\Helper\StringHelper;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class SanPham extends Model implements CommonFunction
 {
@@ -78,6 +79,24 @@ class SanPham extends Model implements CommonFunction
             'khuyen_mai_id'
         )->orderBy('ngay_ket_thuc', 'desc');//->first();
 
+    }
+
+    public function comments() {
+        return DB::table('binh_luans')
+            ->select(['binh_luans.*', 'name'])
+            ->where([
+                ['san_pham_id', $this->id],
+                ['approved', true]
+            ])
+            ->join('customers', 'binh_luans.customer_id', '=', 'customers.id')
+            ->orderBy('created_at', 'desc');
+    }
+
+
+    public function ratingCount() {
+        return DB::table('danh_gias')
+            ->where('san_pham_id', $this->id)
+            ->get()->count();
     }
 
     public function tinhTrang() {

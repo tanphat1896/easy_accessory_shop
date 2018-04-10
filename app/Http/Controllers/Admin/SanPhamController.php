@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Acme\Repository\SanPhamRepository;
+use App\Acme\Repository\ProductRepository;
 use App\LoaiSanPham;
 use App\SanPham;
 use App\ThuongHieu;
@@ -12,7 +12,7 @@ use App\Http\Controllers\Controller;
 class SanPhamController extends Controller {
     private $sanPhamRepository;
 
-    public function __construct(SanPhamRepository $sanPhamRepository) {
+    public function __construct(ProductRepository $sanPhamRepository) {
         $this->sanPhamRepository = $sanPhamRepository;
     }
 

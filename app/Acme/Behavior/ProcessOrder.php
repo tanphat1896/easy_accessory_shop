@@ -10,6 +10,7 @@ namespace App\Acme\Behavior;
 
 
 use App\DonHang;
+use App\Helper\AuthHelper;
 
 trait ProcessOrder {
     private $typeCheckout = ['cash', 'baokim', 'nganluong'];
@@ -20,16 +21,25 @@ trait ProcessOrder {
 
         $order = new DonHang($data);
 
-        $order->ma_don_hang = 'DH' . time();
+        $order->ma_don_hang = uniqid('DH_');
+
+        $order = $this->bindCustomerIdIfLogged($order);
 
         $order->save();
 
-        $order->products()->sync($data['products']);
+        $order->products()->sync($data['syncingProducts']);
 
         return $order->ma_don_hang;
     }
 
     private function notValidPayment($payment) {
         return !in_array($payment, $this->typeCheckout);
+    }
+
+    private function bindCustomerIdIfLogged($order) {
+        if (AuthHelper::userLogged())
+            $order->customer_id = AuthHelper::userId();
+
+        return $order;
     }
 }

@@ -12,13 +12,35 @@
 */
 
 Route::get('/', 'Frontend\IndexController@index');
+
+Route::get('/tim-kiem/{keyword?}', 'Frontend\SearchController@search');
+
 Route::get('/san-pham/{slug}', 'Frontend\SanPhamController@showGroup');
+
 Route::get('/chi-tiet/{slug}', 'Frontend\SanPhamController@show');
-Route::post('/gio-hang/{slug}', 'Frontend\CartController@addProductToCart')->name('cart.add');
+
+Route::post('/gio-hang/{slug}', 'Frontend\CartController@addProduct')->name('cart.add');
+
 Route::get('/gio-hang', 'Frontend\CartController@index')->name('cart.index');
+
 Route::delete('/gio-hang/{slug}', 'Frontend\CartController@removeProduct')->name('cart.remove');
+
 Route::put('/gio-hang/{slug}', 'Frontend\CartController@updateAmount')->name('cart.update');
+
 Route::resource('/checkout', 'Frontend\CheckoutController', ['only' => ['index', 'store']]);
+
+Route::resource('/rating', 'Frontend\RatingController', ['only' => ['store']]);
+
+Route::resource('/comments', 'Frontend\CommentController', ['only' => ['store']]);
+
+Route::group(['middleware' => 'customer'], function() {
+    Route::get('/khach-hang/lich-su-mua-hang', 'Frontend\CustomerController@history')->name('customer.history');
+    Route::get('/khach-hang/don-hang/{code}', 'Frontend\CustomerController@getOrderDetailTable')
+        ->name('customer.orderDetail');
+
+});
+
+
 Route::get('/checkout-result', function() {
     return view('frontend.cart.checkout_result');
 })->name('checkout.result');
@@ -31,6 +53,9 @@ Route::get('customer/login', 'Auth\CustomerLoginController@showLoginForm')->name
 Route::post('customer/logout', 'Auth\CustomerLoginController@logout')->name('customer.logout');
 Route::post('customer/login', 'Auth\CustomerLoginController@login')->name('customer.login.submit');
 
+Route::get('/testing', function() {
+    \App\Helper\FrontendHelper::getStar(Auth::guard('customer')->id(), 1);
+});
 
 
 Route::group(['prefix' => 'admin'], function() {
@@ -73,7 +98,4 @@ Route::group(['prefix' => 'admin'], function() {
 
 
     Route::get('ajax-request/products/search/{query}', 'Admin\SanPhamController@search');
-
-    Route::get('/blabla', function() {
-    });
 });

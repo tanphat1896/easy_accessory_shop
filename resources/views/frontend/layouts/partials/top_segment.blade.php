@@ -1,10 +1,3 @@
-{{--<div class="ui inverted no-margin square-border borderless mini menu">--}}
-    {{--<a class="right item" href="#">--}}
-        {{--<i class="facebook f icon"></i>--}}
-        {{--Fanpage--}}
-    {{--</a>--}}
-{{--</div>--}}
-
 @include ('frontend.layouts.components.modal_auth')
 
 <div class="ui inverted blue square-border no-margin segment clearing">
@@ -17,24 +10,15 @@
 
     </div>
 
-    <div class="ui basic segment left floated no-margin">
-        <div class="ui search computer">
-            <div class="ui icon small input">
-                <input type="text" class="prompt" placeholder="Nhập từ khóa tìm kiếm">
-                <i class="search icon"></i>
-            </div>
-            <div class="results"></div>
-        </div>
-    </div>
+    @include('frontend.layouts.partials.search_computer')
 
     <div class="ui inverted blue basic segment right floated no-margin">
-
         @if (Auth::guard('customer')->check())
             <div class="ui white small dropdown button">
                 <i class="user icon"></i><strong>{{ Auth::guard('customer')->user()->name }}</strong>
                 <div class="menu">
 
-                    <a class="item">
+                    <a class="item" href="{{ route('customer.history') }}">
                         <i class="history icon"></i>
                         Lịch sử mua hàng
                     </a>
@@ -55,11 +39,7 @@
             <i class="cart icon"></i>
             <strong>Giỏ hàng</strong>
             <span class="ui red mini floating label">
-                @if(Session::has('cart'))
-                    {{ count(Session::get('cart')) }}
-                @else
-                    {{ 0 }}
-                @endif
+                {{ \App\Helper\FrontendHelper::totalProductsInCart() }}
             </span>
         </a>
     </div>

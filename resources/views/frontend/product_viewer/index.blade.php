@@ -2,6 +2,11 @@
 
 @section('title', $product->getName())
 
+@php
+// reduce eloquent query
+$price = $product->giaMoiNhat();
+@endphp
+
 @section('content')
     <div class="ui basic segment no-margin-top">
         <div class="ui container">
@@ -26,46 +31,32 @@
                         <div class="column">
 
                             <h3 class="ui header">
-                                Giá: <span class="red-text">{{ number_format($product->giaMoiNhat()) }} đ</span>
+                                Giá: <span class="red-text">{{ number_format($price) }} đ</span>
                             </h3>
 
                             <div class="ui divider hidden"></div>
 
-                            <form action="{{ route('cart.add', [$product->slug]) }}"
-                                  class="ui form" method="post">
-                                {{ csrf_field() }}
+                            {{--Kiểm tra ngừng kinh doanh --}}
 
-                                <div class="two fields">
-                                    <div class="field">
-                                        <label for="">Số lượng</label>
-                                        <input type="number" value="1" min="1" max="20" name="amount" id="amount"
-                                               onchange="updateTotalPrice()">
-                                    </div>
-                                </div>
 
-                                <div class="field">
-                                    <label for="">Tổng số tiền</label>
-                                    <span class="ui green header" id="total-cost">{{ number_format($product->giaMoiNhat()) }} đ</span>
-                                </div>
+                            @if ($product->so_luong < 1)
+                                @include('frontend.product_viewer.partial.out_of_stock')
+                            @elseif ($product->tinh_trang > 0)
+                                @include('frontend.product_viewer.partial.form_order')
+                            @else
+                                <div class="ui basic red big label">Ngừng kinh doanh</div>
+                            @endif
 
-                                <div class="field">
-                                    <button class="ui blue button">
-                                        <i class="cart icon"></i> Thêm vào giỏ
-                                    </button>
-                                </div>
-                            </form>
                         </div>
                         <div class="column">
                             Đánh giá:
 
-                            @guest
-                                @component('sharing.components.star')
-                                    {{ $product->diem_danh_gia }}
-                                @endcomponent
-                                (2 đánh giá)
-                            @else
-                                <span class="ui star rating" data-rating="4" data-max-rating="5"></span>
-                            @endguest
+                            @component('sharing.components.star')
+                                {{ $product->diem_danh_gia }}
+                            @endcomponent
+                            ({{ $product->ratingCount() }} đánh giá)
+
+                            @include('frontend.product_viewer.rating')
 
                             <ul class="ui blue list">
                                 <li>Bảo hành chính hãng 12 tháng</li>
@@ -75,6 +66,9 @@
                     </div>
                 </div>
             </div>
+
+
+            @include('frontend.product_viewer.infomation')
         </div>
     </div>
 @endsection
@@ -82,7 +76,7 @@
 @push('script')
     <script>
         function updateTotalPrice() {
-            let price = parseInt('{{ $product->giaMoiNhat() }}');
+            let price = parseInt('{{ $price }}');
             let amount = $('#amount');
 
             if ($(amount).val() > 20)

@@ -3,8 +3,11 @@
 @section('title', 'Trang chủ')
 
 @section('content')
+    @include('sharing.components.error')
+
     <div class="ui basic segment">
-        
+
+
         @include('frontend.layouts.partials.slider_news')
 
         {{--@include('frontend.product_category.ssd')--}}

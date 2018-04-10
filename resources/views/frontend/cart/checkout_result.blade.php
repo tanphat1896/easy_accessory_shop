@@ -3,6 +3,7 @@
 @section('title', 'Kết quả đặt hàng')
 
 @section('content')
+
     <div class="ui segment basic">
         <div class="ui divider hidden"></div>
         <div class="ui divider hidden"></div>
@@ -20,10 +21,13 @@
             @else
                 <h3 class="ui header center aligned">
                     <i class="green check fitted icon"></i>
-                    Cảm ơn bạn đã mua hàng tại Easy Accessory
+                    Cảm ơn {{ session('name') }} đã mua hàng tại Easy Accessory
                 </h3>
                 <h4 class="ui header center aligned">
-                    Mã đơn hàng của bạn: <span class="blue-text">{{ session('orderCode') }}</span>
+                    Mã đơn hàng của bạn:
+                    <a href="{{ route('customer.history') }}">
+                        {{ session('orderCode') }}
+                    </a>
                 </h4>
             @endif
         </div>

@@ -15,8 +15,8 @@ class CreateGioHangsTable extends Migration
     {
         Schema::create('gio_hangs', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('tai_khoan_id')->unsigned();
-            $table->foreign('tai_khoan_id','fk_gh_tk')->references('id')->on('tai_khoans');
+            $table->integer('customer_id')->unsigned();
+            $table->tinyInteger('was_checkout')->default(0);
             $table->timestamps();
         });
     }
