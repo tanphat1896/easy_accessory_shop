@@ -2,7 +2,7 @@
     $comments = $product->comments()->get();
 @endphp
 
-<div class="ui grid">
+<div class="ui stackable grid">
     <div class="five wide column"></div>
     <div class="eleven wide column">
         <div class="ui top attached tabular menu">

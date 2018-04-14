@@ -8,36 +8,29 @@
     </div>
 </div>
 
+@include('frontend.layouts.partials.search_script')
+
 
 @push('script')
     <script>
-        $('.ui.search.computer')
-            .search({
-                minCharacters: 3,
-                apiSettings: {
-                    url: '/tim-kiem/{query}',
-                    onResponse: function (res) {
-                        let response = {
-                            results: []
-                        };
-                        let products = res.products;
-                        products.forEach((product) => {
-                            let limitChar = 30;
-                            let title = product.ten_san_pham.length > limitChar
-                                ? product.ten_san_pham.substring(0, limitChar) + "..."
-                                : product.ten_san_pham;
-                            response.results.push({
-                                title:  title,
-                                price: toCurrency(product.gia) + "đ",
-                                url: '/chi-tiet/' + product.slug,
-                                image: '/' + product.anh_dai_dien
-                            })
-                        });
+        function productResultsMobile(products) {
+            let response = {
+                results: []
+            };
+            products.forEach((product) => {
+                let limitChar = 17;
+                let title = product.ten_san_pham.length > limitChar
+                    ? product.ten_san_pham.substring(0, limitChar) + "..."
+                    : product.ten_san_pham;
+                response.results.push({
+                    title:  title,
+                    price: toCurrency(product.gia) + "đ",
+                    url: '/chi-tiet/' + product.slug,
+                    image: '/' + product.anh_dai_dien
+                })
+            });
 
-                        return response;
-                    }
-                }
-            })
-        ;
+            return response;
+        }
     </script>
 @endpush

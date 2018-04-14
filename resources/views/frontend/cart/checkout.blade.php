@@ -3,8 +3,8 @@
 @section('title', 'Thanh toán')
 
 @section('content')
-    <div class="ui segment basic">
-        <div class="ui blue segment">
+    <div class="ui segment basic layout-padding">
+        {{--<div class="ui blue segment">--}}
             <div class="ui basic segment">
                 <h2 class="ui header center aligned">
                     Thanh toán
@@ -62,7 +62,7 @@
                                 Thông tin khách hàng
 
                                 @if (! Auth::guard('customer')->check())
-                                    <button type="button" class="ui basic blue label pointer"
+                                    <button type="button" class="ui basic blue label pointer no-lr-margin small-td-margin"
                                             onclick="$('#modal-auth').modal('show');">
                                         <strong>Đã có tài khoản?</strong>
                                     </button>
@@ -127,7 +127,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        {{--</div>--}}
     </div>
 
     <div class="ui scrolling modal" id="order-detail">

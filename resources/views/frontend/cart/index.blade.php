@@ -4,8 +4,8 @@
 
 @section('content')
 
-    <div class="ui segment basic">
-        <div class="ui blue segment clearing">
+    <div class="ui segment basic layout-padding clearing">
+        {{--<div class="ui blue segment clearing">--}}
             <h3 class="ui dividing header">Giỏ hàng của bạn
                 @if(! Auth::guard('customer')->check())
                     <button type="button" class="ui blue basic label pointer small-td-margin no-lr-margin"
@@ -89,7 +89,7 @@
                     </a>
                 @endif
             </div>
-        </div>
+        {{--</div>--}}
         <div class="ui divider hidden"></div>
     </div>
 @endsection

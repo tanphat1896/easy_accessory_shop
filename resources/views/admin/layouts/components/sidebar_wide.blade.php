@@ -55,7 +55,10 @@
                     href="{{ route('slider.index') }}">
                     <i class="certificate icon icon-left"></i>Slide quảng cáo</a>
 
-                <a class="title item"><i class="info icon icon-left"></i>Thông tin cửa hàng</a>
+                <a class="title item {{ Request::is('*info') ? 'active': '' }}"
+                href="{{ route('info.index') }}">
+                    <i class="info icon icon-left"></i>
+                    Thông tin cửa hàng</a>
 
                 <a class="title item {{ Request::is('*menu') ? 'active': '' }}"
                    href="{{ route('menu.index') }}">

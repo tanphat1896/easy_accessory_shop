@@ -54,6 +54,15 @@
 .normal-padding {
     padding: 10px !important;
 }
+.big-padding {
+    padding: 15px !important;
+}
+
+@media only screen and (min-width: 768px) {
+    .layout-padding {
+        padding: 30px 100px !important;
+    }
+}
 
 .white {
     background-color: #fff !important;
@@ -168,4 +177,11 @@
 }
 .force-right {
     float: right !important;
+}
+
+.short-space {
+    margin: 0 20px !important;
+}
+.long-space {
+    margin: 0 50px !important;
 }

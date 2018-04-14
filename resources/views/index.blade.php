@@ -7,7 +7,6 @@
 
     <div class="ui basic segment">
 
-
         @include('frontend.layouts.partials.slider_news')
 
         {{--@include('frontend.product_category.ssd')--}}
@@ -28,6 +27,7 @@
 @endsection
 
 @push('script')
+    @include('frontend.plugin.fb_chat')
     <script>
         $('.ui.search').search({
             source: [

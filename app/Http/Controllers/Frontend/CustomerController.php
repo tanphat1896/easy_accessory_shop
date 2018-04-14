@@ -25,7 +25,7 @@ class CustomerController extends Controller
 
         $products = $this->getOrderDetail($this->getOrder($orderCode)->id);
 
-        return view('frontend.customer.order_detail_table', compact('products'));
+        return view('frontend.order.order_detail_table', compact('products'));
     }
 
     private function orderNotBelongToLoggedCustomer($orderCode) {

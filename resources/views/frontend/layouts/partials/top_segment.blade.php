@@ -30,8 +30,20 @@
                 </div>
             </div>
         @else
-            <div class="ui white small button" onclick="$('#modal-auth').modal('show')">
-                <i class="user icon"></i><strong> Đăng nhập</strong>
+            <div class="ui white small dropdown button">
+                <i class="user icon"></i><strong> Tài khoản</strong>
+                <div class="menu">
+                    <div class="item" onclick="$('#modal-auth').modal('show')">
+                        <i class="sign in alternate icon"></i>Đăng nhập
+                    </div>
+
+                    <a href="{{ route('register') }}" class="item">
+                        <i class="key icon"></i>Đăng ký
+                    </a>
+
+                    <a href="{{ route('order.index') }}" class="item">
+                        <i class="search icon"></i>Tra cứu đơn hàng</a>
+                </div>
             </div>
         @endif
 

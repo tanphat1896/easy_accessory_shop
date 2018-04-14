@@ -8,7 +8,9 @@
     <div class="right menu">
         <a class="normal-padding item" href="{{ route('cart.index') }}">
             <i class="cart icon"></i>
-            <span class="ui red circular tiny floating label" style="top: 3px !important; right: 2px !important;">1</span>
+            <span class="ui red circular tiny floating label" style="top: 3px !important; right: 2px !important;">
+                {{ \App\Helper\FrontendHelper::totalProductsInCart() }}
+            </span>
         </a>
         <div class="normal-padding item" id="toggle-sidebar"><i class="sidebar icon"></i></div>
     </div>

@@ -20,24 +20,23 @@ Route::get('/san-pham/{slug}', 'Frontend\SanPhamController@showGroup');
 Route::get('/chi-tiet/{slug}', 'Frontend\SanPhamController@show');
 
 Route::post('/gio-hang/{slug}', 'Frontend\CartController@addProduct')->name('cart.add');
-
 Route::get('/gio-hang', 'Frontend\CartController@index')->name('cart.index');
-
 Route::delete('/gio-hang/{slug}', 'Frontend\CartController@removeProduct')->name('cart.remove');
-
 Route::put('/gio-hang/{slug}', 'Frontend\CartController@updateAmount')->name('cart.update');
 
 Route::resource('/checkout', 'Frontend\CheckoutController', ['only' => ['index', 'store']]);
 
-Route::resource('/rating', 'Frontend\RatingController', ['only' => ['store']]);
-
-Route::resource('/comments', 'Frontend\CommentController', ['only' => ['store']]);
+Route::resource('/don-hang', 'Frontend\OrderController', ['only' => ['index', 'show']])
+    ->names('order');
 
 Route::group(['middleware' => 'customer'], function() {
     Route::get('/khach-hang/lich-su-mua-hang', 'Frontend\CustomerController@history')->name('customer.history');
     Route::get('/khach-hang/don-hang/{code}', 'Frontend\CustomerController@getOrderDetailTable')
         ->name('customer.orderDetail');
 
+    Route::resource('/rating', 'Frontend\RatingController', ['only' => ['store']]);
+
+    Route::resource('/comments', 'Frontend\CommentController', ['only' => ['store']]);
 });
 
 
@@ -77,6 +76,7 @@ Route::group(['prefix' => 'admin'], function() {
 
     Route::resource('noi_dung/slider', 'Admin\SliderController', ['only' => ['index', 'store', 'destroy']]);
     Route::resource('noi_dung/menu', 'Admin\MenuController', ['only' => ['index', 'store', 'destroy']]);
+    Route::resource('noi_dung/info', 'Admin\ShopInfoController', ['only' => ['index', 'store']]);
 
 
     Route::resource('san_pham', 'Admin\SanPhamController');
