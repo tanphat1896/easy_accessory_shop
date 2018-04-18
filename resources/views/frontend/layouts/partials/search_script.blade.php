@@ -32,7 +32,7 @@
                 results: []
             };
             products.forEach((product) => {
-                let limitChar = 30;
+                let limitChar = 500;
                 let title = product.ten_san_pham.length > limitChar
                     ? product.ten_san_pham.substring(0, limitChar) + "..."
                     : product.ten_san_pham;

@@ -13,12 +13,12 @@
 
 @push('script')
     <script>
-        function productResultsMobile(products) {
+        function productResultsz(products) {
             let response = {
                 results: []
             };
             products.forEach((product) => {
-                let limitChar = 17;
+                let limitChar = 30;
                 let title = product.ten_san_pham.length > limitChar
                     ? product.ten_san_pham.substring(0, limitChar) + "..."
                     : product.ten_san_pham;

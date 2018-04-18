@@ -18,6 +18,11 @@
     position: absolute !important;
     top: 20px !important;
 }
+.search .results .content .title {
+    height: 20px;
+    width: 100%;
+    overflow: hidden;
+}
 
 .mobile.search .results .content {
     width: calc(18em - 35px - 3.5em) !important;

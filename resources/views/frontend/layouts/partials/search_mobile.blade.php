@@ -9,7 +9,7 @@
 
 @push('script')
     <script>
-        function productResults(products) {
+        function productResultsz(products) {
             let response = {
                 results: []
             };
