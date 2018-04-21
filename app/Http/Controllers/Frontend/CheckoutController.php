@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Acme\Behavior\ProcessOrder;
+use App\Acme\Behavior\ProductAvailable;
 use App\Acme\Repository\Cart\CartRepository;
 use App\DonHang;
 use App\Helper\AuthHelper;
@@ -12,6 +13,7 @@ use App\Http\Controllers\Controller;
 class CheckoutController extends Controller
 {
     use ProcessOrder;
+    use ProductAvailable;
 
     private $cartRepository;
 
@@ -44,6 +46,11 @@ class CheckoutController extends Controller
 
     public function store(Request $request) {
         $data = $this->neededData($request);
+
+        $canCheckout = $this->availabelSyncingProducts($data['syncingProducts']);
+
+        if (!$canCheckout)
+            return back()->with('error', 'Số lượng không đủ để đặt hàng ');
 
         $orderCode = $this->saveOrder($data);
 

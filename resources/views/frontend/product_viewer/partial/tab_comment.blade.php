@@ -1,9 +1,12 @@
-<div class="ui bottom attached active tab segment">
-    <div class="ui comments" id="comments">
+<div class="ui bottom attached tab segment" data-tab="second">
+    <div class="ui threaded comments" id="comments">
 
         @foreach($comments as $comment)
             @include('frontend.product_viewer.partial.comment_piece', [
-                'author' => $comment->name, 'time' => \App\Helper\StringHelper::shortDate($comment->created_at), 'content' => $comment->noi_dung
+                'author' => $comment->name,
+                'time' => \App\Helper\StringHelper::shortDate($comment->created_at),
+                'content' => $comment->noi_dung,
+                'children' => $comment->children
             ])
         @endforeach
 
@@ -12,7 +15,7 @@
                 <input type="hidden" id="email" value="{{ Auth::guard('customer')->user()->email }}">
                 <input type="hidden" id="slug" value="{{ $product->slug }}">
                 <div class="field">
-                    <textarea id="content"></textarea>
+                    <textarea id="content" style="height: 50px;"></textarea>
                 </div>
                 <button class="ui blue icon button">
                     <i class="icon send"></i> Thêm bình luận
@@ -20,10 +23,7 @@
             </form>
         @else
             <br>
-            <div class="ui blue label pointer"
-                 onclick="$('#modal-auth').modal('show')">
-                Đăng nhập để bình luận
-            </div>
+            <i>Vui lòng <a class="pointer" onclick="$('#modal-auth').modal('show')">đăng nhập</a> để bình luận</i>
         @endif
     </div>
 </div>
@@ -36,8 +36,7 @@
         });
 
         function addComment() {
-            let comments = $('#comments'),
-                content = $('#content').val(),
+            let content = $('#content').val(),
                 email = $('#email').val(),
                 slug = $('#slug').val();
 
@@ -48,12 +47,13 @@
                 .then(rs => {
                     if (rs.data.toString() === 'false')
                         return $.toast({
-                            heading: 'Lỗi!', text: 'Không thêm được bình luận, thử lại sau' ,
-                            loader: false, icon: 'error', position: 'bottom-right'});
+                            heading: 'Lỗi!', text: 'Không thêm được bình luận, thử lại sau',
+                            loader: false, icon: 'error', position: 'bottom-right'
+                        });
 
                     $('#content').val('');
                     return $.toast({
-                        heading: 'Thành công!', text: 'Bình luận đang chờ duyệt' ,
+                        heading: 'Thành công!', text: 'Bình luận đang chờ duyệt',
                         loader: false, icon: 'success', position: 'bottom-right'
                     });
                 })

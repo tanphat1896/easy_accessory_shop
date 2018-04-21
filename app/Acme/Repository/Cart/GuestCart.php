@@ -9,9 +9,11 @@
 namespace App\Acme\Repository\Cart;
 
 
+use App\Acme\Behavior\ProductAvailable;
 use App\Acme\Template\Cart;
 
 class GuestCart extends Cart {
+    use ProductAvailable;
 
     public function getProducts() {
         return session('cart') ?: [];
@@ -21,7 +23,7 @@ class GuestCart extends Cart {
         $this->products = session('cart');
 
         $amount = $this->increaseAmountIfProductExist($product, $amount);
-        $cost = $amount * $product->giaMoiNhat();
+        $cost = $amount * $product->priceSale();
 
         $this->products[$product->slug] = compact('product', 'amount' ,'cost');
 
@@ -51,10 +53,13 @@ class GuestCart extends Cart {
         if (empty($this->products[$productSlug]))
             return false;
 
+        if (!$this->availableAmount($productSlug, $amount))
+            return false;
+
         $productBunch = $this->products[$productSlug];
 
         $productBunch['amount'] = $amount;
-        $productBunch['cost'] = $productBunch['product']->giaMoiNhat() * $amount;
+        $productBunch['cost'] = $productBunch['product']->priceSale() * $amount;
         $this->products[$productSlug] = $productBunch;
 
         session(['cart' => $this->products]);

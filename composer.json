@@ -15,7 +15,8 @@
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.5",
         "mews/purifier": "^2.0",
-        "phpmailer/phpmailer": "^6.0"
+        "phpmailer/phpmailer": "^6.0",
+        "unisharp/laravel-filemanager": "^1.8"
     },
     "require-dev": {
         "filp/whoops": "~2.0",

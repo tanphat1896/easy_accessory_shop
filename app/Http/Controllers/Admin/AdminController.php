@@ -1,10 +1,13 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+use App\Acme\Behavior\Statistic;
+use App\ThuongHieu;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 class AdminController extends Controller
 {
+    use Statistic;
     /**
      * Create a new controller instance.
      *
@@ -21,16 +24,9 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin');
+        $brandingProducts = $this->getProductAmountByBranding();
+        $ptypeProducts = $this->getProductAmountByType();
+        $orders = $this->getOrdersStatus();
+        return view('admin', compact('brandingProducts', 'ptypeProducts', 'orders'));
     }
 }
-
-//namespace App\Http\Controllers\Admin;
-//
-//use Illuminate\Http\Request;
-//use App\Http\Controllers\Controller;
-//
-//class AdminController extends Controller
-//{
-//    //
-//}

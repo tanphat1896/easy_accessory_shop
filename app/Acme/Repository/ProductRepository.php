@@ -32,15 +32,22 @@ class ProductRepository {
 
     private $folderAnhSanPham = 'uploaded/img_product';
 
-    public function getSanPhams(Request $request) {
+    public function getSanPhams(Request $request, $perPage) {
         if ($this->filtered($request))
             return $this->getSanPhamWithFilter($request);
 
-        return $this->indexDataNoFiltered();
+        return $this->indexDataNoFiltered($perPage);
     }
 
     private function filtered($request) {
-        return !empty($request->query());
+        $filters = $request->query();
+
+        if (empty($filters))
+            return false;
+
+        $onlyPagingQuery = count($filters) == 1 && in_array('page', array_keys($filters));
+
+        return ! $onlyPagingQuery;
     }
 
     private function getSanPhamWithFilter($request) {
@@ -59,7 +66,7 @@ class ProductRepository {
         $conditions = [];
 
         foreach ($filters as $key => $value) {
-            if ($value == 'all')
+            if ($value == 'all' || $key == 'page')
                 continue;
             $conditions[] = [$this->reflectKey[$key], $value];
         }
@@ -71,7 +78,7 @@ class ProductRepository {
         $filterData = [];
 
         foreach ($filters as $key => $value) {
-            if ($value == 'all')
+            if ($value == 'all' || $key == 'page')
                 continue;
 
             $class = $this->reflectClass[$key];
@@ -95,10 +102,10 @@ class ProductRepository {
         return compact('filtered', 'sanPhams', 'thuongHieus', 'loaiSanPhams', 'filterData');
     }
 
-    private function indexDataNoFiltered() {
+    private function indexDataNoFiltered($perPage) {
         $filtered = false;
 
-        $sanPhams = SanPham::all();
+        $sanPhams = SanPham::paginate($perPage);
 
         $thuongHieus = ThuongHieu::all();
 
@@ -130,26 +137,30 @@ class ProductRepository {
         return $sanPham->hinhAnhs()->save($hinhAnh);
     }
 
-    public function updateSanPham($id, $data, $anhDaiDien) {
+    public function updateSanPham($id, $data, $avtFile) {
         $this->sanPham = SanPham::capNhatThongTin($id, $data);
 
-        if (!empty($anhDaiDien)){
-            $storePath = StringHelper::buildImageRelativePathFromProductType($this->sanPham->loai_san_pham_id);
-
-            $relativePath = ImageHelper::storeImageToStorage($anhDaiDien, $storePath);
-
-            ImageHelper::deleteImageFromStorage($this->sanPham->anh_dai_dien);
-
-            $this->sanPham->anh_dai_dien = $relativePath;
+        if (!empty($avtFile)){
+            $this->updateAvatar($avtFile);
         }
 
-        if (GiaSanPham::giaThayDoi($data['gia'])){
-            $this->sanPham->gia()->save(GiaSanPham::fromCurrency($data['gia']));
+        if ($this->sanPham->priceChanged($data['gia'])){
+            $this->sanPham->updatePrice($data['gia']);
         }
 
         $this->themThongSoKyThuat();
 
         return $this->sanPham->update();
+    }
+
+    private function updateAvatar($avtFile) {
+        $storePath = StringHelper::buildImageRelativePathFromProductType($this->sanPham->loai_san_pham_id);
+
+        $relativePath = ImageHelper::storeImageToStorage($avtFile, $storePath);
+
+        ImageHelper::deleteImageFromStorage($this->sanPham->anh_dai_dien);
+
+        $this->sanPham->anh_dai_dien = $relativePath;
     }
 
     public function themSanPham(array $data, $anhDaiDien, $anhChiTiets) {

@@ -3,6 +3,8 @@
 @section('title', 'Thanh toán')
 
 @section('content')
+    @include('sharing.components.error')
+
     <div class="ui segment basic layout-padding">
         {{--<div class="ui blue segment">--}}
             <div class="ui basic segment">
@@ -62,10 +64,10 @@
                                 Thông tin khách hàng
 
                                 @if (! Auth::guard('customer')->check())
-                                    <button type="button" class="ui basic blue label pointer no-lr-margin small-td-margin"
+                                    <span type="button" class="ui basic blue label pointer no-lr-margin small-td-margin"
                                             onclick="$('#modal-auth').modal('show');">
                                         <strong>Đã có tài khoản?</strong>
-                                    </button>
+                                    </span>
                                 @endif
 
                             </h4>
@@ -134,11 +136,12 @@
         <div class="content">
             <h3 class="ui blue-text dividing header">Thông tin đơn hàng</h3>
 
-            <table class="ui compact table square-border">
+            <table class="ui compact table square-border center aligned">
                 <thead>
-                <tr class="center aligned">
+                <tr>
                     <th>Mặt hàng</th>
                     <th>Đơn giá</th>
+                    <th>Giảm giá</th>
                     <th>Số lượng</th>
                     <th>Thành tiền</th>
                 </tr>
@@ -151,16 +154,17 @@
                             {{ $product['product']->getName() }}
                         </td>
                         <td>{{ number_format($product['product']->giaMoiNhat()) }}đ</td>
-                        <td class="center aligned">{{ $product['amount'] }}</td>
-                        <td class="center aligned">{{ number_format($product['cost']) }}đ</td>
+                        <td>{{ $product['product']->salePercent() }}%</td>
+                        <td>{{ $product['amount'] }}</td>
+                        <td>{{ number_format($product['cost']) }}đ</td>
                     </tr>
                 @endforeach
                 </tbody>
                 <tfoot>
                 <tr>
-                    <th class="right aligned" colspan="2"><strong>Tổng cộng</strong></th>
-                    <th class="center aligned">{{ $totalAmount }}</th>
-                    <th class="center aligned"><span class="ui red label">{{ number_format($totalCost) }}đ</span></th>
+                    <th class="right aligned" colspan="3"><strong>Tổng cộng</strong></th>
+                    <th>{{ $totalAmount }}</th>
+                    <th><span class="ui red label">{{ number_format($totalCost) }}đ</span></th>
                 </tr>
                 </tfoot>
             </table>

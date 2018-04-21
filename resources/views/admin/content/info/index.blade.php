@@ -28,10 +28,8 @@
                 <label>Địa chỉ</label>
                 <input type="text" name="address" value="{{ $info->dia_chi }}">
             </div>
-            <div class="field">
-                <label>Logo</label>
-                <input type="file" name="logo">
-            </div>
+
+            @include('sharing.lfm_field', ['label' => 'Logo', 'thumb' => $info->logo, 'needThumb' => 1])
 
             <div class="field">
                 <button class="ui blue button">

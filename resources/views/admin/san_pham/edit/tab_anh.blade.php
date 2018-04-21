@@ -1,4 +1,4 @@
-<div class="ui bottom attached tab segment" data-tab="second">
+<div class="ui bottom attached tab segment" data-tab="four">
 
     {{--<form action="{{ route('anh_san_pham.store') }}" method="post" enctype="multipart/form-data">--}}
         {{--{{csrf_field()}}--}}

@@ -3,6 +3,7 @@
 @section('title', 'Giỏ hàng')
 
 @section('content')
+    @include('sharing.components.error')
 
     <div class="ui segment basic layout-padding clearing">
         {{--<div class="ui blue segment clearing">--}}

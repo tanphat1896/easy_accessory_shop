@@ -23,6 +23,7 @@ class ShopInfoController extends Controller
         $info->email = $data['email'];
         $info->so_dien_thoai = $data['phone'];
         $info->dia_chi = $data['address'];
+        $info->logo = $data['logo'];
 
         $info->save();
         
@@ -34,7 +35,8 @@ class ShopInfoController extends Controller
         $email = $request->email ?: 'ezshop@gmail.com';
         $phone = $request->phone ?: '01236544789';
         $address = $request->address ?: 'Ninh Kieu, Can Tho';
+        $logo = $request->filepath ?: '/';
 
-        return compact('name', 'email', 'phone', 'address');
+        return compact('name', 'email', 'phone', 'address', 'logo');
     }
 }

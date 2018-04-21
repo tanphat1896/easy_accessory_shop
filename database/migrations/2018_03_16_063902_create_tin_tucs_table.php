@@ -15,11 +15,11 @@ class CreateTinTucsTable extends Migration
     {
         Schema::create('tin_tucs', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('tieu_de',255);
-            $table->string('noi_dung',500);
-            $table->dateTime('ngay_dang');
-            $table->integer('tai_khoan_id')->unsigned();
-            $table->foreign('tai_khoan_id','fk_tt_tk')->references('id')->on('tai_khoans');
+            $table->string('tieu_de');
+            $table->longText('noi_dung')->nullable();
+            $table->string('slug');
+            $table->string('thumb');
+            $table->integer('admin_id')->unsigned();
             $table->timestamps();
         });
     }

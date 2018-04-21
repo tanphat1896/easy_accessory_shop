@@ -12,11 +12,21 @@ class AdminSeeder extends Seeder
     public function run()
     {
         DB::table('admins')->insert([
-            'name' => 'Nguyễn Đình Trọng',
-            'email' => 'nguyentrongcp@gmail.com',
-            'phone' => '01639883047',
-            'username' => 'nguyentrong',
-            'password' => bcrypt('111111')
+            [
+                'name' => 'Nguyễn Đình Trọng',
+                'email' => 'nguyentrongcp@gmail.com',
+                'phone' => '01639883047',
+                'username' => 'nguyentrong',
+                'password' => bcrypt('111111')
+            ],
+            [
+                'name' => 'Mr. Blo bla',
+                'email' => 'blabla@gmail.com',
+                'phone' => '01639883047',
+                'username' => 'blabla',
+                'password' => bcrypt('111111')
+            ],
+
         ]);
     }
 }

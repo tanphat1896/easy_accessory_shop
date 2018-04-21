@@ -19,11 +19,25 @@ class KhuyenMai extends Model
     public static function createFrom(array $data) {
         $sale = new self;
 
-        $sale->gia_tri_km = (float)$data['gia-tri']/100;
+        $sale = self::assignData($sale, $data);
+
+        return $sale->save();
+    }
+
+    public static function updateFrom($id, array $data) {
+        $sale = KhuyenMai::findOrFail($id);
+
+        $sale = self::assignData($sale, $data);
+
+        return $sale->update();
+    }
+
+    private static function assignData(KhuyenMai $sale, array $data) {
+        $sale->gia_tri_km = (int)$data['gia-tri'];
         $sale->ngay_bat_dau = $data['ngay-bat-dau'];
         $sale->ngay_ket_thuc = $data['ngay-ket-thuc'];
 
-        return $sale->save();
+        return $sale;
     }
 
     public function start() {
@@ -35,6 +49,6 @@ class KhuyenMai extends Model
     }
 
     public function percent() {
-        return $this->gia_tri_km * 100;
+        return $this->gia_tri_km;
     }
 }

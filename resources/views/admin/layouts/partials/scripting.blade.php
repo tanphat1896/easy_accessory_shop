@@ -1,3 +1,5 @@
+<script src="{{ asset('plugin/chartjs/Chart.min.js') }}"></script>
+<script src="{{ asset('plugin/chartjs/Chart.PieceLabel.min.js') }}"></script>
 <script src="{{ asset('plugin/datatable/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('plugin/datatable/dataTables.semanticui.min.js') }}"></script>
 <script src="{{ asset('js/admin-script.js') }}"></script>
@@ -48,5 +50,36 @@
     }
 
     $('#btn-toggle-menu').click(toggleSidebar());
+
+    function buildChart(id, type, dataSource, name, customColors = null) {
+        let ctx = document.getElementById(id).getContext('2d');
+        let colors = customColors || ['#36A2EB', '#4BC0C0', '#FFCD56', '#FF9F40', '#FF6384','#f57f17','#1565c0', '#004d40', '#827717'];
+        // let colors = customColors || ['#56E289', '#E2CF56', '#E256AE', '#56AEE2', '#E28956','#f57f17','#1565c0', '#004d40', '#827717'];
+        let dataVals = [], labels = [], bgColors = [];
+
+        dataSource.forEach(function(datum, idx) {
+            bgColors.push(colors[idx]);
+            dataVals.push(datum.total);
+            labels.push(datum[name]);
+        });
+        let data = {
+                datasets: [{
+                    data: dataVals,
+                    backgroundColor: bgColors
+                }],
+                labels: labels
+            };
+        new Chart(ctx, {
+            type: type,
+            data: data,
+            options: {
+                pieceLabel: {
+                    render: 'percentage',
+                    frontColor: ['black'],
+                    precision: 2
+                }
+            }
+        });
+    }
 
 </script>

@@ -11,35 +11,63 @@ namespace App\Acme\Behavior;
 
 use App\DonHang;
 use App\Helper\AuthHelper;
+use App\SanPham;
+use Illuminate\Support\Facades\DB;
 
 trait ProcessOrder {
     private $typeCheckout = ['cash', 'baokim', 'nganluong'];
+    private $order;
 
     public function saveOrder(array $data) {
         if ($this->notValidPayment($data['hinh_thuc_thanh_toan']))
             return false;
 
-        $order = new DonHang($data);
+        $this->order = new DonHang($data);
+        $this->order->ma_don_hang = uniqid('DH_');
 
-        $order->ma_don_hang = uniqid('DH_');
+        $this->bindCustomerIdIfLogged();
 
-        $order = $this->bindCustomerIdIfLogged($order);
+        $success = $this->storeOrderToDB($data);
 
-        $order->save();
-
-        $order->products()->sync($data['syncingProducts']);
-
-        return $order->ma_don_hang;
+        return $success ? $this->order->ma_don_hang: false;
     }
 
     private function notValidPayment($payment) {
         return !in_array($payment, $this->typeCheckout);
     }
 
-    private function bindCustomerIdIfLogged($order) {
+    private function bindCustomerIdIfLogged() {
         if (AuthHelper::userLogged())
-            $order->customer_id = AuthHelper::userId();
+            $this->order->customer_id = AuthHelper::userId();
+    }
 
-        return $order;
+    private function storeOrderToDB(array $data) {
+        $success = true;
+
+        DB::beginTransaction();
+        try {
+            $this->order->save();
+
+            $this->decreaseAmountOfEachSyncingProducts($data['syncingProducts']);
+
+            $this->order->products()->sync($data['syncingProducts']);
+            DB::commit();
+        } catch (\Exception $e) {
+            $success = false;
+            DB::rollBack();
+        }
+
+        return $success;
+    }
+
+    private function decreaseAmountOfEachSyncingProducts($syncingProducts) {
+        foreach ($syncingProducts as $id => $syncingProduct) {
+            $product = SanPham::find($id);
+            if (empty($product))
+                continue;
+
+            $product->so_luong -= $syncingProduct['so_luong'];
+            $product->save();
+        }
     }
 }

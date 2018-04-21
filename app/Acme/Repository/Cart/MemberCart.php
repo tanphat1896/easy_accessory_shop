@@ -9,11 +9,14 @@
 namespace App\Acme\Repository\Cart;
 
 
+use App\Acme\Behavior\ProductAvailable;
 use App\Acme\Template\Cart;
 use App\Helper\AuthHelper;
 use App\SanPham;
 
 class MemberCart extends Cart {
+    use ProductAvailable;
+
     private $member;
     private $activeCart;
 
@@ -43,7 +46,7 @@ class MemberCart extends Cart {
             $this->products[$product->slug] = [
                 'product' => $product,
                 'amount' => $amount,
-                'cost' => $product->giaMoiNhat() * $amount
+                'cost' => $product->priceSale() * $amount
             ];
         }
 
@@ -83,7 +86,12 @@ class MemberCart extends Cart {
     public function updateAmount($productSlug, $amount) {
         $product = SanPham::whereSlug($productSlug)->first();
 
+        if (! $this->availableAmount($product->id, $amount))
+            return false;
+
         $this->updateAmountExistProduct($product, $amount);
+
+        return true;
     }
 
     public function cleanCart() {

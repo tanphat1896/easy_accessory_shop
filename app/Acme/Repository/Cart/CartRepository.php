@@ -9,12 +9,15 @@
 namespace App\Acme\Repository\Cart;
 
 
+use App\Acme\Behavior\ProductAvailable;
 use App\Acme\Template\Cart;
 use App\Helper\AuthHelper;
 use App\SanPham;
 use Illuminate\Http\Request;
 
 class CartRepository {
+    use ProductAvailable;
+
     private $cart;
 
     public function injectCart($customerLogged) {
@@ -62,9 +65,7 @@ class CartRepository {
 
         $amount = (int)$request->get('amount');
 
-        $this->cart->updateAmount($productSlug, $amount);
-
-        return true;
+        return $this->cart->updateAmount($productSlug, $amount);
     }
 
     public function cleanCart() {

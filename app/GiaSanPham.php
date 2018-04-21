@@ -13,13 +13,6 @@ class GiaSanPham extends Model
 
     protected $fillable = ['ngay_cap_nhat', 'gia', 'san_pham_id'];
 
-    public static function giaThayDoi($gia) {
-        $giaMoiNhat = self::orderBy('ngay_cap_nhat', 'desc')->first()->gia;
-        $gia = StringHelper::getNumberFromCurrency($gia);
-
-        return floor($gia - $giaMoiNhat) != 0;
-    }
-
     public static function fromCurrency($gia) {
         $gia = StringHelper::getNumberFromCurrency($gia);
 

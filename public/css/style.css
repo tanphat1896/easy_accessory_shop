@@ -82,6 +82,18 @@
 .orange-text {
     color: #E15100 !important;
 }
+.red-bg {
+    background-color: #C6000B !important;
+}
+.blue-bg {
+    background-color: #004D85 !important;
+}
+.green-bg {
+    background-color: #004A20 !important;
+}
+.orange-bg {
+    background-color: #E15100 !important;
+}
 
 .full-height {
     height: 100%;
@@ -184,4 +196,8 @@
 }
 .long-space {
     margin: 0 50px !important;
+}
+
+.pusher {
+    min-height: 330px !important;
 }

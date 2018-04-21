@@ -4,11 +4,6 @@
             <div class="ten wide column">
 
                 <div class="inline field">
-                    <label for="" class="label-fixed">Mã sản phẩm</label>
-                    <div class="static-input">{{ $sanPham->ma_san_pham }}</div>
-                </div>
-
-                <div class="inline field">
                     <label class="label-fixed">Tên sản phẩm</label>
                     <div class="static-input">{{ $sanPham->getName() }}</div>
                 </div>
@@ -28,12 +23,11 @@
                     <div class="static-input"><strong>{{ number_format($sanPham->giaMoiNhat()) }} đ</strong>
 
                         {{--ăn gian code --}}
-                        <a href="#" class="ui label"
-                           onclick="$('#lich-su-gia').modal('show');"
-                        >Lịch sử</a>
+                        <a class="ui label"
+                           onclick="$('#lich-su-gia').modal('show');">Lịch sử</a>
+
                         <a href="#" class="ui blue label"
-                           onclick="$('#cap-nhat-gia').modal('show');"
-                        >Cập nhật</a>
+                           onclick="$('#cap-nhat-gia').modal('show');">Cập nhật</a>
                     </div>
                 </div>
 

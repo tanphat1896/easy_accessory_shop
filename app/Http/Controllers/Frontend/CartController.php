@@ -46,8 +46,9 @@ class CartController extends Controller
     }
 
     public function updateAmount(Request $request, $productSlug) {
-        $this->cartRepository->updateAmount($request, $productSlug);
+        $success = $this->cartRepository->updateAmount($request, $productSlug);
 
-        return back();
+        $message = $success ? []: ['error' => 'Không đủ số lượng'];
+        return back()->with($message);
     }
 }
