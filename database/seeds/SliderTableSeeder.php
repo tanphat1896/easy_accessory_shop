@@ -12,10 +12,9 @@ class SliderTableSeeder extends Seeder
     public function run()
     {
         DB::table('sliders')->insert([
-            ['hinh_anh' => '/assets/images/slider/slide1.png'],
-            ['hinh_anh' => '/assets/images/slider/slide2.png'],
-            ['hinh_anh' => '/assets/images/slider/slide3.jpg'],
-            ['hinh_anh' => '/assets/images/slider/slide4.jpg']
+            ['hinh_anh' => '/assets/images/default-slider/slide1.png'],
+            ['hinh_anh' => '/assets/images/default-slider/slide2.png'],
+            ['hinh_anh' => '/assets/images/default-slider/slide3.jpg'],
         ]);
     }
 }
