@@ -141,12 +141,20 @@ trait GetProduct {
         $products = SanPham::where($condition)
             ->limit(5)->get();
 
-        return $products;
+        if ($products->count() > 0)
+            return $products;
+
+        unset($condition[2]);
+
+        $products = SanPham::where($condition)
+            ->limit(5)->get();
+
+        return $products;    
     }
 
     private function getCapacityFrom($productName) {
         $matches = null;
-        $pattern = '/.*\s?([0-9]{3}GB).*/';
+        $pattern = '/.*\s?([0-9]{1,3}GB).*/';
         preg_match($pattern, $productName, $matches);
 
         $capacity = empty($matches[1]) ? 0 : $matches[1];
