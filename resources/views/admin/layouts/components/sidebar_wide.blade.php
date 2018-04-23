@@ -12,7 +12,7 @@
         </div>
         <div class="content {{ Request::is('admin') ? 'active': '' }}">
             <div class="menu">
-                <a class="title item {{ Request::is('admin') ? 'active': '' }}">
+                <a href="/admin" class="title item {{ Request::is('admin') ? 'active': '' }}">
                     <i class="globe icon icon-left"></i>Tổng quan</a>
                 <a class="title item">
                     <i class="dollar sign icon icon-left"></i>Doanh thu</a>
@@ -66,7 +66,9 @@
                    href="{{ route('menu.index') }}">
                     <i class="list icon icon-left"></i>Menu</a>
 
-                <a class="title item"><i class="newspaper icon icon-left"></i>Tin tức</a>
+                <a class="title item {{ Request::is('*news*') ? 'active': '' }}"
+                href="{{ route('news.index') }}">
+                    <i class="newspaper icon icon-left"></i>Tin tức</a>
             </div>
         </div>
     </div>

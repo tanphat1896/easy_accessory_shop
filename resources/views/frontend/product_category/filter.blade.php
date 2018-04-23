@@ -1,17 +1,39 @@
 <div class="ui small borderless menu no-margin square-border">
-    <div class="item">128GB</div>
-    <div class="item">256GB</div>
-    <div class="item">1TB</div>
-    <div class="item">Samsung</div>
-    <div class="item">Sandisk</div>
     <div class="ui item dropdown">
         <div class="text">Tất cả giá</div>
+        <i class="dropdown icon"></i>
         <div class="menu">
-            <a href="" onclick="filtering('price', 'desc');">Giá giảm dần</a>
-            <a href="" onclick="filtering('price', 'desc');">Giá tăng dần</a>
+            <a class="item"
+               href="{{ route('get_product', ['slug' => $productType->slug, 'filter' => 'price=desc']) }}">
+                Giá giảm dần
+            </a>
+            <a class="item"
+               href="{{ route('get_product', ['slug' => $productType->slug, 'filter' => 'price=asc']) }}">
+                Giá tăng dần</a>
         </div>
     </div>
+    <div class="item" id="branding">Thương hiệu</div>
+    <div class="ui flowing popup bottom center hidden">
+        <div class="ui checkbox">
+            <label for="">Samsung</label>
+            <input type="checkbox" class="hidden">
+        </div>
+
+        <div class="ui checkbox">
+            <label for="">Samsung</label>
+            <input type="checkbox" class="hidden">
+        </div>
+    </div>
+
+    <div class="item">Sandisk</div>
+    <div class="item">
+        <div class="ui blue label">hello</div>
+        <div class="ui blue label">hello</div>
+        <div class="ui blue label">hello</div>
+        <div class="ui blue label">hello</div>
+    </div>
     <div class="item pointer" id="option">Tùy chọn<i class="dropdown icon"></i></div>
+
     <div class="ui flowing popup bottom center hidden">
         <div class="ui three column divided grid">
             <div class="row">
@@ -86,10 +108,23 @@
             </div>
         </div>
     </div>
+
+    <div class="item">
+
+    </div>
 </div>
 @push('script')
     <script>
-        $('#option').popup({
+        let queryPattern = /(.*)\?(.*)/;
+        let query = queryPattern.exec(window.location.href);
+        let filter = '';
+        if (query !== null)
+            filter = query[1];
+
+        function filtering(criteria, value) {
+
+        }
+        $('#option, #branding').popup({
             hoverable: true,
             inline: true,
             delay: {

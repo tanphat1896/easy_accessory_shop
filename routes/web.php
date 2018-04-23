@@ -15,9 +15,10 @@ Route::get('/', 'Frontend\IndexController@index');
 
 Route::get('/tim-kiem/{keyword?}', 'Frontend\SearchController@search');
 
-Route::get('/san-pham/{slug}', 'Frontend\SanPhamController@showGroup');
+Route::get('/san-pham/{slug}/{filter?}', 'Frontend\SanPhamController@showGroup')->name('get_product');
+Route::get('/san-pham-{type}', 'Frontend\SanPhamController@showSpecial')->name('product.special');
 
-Route::get('/chi-tiet/{slug}', 'Frontend\SanPhamController@show');
+Route::get('/chi-tiet/{slug}', 'Frontend\SanPhamController@show')->name('product.viewer');
 
 Route::post('/gio-hang/{slug}', 'Frontend\CartController@addProduct')->name('cart.add');
 Route::get('/gio-hang', 'Frontend\CartController@index')->name('cart.index');
@@ -28,6 +29,9 @@ Route::resource('/checkout', 'Frontend\CheckoutController', ['only' => ['index',
 
 Route::resource('/don-hang', 'Frontend\OrderController', ['only' => ['index', 'show']])
     ->names('order');
+
+Route::get('/tin-tuc/bai-viet/{slug}', 'Frontend\IndexController@showNews')->name('read.news');
+Route::get('/tin-tuc/', 'Frontend\IndexController@showAllNews')->name('news.all');
 
 Route::group(['middleware' => 'customer'], function() {
     Route::get('/khach-hang/lich-su-mua-hang', 'Frontend\CustomerController@history')->name('customer.history');
@@ -53,18 +57,19 @@ Route::post('customer/logout', 'Auth\CustomerLoginController@logout')->name('cus
 Route::post('customer/login', 'Auth\CustomerLoginController@login')->name('customer.login.submit');
 
 Route::get('/testing', function() {
-    \App\Helper\FrontendHelper::getStar(Auth::guard('customer')->id(), 1);
+    return view('home');
 });
 
 
-Route::group(['prefix' => 'admin'], function() {
-    Route::get('/', function(){
-        return view('admin');
-    });
+Route::get('/admin/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
+Route::post('/admin/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
 
-//    Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
-//    Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
-//    Route::get('/', 'Admin\AdminController@index')->name('admin.dashboard');
+
+Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
+
+
+    Route::get('/', 'Admin\AdminController@index')->name('admin.dashboard');
+    Route::get('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
     
 
     Route::resource('thuong_hieu', 'Admin\ThuongHieuController', ["except" => ["create", "show", "edit"]]);
@@ -77,6 +82,7 @@ Route::group(['prefix' => 'admin'], function() {
     Route::resource('noi_dung/slider', 'Admin\SliderController', ['only' => ['index', 'store', 'destroy']]);
     Route::resource('noi_dung/menu', 'Admin\MenuController', ['only' => ['index', 'store', 'destroy']]);
     Route::resource('noi_dung/info', 'Admin\ShopInfoController', ['only' => ['index', 'store']]);
+    Route::resource('noi_dung/news', 'Admin\NewsController');
 
 
     Route::resource('san_pham', 'Admin\SanPhamController');
@@ -84,6 +90,7 @@ Route::group(['prefix' => 'admin'], function() {
     Route::post('gia_san_pham/{sanpham_id}', 'Admin\GiaSanPhamController@store')->name('gia_san_pham.store');
     Route::post('thong_so_ky_thuat/{sanpham_id}', 'Admin\ThongSoKyThuatController@update')->name('thong_so_ky_thuat');
     Route::resource('anh_san_pham', 'Admin\AnhSanPhamController', ['only' => ['store', 'destroy']]);
+    Route::resource('binh_luan', 'Admin\CommentController', ['only' => ['store', 'destroy', 'update']]);
 
 
     Route::resource('nhap_hang','Admin\NhapHangController');

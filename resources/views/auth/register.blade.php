@@ -32,43 +32,47 @@
                 <div class="inline field required">
                     <label for="name">Họ và tên</label>
                     <input type="text" id="name" name="name" value="{{ old('name') }}">
-                    @if ($errors->has('name'))
-                        <span class="ui basic red label">
-                            <strong>{{ $errors->first('name') }}</strong>
-                        </span>
-                    @endif
                 </div>
+                @if ($errors->has('name'))
+                    <p class="red-text">
+                        {{ $errors->first('name') }}
+                    </p>
+                @endif
+
                 <div class="inline field required">
                     <label for="email">Email</label>
                     <input type="email" id="email" name="email" value="{{ old('email') }}">
-                    @if ($errors->has('email'))
-                        <span class="ui basic red label">
-                            <strong>{{ $errors->first('email') }}</strong>
-                        </span>
-                    @endif
                 </div>
+                @if ($errors->has('email'))
+                    <p class="red-text">
+                        {{ $errors->first('email') }}
+                    </p>
+                @endif
+
                 <div class="inline field required">
                     <label for="password">Mật khẩu</label>
-                    <input type="password" id="password" name="password" oninput="testStrength()">
+                    <input type="password" id="password" name="password">
                 </div>
                 <div class="inline field required">
                     <label for="password_confirmation">Nhập lại mật khẩu</label>
                     <input type="password" id="password_confirmation" name="password_confirmation">
-                    @if ($errors->has('password'))
-                        <span class="ui basic red label">
-                            <strong>{{ $errors->first('password') }}</strong>
-                        </span>
-                    @endif
                 </div>
-                <div class="inline field">
+                @if ($errors->has('password'))
+                    <p class="red-text">
+                        {{ $errors->first('password') }}
+                    </p>
+                @endif
+
+                <div class="inline field required">
                     <label for="phone">Số điện thoại</label>
                     <input type="text" id="phone" name="phone" value="{{ old('phone') }}">
-                    @if ($errors->has('phone'))
-                        <span class="ui basic red label">
-                            <strong>{{ $errors->first('phone') }}</strong>
-                        </span>
-                    @endif
                 </div>
+                @if ($errors->has('phone'))
+                    <p class="red-text">
+                        {{ $errors->first('phone') }}
+                    </p>
+                @endif
+
                 <div class="inline field">
                     <button type="submit" class="ui blue button">
                         <i class="edit icon"></i>
@@ -78,14 +82,3 @@
             </form>
         </div>
 @endsection
-
-@push('script')
-    <script type="text/javascript">
-        var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
-        var mediumRegex = new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})");
-
-        function testStrength() {
-            let pwd = $('#password').text();
-        }
-    </script>
-@endpush

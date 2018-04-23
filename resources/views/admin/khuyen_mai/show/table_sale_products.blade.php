@@ -1,4 +1,4 @@
-<h4 class="ui dividing header">Danh sách sản phẩm</h4>
+<h3 class="ui blue-text dividing header">Danh sách sản phẩm</h3>
 <table class="ui table celled striped">
     <thead>
     <tr class="center aligned">
@@ -8,7 +8,6 @@
             {{--</div>--}}
         {{--</th>--}}
         <th class="collapsing">STT</th>
-        <th class="collapsing">Mã sản phẩm</th>
         <th>Tên sản phẩm</th>
     </tr>
     </thead>
@@ -18,7 +17,6 @@
         <tr>
             <td class="force-hidden sale-products">{{ $product->id }}</td>
             <td>{{ $idx + 1 }}</td>
-            <td>{{ $product->ma_san_pham }}</td>
             <td>{{ $product->getName() }}</td>
         </tr>
     @endforeach

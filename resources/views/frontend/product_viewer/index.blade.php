@@ -4,7 +4,8 @@
 
 @php
 // reduce eloquent query
-$price = $product->giaMoiNhat();
+$salePercent = $product->salePercent();
+$priceSale = $product->priceSale();
 @endphp
 
 @section('content')
@@ -16,7 +17,9 @@ $price = $product->giaMoiNhat();
             <div class="ui grid stackable">
 
                 <div class="four wide column">
+
                     @include('frontend.product_viewer.slider')
+
                 </div>
 
                 <div class="column"></div>
@@ -25,20 +28,23 @@ $price = $product->giaMoiNhat();
 
                     <h3 class="ui dividing header">
                         {{ $product->getName() }}
-                        {{--<span class="ui tiny red label"> Giảm giá 30% </span>--}}
                     </h3>
                     <div class="ui two columns grid stackable">
                         <div class="column">
 
                             <h3 class="ui header">
-                                Giá: <span class="red-text">{{ number_format($price) }} đ</span>
+
+                                @if (!empty($salePercent))
+                                    Giá: <span class="red-text">{{ number_format($priceSale) }} đ</span>
+                                    <span class="ui red label"> Tiết kiệm {{ $salePercent }}% </span>
+                                @else
+                                    Giá: <span class="red-text">{{ number_format($priceSale) }} đ</span>
+                                @endif
                             </h3>
 
                             <div class="ui divider hidden"></div>
 
                             {{--Kiểm tra ngừng kinh doanh --}}
-
-
                             @if ($product->so_luong < 1)
                                 @include('frontend.product_viewer.partial.out_of_stock')
                             @elseif ($product->tinh_trang > 0)
@@ -76,7 +82,7 @@ $price = $product->giaMoiNhat();
 @push('script')
     <script>
         function updateTotalPrice() {
-            let price = parseInt('{{ $price }}');
+            let price = parseInt('{{ $priceSale }}');
             let amount = $('#amount');
 
             if ($(amount).val() > 20)

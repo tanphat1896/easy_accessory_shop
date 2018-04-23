@@ -16,20 +16,19 @@
             Sửa đổi: {{ $sanPham->getName() }}
         </h3>
 
-        <div class="ui top attached tabular menu">
-            <a class="item active" data-tab="first">Thông tin</a>
-            <a class="item" data-tab="second">Ảnh chi tiết ({{ $sanPham->hinhAnhs->count() }})</a>
-        </div>
+        <form action="{{ route('san_pham.update', [$sanPham->id]) }}" method="post" enctype="multipart/form-data"
+              class="ui form static" id="form-thong-tin-san-pham">
 
-        @include('admin.san_pham.edit.tab_thong_tin')
+            <div class="ui top attached tabular menu">
+                <a class="item active" data-tab="first">Thông tin</a>
+                <a class="item" data-tab="third">Mô tả sản phẩm</a>
+            </div>
 
-        @include('admin.san_pham.edit.tab_anh')
+            @include('admin.san_pham.edit.tab_thong_tin')
+
+            @include('admin.san_pham.edit.tab_bai_viet')
+        </form>
+
 
     </div>
 @endsection
-
-@push('script')
-    <script>
-        $('.ui.tabular.menu .item').tab();
-    </script>
-@endpush

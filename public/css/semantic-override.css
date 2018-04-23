@@ -49,23 +49,6 @@
     width: 3.5em !important;
 }
 
-/*.computer.search .results .content {*/
-    /*position: relative !important;*/
-/*}*/
-/*.computer.search .results .image {*/
-    /*width: 3em !important;*/
-/*}*/
-/*.computer.search .results .content {*/
-    /*margin-right: 3.5em !important;*/
-/*}*/
-/*.computer.search .results .title {*/
-    /*font-weight: normal !important;*/
-/*}*/
-/*.computer.search .results .price {*/
-    /*float: unset !important;*/
-    /*position: absolute !important;*/
-    /*top: 30px !important;*/
-/*}*/
 .ui.search img {
     margin-right: 0 !important;
 }
@@ -114,4 +97,9 @@
     top: .5rem!important;
     right: .5rem!important;
     color: rgba(0,0,0,.87) !important;
+}
+
+.event .summary a {
+    color: #3e3e3e !important;
+    font-weight: 400 !important;
 }

@@ -17,7 +17,8 @@ class SanPhamController extends Controller {
     }
 
     public function index(Request $request) {
-        $data = $this->sanPhamRepository->getSanPhams($request);
+        $perPage = 20;
+        $data = $this->sanPhamRepository->getSanPhams($request, $perPage);
 
         return view('admin.san_pham.index.index', $data);
     }

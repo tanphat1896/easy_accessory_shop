@@ -32,4 +32,29 @@ class AuthHelper {
 	    $guard = Auth::guard('customer');
 	    return $guard;
     }
+
+    public static function adminLogged() {
+	    return self::adminGuard()->check();
+    }
+
+    public static function adminId() {
+        return self::adminGuard()->id();
+    }
+
+    public static function adminEmail() {
+        return self::admin()->email;
+    }
+
+    public static function adminName() {
+        return self::admin()->name;
+    }
+
+    public static function admin() {
+	    return self::adminGuard()->user();
+    }
+
+    private static function adminGuard() {
+	    $guard = Auth::guard('admin');
+	    return $guard;
+    }
 }

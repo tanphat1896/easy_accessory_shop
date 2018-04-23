@@ -1,4 +1,4 @@
-<h4 class="ui dividing header">Thêm sản phẩm</h4>
+<h3 class="ui blue-text dividing header">Thêm sản phẩm</h3>
 <form class="ui form segment" onsubmit="return false;">
     <div class="fields">
         <div class="field">
@@ -37,7 +37,6 @@
                 </div>
             </th>
             <th class="collapsing">STT</th>
-            <th class="collapsing">Mã sản phẩm</th>
             <th>Tên sản phẩm</th>
         </tr>
         </thead>
@@ -47,7 +46,7 @@
 
 @push('script')
     <script>
-        let saleProductIds = [...$('.sale-products')].map(span => parseInt(span.innerText));
+        let saleProductIds = [...$('.sale-products')].map(productIdSpanTag => parseInt(productIdSpanTag.innerText));
         function search() {
             console.log('search');
             let queryString = buildQueryString();
@@ -87,7 +86,6 @@
             let tr = '<tr>';
             tr += buildCheckboxFor(product);
             tr += `<td>${index}</td>`;
-            tr += `<td>${product.ma_san_pham}</td>`;
             tr += `<td>${product.ten_san_pham}</td>`;
             return tr + '</tr>';
         }

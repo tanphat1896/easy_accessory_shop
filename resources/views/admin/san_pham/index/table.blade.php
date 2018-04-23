@@ -2,7 +2,6 @@
     <thead>
     <tr class="center aligned">
         <th class="collapsing">STT</th>
-        <th class="collapsing">Mã SP</th>
         <th>Tên SP</th>
         <th class="collapsing">Số lượng</th>
         <th>Tình trạng</th>
@@ -13,7 +12,6 @@
     @foreach($sanPhams as $stt => $sanPham)
         <tr>
             <td>{{ $stt + 1 }}</td>
-            <td>{{ $sanPham->ma_san_pham }}</td>
             <td>{{ $sanPham->ten_san_pham }}</td>
             <td>{{ $sanPham->so_luong }}</td>
             <td class="collapsing" id="{{ 'status' . $sanPham->id }}">{{ $sanPham->tinhTrang() }}</td>
@@ -40,6 +38,13 @@
         </tr>
     @endforeach
     </tbody>
+    @if (method_exists($sanPhams, 'render'))
+        <tfoot>
+        <tr class="center aligned"><th colspan="5">
+                {{ $sanPhams->render('vendor.pagination.smui')}}
+            </th></tr>
+        </tfoot>
+    @endif
 </table>
 
 @push('script')

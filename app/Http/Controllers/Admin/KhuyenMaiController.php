@@ -33,13 +33,9 @@ class KhuyenMaiController extends Controller
     }
 
     public function update(Request $request, $id) {
-        $sale = KhuyenMai::findOrFail($id);
+        $success = KhuyenMai::updateFrom($id, $request->all());
 
-        $sale->gia_tri_km = (float)$request->get('gia-tri')/100;
-        $sale->ngay_bat_dau = $request->get('ngay-bat-dau');
-        $sale->ngay_ket_thuc = $request->get('ngay-ket-thuc');
-
-        if ($sale->update())
+        if ($success)
             return back()->with('success', 'Cập nhật khuyến mãi thành công');
 
         return back()->with('errors', ['Thêm thất bại, hãy thử lại sau!']);

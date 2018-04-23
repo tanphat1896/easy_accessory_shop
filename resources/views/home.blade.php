@@ -1,23 +1,21 @@
-@extends('layouts.app')
-
-@section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
-
-                <div class="panel-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    You are logged in!
-                </div>
-            </div>
-        </div>
-    </div>
+<html>
+<head>
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('vendor/laravel-filemanager/js/lfm.js') }}"></script>
+</head>
+<body>
+<div class="input-group">
+   <span class="input-group-btn">
+     <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
+       <i class="fa fa-picture-o"></i> Choose
+     </a>
+   </span>
+    <input id="thumbnail" class="form-control" type="text" name="filepath">
 </div>
-@endsection
+<img id="holder" style="margin-top:15px;max-height:100px;">
+<script>
+    $('#lfm').filemanager('image', {prefix: 'fm'});
+</script>
+</body>
+</html>

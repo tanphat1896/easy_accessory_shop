@@ -12,11 +12,12 @@ use App\Http\Controllers\Controller;
 class CommentController extends Controller
 {
     public function store(Request $request) {
+
         $data = $this->validateComment($request);
         if (empty($data))
-            return
+            return response()->json(false);
 
-        $comment = BinhLuan::create($data);
+        BinhLuan::create($data);
 
         return response()->json(true);
     }
@@ -33,7 +34,6 @@ class CommentController extends Controller
 
         return [
             'name' => $customer->name,
-            'customer_id' => $customer->id,
             'san_pham_id' => $product->id,
             'noi_dung' => $content,
             'parent_id' => null

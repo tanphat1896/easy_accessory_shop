@@ -1,4 +1,4 @@
-<div class="ui square-border no-margin borderless menu">
+<div class="ui square-border no-margin borderless blue inverted menu">
     <a class="item normal-padding" href="/">
         <img src="{{ asset('assets/images/favicon.png') }}" class="ui mini image">
     </a>

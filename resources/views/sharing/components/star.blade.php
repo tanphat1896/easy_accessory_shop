@@ -26,9 +26,11 @@
         $star = floatval(str_replace(',', '.', $slot));
         $floor = floor($star);
     @endphp
+
     @for ($i = 0; $i < $floor; $i++)
         <i class="star yellow fitted icon"></i>
     @endfor
+
     @if ($star - $floor > 0)
         <i class="star half yellow fitted icon"></i>
     @endif

@@ -10,7 +10,13 @@
             @foreach($sanPham->gia as $gia)
                 <tr>
                     <td>{{ $gia->formatDate('ngay_cap_nhat') }}</td>
-                    <td><strong>{{ number_format($gia->gia) }} đ</strong></td>
+                    <td>
+                        @if ($gia->active)
+                            <strong class="red-text">{{ number_format($gia->gia) }} đ</strong>
+                        @else
+                            {{ number_format($gia->gia) }} đ
+                        @endif
+                    </td>
                 </tr>
             @endforeach
             </tbody>
@@ -55,7 +61,7 @@
             @foreach($sanPham->thongSos as $stt => $thongSo)
                 <div class="inline field">
                     <label style="width: 100px">{{ $thongSo->getName() }}:</label>
-                    <input type="text" name="{{ $thongSo->id }}" value="{{ random_int(1, 100) }}">
+                    <input type="text" name="{{ $thongSo->id }}" value="{{ $thongSo->pivot->gia_tri }}">
                 </div>
             @endforeach
             <div class="field">

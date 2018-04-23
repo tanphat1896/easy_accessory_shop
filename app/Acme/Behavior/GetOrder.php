@@ -21,11 +21,12 @@ trait GetOrder {
     }
 
     public function getOrder($orderCode) {
-        return DonHang::where('ma_don_hang', $orderCode)->first();
+        return DonHang::where('ma_don_hang', $orderCode)->firstOrFail();
     }
 
     public function getOrderDetail($orderId) {
         return DB::table('chi_tiet_don_hangs')
+            ->select(['chi_tiet_don_hangs.*', 'ten_san_pham', 'anh_dai_dien'])
             ->where('don_hang_id', $orderId)
             ->join('san_phams', 'san_phams.id', '=', 'chi_tiet_don_hangs.san_pham_id')
             ->get();

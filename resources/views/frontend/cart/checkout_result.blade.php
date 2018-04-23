@@ -25,9 +25,15 @@
                 </h3>
                 <h4 class="ui header center aligned">
                     Mã đơn hàng của bạn:
-                    <a href="{{ route('customer.history') }}">
-                        {{ session('orderCode') }}
-                    </a>
+                    @if (Auth::guard('customer')->check())
+                        <a href="{{ route('customer.history') }}">
+                            {{ session('orderCode') }}
+                        </a>
+                    @else
+                        <a href="{{ route('order.show', ['s']) }}?code={{ session('orderCode') }}">
+                            {{ session('orderCode') }}
+                        </a>
+                    @endif
                 </h4>
             @endif
         </div>

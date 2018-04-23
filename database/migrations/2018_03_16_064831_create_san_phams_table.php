@@ -15,10 +15,9 @@ class CreateSanPhamsTable extends Migration
     {
         Schema::create('san_phams', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('ma_san_pham')->unique();
             $table->string('ten_san_pham',255);
             $table->integer('so_luong')->default(0);
-            $table->string('mo_ta',500)->nullable();
+            $table->longText('mo_ta')->nullable();
             $table->float('diem_danh_gia')->default(0.0);
             $table->integer('loai_san_pham_id')->unsigned();
             $table->integer('thuong_hieu_id')->unsigned();
