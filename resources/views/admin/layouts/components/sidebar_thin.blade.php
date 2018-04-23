@@ -34,6 +34,9 @@
     <a class="item {{Request::is('*/nhap_hang') ? 'active-bar': '' }}" href="/admin/nhap_hang">
         <i class="dolly icon icon-left"></i></a>
 
+    <a class="item {{Request::is('*/don_hang') ? 'active-bar': '' }}" href="/admin/don_hang">
+        <i class="dolly icon icon-left"></i></a>
+
     <div class="item"><i class="clipboard list icon icon-left"></i></div>
 
     <div class="item"><i class="certificate icon icon-left"></i></div>
