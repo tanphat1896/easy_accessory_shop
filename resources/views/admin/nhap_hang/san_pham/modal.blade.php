@@ -58,7 +58,7 @@
                 <label for="ten-san-pham">Sản phẩm</label>
                 <div class="field">
                     <select id="ten-san-pham" name="ten-san-pham" class="ui dropdown">
-                        <option value="{{ $chiTietPhieuNhap->san_pham_id }} 'selected'">
+                        <option value="{{ $chiTietPhieuNhap->san_pham_id }}">
                             {{ \App\SanPham::find($chiTietPhieuNhap->san_pham_id)->ten_san_pham }}
                         </option>
                         @foreach(\App\SanPham::all() as $sanPham)

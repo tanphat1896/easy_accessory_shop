@@ -18,6 +18,7 @@
             <a class="item" data-tab="second">Sản phẩm</a>
         </div>
 
+        @include('admin.don_hang.san_pham.thong_tin')
         @include('admin.don_hang.san_pham.table')
 
 

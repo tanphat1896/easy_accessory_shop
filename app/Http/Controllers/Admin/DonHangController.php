@@ -50,10 +50,10 @@ class DonHangController extends Controller
      */
     public function show($id)
     {
-        $donHangs = DonHang::find($id);
         $chiTietDonHangs = ChiTietDonHang::where('don_hang_id', $id)->get();
+        $donHang = DonHang::find($id);
 
-        return view('admin.don_hang.san_pham.index', compact(['$donHangs', '$chiTietDonHangs']));
+        return view('admin.don_hang.san_pham.index', compact(['id', 'chiTietDonHangs', 'donHang']));
     }
 
     /**
