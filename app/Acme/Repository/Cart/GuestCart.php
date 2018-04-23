@@ -11,12 +11,26 @@ namespace App\Acme\Repository\Cart;
 
 use App\Acme\Behavior\ProductAvailable;
 use App\Acme\Template\Cart;
+use App\SanPham;
 
 class GuestCart extends Cart {
     use ProductAvailable;
 
     public function getProducts() {
+        $this->updateCartToNewestPrice();
         return session('cart') ?: [];
+    }
+
+    private function updateCartToNewestPrice() {
+        $this->products = session('cart');
+        foreach ($this->products as $slug => $product) {
+            $product['product'] = SanPham::whereSlug($slug)->first();
+            $product['cost'] = $product['product']->priceSale() * $product['amount'];
+
+            $this->products[$slug] = $product;
+        }
+
+        session(['cart' => $this->products]);
     }
 
     public function addProduct($product, $amount) {

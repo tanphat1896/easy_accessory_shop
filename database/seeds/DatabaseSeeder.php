@@ -26,12 +26,11 @@ class DatabaseSeeder extends Seeder
             'logo' => '/assets/images/favicon.png',
             'wide_menu' => 1]);
         DB::table('loai_san_phams')->insert([
-            ['ten_loai' => 'SSD', 'slug' => 'ssd'],
-            ['ten_loai' => 'HDD', 'slug' => 'hdd'],
-            ['ten_loai' => 'Bàn phím', 'slug' => 'ban-phim'],
-            ['ten_loai' => 'USB', 'slug' => 'usb'],
-            ['ten_loai' => 'Headphone', 'slug' => 'headphone'],
-            ['ten_loai' => 'Tai nghe', 'slug' => 'tai-nghe'],
+            ['id' => 1, 'ten_loai' => 'SSD', 'slug' => 'ssd'],
+            ['id' => 3, 'ten_loai' => 'Bàn phím', 'slug' => 'ban-phim'],
+            ['id' => 4, 'ten_loai' => 'USB', 'slug' => 'usb'],
+            ['id' => 5, 'ten_loai' => 'Headphone', 'slug' => 'headphone'],
+            ['id' => 6, 'ten_loai' => 'Tai nghe', 'slug' => 'tai-nghe'],
         ]);
         DB::table('menus')->insert([
             ['name' => '', 'link' => '/', 'icon' => 'home', 'loai_san_pham_id' => null],

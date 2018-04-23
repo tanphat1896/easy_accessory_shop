@@ -37,8 +37,7 @@
     <a class="item {{Request::is('*/nhap_hang') ? 'active-bar': '' }}" href="/admin/nhap_hang">
         <i class="dolly icon icon-left"></i>Nhập hàng </a>
 
-    <div class="item"><i class="clipboard list icon icon-left"></i>Đơn hàng </div>
-    <a class="item {{Request::is('*/don_hang') ? 'active-bar': '' }}" href="/admin/don_hang">
+    <a class="item {{Request::is('*/don_hang*') ? 'active-bar': '' }}" href="/admin/don_hang">
         <i class="clipboard icon icon-left"></i>Đơn hàng </a>
 
     <a class="item {{Request::is('*/khuyen_mai') ? 'active-bar': '' }}" href="/admin/khuyen_mai">
