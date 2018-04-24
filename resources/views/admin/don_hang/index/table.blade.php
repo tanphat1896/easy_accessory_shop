@@ -29,19 +29,12 @@
                 <a class="ui small blue label" href="{{ route('don_hang.show',[$donHang->id]) }}">
                     <i class="eye open fitted icon"></i>
                 </a>
-                <a class="ui small teal label">Duyệt</a>
-                <a class="ui small orange label">Xóa</a>
-                {{--<a href="{{ route('nhap_hang.show',[$phieuNhap->id]) }}"--}}
-                   {{--class="ui small blue label">--}}
-                    {{--<i class="eye open fitted icon"></i>--}}
-                {{--</a>--}}
-                {{--<a href="#" onclick="$( '{{ '#modal-sua-'.$phieuNhap->id }}' ).modal('show')"--}}
-                   {{--class="ui small green label">--}}
-                    {{--<i class="edit fitted icon"></i>--}}
-                {{--</a>--}}
-                {{--<a href="{{ route('nhap_hang.show',[$phieuNhap->id]) }}" class="ui small blue label">Xem</a>--}}
-                {{--<a href="#" class="ui small teal label"--}}
-                {{--onclick="$( '{{ '#modal-sua-'.$phieuNhap->id }}' ).modal('show')">Sửa</a>--}}
+                <a class="ui small teal label">
+                    <i class="check open fitted icon"></i>
+                </a>
+                <a class="ui small orange label">
+                    <i class="remove open fitted icon"></i>
+                </a>
             </td>
         </tr>
     @endforeach

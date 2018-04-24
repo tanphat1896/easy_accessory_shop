@@ -29,12 +29,12 @@
 
             <div class="field">
                 <label for="so-luong">Số lượng</label>
-                <input type="text" id="so-luong" name="so-luong" required autofocus>
+                <input type="number" id="so-luong" name="so-luong" required min="1" max="100" autofocus>
             </div>
 
             <div class="field">
                 <label for="don-gia">Đơn giá</label>
-                <input type="text" id="don-gia" name="don-gia" required>
+                <input type="number" id="don-gia" name="don-gia" required min="1000" max="100000000">
             </div>
 
             <div class="field">
@@ -86,12 +86,14 @@
 
                 <div class="field">
                     <label for="so-luong">Số lượng</label>
-                    <input type="text" id="so-luong" name="so-luong" value="{{ $chiTietPhieuNhap->so_luong }}" required autofocus>
+                    <input type="number" id="so-luong" name="so-luong"
+                           value="{{ $chiTietPhieuNhap->so_luong }}" required min="1" max="100" autofocus>
                 </div>
 
                 <div class="field">
                     <label for="don-gia">Đơn giá</label>
-                    <input type="text" id="don-gia" name="don-gia" value="{{ $chiTietPhieuNhap->don_gia }}" required>
+                    <input type="number" id="don-gia" name="don-gia"
+                           value="{{ $chiTietPhieuNhap->don_gia }}" required min="1000" max="100000000">
                 </div>
 
                 <div class="field">

@@ -25,7 +25,7 @@
                     </div>
                 </td>
                 <td>{{ $stt + 1 }}</td>
-                <td>{{ \App\PhieuNhap::find($phieuNhap->id)->TaiKhoan->ten }}</td>
+                <td>{{ \App\PhieuNhap::find($phieuNhap->id)->Admin->name }}</td>
                 <td>{{ $phieuNhap->ngay_nhap }}</td>
                 <td>{{ \App\PhieuNhap::find($phieuNhap->id)->NhaCungCap->ten_ncc }}</td>
                 <td  class="collapsing">

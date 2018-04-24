@@ -19,6 +19,7 @@ class CreateDonHangsTable extends Migration
             $table->string('ten_nguoi_nhan',50);
             $table->string('email_nguoi_nhan',100);
             $table->string('sdt_nguoi_nhan',11);
+            $table->string('dia_chi', 500);
             $table->integer('customer_id')->nullable()->unsigned();
             $table->double('tong_tien');
             $table->string('ghi_chu',500)->nullable();

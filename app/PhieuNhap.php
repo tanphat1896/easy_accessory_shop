@@ -13,7 +13,7 @@ class PhieuNhap extends Model
         return $this->belongsTo(NhaCungCap::class);
     }
 
-    public function taiKhoan() {
-        return $this->belongsTo(TaiKhoan::class);
+    public function admin() {
+        return $this->belongsTo(Admin::class);
     }
 }

@@ -13,12 +13,12 @@ class NhapHangSeeder extends Seeder
     {
         DB::table('phieu_nhaps')->insert([
             'ngay_nhap' => '2018-04-03',
-            'tai_khoan_id' => 2,
+            'admin_id' => 1,
             'nha_cung_cap_id' => 1
         ]);
         DB::table('phieu_nhaps')->insert([
             'ngay_nhap' => '2018-04-03',
-            'tai_khoan_id' => 2,
+            'admin_id' => 1,
             'nha_cung_cap_id' => 2
         ]);
     }
