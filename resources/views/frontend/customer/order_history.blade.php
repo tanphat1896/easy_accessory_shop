@@ -5,13 +5,15 @@
 @section('content')
     <div class="ui basic segment">
         <div class="ui blue segment">
-            <h3 class="ui dividing header">Lịch sử đơn hàng</h3>
+            <h3 class="ui dividing header">Lịch sử đơn hàng
+                <i class="spinner loading icon" id="loader" style="display: none;"></i>
+            </h3>
 
             <div class="ui basic segment no-padding no-margin">
 
-                <div class="ui dimmer" id="loader">
-                    <div class="ui text loader">Đang tải</div>
-                </div>
+                {{--<div class="ui dimmer" id="loader">--}}
+                    {{--<div class="ui text loader">Đang tải</div>--}}
+                {{--</div>--}}
 
                 <table class="ui table striped celled center aligned" id="order-table">
                     <thead>
@@ -65,12 +67,12 @@
         function showOrderDetail(orderCode) {
             let url = '/khach-hang/don-hang/' + orderCode;
             console.log(url);
-            $('#loader').addClass('active');
+            $('#loader').show();
             axios.get(url).then(res => {
                 let modal =  $('#' + orderCode);
                 $(modal).find('.order-detail-table').html(res.data);
                 $(modal).modal('show');
-                $('#loader').removeClass('active');
+                $('#loader').hide();
             });
         }
     </script>

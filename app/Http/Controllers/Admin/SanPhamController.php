@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Acme\Behavior\SearchProductSale;
 use App\Acme\Repository\ProductRepository;
 use App\LoaiSanPham;
 use App\SanPham;
@@ -10,6 +11,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class SanPhamController extends Controller {
+    use SearchProductSale;
+
     private $sanPhamRepository;
 
     public function __construct(ProductRepository $sanPhamRepository) {
@@ -17,7 +20,7 @@ class SanPhamController extends Controller {
     }
 
     public function index(Request $request) {
-        $perPage = 15;
+        $perPage = 10;
         $data = $this->sanPhamRepository->getSanPhams($request, $perPage);
 
         return view('admin.san_pham.index.index', $data);
@@ -83,9 +86,9 @@ class SanPhamController extends Controller {
         return response()->json(['success' => true]);
     }
 
-    public function search($query) {
-        $products = $this->sanPhamRepository->search($query);
-
-        return $products;
-    }
+//    public function search($query) {
+//        $products = $this->sanPhamRepository->search($query);
+//
+//        return $products;
+//    }
 }

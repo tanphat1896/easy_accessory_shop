@@ -115,8 +115,13 @@
 
                             <div class="field required">
                                 <label for="address">Địa chỉ nhận hàng</label>
-                                <textarea name="address" id="address" rows="3" required>Ninh Kieu, Can Tho</textarea>
+                                <textarea name="address" id="address" rows="2" required>Ninh Kieu, Can Tho</textarea>
 
+                            </div>
+
+                            <div class="field">
+                                <label for="note">Ghi chú</label>
+                                <textarea name="note" id="note" rows="2">Giao hàng vào đầu tuần</textarea>
                             </div>
 
                             <div class="field">

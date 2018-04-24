@@ -18,7 +18,8 @@ class CreateChiTietKhuyenMaisTable extends Migration
             $table->integer('khuyen_mai_id')->unsigned();
             $table->integer('san_pham_id')->unsigned();
             $table->foreign('san_pham_id','fk_ctkm_sp')->references('id')->on('san_phams');
-            $table->foreign('khuyen_mai_id','fk_ctkm_km')->references('id')->on('khuyen_mais');
+            $table->foreign('khuyen_mai_id','fk_ctkm_km')->references('id')->on('khuyen_mais')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }

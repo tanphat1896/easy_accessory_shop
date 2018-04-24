@@ -10,17 +10,27 @@ use App\Http\Controllers\Controller;
 class KhuyenMaiController extends Controller
 {
     public function index(){
-        $sales = KhuyenMai::all();
+        $sales = KhuyenMai::where('parent_id', null)
+            ->orderBy('ngay_ket_thuc', 'desc')
+            ->get();
 
-        return view('admin.khuyen_mai.index.index', compact('sales'));
+        return view('admin.khuyen_mai.parent_sale.index', compact('sales'));
     }
 
     public function show($id) {
         $sale = KhuyenMai::findOrFail($id);
+
+        if (empty($sale->parent_id))
+            return $this->indexChild($sale);
+
         $sale->load('products');
         $productTypes = LoaiSanPham::all();
 
         return view('admin.khuyen_mai.show.index', compact('sale', 'productTypes'));
+    }
+
+    private function indexChild($parentSale) {
+        return view('admin.khuyen_mai.child_sale.index', compact('parentSale'));
     }
 
     public function store(Request $request) {
@@ -39,5 +49,11 @@ class KhuyenMaiController extends Controller
             return back()->with('success', 'Cập nhật khuyến mãi thành công');
 
         return back()->with('errors', ['Thêm thất bại, hãy thử lại sau!']);
+    }
+
+    public function destroy(Request $request) {
+        KhuyenMai::destroy($request->get('khuyen-mai-id'));
+
+        return back()->with('success', 'Xóa thành công');
     }
 }

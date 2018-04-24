@@ -7,8 +7,8 @@
             {{ csrf_field() }}
 
             <div class="field">
-                <label for="gia-tri">Phần trăm giảm giá</label>
-                <input type="number" id="gia-tri" name="gia-tri" required min="1" max="99">
+                <label for="name">Tên khuyến mãi</label>
+                <input type="text" id="name" name="name" required value="KM Nhân dịp 30/4 - 1/5">
             </div>
 
             <div class="field">
@@ -39,11 +39,10 @@
                 {{ method_field('PUT') }}
 
                 <div class="field">
-                    <label for="gia-tri">Phần trăm giảm giá</label>
-                    <input type="number" id="gia-tri" name="gia-tri"
-                           value="{{ $sale->percent() }}" required
-                           min="1" max="99">
+                    <label for="name">Tên khuyến mãi</label>
+                    <input type="text" id="name" name="name" required value="{{ $sale->ten_km }}">
                 </div>
+
                 <div class="field">
                     <label>Ngày bắt đầu</label>
                     <input type="date" name="ngay-bat-dau" value="{{ $sale->ngay_bat_dau }}">

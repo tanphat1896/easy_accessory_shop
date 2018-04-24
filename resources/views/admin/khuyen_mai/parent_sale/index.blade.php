@@ -29,7 +29,7 @@
 
             <div class="ui divider small-td-margin hidden"></div>
 
-            @include('admin.khuyen_mai.index.table')
+            @include('admin.khuyen_mai.parent_sale.table')
 
             <button type="submit" class="ui small red delete button need-popup"
                     data-content="Xóa các mục vừa chọn"
@@ -44,7 +44,7 @@
             </button>
         </form>
 
-        @include('admin.khuyen_mai.index.modals')
+        @include('admin.khuyen_mai.parent_sale.modals')
     </div>
 @endsection
 

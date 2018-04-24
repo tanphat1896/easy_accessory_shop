@@ -55,8 +55,12 @@ function bindSelectAll(id) {
     });
 }
 
-function bindDataTable(tableId) {
+function bindDataTable(tableId, onlyPaging = false) {
     $('#' + tableId).DataTable({
+        searching: !onlyPaging,
+        ordering: !onlyPaging,
+        lengthChange: !onlyPaging,
+        info: false,
         "language": {
             "lengthMenu": "Hiển thị _MENU_ dòng mỗi trang",
             "zeroRecords": "Không có dữ liệu",

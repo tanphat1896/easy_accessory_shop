@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class KhuyenMai extends Model
 {
+    public function children() {
+        return $this->hasMany(KhuyenMai::class, 'parent_id', 'id');
+    }
 
     public function products() {
         return $this->belongsToMany(
@@ -19,7 +22,7 @@ class KhuyenMai extends Model
     public static function createFrom(array $data) {
         $sale = new self;
 
-        $sale = self::assignData($sale, $data);
+        $sale = $sale->assignData($data);
 
         return $sale->save();
     }
@@ -27,17 +30,24 @@ class KhuyenMai extends Model
     public static function updateFrom($id, array $data) {
         $sale = KhuyenMai::findOrFail($id);
 
-        $sale = self::assignData($sale, $data);
+        $sale = $sale->assignData($data);
+
+        $sale->children()->update([
+            'ngay_bat_dau' => $sale->ngay_bat_dau,
+            'ngay_ket_thuc' => $sale->ngay_ket_thuc
+        ]);
 
         return $sale->update();
     }
 
-    private static function assignData(KhuyenMai $sale, array $data) {
-        $sale->gia_tri_km = (int)$data['gia-tri'];
-        $sale->ngay_bat_dau = $data['ngay-bat-dau'];
-        $sale->ngay_ket_thuc = $data['ngay-ket-thuc'];
+    private function assignData(array $data) {
+        $this->ten_km = empty($data['name']) ? '': $data['name'];
+        $this->gia_tri_km = empty($data['gia-tri']) ? 0: (int)$data['gia-tri'];
+        $this->parent_id = empty($data['parent_id']) ? null : (int)$data['parent_id'];
+        $this->ngay_bat_dau = $data['ngay-bat-dau'];
+        $this->ngay_ket_thuc = $data['ngay-ket-thuc'];
 
-        return $sale;
+        return $this;
     }
 
     public function start() {
@@ -50,5 +60,9 @@ class KhuyenMai extends Model
 
     public function percent() {
         return $this->gia_tri_km;
+    }
+
+    public function overdue() {
+        return $this->ngay_ket_thuc <= date('Y-m-d');
     }
 }

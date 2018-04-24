@@ -76,6 +76,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
     Route::resource('loai_sp', 'Admin\LoaiSanPhamController', ["except" => ["create", "show", "edit"]]);
     Route::resource('nha_cung_cap', 'Admin\NhaCungCapController', ["except" => ["create", "show", "edit"]]);
     Route::resource('khuyen_mai', 'Admin\KhuyenMaiController', ["except" => ["create", "edit"]]);
+    Route::resource('khuyen_mai', 'Admin\KhuyenMaiController', ["except" => ["create", "edit"]]);
     Route::resource('chi_tiet_km', 'Admin\ChiTietKMController', ["only" => ["store", "destroy"]]);
 
 
@@ -106,5 +107,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
     });
 
 
-    Route::get('ajax-request/products/search/{query}', 'Admin\SanPhamController@search');
+    Route::get('ajax-request/products/search/{query}/{sale?}', 'Admin\SanPhamController@search');
+
+    Route::get('/testing', 'Admin\SanPhamController@searchProductSale');
 });

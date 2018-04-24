@@ -70,6 +70,8 @@ class CheckoutController extends Controller
         $name = $request->get('name');
         $email = $request->get('email');
         $phone = $request->get('phone');
+        $address = $request->get('address');
+        $note = $request->get('note');
         $totalCost = $request->get('total-cost');
         $typeCheckout = $request->get('type-checkout');
 
@@ -78,7 +80,8 @@ class CheckoutController extends Controller
             'email_nguoi_nhan' => $email,
             'sdt_nguoi_nhan' => $phone,
             'tong_tien' => $totalCost,
-            'ghi_chu' => '',
+            'dia_chi' => $address,
+            'ghi_chu' => $note,
             'tinh_trang' => 0,
             'ngay_dat_hang' => $orderDate,
             'hinh_thuc_thanh_toan' => $typeCheckout,
@@ -95,7 +98,8 @@ class CheckoutController extends Controller
 
             $products[$productId] = [
                 'so_luong' => $bunch['amount'],
-                'don_gia' => $bunch['product']->giaMoiNhat()
+                'don_gia' => $bunch['product']->giaMoiNhat(),
+                'giam_gia' => $bunch['product']->salePercent()
             ];
         }
 

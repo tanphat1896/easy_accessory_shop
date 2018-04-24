@@ -18,6 +18,7 @@ use App\SanPham;
 use App\ThuongHieu;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use PharIo\Manifest\Email;
 
@@ -203,40 +204,4 @@ class ProductRepository {
 
         return $this->sanPham->id;
     }
-
-    public function search($queryString) {
-        $queries = $this->extractQuery($queryString);
-
-        $productsModel = null;
-
-        if (!empty($queries['product-type']))
-            $productsModel = LoaiSanPham::find($queries['product-type'])->sanPhams();
-
-        if (!empty($queries['name']))
-            $productsModel = $this->getProductsModelByName($productsModel, $queries['name']);
-
-        return $productsModel->get();
-    }
-
-    private function extractQuery($queryString) {
-        $parts = explode(';', $queryString);
-        $queries = [];
-        foreach ($parts as $part) {
-            if (!preg_match('/.+(=).+/', $part))
-                continue;
-            $bunch = explode('=', $part);
-            $queries[$bunch[0]] = $bunch[1];
-        }
-        return $queries;
-    }
-
-    private function getProductsModelByName($productsModel, $name) {
-        $condition = [['ten_san_pham', 'like', "%$name%"]];
-        if (empty($productsModel))
-            return SanPham::where($condition);
-
-        return $productsModel->where($condition);
-    }
-
-
 }

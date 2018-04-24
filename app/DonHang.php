@@ -15,6 +15,7 @@ class DonHang extends Model
         'email_nguoi_nhan',
         'sdt_nguoi_nhan',
         'tong_tien',
+        'dia_chi',
         'ghi_chu',
         'tinh_trang',
         'ngay_dat_hang',

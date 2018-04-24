@@ -15,10 +15,14 @@ class CreateKhuyenMaisTable extends Migration
     {
         Schema::create('khuyen_mais', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('ten_km')->nullable();
             $table->integer('gia_tri_km');
+            $table->integer('parent_id')->unsigned()->nullable()->default(null);
             $table->date('ngay_bat_dau');
             $table->date('ngay_ket_thuc');
             $table->timestamps();
+            $table->foreign('parent_id')->references('id')->on('khuyen_mais')
+                ->onDelete('cascade');
         });
     }
 
