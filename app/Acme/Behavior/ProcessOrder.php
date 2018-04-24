@@ -29,11 +29,15 @@ trait ProcessOrder {
 
         $success = $this->storeOrderToDB($data);
 
-        return $success ? $this->order->ma_don_hang: false;
+        return $success ? $this->order: false;
     }
 
     private function notValidPayment($payment) {
         return !in_array($payment, $this->typeCheckout);
+    }
+
+    private function notCashPayment($type) {
+        return $type != 'cash';
     }
 
     private function bindCustomerIdIfLogged() {
