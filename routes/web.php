@@ -26,15 +26,9 @@ Route::delete('/gio-hang/{slug}', 'Frontend\CartController@removeProduct')->name
 Route::put('/gio-hang/{slug}', 'Frontend\CartController@updateAmount')->name('cart.update');
 
 Route::resource('/checkout', 'Frontend\CheckoutController', ['only' => ['index', 'store']]);
-Route::post('/payment-result', function(Request $request) {
-    dd($request);
-});
-Route::get('/payment-result', function(Request $request) {
-    dd($request);
-});
-Route::get('/baokim_5df30d1528fe6193.html', function() {
-    return 'baokim-site-verification: baokim_5df30d1528fe6193.html';
-});
+
+Route::get('/payment-result', 'Frontend\CheckoutController@checkoutOnlineResult');
+
 
 Route::resource('/don-hang', 'Frontend\OrderController', ['only' => ['index', 'show']])
     ->names('order');
@@ -66,7 +60,7 @@ Route::post('customer/logout', 'Auth\CustomerLoginController@logout')->name('cus
 Route::post('customer/login', 'Auth\CustomerLoginController@login')->name('customer.login.submit');
 
 Route::get('/testing', function() {
-    return view('home');
+
 });
 
 

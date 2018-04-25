@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Acme\Behavior\ProcessOnlinePayment;
 use App\Acme\Behavior\ProcessOrder;
 use App\Acme\Behavior\ProductAvailable;
+use App\Acme\Payment\NganluongPayment;
 use App\Acme\Repository\Cart\CartRepository;
 use App\DonHang;
 use App\Helper\AuthHelper;
@@ -14,6 +16,7 @@ class CheckoutController extends Controller
 {
     use ProcessOrder;
     use ProductAvailable;
+    use ProcessOnlinePayment;
 
     private $cartRepository;
 
@@ -52,14 +55,17 @@ class CheckoutController extends Controller
         if (!$canCheckout)
             return back()->with('error', 'Số lượng không đủ để đặt hàng ');
 
-        $orderCode = $this->saveOrder($data);
+        $order = $this->saveOrder($data);
 
-        if (!empty($orderCode))
+        if (!empty($order))
             $this->cleanCart();
+
+        if ($this->notCashPayment($order->hinh_thuc_thanh_toan))
+            return $this->processOnlinePayment($order);
 
         return redirect()->route('checkout.result')
             ->with([
-                'orderCode' => $orderCode,
+                'orderCode' => $order->ma_don_hang,
                 'name' => $data['ten_nguoi_nhan']
             ]);
     }
@@ -108,5 +114,19 @@ class CheckoutController extends Controller
 
     private function cleanCart() {
         $this->cartRepository->cleanCart();
+    }
+
+    public function checkoutOnlineResult(Request $request) {
+        $payment = new NganluongPayment();
+
+        dd($payment->verifyPaymentUrl(
+            $request->get('transaction_info'),
+            $request->get('order_code'),
+            $request->get('price'),
+            $request->get('payment_id'),
+            $request->get('payment_type'),
+            $request->get('error_text'),
+            $request->get('secure_code')
+        ));
     }
 }
