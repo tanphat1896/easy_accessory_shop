@@ -15,11 +15,8 @@ class NganluongPayment extends OnlinePayment {
 
     public $affiliate_code = '';
 
-    public function init($paymentGate) {
-        $env = config('payment.env');
-        $this->url = config("payment.url.$paymentGate.$env");
-        $this->merchant_id = config("payment.type.$paymentGate.$env.id");
-        $this->secure_pass = config("payment.type.$paymentGate.$env.password");
+    public function __construct() {
+        $this->init();
     }
 
     public function buildUrl($data) {
