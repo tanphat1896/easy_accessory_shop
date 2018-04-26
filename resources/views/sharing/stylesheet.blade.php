@@ -8,6 +8,7 @@
 {{--<link rel="stylesheet" href="{{ asset('plugin/barrating/themes/fontawesome-stars-o.css') }}">--}}
 <style type="text/css">
     *:not(i) {
+    	font-family: 'Segoe UI', Tahoma, Arial, san-serif !important;
 	}
 </style>
 @stack('style')
