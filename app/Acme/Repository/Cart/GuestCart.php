@@ -22,7 +22,7 @@ class GuestCart extends Cart {
     }
 
     private function updateCartToNewestPrice() {
-        $this->products = session('cart');
+        $this->products = session('cart') ?: [];
         foreach ($this->products as $slug => $product) {
             $product['product'] = SanPham::whereSlug($slug)->first();
             $product['cost'] = $product['product']->priceSale() * $product['amount'];
