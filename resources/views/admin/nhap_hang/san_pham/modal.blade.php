@@ -29,16 +29,17 @@
 
             <div class="field">
                 <label for="so-luong">Số lượng</label>
-                <input type="number" id="so-luong" name="so-luong" required min="1" max="100" autofocus>
+                <input type="number" id="so-luong-input" name="so-luong" value="5" required min="1" max="100" autofocus>
             </div>
 
             <div class="field">
                 <label for="don-gia">Đơn giá</label>
-                <input type="number" id="don-gia" name="don-gia" required min="1000" max="100000000">
+                <input type="number" id="don-gia-input" name="don-gia" value="100000" required min="1000" max="100000000">
             </div>
 
             <div class="field">
-                <button class="ui blue fluid button"><strong>Lưu</strong></button>
+                <button class="ui blue fluid button">
+                    <strong>Lưu</strong></button>
             </div>
         </form>
     </div>

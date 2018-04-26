@@ -18,6 +18,8 @@ class CreateChiTietPhieuNhapsTable extends Migration
             $table->integer('phieu_nhap_id')->unsigned();
             $table->integer('san_pham_id')->unsigned();
             $table->integer('so_luong');
+            $table->integer('so_luong_cap_nhat');
+            $table->boolean('da_xoa')->default(false);
             $table->double('don_gia');
             $table->unique(['phieu_nhap_id','san_pham_id']);
             $table->foreign('phieu_nhap_id','fk_ctpn_pn')->references('id')->on('phieu_nhaps')->onDelete('cascade');

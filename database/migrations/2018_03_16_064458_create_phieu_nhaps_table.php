@@ -18,6 +18,8 @@ class CreatePhieuNhapsTable extends Migration
             $table->date('ngay_nhap');
             $table->integer('admin_id')->unsigned();
             $table->integer('nha_cung_cap_id')->unsigned();
+            $table->integer('so_san_pham')->default(0);
+            $table->boolean('da_cap_nhat')->default(true);
             $table->foreign('nha_cung_cap_id','fk_pn_ncc')->references('id')->on('nha_cung_caps');
             $table->timestamps();
         });

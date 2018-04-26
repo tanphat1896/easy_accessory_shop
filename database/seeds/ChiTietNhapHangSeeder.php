@@ -15,24 +15,28 @@ class ChiTietNhapHangSeeder extends Seeder
            'phieu_nhap_id' => 1,
             'san_pham_id' => 1,
             'so_luong' => 10,
+            'so_luong_cap_nhat' => 10,
             'don_gia' => 50000
         ]);
         DB::table('chi_tiet_phieu_nhaps')->insert([
             'phieu_nhap_id' => 1,
             'san_pham_id' => 4,
             'so_luong' => 4,
+            'so_luong_cap_nhat' => 4,
             'don_gia' => 30000
         ]);
         DB::table('chi_tiet_phieu_nhaps')->insert([
             'phieu_nhap_id' => 1,
             'san_pham_id' => 6,
             'so_luong' => 13,
+            'so_luong_cap_nhat' => 13,
             'don_gia' => 60000
         ]);
         DB::table('chi_tiet_phieu_nhaps')->insert([
             'phieu_nhap_id' => 1,
             'san_pham_id' => 3,
             'so_luong' => 20,
+            'so_luong_cap_nhat' => 20,
             'don_gia' => 90000
         ]);
     }

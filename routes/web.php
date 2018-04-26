@@ -99,9 +99,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
 
     Route::resource('nhap_hang','Admin\NhapHangController');
     Route::resource('chi_tiet_nhap_hang', 'Admin\CTNHController', ['only' => ['update', 'store', 'destroy']]);
+    Route::get('cap_nhat_so_luong/{id}', 'Admin\CTNHController@productUpdate')->name('cap_nhat_so_luong');
 
     Route::resource('don_hang', 'Admin\DonHangController');
-
+    Route::get('duyet_don/{id}', 'Admin\DonHangController@duyetDon')->name('duyet_don');
 
     Route::get('menu_state/{state}', function($state) {
         $store = App\CuaHang::first();

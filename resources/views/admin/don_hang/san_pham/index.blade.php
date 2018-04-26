@@ -4,24 +4,49 @@
 
 @section('content')
     <div class="ui blue raised segment">
-        {{--<h3 class="ui dividing header">--}}
-            {{--<a href="{{ route('san_pham.index') }}" class="need-popup" data-content="Danh sách sản phẩm">--}}
-                {{--<i class="blue small angle double left circular fitted icon"></i></a>--}}
-            {{--{{ $sanPham->getName() }}--}}
-            {{--<a href="{{ route('san_pham.edit', [$sanPham->id]) }}" class="ui blue label">--}}
-                {{--<i class="edit fitted icon"></i> Sửa--}}
-            {{--</a>--}}
-        {{--</h3>--}}
+        <h3 class="ui dividing header">
+            <a href="{{ route('don_hang.index') }}" class="need-popup" data-content="Danh sách đơn hàng">
+                <i class="blue small angle double left circular fitted icon"></i></a>
 
-        <div class="ui top attached tabular menu">
-            <a class="item active" data-tab="first">Thông tin</a>
-            <a class="item" data-tab="second">Sản phẩm</a>
-        </div>
+            Đơn hàng "{{ $donHang->ma_don_hang }}"
+
+            @if($donHang->tinh_trang == 0)
+                <a href="{{ route('duyet_don', [$donHang->id]) }}" class="ui teal label"
+                onclick="return confirm('Bạn chắc chắn muốn duyệt đơn hàng này?')">
+                    <i class="check open fitted icon"></i>
+                    Duyệt
+                </a>
+                <a href="{{ route('duyet_don', [$donHang->id]) }}" class="ui orange label"
+                   onclick="return confirm('Bạn chắc chắn muốn hủy đơn hàng?')">
+                    <i class="remove open fitted icon"></i>
+                    Hủy
+                </a>
+            @endif
+
+            <a href="{{ URL::previous() }}" class="ui label" style="float: right"><i class="print open fitted icon"></i> In</a>
+
+        </h3>
+
+
+        @include('admin.layouts.components.success_msg')
+
+        @include('admin.layouts.components.error_msg')
 
         @include('admin.don_hang.san_pham.thong_tin')
         @include('admin.don_hang.san_pham.table')
 
-
+        @if($donHang->tinh_trang == 0)
+            <a href="{{ route('duyet_don', [$donHang->id]) }}" class="ui teal label"
+               onclick="return confirm('Bạn chắc chắn muốn duyệt đơn hàng này?')">
+                <i class="check open fitted icon"></i>
+                Duyệt
+            </a>
+            <a href="{{ route('duyet_don', [$donHang->id]) }}" class="ui orange label"
+               onclick="return confirm('Bạn chắc chắn muốn hủy đơn hàng?')">
+                <i class="remove open fitted icon"></i>
+                Hủy
+            </a>
+        @endif
     </div>
 @endsection
 

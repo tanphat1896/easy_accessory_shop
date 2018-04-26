@@ -18,7 +18,7 @@
 
             <div class="field">
                 <label for="dia-chi">Ngày nhập</label>
-                <input type="date" id="ngay-nhap" name="ngay-nhap" value="{{ date('Y-m-d') }}" required>
+                <input type="date" id="ngay-nhap" name="ngay-nhap" value="{{ date('Y-m-d') }}" max="{{ date('Y-m-d') }}" required>
                 {{--<script>--}}
                     {{--document.querySelector("#ngay-nhap").valueAsDate = new Date()--}}
                 {{--</script>--}}
@@ -56,7 +56,7 @@
                 <div class="field">
                     <label for="dia-chi">Ngày nhập</label>
                     <input type="date" id="ngay-nhap" name="ngay-nhap"
-                           value="{{ $phieuNhap->ngay_nhap }}" required>
+                           value="{{ $phieuNhap->ngay_nhap }}" max="{{ date('Y-m-d') }}" required>
                     {{--<script>--}}
                     {{--document.querySelector("#ngay-nhap").valueAsDate = new Date()--}}
                     {{--</script>--}}

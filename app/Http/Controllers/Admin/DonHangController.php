@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\ChiTietDonHang;
 use App\DonHang;
+use Faker\Provider\DateTime;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -76,7 +77,11 @@ class DonHangController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        dd($id);
+        $donHang = DonHang::findOrFail($id);
+        $donHang->tinh_trang = 1;
+        $donHang->ngay_duyet_don = date('M-d-y');
+        $donHang->update();
     }
 
     /**
@@ -87,6 +92,18 @@ class DonHangController extends Controller
      */
     public function destroy($id)
     {
-        //
+        dd($id);
+        DonHang::destroy($id);
+
+        return back()->with('success', 'Xóa thành công');
+    }
+
+    public function duyetDon($id) {
+        $donHang = DonHang::findOrFail($id);
+        $donHang->tinh_trang = 1;
+        $donHang->ngay_duyet_don = date('Y-m-d H:i:s');
+        $donHang->update();
+
+        return back()->with('success', 'Duyệt đơn thành công');
     }
 }
