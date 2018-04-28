@@ -36,7 +36,27 @@
 
             <div class="inline field">
                 <label class="label-fixed">Hình thức thanh toán:</label>
-                <div class="static-input">{{ $donHang->hinh_thuc_thanh_toan }}</div>
+                <div class="static-input">
+                    @switch($donHang->hinh_thuc_thanh_toan)
+                        @case('cash')
+                            Trực tiếp
+                            @break
+                        @case('nganluong')
+                            Ngân lượng
+                            @break
+                        @case('baokim')
+                            Bảo kim
+                            @break
+                        @if($donHang->hinh_thuc_thanh_toan != 'cash')
+                            @if($donHang->payment_type == 1)
+                                (thanh toán trực tiếp)
+                            @elseif($donHang->payment_type == 2)
+                                (thanh toán tạm giữ)
+                            @endif
+                        @endif
+                    @endswitch
+
+                </div>
             </div>
 
             <div class="inline field">
@@ -44,10 +64,29 @@
                 <div class="static-input">{{ $donHang->ghi_chu }}</div>
             </div>
 
-            <div class="inline field">
-                <label class="label-fixed">Tình trạng giao hàng:</label>
-                <div class="static-input">{{ ($donHang->tinh_trang==3)?'Đang vận chuyển':'Đã giao hàng' }}</div>
-            </div>
+            @if($donHang->tinh_trang > 0)
+                <div class="inline field">
+                    <label class="label-fixed">Tình trạng giao hàng:</label>
+                    <div class="static-input">
+                        @if($donHang->tinh_trang == 1)
+                            <i class="wait teal open fitted icon"></i>
+                            <span style="color: teal">
+                                <b>Đang vận chuyển</b>
+                            </span>
+                        @else
+                            <i class="check green open fitted icon"></i>
+                            <span style="color: green">
+                                <b>Đã giao hàng</b>
+                            </span>
+                        @endif
+                        <a class="ui small blue label need-popup" href="{{ route('don_hang.edit', [$donHang->id]) }}"
+                           data-content="Thay đổi trạng thái giao hàng"
+                           onclick="return confirm('Xác nhận cập nhật trạng thái giao hàng?')">
+                            Cập nhật
+                        </a>
+                    </div>
+                </div>
+            @endif
 
             @if($donHang->hinh_thuc_thanh_toan != 'cash')
                 <div class="inline field">

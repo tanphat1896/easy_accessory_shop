@@ -16,7 +16,7 @@
                     <i class="check open fitted icon"></i>
                     Duyệt
                 </a>
-                <a href="{{ route('duyet_don', [$donHang->id]) }}" class="ui orange label"
+                <a href="{{ route('huy_don', [$donHang->id]) }}" class="ui orange label"
                    onclick="return confirm('Bạn chắc chắn muốn hủy đơn hàng?')">
                     <i class="remove open fitted icon"></i>
                     Hủy
@@ -41,7 +41,7 @@
                 <i class="check open fitted icon"></i>
                 Duyệt
             </a>
-            <a href="{{ route('duyet_don', [$donHang->id]) }}" class="ui orange label"
+            <a href="{{ route('huy_don', [$donHang->id]) }}" class="ui orange label"
                onclick="return confirm('Bạn chắc chắn muốn hủy đơn hàng?')">
                 <i class="remove open fitted icon"></i>
                 Hủy

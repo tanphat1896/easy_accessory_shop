@@ -65,7 +65,11 @@ class DonHangController extends Controller
      */
     public function edit($id)
     {
-        //
+        $donHang = DonHang::findOrFail($id);
+        ($donHang->tinh_trang == 1)?($donHang->tinh_trang = 2):($donHang->tinh_trang = 1);
+        $donHang->update();
+
+        return back()->with('success', 'Cập nhật trạng thái giao hàng thành công');
     }
 
     /**
@@ -104,6 +108,15 @@ class DonHangController extends Controller
         $donHang->ngay_duyet_don = date('Y-m-d H:i:s');
         $donHang->update();
 
-        return back()->with('success', 'Duyệt đơn thành công');
+        return back()->with('success', 'Duyệt đơn hàng thành công');
+    }
+
+    public function huyDon($id) {
+        $chiTietDonHangs = ChiTietDonHang::where('don_hang_id', $id)->get();
+        foreach ($chiTietDonHangs as $key => $chiTietDonHang) {
+            ChiTietDonHang::destroy($chiTietDonHang->id);
+        }
+        DonHang::destroy($id);
+        return redirect('/admin/don_hang')->with('success', 'Hủy đơn hàng thành công');
     }
 }
