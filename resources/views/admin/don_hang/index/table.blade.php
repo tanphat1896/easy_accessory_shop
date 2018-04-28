@@ -2,15 +2,16 @@
 
     <thead>
     <tr>
-        <th class="collapsing">STT</th>
-        <th>Người nhận hàng</th>
+        <th>STT</th>
+        <th>Mã đơn hàng</th>
+        <th>Người dặt hàng</th>
         <th>Số điện thoại</th>
         <th>Ngày đặt hàng</th>
-        <th>Hình thức thanh toán</th>
+        {{--<th>Hình thức thanh toán</th>--}}
         <th>Số sản phẩm</th>
         <th>Tổng tiền</th>
         <th>Tình trạng</th>
-        <th>Hành động</th>
+        <th class="collapsing">Hành động</th>
     </tr>
     </thead>
 
@@ -20,31 +21,56 @@
         <tr>
             <input type="hidden" name="don-hang-id[]" value="{{ $donHang->id }}">
             <td>{{ $stt + 1 }}</td>
+            <td class="collapsing">{{ $donHang->ma_don_hang }}</td>
             <td>{{ $donHang->ten_nguoi_nhan }}</td>
             <td>{{ $donHang->sdt_nguoi_nhan }}</td>
             <td>{{ $donHang->ngay_dat_hang }}</td>
-            <td>
-                {{ $donHang->hinh_thuc_thanh_toan }}
-                @if($donHang->)
-            </td>
+            {{--<td>--}}
+                {{--@switch($donHang->hinh_thuc_thanh_toan)--}}
+                    {{--@case('cash')--}}
+                        {{--Trực tiếp khi nhận hàng--}}
+                        {{--@break--}}
+                    {{--@case('nganluong')--}}
+                        {{--Qua ngân lượng--}}
+                        {{--@break--}}
+                    {{--@case('baokim')--}}
+                        {{--Qua bảo kim--}}
+                        {{--@break--}}
+                {{--@endswitch--}}
+                {{--@if(($donHang->tinh_trang_thanh_toan == 1)&&($donHang->hinh_thuc_thanh_toan != 'cash'))--}}
+                    {{--(<span style="color: green">đã thanh toán</span>)--}}
+                {{--@elseif(($donHang->tinh_trang_thanh_toan == 0)&&($donHang->hinh_thuc_thanh_toan != 'cash'))--}}
+                    {{--(<span style="color: red">chưa thanh toán</span>)--}}
+                {{--@endif--}}
+            {{--</td>--}}
             <td>{{ App\ChiTietDonHang::where('don_hang_id', $donHang->id)->count() }}</td>
             <td>{{ number_format($donHang->tong_tien) }} đ</td>
             <td>
-                @if($donHang->tinh_trang == 1)
-                    <span style="color: green" ><strong>Đã duyệt</strong></span>
+                @if($donHang->tinh_trang == 0)
+                    <i class="warning open fitted red icon"></i>
+                    <span style="color: red" ><strong> Chưa duyệt</strong></span>
+                @elseif($donHang->tinh_trang == 1)
+                    <i class="wait teal open fitted red icon"></i>
+                    <span style="color: teal"><strong>Đang vận chuyển</strong></span>
                 @else
-                    <span style="color: red"><strong>Chưa duyệt</strong></span>
+                    <i class="check green open fitted red icon"></i>
+                    <span style="color: green"><strong>Đã giao hàng</strong></span>
                 @endif
             </td>
-            <td  class="collapsing">
-                <a class="ui small blue label" href="{{ route('don_hang.show',[$donHang->id]) }}">
+            <td class="collapsing">
+                <a class="ui small blue label need-popup" href="{{ route('don_hang.show',[$donHang->id]) }}"
+                    data-content="Xem đơn">
                     <i class="eye open fitted icon"></i>
                 </a>
                 @if($donHang->tinh_trang == 0)
-                    <a class="ui small teal label">
+                    <a class="ui small teal label need-popup" href="{{ route('duyet_don', [$donHang->id]) }}"
+                       onclick="return confirm('Bạn chắc chắn muốn duyệt đơn hàng này?')"
+                        data-content="Duyệt đơn">
                         <i class="check open fitted icon"></i>
                     </a>
-                    <a class="ui small orange label">
+                    <a class="ui small orange label need-popup" href="{{ route('huy_don', [$donHang->id]) }}"
+                        onclick="return confirm('Bạn chắc chắn muốn hủy đơn hàng này?')"
+                        data-content="Hủy đơn">
                         <i class="remove open fitted icon"></i>
                     </a>
                 @endif

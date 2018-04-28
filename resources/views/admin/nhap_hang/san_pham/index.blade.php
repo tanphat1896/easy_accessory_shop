@@ -10,7 +10,7 @@
             Chi tiết phiếu nhập
             @if(\App\PhieuNhap::find($id)->da_cap_nhat == false)
                 <a href="{{ route('cap_nhat_so_luong', [$id]) }}"
-                   class="ui green label" data-tooltip="Cập nhật số lượng sản phẩm trong kho">
+                   class="ui green label need-popup" data-content="Cập nhật số lượng sản phẩm vào kho">
                     <i class="check open fitted icon"></i> Cập nhật vào kho
                 </a>
             @endif
