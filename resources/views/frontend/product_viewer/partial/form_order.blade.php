@@ -2,12 +2,10 @@
       class="ui form" method="post">
     {{ csrf_field() }}
 
-    <div class="two fields">
-        <div class="field">
-            <label for="">Số lượng</label>
-            <input type="number" value="1" min="1" max="{{ $product->so_luong }}" name="amount" id="amount"
-                   onchange="updateTotalPrice()">
-        </div>
+    <div class="field limit-size">
+        <label for="">Số lượng (Còn <span class="red-text">{{ $product->so_luong }}</span> sản phẩm)</label>
+        <input type="number" value="1" min="1" max="{{ $product->so_luong }}" name="amount" id="amount"
+               onchange="updateTotalPrice()">
     </div>
 
     <div class="field">

@@ -29,6 +29,9 @@
     margin-top: 5px !important;
     margin-bottom: 5px !important;
 }
+.small-bot-margin {
+    margin-bottom: 5px !important;
+}
 .normal-margin {
     margin: 10px !important;
 }
@@ -51,8 +54,20 @@
 .small-padding {
     padding: 5px !important;
 }
+.small-lr-padding {
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+}
 .normal-padding {
     padding: 10px !important;
+}
+.normal-td-padding {
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+}
+.small-td-padding {
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
 }
 .big-padding {
     padding: 15px !important;
@@ -163,6 +178,11 @@
     width: calc(100% - 250px) !important;
 }
 
+.limit-size input[type="number"] {
+    min-width: 45px !important;
+    max-width: 200px !important;
+}
+
 .help-text {
     margin-top: 5px;
 }
@@ -200,4 +220,8 @@
 
 .pusher {
     min-height: 330px !important;
+}
+
+.ui.range{
+    min-width: 200px;
 }

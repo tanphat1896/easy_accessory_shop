@@ -20,14 +20,14 @@ class SanPhamController extends Controller
         'new' => 'newProductsData'
     ];
 
-    public function showGroup($slug, $filter = '') {
+    public function showGroup($slug, Request $request) {
         $productType = LoaiSanPham::whereSlug($slug)->firstOrFail();
 
         $totalPerPage = 12;
 
-        $products = empty($filter)
-            ? $this->getProducts($productType->id, $totalPerPage)
-            : $this->getProductsWithFilter($productType->id, $filter, $totalPerPage);
+        $products = $this->filtered($request)
+            ? $this->getProductsWithFilter($productType->id, $request->query(), $totalPerPage)
+            : $this->getProducts($productType->id, $totalPerPage);
 
         return view('frontend.product_category.index', compact('products', 'productType'));
     }

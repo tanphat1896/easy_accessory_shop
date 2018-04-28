@@ -38,7 +38,8 @@ return [
             'sandbox' => 'https://www.baokim.vn/payment/order/version11'
         ],
         'base_url' => 'http://127.0.0.1:8000',
-        'return_url' => 'http://127.0.0.1:8000/payment-result'
+        'return_url' => 'http://127.0.0.1:8000/payment-result',
+        'cancel_url' => 'http://127.0.0.1:8000/payment-cancel'
     ],
     'info' => [
         'receiver' => 'entipi18@gmail.com',

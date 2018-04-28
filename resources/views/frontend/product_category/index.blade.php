@@ -1,12 +1,19 @@
 @extends('frontend.layouts.master')
 
 @section('title', $productType->getName())
-
+@php
+    if (is_array($products))
+        extract($products);
+@endphp
 @section('content')
     @include('frontend.product_category.filter')
     <div class="ui basic segment">
 
-        <h3 class="ui dividing header">Sản phẩm: {{ $productType->getName() }}</h3>
+        @if (!empty($criteria))
+            <h3 class="ui dividing header">{{ $productType->getName() }} ({{ $products->count() }} sản phẩm)</h3>
+        @else
+            <h3 class="ui dividing header"> Sản phẩm: {{ $productType->getName() }}</h3>
+        @endif
 
         <div class="ui six column computer four column tablet stackable grid">
             @foreach($products as $plainProduct)
@@ -47,7 +54,7 @@
                                 @endif
 
                                 @if ($plainProduct->so_luong < 1)
-                                    <span class="ui red label">Hết hàng</span>
+                                    <span class="red-text">(Hết hàng)</span>
                                 @endif
 
                             </p>
@@ -60,9 +67,11 @@
             @endforeach
         </div>
 
-        <div class="ui basic segment center aligned">
-            {{ $products->render('vendor.pagination.smui') }}
-        </div>
+        @if(method_exists($products, 'render'))
+            <div class="ui basic segment center aligned">
+                {{ $products->render('vendor.pagination.smui') }}
+            </div>
+        @endif
 
     </div>
 @endsection

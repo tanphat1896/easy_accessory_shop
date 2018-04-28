@@ -12,6 +12,8 @@ $priceSale = $product->priceSale();
     <div class="ui basic segment no-margin-top">
         <div class="ui container">
 
+            @include('sharing.components.error')
+
             <div class="ui divider hidden"></div>
 
             <div class="ui grid stackable">
@@ -32,7 +34,7 @@ $priceSale = $product->priceSale();
                     <div class="ui two columns grid stackable">
                         <div class="column">
 
-                            <h3 class="ui header">
+                            <h3 class="ui header small-bot-margin">
 
                                 @if (!empty($salePercent))
                                     Giá: <span class="red-text">{{ number_format($priceSale) }} đ</span>
@@ -41,14 +43,19 @@ $priceSale = $product->priceSale();
                                     Giá: <span class="red-text">{{ number_format($priceSale) }} đ</span>
                                 @endif
                             </h3>
+                            <span style="color: gray;">Giá trên đã có VAT</span>
 
                             <div class="ui divider hidden"></div>
 
                             {{--Kiểm tra ngừng kinh doanh --}}
                             @if ($product->so_luong < 1)
+
                                 @include('frontend.product_viewer.partial.out_of_stock')
+
                             @elseif ($product->tinh_trang > 0)
+
                                 @include('frontend.product_viewer.partial.form_order')
+
                             @else
                                 <div class="ui basic red big label">Ngừng kinh doanh</div>
                             @endif

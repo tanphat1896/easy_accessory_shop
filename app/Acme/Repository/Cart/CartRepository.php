@@ -48,15 +48,11 @@ class CartRepository {
         if (empty($product) || empty($amount))
             return false;
 
-        $this->cart->addProduct($product, $amount);
-
-        return true;
+        return $this->cart->addProduct($product, $amount);
     }
 
     public function removeProduct($productSlug) {
-        $this->cart->removeProduct($productSlug);
-
-        return true;
+        return $this->cart->removeProduct($productSlug);
     }
 
     public function updateAmount(Request $request, $productSlug) {
@@ -72,5 +68,30 @@ class CartRepository {
         $this->cart->cleanCart();
 
         return true;
+    }
+
+    public function blockCart() {
+        $this->cart->block();
+    }
+
+    public function cartBlocked() {
+        return $this->cart->blocked();
+    }
+
+    public function cartProductsForSync() {
+        $cart = $this->getProducts();
+        $products = [];
+
+        foreach ($cart as $bunch){
+            $productId = $bunch['product']->id;
+
+            $products[$productId] = [
+                'so_luong' => $bunch['amount'],
+                'don_gia' => $bunch['product']->giaMoiNhat(),
+                'giam_gia' => $bunch['product']->salePercent()
+            ];
+        }
+
+        return $products;
     }
 }

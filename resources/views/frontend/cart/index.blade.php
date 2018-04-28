@@ -15,65 +15,70 @@
                 @endif
             </h3>
 
-            <table class="ui celled striped table center aligned">
-                <thead>
-                <tr>
-                    <th class="center aligned collapsing">STT</th>
-                    <th>Sản phẩm</th>
-                    <th>Số lượng</th>
-                    <th>Thành tiền</th>
-                    <th class="collapsing">Thao tác</th>
-                </tr>
-
-                </thead>
-                <tbody>
-                @php $idx = 1; $total = 0;@endphp
-                @foreach($products as $slug => $productBunch)
+            <div class="ui basic segment no-padding table-responsive">
+                <table class="ui celled striped table center aligned unstackable">
+                    <thead>
                     <tr>
-                        <td class="center aligned">{{ $idx++ }}</td>
-                        <td>{{ $productBunch['product']->getName() }}</td>
-                        <td>
-                            <form action="{{ route('cart.update', [$slug]) }}"
-                                  class="ui form no-padding no-margin force-inline"
-                                  method="post" id="{{ 'form-update-amount' . $idx }}">
-                                {{ csrf_field() }}
-                                {{ method_field('PUT') }}
-                                <div class="field">
-                                    <input type="number" value="{{ $productBunch['amount'] }}"
-                                           name="amount" min="1" max="20"
-                                           onchange="$('#{{ 'form-update-amount' . $idx }}').submit()">
-                                </div>
-                            </form>
-                        </td>
-                        <td>
-                            @php $total += $productBunch['cost']; @endphp
-                            {{ number_format($productBunch['cost']) }}
-                        </td>
-                        <td class="center-aligned">
-                            <form action="{{ route('cart.remove', [$slug]) }}"
-                                  method="post"
-                                  class="force-inline no-padding no-margin">
-                                {{ csrf_field() }}
-
-                                {{ method_field('DELETE') }}
-
-                                <button class="ui red small label pointer">Xóa</button>
-                            </form>
-                        </td>
+                        <th class="center aligned collapsing">STT</th>
+                        <th>Sản phẩm</th>
+                        <th>Số lượng</th>
+                        <th>Thành tiền</th>
+                        <th class="collapsing">Thao tác</th>
                     </tr>
-                @endforeach
-                </tbody>
-                <tfoot>
-                <tr>
-                    <th colspan="3" class="center aligned"><strong>Tổng tiền</strong></th>
-                    <th colspan="2" class="center aligned">
+
+                    </thead>
+                    <tbody>
+                    @php $idx = 1; $total = 0;@endphp
+                    @foreach($products as $slug => $productBunch)
+                        <tr>
+                            <td class="center aligned">{{ $idx++ }}</td>
+                            <td class="left aligned">
+                                <img src="{{ $productBunch['product']->anh_dai_dien }}" class="ui spaced mini image">
+                                {{ $productBunch['product']->getName() }}</td>
+                            <td>
+                                <form action="{{ route('cart.update', [$slug]) }}"
+                                      class="ui form no-padding no-margin force-inline"
+                                      method="post" id="{{ 'form-update-amount' . $idx }}">
+                                    {{ csrf_field() }}
+                                    {{ method_field('PUT') }}
+                                    <div class="field limit-size">
+                                        <input type="number" value="{{ $productBunch['amount'] }}"
+                                               name="amount" min="1" max="20"
+                                               class="small-lr-padding"
+                                               onchange="$('#{{ 'form-update-amount' . $idx }}').submit()">
+                                    </div>
+                                </form>
+                            </td>
+                            <td>
+                                @php $total += $productBunch['cost']; @endphp
+                                {{ number_format($productBunch['cost']) }}
+                            </td>
+                            <td class="center-aligned">
+                                <form action="{{ route('cart.remove', [$slug]) }}"
+                                      method="post"
+                                      class="force-inline no-padding no-margin">
+                                    {{ csrf_field() }}
+
+                                    {{ method_field('DELETE') }}
+
+                                    <button class="ui red small label pointer">Xóa</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th colspan="3" class="center aligned"><strong>Tổng tiền</strong></th>
+                        <th colspan="2" class="center aligned">
                         <span class="ui basic red large label">
                             <strong>{{ number_format($total) }}đ</strong>
                         </span>
-                    </th>
-                </tr>
-                </tfoot>
-            </table>
+                        </th>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
 
             <div class="ui divider hidden clearing no-margin no-padding"></div>
 

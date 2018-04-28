@@ -20,6 +20,8 @@ class DonHang extends Model
         'tinh_trang',
         'ngay_dat_hang',
         'hinh_thuc_thanh_toan',
+        'payment_id',
+        'payment_type'
     ];
 
     public function products() {
@@ -30,7 +32,7 @@ class DonHang extends Model
 
     public function statusHtml() {
         $statusText = [
-            -1 => '<i class="close red icon"></i> Không duyệt',
+            -1 => '<i class="close red icon"></i> Đã hủy',
             0 => '<i class="spinner blue icon"></i> Chưa duyệt',
             1 => '<i class="green check icon"></i> Đã duyệt'];
 

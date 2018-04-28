@@ -23,7 +23,8 @@ trait ProcessOrder {
             return false;
 
         $this->order = new DonHang($data);
-        $this->order->ma_don_hang = strtoupper(uniqid('DH_'));
+
+        $this->order->ma_don_hang = $this->order->ma_don_hang ?: strtoupper(uniqid('DH_'));
 
         $this->bindCustomerIdIfLogged();
 
@@ -50,7 +51,7 @@ trait ProcessOrder {
 
         DB::beginTransaction();
         try {
-            $this->order->save();
+            $success =  $this->order->save();
 
             $this->decreaseAmountOfEachSyncingProducts($data['syncingProducts']);
 

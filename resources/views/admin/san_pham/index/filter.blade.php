@@ -1,7 +1,7 @@
 <a class="ui green small button normal-td-margin" id="sp-filter">
     <i class="filter icon"></i>Bộ lọc</a>
 
-@if($filtered)
+@if(!empty($filtered))
     @foreach($filterData as $datum)
         <span class="ui teal label">{{ $datum->getName() }}</span>
     @endforeach

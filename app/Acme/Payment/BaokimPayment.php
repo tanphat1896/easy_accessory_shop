@@ -13,8 +13,8 @@ use App\Acme\Template\OnlinePayment;
 
 class BaokimPayment extends OnlinePayment {
 
-    public function __construct() {
-        $this->init();
+    public function __construct($paymentGate) {
+        $this->init($paymentGate);
     }
 
     public function buildUrl($data) {

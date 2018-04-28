@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Acme\Behavior\ProcessOnlinePayment;
 use App\Acme\Behavior\ProcessOrder;
+use App\Acme\Behavior\ProcessResultPayment;
 use App\Acme\Behavior\ProductAvailable;
 use App\Acme\Payment\NganluongPayment;
 use App\Acme\Repository\Cart\CartRepository;
@@ -17,6 +18,7 @@ class CheckoutController extends Controller
     use ProcessOrder;
     use ProductAvailable;
     use ProcessOnlinePayment;
+    use ProcessResultPayment;
 
     private $cartRepository;
 
@@ -50,28 +52,25 @@ class CheckoutController extends Controller
     public function store(Request $request) {
         $data = $this->neededData($request);
 
-        $canCheckout = $this->availabelSyncingProducts($data['syncingProducts']);
+        $this->blockCartIfCanCheckout($data);
 
-        if (!$canCheckout)
-            return back()->with('error', 'Số lượng không đủ để đặt hàng ');
+        if ($this->notCashPayment($data['hinh_thuc_thanh_toan']))
+            return $this->processOnlinePayment($data);
 
         $order = $this->saveOrder($data);
 
         if (!empty($order))
             $this->cleanCart();
 
-        if ($this->notCashPayment($order->hinh_thuc_thanh_toan))
-            return $this->processOnlinePayment($order);
-
         return redirect()->route('checkout.result')
             ->with([
                 'orderCode' => $order->ma_don_hang,
-                'name' => $data['ten_nguoi_nhan']
+                'name' => $order->ten_nguoi_nhan
             ]);
     }
 
     private function neededData(Request $request) {
-        $cartProducts = $this->cartProductsForSync();
+        $cartProducts = $this->cartRepository->cartProductsForSync();
         $orderDate = date('Y-m-d H:i:s');
         $name = $request->get('name');
         $email = $request->get('email');
@@ -95,21 +94,13 @@ class CheckoutController extends Controller
         ];
     }
 
-    private function cartProductsForSync() {
-        $cart = $this->cartRepository->getProducts();
-        $products = [];
+    private function blockCartIfCanCheckout(array $data) {
+        $canCheckout = $this->availabelSyncingProducts($data['syncingProducts']);
 
-        foreach ($cart as $bunch){
-            $productId = $bunch['product']->id;
+        if (!$canCheckout)
+            return back()->with('error', 'Số lượng không đủ để đặt hàng ');
 
-            $products[$productId] = [
-                'so_luong' => $bunch['amount'],
-                'don_gia' => $bunch['product']->giaMoiNhat(),
-                'giam_gia' => $bunch['product']->salePercent()
-            ];
-        }
-
-        return $products;
+        $this->cartRepository->blockCart();
     }
 
     private function cleanCart() {
@@ -117,16 +108,15 @@ class CheckoutController extends Controller
     }
 
     public function checkoutOnlineResult(Request $request) {
-        $payment = new NganluongPayment();
+        $order = $this->processCheckoutOnlineResult($request);
 
-        dd($payment->verifyPaymentUrl(
-            $request->get('transaction_info'),
-            $request->get('order_code'),
-            $request->get('price'),
-            $request->get('payment_id'),
-            $request->get('payment_type'),
-            $request->get('error_text'),
-            $request->get('secure_code')
-        ));
+        if (!empty($order))
+            $this->cleanCart();
+
+        return redirect()->route('checkout.result')
+            ->with([
+                'orderCode' => $order->ma_don_hang,
+                'name' => $order->ten_nguoi_nhan
+            ]);
     }
 }

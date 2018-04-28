@@ -12,8 +12,8 @@ namespace App\Acme\Behavior;
 use App\SanPham;
 
 trait ProductAvailable {
-    public function availableAmount($key, $neededAmount) {
-        $product = is_int($key) ? SanPham::find($key) : SanPham::whereSlug($key)->first();
+    public function availableAmount($idOrSlug, $neededAmount) {
+        $product = is_int($idOrSlug) ? SanPham::find($idOrSlug) : SanPham::whereSlug($idOrSlug)->first();
 
         return empty($product) ? false: (int)$product->so_luong >= $neededAmount;
     }

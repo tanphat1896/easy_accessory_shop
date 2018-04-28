@@ -54,15 +54,22 @@ class MemberCart extends Cart {
     }
 
     public function addProduct($product, $amount) {
+        if ($this->blocked())
+            return self::ERROR_TEXT['BLOCKED'];
         $oldAmount = $this->getAmountIfCartHas($product);
 
         if ($oldAmount > 0){
             $amount += $oldAmount;
-            $this->updateAmountExistProduct($product, $amount);
-            return;
+
+            if ($this->availableAmount($product->id, $amount))
+                $this->updateAmountExistProduct($product, $amount);
+
+            return self::NO_ERROR;
         }
 
         $this->activeCart->products()->attach([$product->id => ['so_luong' => $amount]]);
+
+        return self::NO_ERROR;
     }
 
     private function getAmountIfCartHas($product) {
@@ -78,24 +85,40 @@ class MemberCart extends Cart {
     }
 
     public function removeProduct($productSlug) {
+        if ($this->blocked())
+            return self::ERROR_TEXT['BLOCKED'];
+
         $product = SanPham::whereSlug($productSlug)->first();
 
         $this->activeCart->products()->detach($product->id);
+
+        return self::NO_ERROR;
     }
 
     public function updateAmount($productSlug, $amount) {
+        if ($this->blocked())
+            return self::ERROR_TEXT['BLOCKED'];
+
         $product = SanPham::whereSlug($productSlug)->first();
 
         if (! $this->availableAmount($product->id, $amount))
-            return false;
+            return self::ERROR_TEXT['NOT_ENOUGH'];
 
         $this->updateAmountExistProduct($product, $amount);
 
-        return true;
+        return self::NO_ERROR;
     }
 
     public function cleanCart() {
         $this->activeCart->was_checkout = 1;
         $this->activeCart->save();
+    }
+
+    public function block() {
+        $this->activeCart->block();
+    }
+
+    public function blocked() {
+        return $this->activeCart->blocked();
     }
 }

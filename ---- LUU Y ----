@@ -12,3 +12,8 @@ public static function deleteSlidersFromStorage($sliderIds) {
 
         return count(array_unique($results->toArray())) < 2;
     }
+
+    Số thẻ: 9874563254178962
+    Họ tên chủ thẻ: Nguyen Hue
+    Ngày phát hành: 10/2016
+    Mã OTP: 123456

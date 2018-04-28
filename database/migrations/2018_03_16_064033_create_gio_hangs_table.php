@@ -17,6 +17,7 @@ class CreateGioHangsTable extends Migration
             $table->increments('id');
             $table->integer('customer_id')->unsigned();
             $table->tinyInteger('was_checkout')->default(0);
+            $table->boolean('blocked')->default(false);
             $table->timestamps();
         });
     }

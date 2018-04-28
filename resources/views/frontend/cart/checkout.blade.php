@@ -53,7 +53,7 @@
                                     </div>
                                 </div>
                                 <div class="field">
-                                    <div class="ui radio checkbox">
+                                    <div class="ui radio checkbox disabled">
                                         <input type="radio" name="type-checkout" value="baokim" id="bao-kim">
                                         <label for="online">Thanh toán qua Bảo kim</label>
                                     </div>

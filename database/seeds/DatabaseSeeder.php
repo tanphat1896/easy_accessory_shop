@@ -24,6 +24,8 @@ class DatabaseSeeder extends Seeder
             'so_dien_thoai' => '01234569871',
             'dia_chi' => 'Ninh Kiều, Cần Thơ',
             'logo' => '/assets/images/favicon.png',
+            'baokim_email' => 'entipi18@gmail.com',
+            'nganluong_email' => 'entipi18@gmail.com',
             'wide_menu' => 1]);
         DB::table('loai_san_phams')->insert([
             ['id' => 1, 'ten_loai' => 'SSD', 'slug' => 'ssd'],
