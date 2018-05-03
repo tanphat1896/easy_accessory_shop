@@ -24,6 +24,11 @@ class ShopInfoController extends Controller
         $info->so_dien_thoai = $data['phone'];
         $info->dia_chi = $data['address'];
         $info->logo = $data['logo'];
+        $info->chat_plugin = $data['chatPlugin'];
+        $info->nganluong_email = $data['nganluongEmail'];
+        $info->baokim_email = $data['baokimEmail'];
+        $info->link_fb = $data['linkFb'];
+        $info->link_tawkto = $data['linkTawkto'];
 
         $info->save();
         
@@ -36,7 +41,13 @@ class ShopInfoController extends Controller
         $phone = $request->phone ?: '01236544789';
         $address = $request->address ?: 'Ninh Kieu, Can Tho';
         $logo = $request->filepath ?: '/';
+        $chatPlugin = $request->chat_plugin ?: 'tawkto';
+        $baokimEmail = $request->baokim_email ?: 'entipi18@gmail.com';
+        $nganluongEmail = $request->nganluong_email ?: 'entipi18@gmail.com';
+        $linkFb = $request->link_fb ?: '';
+        $linkTawkto = $request->link_tawkto ?: '';
 
-        return compact('name', 'email', 'phone', 'address', 'logo');
+        return compact('name', 'email', 'phone', 'address', 'logo', 'chatPlugin', 'nganluongEmail',
+            'baokimEmail', 'linkFb', 'linkTawkto');
     }
 }

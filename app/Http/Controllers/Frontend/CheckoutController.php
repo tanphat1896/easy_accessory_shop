@@ -8,6 +8,7 @@ use App\Acme\Behavior\ProcessResultPayment;
 use App\Acme\Behavior\ProductAvailable;
 use App\Acme\Payment\NganluongPayment;
 use App\Acme\Repository\Cart\CartRepository;
+use App\Acme\Repository\Cart\TempCart;
 use App\DonHang;
 use App\Helper\AuthHelper;
 use Illuminate\Http\Request;
@@ -52,7 +53,7 @@ class CheckoutController extends Controller
     public function store(Request $request) {
         $data = $this->neededData($request);
 
-        $this->blockCartIfCanCheckout($data);
+        $this->checkIfCanCheckout($data);
 
         if ($this->notCashPayment($data['hinh_thuc_thanh_toan']))
             return $this->processOnlinePayment($data);
@@ -94,13 +95,11 @@ class CheckoutController extends Controller
         ];
     }
 
-    private function blockCartIfCanCheckout(array $data) {
+    private function checkIfCanCheckout(array $data) {
         $canCheckout = $this->availabelSyncingProducts($data['syncingProducts']);
 
         if (!$canCheckout)
             return back()->with('error', 'Số lượng không đủ để đặt hàng ');
-
-        $this->cartRepository->blockCart();
     }
 
     private function cleanCart() {

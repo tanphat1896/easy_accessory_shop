@@ -20,7 +20,9 @@ class CreateCuaHangsTable extends Migration
             $table->string('so_dien_thoai',11);
             $table->string('dia_chi',255);
             $table->string('logo',100);
-            $table->enum('chat_plugin', ['fb', 'tawk'])->default('fb');
+            $table->enum('chat_plugin', ['fb', 'tawkto'])->default('fb');
+            $table->text('link_fb')->nullable();
+            $table->text('link_tawkto')->nullable();
             $table->string('baokim_email')->nullable();
             $table->string('nganluong_email')->nullable();
             $table->integer('wide_menu');

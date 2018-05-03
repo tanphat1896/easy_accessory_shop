@@ -8,14 +8,14 @@
         <div class="ui divider hidden"></div>
         <div class="ui divider hidden"></div>
         <div class="ui divider hidden"></div>
-
+        
         @if (empty($errors))
-{{--            @php session(['checkout_online' => false]);@endphp--}}
+            @php session(['checkout_online_token' => true]);@endphp
             <h3 class="ui icon header center aligned">
                 <i class="spinner loading icon blue"></i>
                 <span id="text">Chuyển sang trang thanh toán sau <span id="time">3</span> giây</span>
             </h3>
-        
+
             <script type="text/javascript">
                 let time = 3;
                 window.onload = function() {

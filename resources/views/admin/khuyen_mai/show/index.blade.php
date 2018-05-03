@@ -78,6 +78,6 @@
     <script>
         bindSelectAll('select-all-current');
 
-        bindDataTable('table-sale-product', true);
+        // bindDataTable('table-sale-product', true);
     </script>
 @endpush

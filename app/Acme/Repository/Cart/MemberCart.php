@@ -54,8 +54,6 @@ class MemberCart extends Cart {
     }
 
     public function addProduct($product, $amount) {
-        if ($this->blocked())
-            return self::ERROR_TEXT['BLOCKED'];
         $oldAmount = $this->getAmountIfCartHas($product);
 
         if ($oldAmount > 0){
@@ -85,9 +83,6 @@ class MemberCart extends Cart {
     }
 
     public function removeProduct($productSlug) {
-        if ($this->blocked())
-            return self::ERROR_TEXT['BLOCKED'];
-
         $product = SanPham::whereSlug($productSlug)->first();
 
         $this->activeCart->products()->detach($product->id);
@@ -96,9 +91,6 @@ class MemberCart extends Cart {
     }
 
     public function updateAmount($productSlug, $amount) {
-        if ($this->blocked())
-            return self::ERROR_TEXT['BLOCKED'];
-
         $product = SanPham::whereSlug($productSlug)->first();
 
         if (! $this->availableAmount($product->id, $amount))
@@ -112,13 +104,5 @@ class MemberCart extends Cart {
     public function cleanCart() {
         $this->activeCart->was_checkout = 1;
         $this->activeCart->save();
-    }
-
-    public function block() {
-        $this->activeCart->block();
-    }
-
-    public function blocked() {
-        return $this->activeCart->blocked();
     }
 }

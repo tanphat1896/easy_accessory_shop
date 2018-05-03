@@ -8,10 +8,8 @@
 
 namespace App\Acme\Behavior;
 
-
-use App\Acme\Payment\NganluongPayment;
+use App\Acme\Repository\Cart\TempCart;
 use App\Acme\Template\OnlinePayment;
-use App\DonHang;
 use Illuminate\Http\Request;
 
 trait ProcessResultPayment {
@@ -64,7 +62,9 @@ trait ProcessResultPayment {
         $paymentType = $request->get('payment_type');
         $paymentId = $request->get('payment_id');
 
-        $cartProducts = $this->cartRepository->cartProductsForSync();
+        $tempCart = TempCart::get($info['tcid']);
+
+        $cartProducts = $this->cartRepository->cartProductsForSync($tempCart);
 
         return [
             'ma_don_hang' => $orderCode,

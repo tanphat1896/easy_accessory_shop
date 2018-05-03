@@ -2,6 +2,8 @@
 
 @section('title', 'Trang chủ')
 
+@php $shopInfo = \App\CuaHang::find(1); @endphp
+
 @section('content')
     @include('sharing.components.error')
 
@@ -18,4 +20,5 @@
 
 @push('script')
     @include('frontend.plugin.fb_chat')
+    @include('frontend.plugin.tawkto_chat')
 @endpush

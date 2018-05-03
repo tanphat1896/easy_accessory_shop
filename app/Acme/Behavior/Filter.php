@@ -10,11 +10,13 @@ namespace App\Acme\Behavior;
 
 
 use App\Helper\StringHelper;
+use App\LoaiSanPham;
 use App\ThuongHieu;
 use Illuminate\Http\Request;
 
 trait Filter {
     private $reflectKey = [
+        'pt' => 'loai_san_pham_id',
         'p' => 'gia',
         't' => 'thuong_hieu',
         'min' => 'gia',
@@ -38,6 +40,19 @@ trait Filter {
         $onlyPagingQuery = $request->has('page') && count($request->query()) == 1;
 
         return !$onlyPagingQuery;
+    }
+
+    // special function: use in different context
+    private function whereProductTypeId($builder, $productTypeId) {
+        if (empty($productTypeId))
+            return $builder;
+
+        $this->translatedFilters['pt'] = [
+            "text" => LoaiSanPham::find($productTypeId)->ten_loai,
+            "val" => $productTypeId
+        ];
+
+        return $builder->where('loai_san_pham_id', '=', $productTypeId);
     }
 
     // assume query like: p=desc&t=samsung;sandisk;&min=1000&max=10000000&name=SSD

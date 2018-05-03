@@ -43,11 +43,12 @@ trait GetProduct {
         return $products->paginate($perPage);
     }
 
-    public function getProductsWithFilter($productTypeId, $criteria, $perPage) {
+    public function getProductsWithFilter($productTypeId, $criteria, $perPage = null) {
         $products = DB::table($this->table)
-            ->where('loai_san_pham_id', '=', $productTypeId)
             ->join('gia_san_phams', "{$this->table}.id", '=', 'gia_san_phams.san_pham_id')
             ->where('gia_san_phams.active', 1);
+
+        $products = $this->whereProductTypeId($products, $productTypeId);
 
         $products = $this->bindFilterToBuilder($products, $criteria)->get();
 

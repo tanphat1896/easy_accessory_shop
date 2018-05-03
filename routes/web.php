@@ -11,7 +11,9 @@
 |
 */
 
-Route::get('/testing', 'TestController@filter');
+Route::get('/testing', function(){
+    return \App\Helper\Statistic::getRevenueByAllYear();
+});
 
 Route::get('/', 'Frontend\IndexController@index');
 
@@ -73,7 +75,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
 
     Route::get('/', 'Admin\AdminController@index')->name('admin.dashboard');
     Route::get('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
-    
+
+
+    Route::get('/account', 'Admin\StatisticController@account')->name('account');
+
 
     Route::resource('thuong_hieu', 'Admin\ThuongHieuController', ["except" => ["create", "show", "edit"]]);
     Route::resource('loai_sp', 'Admin\LoaiSanPhamController', ["except" => ["create", "show", "edit"]]);
@@ -112,7 +117,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
     });
 
 
-    Route::get('ajax-request/products/search/{query}/{sale?}', 'Admin\SanPhamController@search');
+    Route::prefix('ajax-request')->group(function() {
+        Route::get('products/sale-search', 'Admin\SanPhamController@searchProductSale');
+        Route::get('statistic/account', 'Admin\StatisticController@getAccount');
+    });
 
     Route::get('/testing', 'Admin\SanPhamController@searchProductSale');
 });

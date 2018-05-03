@@ -23,10 +23,11 @@ class KhuyenMaiController extends Controller
         if (empty($sale->parent_id))
             return $this->indexChild($sale);
 
-        $sale->load('products');
+        $products = $sale->products()->paginate(10);
+
         $productTypes = LoaiSanPham::all();
 
-        return view('admin.khuyen_mai.show.index', compact('sale', 'productTypes'));
+        return view('admin.khuyen_mai.show.index', compact('sale', 'productTypes', 'products'));
     }
 
     private function indexChild($parentSale) {

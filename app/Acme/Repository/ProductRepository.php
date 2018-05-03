@@ -9,6 +9,7 @@
 namespace App\Acme\Repository;
 
 
+use App\Acme\Behavior\GetProduct;
 use App\GiaSanPham;
 use App\Helper\ImageHelper;
 use App\Helper\StringHelper;
@@ -23,11 +24,13 @@ use Illuminate\Support\Facades\Log;
 use PharIo\Manifest\Email;
 
 class ProductRepository {
+    use GetProduct;
+
     private $sanPham;
 
     private $sanPhams;
 
-    private $reflectKey = ['th' => 'thuong_hieu_id', 'lsp' => 'loai_san_pham_id'];
+//    private $reflectKey = ['th' => 'thuong_hieu_id', 'lsp' => 'loai_san_pham_id'];
 
     private $reflectClass = ['th' => 'ThuongHieu', 'lsp' => 'LoaiSanPham'];
 
@@ -40,27 +43,28 @@ class ProductRepository {
         return $this->indexDataNoFiltered($perPage);
     }
 
-    private function filtered($request) {
-        $filters = $request->query();
+    private function getSanPhamWithFilter(Request $request) {
+        $criteria = $request->query();
 
-        if (empty($filters))
-            return false;
+        $productTypeId = $this->getProductType($request);
 
-        $onlyPagingQuery = count($filters) == 1 && in_array('page', array_keys($filters));
+        $this->sanPhams = $this->getProductsWithFilter($productTypeId, $criteria);
 
-        return ! $onlyPagingQuery;
+//        $condition = $this->buildWhereCondition($filters);
+//
+//        $filterData = $this->getFilterDataFrom($filters);
+//
+//        $this->sanPhams = SanPham::where($condition)->get();
+
+        return $this->indexDataFiltered();
     }
 
-    private function getSanPhamWithFilter($request) {
-        $filters = $request->query();
+    private function getProductType(Request $request) {
+        $noProductType = [null, 'all'];
 
-        $condition = $this->buildWhereCondition($filters);
+        $productTypeId = $request->get('pt');
 
-        $filterData = $this->getFilterDataFrom($filters);
-
-        $this->sanPhams = SanPham::where($condition)->get();
-
-        return $this->indexDataFiltered($filterData);
+        return ! in_array($productTypeId, $noProductType) ? $productTypeId : null;
     }
 
     private function buildWhereCondition($filters) {
@@ -91,16 +95,16 @@ class ProductRepository {
         return $filterData;
     }
 
-    private function indexDataFiltered($filterData) {
-        $filtered = true;
+    private function indexDataFiltered() {
+        $criteria = $this->translatedFilters;
 
-        $sanPhams = $this->sanPhams;
+        $sanPhams = $this->sanPhams['products'];
 
         $thuongHieus = ThuongHieu::all();
 
         $loaiSanPhams = LoaiSanPham::all();
 
-        return compact('filtered', 'sanPhams', 'thuongHieus', 'loaiSanPhams', 'filterData');
+        return compact('criteria', 'sanPhams', 'thuongHieus', 'loaiSanPhams');
     }
 
     private function indexDataNoFiltered($perPage) {

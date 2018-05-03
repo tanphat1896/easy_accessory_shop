@@ -24,6 +24,7 @@ class GuestCart extends Cart {
 
     private function updateCartToNewestPrice() {
         $this->products = session('cart') ?: [];
+
         foreach ($this->products as $slug => $product) {
             $product['product'] = SanPham::whereSlug($slug)->first();
             $product['cost'] = $product['product']->priceSale() * $product['amount'];
@@ -35,9 +36,6 @@ class GuestCart extends Cart {
     }
 
     public function addProduct($product, $amount) {
-        if ($this->blocked())
-            return self::ERROR_TEXT['BLOCKED'];
-
         $this->products = session('cart');
 
         $amount = $this->increaseAmountIfProductExist($product, $amount);
@@ -62,9 +60,6 @@ class GuestCart extends Cart {
     }
 
     public function removeProduct($productSlug) {
-        if ($this->blocked())
-            return self::ERROR_TEXT['BLOCKED'];
-
         $this->products = session('cart');
 
         unset($this->products[$productSlug]);
@@ -75,9 +70,6 @@ class GuestCart extends Cart {
     }
 
     public function updateAmount($productSlug, $amount) {
-        if ($this->blocked())
-            return self::ERROR_TEXT['BLOCKED'];
-
         $this->products = session('cart');
 
         if (empty($this->products[$productSlug]))
@@ -99,13 +91,5 @@ class GuestCart extends Cart {
 
     public function cleanCart() {
         session(['cart' => [], 'cart_blocked' => false]);
-    }
-
-    public function block() {
-        session(['cart_blocked' => true]);
-    }
-
-    public function blocked() {
-        return session('cart_blocked');
     }
 }

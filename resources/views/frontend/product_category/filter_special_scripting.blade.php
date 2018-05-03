@@ -1,5 +1,6 @@
 <script>
     let url = window.location.href;
+    url = url.replace(/page=\d{1,2}/, '');
     let parts = /(.*)\?(.*)/.exec(url);
     let baseUrl = parts == null ? url : parts[1];
     let query = parts == null ? '' : parts[2];

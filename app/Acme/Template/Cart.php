@@ -29,9 +29,5 @@ abstract class Cart {
 
     abstract public function updateAmount($productSlug, $amount);
 
-    abstract public function block();
-
-    abstract public function blocked();
-
     abstract public function cleanCart();
 }

@@ -70,16 +70,9 @@ class CartRepository {
         return true;
     }
 
-    public function blockCart() {
-        $this->cart->block();
-    }
-
-    public function cartBlocked() {
-        return $this->cart->blocked();
-    }
-
-    public function cartProductsForSync() {
-        $cart = $this->getProducts();
+    public function cartProductsForSync($cart = null) {
+        if (empty($cart))
+            $cart = $this->getProducts();
         $products = [];
 
         foreach ($cart as $bunch){
@@ -93,5 +86,13 @@ class CartRepository {
         }
 
         return $products;
+    }
+
+    public function cloneToTempCart() {
+        $cart = $this->cart->getProducts();
+
+        $tmpCartId = TempCart::cloneCart($cart);
+
+        return $tmpCartId;
     }
 }

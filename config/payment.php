@@ -34,7 +34,7 @@ return [
             'sandbox' => 'https://sandbox.nganluong.vn:8088/nl30/checkout.php'
         ],
         'baokim' => [
-            'live' => '',
+            'live' => 'https://www.baokim.vn/payment/order/version11',
             'sandbox' => 'https://www.baokim.vn/payment/order/version11'
         ],
         'base_url' => 'http://127.0.0.1:8000',
