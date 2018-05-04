@@ -10,21 +10,40 @@ namespace App\Acme\Payment;
 
 
 use App\Acme\Template\OnlinePayment;
+use Illuminate\Http\Request;
 
 class NganluongPayment extends OnlinePayment {
+    protected $sendingFillable = ['return_url', 'receiver', 'transaction_info', 'order_code', 'price'];
 
     public $affiliate_code = '';
 
-    public function __construct() {
+    public function __construct($paymentGate) {
+        $this->gate = $paymentGate;
         $this->init();
     }
 
     public function buildUrl($data) {
-        // TODO: Implement buildUrl() method.
+        if (! $this->validDataSending($data))
+            return null;
+        return $this->buildCheckoutUrl(
+            $data['return_url'],
+            $data['receiver'],
+            $data['transaction_info'],
+            $data['order_code'],
+            $data['price']
+        );
     }
 
-    public function verify($data) {
-        // TODO: Implement verify() method.
+    public function verify(Request $request) {
+        return $this->verifyPaymentUrl(
+            $request->get('transaction_info'),
+            $request->get('order_code'),
+            $request->get('price'),
+            $request->get('payment_id'),
+            $request->get('payment_type'),
+            $request->get('error_text'),
+            $request->get('secure_code')
+        );
     }
 
     /**

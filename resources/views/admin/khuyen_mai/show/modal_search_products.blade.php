@@ -14,7 +14,7 @@
                 </div>
                 <div class="field">
                     <label>Tên sản phẩm</label>
-                    <input type="text" id="search-name" placeholder="Từ khóa" autofocus>
+                    <input type="text" id="search-name" placeholder="Từ khóa" autofocus onkeyup="keyupSearch(event)">
                 </div>
                 <div class="field">
                     <label for="">&nbsp;</label>
@@ -55,11 +55,16 @@
 
 @push('script')
     <script>
-        let saleProductIds = [...$('.sale-products')].map(productIdSpanTag => parseInt(productIdSpanTag.innerText));
+        // let saleProductIds = [...$('.sale-products')].map(productIdSpanTag => parseInt(productIdSpanTag.innerText));
+        function keyupSearch(e) {
+            if (e.keyCode !== 13)
+                return;
+            search();
+        }
         function search() {
-            console.log('search');
+            // console.log('search');
             let queryString = buildQueryString();
-            let url = '/admin/ajax-request/products/search/' + queryString + '/1';
+            let url = '/admin/ajax-request/products/sale-search' + queryString;
 
             axios.get(url).then(res => updateResultTable(res.data)).catch(err => console.log(err));
         }
@@ -68,16 +73,17 @@
             let productType = $('#search-product-type').val();
             let name = $('#search-name').val();
 
-            return `product-type=${productType};name=${name}`;
+            return `?pt=${productType}&n=${name}`;
         }
 
         function updateResultTable(products) {
             let html = '';
-            let count = 1;
+            // let count = 1;
             for (let i = 0; i < products.length; i++) {
-                if (hasSale(products[i]))
-                    continue;
-                html += buildTableRowHtml(count++, products[i]);
+                // if (hasSale(products[i]))
+                //     continue;
+                // html += buildTableRowHtml(count++, products[i]);
+                html += buildTableRowHtml(i, products[i]);
             }
             if (products.length === 0 || html === '')
                 html = '<tr class="center aligned"><td colspan="4">Không có sản phẩm nào</td></tr>';
@@ -87,15 +93,15 @@
             bindSelectAll('select-all-products');
         }
 
-        function hasSale(product) {
-            return saleProductIds.indexOf(product.id) > -1;
-        }
+        // function hasSale(product) {
+        //     return saleProductIds.indexOf(product.id) > -1;
+        // }
 
         function buildTableRowHtml(index, product) {
             let tr = '<tr>';
             tr += buildCheckboxFor(product);
             tr += `<td>${index}</td>`;
-            tr += `<td>${product.ten_san_pham}</td>`;
+            tr += `<td>${product.name}</td>`;
             return tr + '</tr>';
         }
 

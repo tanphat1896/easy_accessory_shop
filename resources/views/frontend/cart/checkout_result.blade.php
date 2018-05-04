@@ -8,7 +8,6 @@
         <div class="ui divider hidden"></div>
         <div class="ui divider hidden"></div>
         <div class="ui divider hidden"></div>
-
         @if(empty(session('orderCode')))
             <h3 class="ui header center aligned">
                 <i class="frown outline fitted icon"></i>

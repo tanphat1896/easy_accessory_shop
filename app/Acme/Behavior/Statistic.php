@@ -35,7 +35,8 @@ trait Statistic {
         $status = [
             1 => 'Đã duyệt',
             0 => 'Chưa duyệt',
-            -1 => 'Đã hủy'
+            -1 => 'Đã hủy',
+            2 => 'Đã giao hàng'
         ];
         $orders = DB::table('don_hangs')
             ->select('tinh_trang', DB::raw('count(*) as total'))

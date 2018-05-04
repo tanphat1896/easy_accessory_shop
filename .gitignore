@@ -10,6 +10,7 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 .env
+app/Providers/AppServiceProvider.php
 public/assets/images/uploaded/products/ssd/152404102439.png
 public/assets/images/uploaded/products/ssd/152404230766.png
 public/assets/images/uploaded/products/ssd/152404231751.png

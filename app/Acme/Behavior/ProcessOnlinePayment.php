@@ -11,41 +11,74 @@ namespace App\Acme\Behavior;
 
 use App\Acme\Payment\BaokimPayment;
 use App\Acme\Payment\NganluongPayment;
+use App\Acme\Repository\Cart\TempCart;
+use App\Acme\Template\OnlinePayment;
+use App\CuaHang;
 
 trait ProcessOnlinePayment {
 
     private $payment = null;
-    private $paymentClass = ['baokim' => 'BaokimPayment', 'nganluong' => 'NganluongPayment'];
-    private $paymentMethod = ['baokim' => 'processBaokimPayment', 'nganluong' => 'processNganLuongPayment'];
+    private $paymentMethod = ['baokim' => 'generateUrlBaokim', 'nganluong' => 'generateUrlNganluong'];
 
-    public function processOnlinePayment($order) {
-        $method = $this->paymentMethod[$order->hinh_thuc_thanh_toan];
+    public function processOnlinePayment($data) {
+        $gate = $data['hinh_thuc_thanh_toan'];
+        $this->payment = OnlinePayment::getPayment($gate);
 
-        $this->$method($order);
+        $errors = [];
+        if (empty($this->payment))
+            $errors = ['Cổng thanh toán không hợp lệ'];
+
+        $url = $this->generateUrl($gate, $data);
+
+        if (empty($url))
+            $errors[] = 'Xin lỗi, không thể kết nối tới cổng thanh toán';
+
+        return view('frontend.cart.checkout_online', compact('url', 'errors'));
     }
 
-    private function processBaokimPayment($order) {
-        $this->payment = new BaokimPayment();
+    private function generateUrl($gate, $data) {
+        $method = $this->paymentMethod[$gate];
+
+        $tmpCartId = $this->cartRepository->cloneToTempCart();
+        $orderCode = strtoupper(uniqid('DH_'));
+        $info = $this->neededSendingInfo($data, $tmpCartId);
+
+        $url = $this->$method($orderCode, $data['tong_tien'], $info);
+
+        return $url;
+    }
+
+    private function neededSendingInfo(array $data, $tmpCartId) {
+        return [
+            'tcid' => $tmpCartId,
+            'name' => $data['ten_nguoi_nhan'],
+            'phone' => $data['sdt_nguoi_nhan'],
+            'email' => $data['email_nguoi_nhan'],
+            'addr' => $data['dia_chi'],
+            'note' => $data['ghi_chu'],
+            'order_date' => $data['ngay_dat_hang']
+        ];
+    }
+
+    private function generateUrlBaokim($orderCode, $totalCost, $info) {
         $url = $this->payment->createRequestUrl(
-            $order->ma_don_hang,
-            'entipi18@gmail.com',
-            $order->tong_tien
+            $orderCode,
+            CuaHang::baokimEmail(),
+            $totalCost
         );
 
-        echo $url;
+        return $url;
     }
 
-    private function processNganluongPayment($order) {
-        $this->payment = new NganluongPayment();
-        $this->payment->init('nganluong');
-        $url = $this->payment->buildCheckoutUrl(
-            config('payment.url.return_url'),
-            'entipi18@gmail.com',
-            'ntp',
-            $order->ma_don_hang,
-            $order->tong_tien
-        );
+    private function generateUrlNganluong($orderCode, $totalCost, $info) {
+        $url = $this->payment->buildUrl([
+            "return_url" => config('payment.url.return_url'),
+            "receiver" => CuaHang::nganluongEmail(),
+            "transaction_info" => json_encode($info),
+            "order_code" => $orderCode,
+            "price" => $totalCost
+        ]);
 
-        echo $url;
+        return $url;
     }
 }

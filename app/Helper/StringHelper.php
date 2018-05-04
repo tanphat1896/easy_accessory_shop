@@ -82,4 +82,8 @@ class StringHelper {
     public static function removeRedundantSpace($str) {
         return preg_replace('/\s\s/', ' ', $str);
     }
+
+    public static function getProductStatus($statusCode) {
+        return $statusCode > 0 ? 'Kinh doanh': 'Ngừng k.doanh';
+    }
 }

@@ -14,7 +14,9 @@
             <td>{{ $stt + 1 }}</td>
             <td>{{ $sanPham->ten_san_pham }}</td>
             <td>{{ $sanPham->so_luong }}</td>
-            <td class="collapsing" id="{{ 'status' . $sanPham->id }}">{{ $sanPham->tinhTrang() }}</td>
+            <td class="collapsing" id="{{ 'status' . $sanPham->id }}">
+                {{ \App\Helper\StringHelper::getProductStatus($sanPham->tinh_trang) }}
+            </td>
             <td class="collapsing">
                 <a href="{{ route('san_pham.show', [$sanPham->id]) }}"
                    class="ui small blue label">

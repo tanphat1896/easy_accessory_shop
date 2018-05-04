@@ -26,11 +26,11 @@ class CreateDonHangsTable extends Migration
             $table->tinyInteger('tinh_trang')->default(0);
             $table->dateTime('ngay_dat_hang');
             $table->dateTime('ngay_duyet_don')->nullable();
-            $table->enum('hinh_thuc_thanh_toan',['cash', 'baokim', 'nganluong']);
+            $table->enum('hinh_thuc_thanh_toan', ['cash', 'baokim', 'nganluong']);
             $table->string('payment_id', 100)->nullable();
             $table->tinyInteger('payment_type')->nullable();
             $table->foreign('customer_id','fk_customer_donhang')
-                ->references('id')->on('tai_khoans');
+                ->references('id')->on('customers');
             $table->timestamps();
         });
     }

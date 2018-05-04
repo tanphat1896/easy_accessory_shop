@@ -8,12 +8,17 @@
 
 namespace App\Helper;
 
+use App\Acme\Behavior\AccountStatistic;
 use App\BinhLuan;
 use App\DonHang;
 use App\SanPham;
 use App\ThuongHieu;
 
 class Statistic {
+    use AccountStatistic;
+
+    const CHART_FIELDS = ['label', 'value'];
+
     const reflectClass = [
         'product' => 'SanPham',
         'brand' => 'ThuongHieu',
@@ -47,5 +52,34 @@ class Statistic {
         ];
 
         return DonHang::where('tinh_trang', $types[$type])->get()->count();
+    }
+
+    public static function convertToChartData($source, $columns = [], $axisLabels = []) {
+        $output = [];
+        foreach ($source as $key => $data) {
+            $output[$key] = self::convertToDataSet($data, $columns);
+        }
+
+        return [
+            'data' => $output,
+            'axes' => [
+                'x' => empty($axisLabels[0]) ? '' : $axisLabels[0],
+                'y' => empty($axisLabels[1]) ? '' : $axisLabels[1]
+            ]
+        ];
+    }
+
+    private static function convertToDataSet($data, $columns) {
+        $set = [];
+        foreach ($data as $datum) {
+            $row = [];
+            foreach ($columns as $idx => $column) {
+                if (empty(self::CHART_FIELDS[$idx]))
+                    break;
+                $row[self::CHART_FIELDS[$idx]] = $datum->$column;
+            }
+            $set[] = $row;
+        }
+        return $set;
     }
 }

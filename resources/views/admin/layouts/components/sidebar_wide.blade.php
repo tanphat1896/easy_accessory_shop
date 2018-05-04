@@ -22,6 +22,9 @@
         </div>
     </div>
 
+    <a href="{{ route('account') }}" class="title item {{ Request::is('*account') ? 'active': '' }}">
+        <i class="dollar icon icon-left"></i>Tài chính</a>
+
     <a class="item {{ Request::is('*san_pham*') ? 'active-bar': '' }}" href="{{ route('san_pham.index') }}">
         <i class="box icon icon-left"></i>Sản phẩm</a>
 

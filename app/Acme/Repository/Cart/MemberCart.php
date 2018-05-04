@@ -58,11 +58,16 @@ class MemberCart extends Cart {
 
         if ($oldAmount > 0){
             $amount += $oldAmount;
-            $this->updateAmountExistProduct($product, $amount);
-            return;
+
+            if ($this->availableAmount($product->id, $amount))
+                $this->updateAmountExistProduct($product, $amount);
+
+            return self::NO_ERROR;
         }
 
         $this->activeCart->products()->attach([$product->id => ['so_luong' => $amount]]);
+
+        return self::NO_ERROR;
     }
 
     private function getAmountIfCartHas($product) {
@@ -81,17 +86,19 @@ class MemberCart extends Cart {
         $product = SanPham::whereSlug($productSlug)->first();
 
         $this->activeCart->products()->detach($product->id);
+
+        return self::NO_ERROR;
     }
 
     public function updateAmount($productSlug, $amount) {
         $product = SanPham::whereSlug($productSlug)->first();
 
         if (! $this->availableAmount($product->id, $amount))
-            return false;
+            return self::ERROR_TEXT['NOT_ENOUGH'];
 
         $this->updateAmountExistProduct($product, $amount);
 
-        return true;
+        return self::NO_ERROR;
     }
 
     public function cleanCart() {

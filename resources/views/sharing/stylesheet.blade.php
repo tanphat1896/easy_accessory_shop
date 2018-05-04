@@ -1,4 +1,5 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('smui/semanticoff.min.css') }}">
+{{--<link rel="stylesheet" type="text/css" href="{{ asset('smui/range.css') }}">--}}
 <link rel="stylesheet" href="{{ asset('css/semantic-override.css') }}">
 <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 <link rel="stylesheet" href="{{ asset('plugin/pace/white/pace-theme-minimal.css') }}">

@@ -51,6 +51,16 @@
 
     $('#btn-toggle-menu').click(toggleSidebar());
 
+    // (function(e) {
+    //     let timeout;
+    //     window.addEventListener('resize', function(e) {
+    //         clearTimeout(timeout);
+    //         timeout = setTimeout(function() {
+    //             console.log(e);
+    //         }, 300);
+    //     });
+    // })();
+
     function buildChart(id, type, dataSource, name, customColors = null) {
         let ctx = document.getElementById(id).getContext('2d');
         let colors = customColors || ['#36A2EB', '#4BC0C0', '#FFCD56', '#FF9F40', '#FF6384','#f57f17','#1565c0', '#004d40', '#827717'];

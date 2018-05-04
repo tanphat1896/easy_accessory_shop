@@ -13,6 +13,14 @@ abstract class Cart {
 
     protected $products = [];
 
+    const ERROR_TEXT = [
+        'NOT_ENOUGH' => 'Không đủ số lượng',
+        'BLOCKED' => 'Giỏ hàng đã khóa để thanh toán',
+        'NOT_EXIST' => 'Không có sản phẩm này'
+    ];
+
+    const NO_ERROR = false;
+
     abstract public function getProducts();
 
     abstract public function addProduct($product, $amount);

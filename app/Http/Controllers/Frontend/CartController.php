@@ -34,21 +34,26 @@ class CartController extends Controller
     }
 
     public function addProduct(Request $request, $productSlug) {
-        $this->cartRepository->addProduct($request, $productSlug);
+        $errorText = $this->cartRepository->addProduct($request, $productSlug);
 
-        return back();
+        return empty($errorText)
+            ? back()
+            : back()->with('error', $errorText);
     }
 
     public function removeProduct($productSlug) {
-        $this->cartRepository->removeProduct($productSlug);
+        $errorText = $this->cartRepository->removeProduct($productSlug);
 
-        return back();
+        return empty($errorText)
+            ? back()
+            : back()->with('error', $errorText);
     }
 
     public function updateAmount(Request $request, $productSlug) {
-        $success = $this->cartRepository->updateAmount($request, $productSlug);
+        $errorText = $this->cartRepository->updateAmount($request, $productSlug);
 
-        $message = $success ? []: ['error' => 'Không đủ số lượng'];
-        return back()->with($message);
+        return empty($errorText)
+            ? back()
+            : back()->with('error', $errorText);
     }
 }

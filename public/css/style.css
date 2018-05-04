@@ -29,6 +29,9 @@
     margin-top: 5px !important;
     margin-bottom: 5px !important;
 }
+.small-bot-margin {
+    margin-bottom: 5px !important;
+}
 .normal-margin {
     margin: 10px !important;
 }
@@ -51,8 +54,20 @@
 .small-padding {
     padding: 5px !important;
 }
+.small-lr-padding {
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+}
 .normal-padding {
     padding: 10px !important;
+}
+.normal-td-padding {
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+}
+.small-td-padding {
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
 }
 .big-padding {
     padding: 15px !important;
@@ -146,9 +161,10 @@
 .icon-accordion {
     margin-right: 13px !important;
 }
-
 .static-input {
-    display: inline-block;
+    /*border: 1px solid red;*/
+    /*display: inline;*/
+    /*width: 200px !important;*/
     padding: 0.67em 0;
 }
 
@@ -161,6 +177,11 @@
 .ui.form .inline.field > .selection.dropdown,
 .ui.form .inline.fields .field > .selection.dropdown {
     width: calc(100% - 250px) !important;
+}
+
+.limit-size input[type="number"] {
+    min-width: 45px !important;
+    max-width: 200px !important;
 }
 
 .help-text {
@@ -200,4 +221,8 @@
 
 .pusher {
     min-height: 330px !important;
+}
+
+.ui.range{
+    min-width: 200px;
 }

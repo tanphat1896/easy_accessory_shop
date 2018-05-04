@@ -12,63 +12,67 @@ namespace App\Acme\Behavior;
 use App\KhuyenMai;
 use App\LoaiSanPham;
 use App\SanPham;
+use Hamcrest\Thingy;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 trait SearchProductSale {
+
+    private $builder = null;
     private $products;
 
-    public function searchProductSale($queryString = 'product-type=1;name=Sam', $endDate = null) {
-        $builder = $this->buildBuilderFromQueries($queryString);
-        dd($builder->get());
+
+    public function searchProductSale(Request $request) {
+        $this->buildBuilderFromQueries($request);
+
+        if (empty($this->builder))
+            return response()->json([]);
+
+        $this->exceptSalingProduct();
+
+        $this->products = $this->builder
+            ->select(['san_phams.id', 'ten_san_pham as name'])
+            ->get();
+
+        return response()->json($this->products);
     }
 
-    private function buildBuilderFromQueries($queryString) {
-        $queries = $this->extractQuery($queryString);
+    private function buildBuilderFromQueries(Request $request) {
+        $queries = $request->query();
 
         $builder = null;
 
-        if (!empty($queries['product-type']))
-            $builder = LoaiSanPham::find($queries['product-type'])->sanPhams();
+        if (!empty($queries['pt']))
+            $this->builder = LoaiSanPham::find($queries['pt'])->sanPhams();
 
-        if (!empty($queries['name']))
-            $builder = $this->getBuilderFormProductName($builder, $queries['name']);
-
-        return $builder;
+        if (!empty($queries['n']))
+            $this->getBuilderFormProductName($queries['n']);
     }
 
-    private function extractQuery($queryString) {
-        $parts = explode(';', $queryString);
-        $queries = [];
-        foreach ($parts as $part) {
-            if (!preg_match('/.+(=).+/', $part))
-                continue;
-            $bunch = explode('=', $part);
-            $queries[$bunch[0]] = $bunch[1];
-        }
-        return $queries;
-    }
-
-    private function getBuilderFormProductName($builder, $name) {
+    private function getBuilderFormProductName($name) {
         $condition = [['ten_san_pham', 'like', "%$name%"]];
-        if (empty($builder))
-            return SanPham::where($condition);
 
-        return $builder->where($condition);
+        $this->builder = empty($this->builder)
+            ? SanPham::where($condition)
+            : $this->builder->where($condition);
     }
 
-    public function getProductIdsOnSale($endDate = null) {
+    private function exceptSalingProduct() {
+        $salingProductIds = $this->getProductIdsOnSale();
+
+        $this->builder = $this->builder->whereNotIn('san_phams.id', $salingProductIds);
+    }
+
+    public function getProductIdsOnSale() {
         $currentlyOnSaleCondition = [
             ['ngay_ket_thuc', '>=', date('Y-m-d')]
         ];
-        $sales = DB::table('khuyen_mais as k')
+
+        $productIds = DB::table('khuyen_mais as k')
             ->join('chi_tiet_khuyen_mais as c', 'k.id', '=', 'c.khuyen_mai_id')
             ->where($currentlyOnSaleCondition)
-            ->get();
+            ->pluck('san_pham_id');
 
-        $output = array_map(function($sale) {
-            return $sale->san_pham_id;
-        }, $sales->toArray());
-
-        return $output;
+        return $productIds->toArray();
     }
 }

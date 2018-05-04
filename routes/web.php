@@ -11,11 +11,15 @@
 |
 */
 
+Route::get('/testing', function(){
+    return \App\Helper\Statistic::getRevenueByAllYear();
+});
+
 Route::get('/', 'Frontend\IndexController@index');
 
 Route::get('/tim-kiem/{keyword?}', 'Frontend\SearchController@search');
 
-Route::get('/san-pham/{slug}/{filter?}', 'Frontend\SanPhamController@showGroup')->name('get_product');
+Route::get('/san-pham/{slug}', 'Frontend\SanPhamController@showGroup')->name('get_product');
 Route::get('/san-pham-{type}', 'Frontend\SanPhamController@showSpecial')->name('product.special');
 
 Route::get('/chi-tiet/{slug}', 'Frontend\SanPhamController@show')->name('product.viewer');
@@ -28,6 +32,7 @@ Route::put('/gio-hang/{slug}', 'Frontend\CartController@updateAmount')->name('ca
 Route::resource('/checkout', 'Frontend\CheckoutController', ['only' => ['index', 'store']]);
 
 Route::get('/payment-result', 'Frontend\CheckoutController@checkoutOnlineResult');
+Route::get('/payment-cencel', 'Frontend\CheckoutController@checkoutOnlineCancel');
 
 
 Route::resource('/don-hang', 'Frontend\OrderController', ['only' => ['index', 'show']])
@@ -37,7 +42,8 @@ Route::get('/tin-tuc/bai-viet/{slug}', 'Frontend\IndexController@showNews')->nam
 Route::get('/tin-tuc/', 'Frontend\IndexController@showAllNews')->name('news.all');
 
 Route::group(['middleware' => 'customer'], function() {
-    Route::get('/khach-hang/lich-su-mua-hang', 'Frontend\CustomerController@history')->name('customer.history');
+    Route::get('/khach-hang/lich-su-mua-hang', 'Frontend\CustomerController@history')
+        ->name('customer.history');
     Route::get('/khach-hang/don-hang/{code}', 'Frontend\CustomerController@getOrderDetailTable')
         ->name('customer.orderDetail');
 
@@ -59,10 +65,6 @@ Route::get('customer/login', 'Auth\CustomerLoginController@showLoginForm')->name
 Route::post('customer/logout', 'Auth\CustomerLoginController@logout')->name('customer.logout');
 Route::post('customer/login', 'Auth\CustomerLoginController@login')->name('customer.login.submit');
 
-Route::get('/testing', function() {
-
-});
-
 
 Route::get('/admin/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
 Route::post('/admin/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
@@ -73,7 +75,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
 
     Route::get('/', 'Admin\AdminController@index')->name('admin.dashboard');
     Route::get('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
-    
+
+
+    Route::get('/account', 'Admin\StatisticController@account')->name('account');
+
 
     Route::resource('thuong_hieu', 'Admin\ThuongHieuController', ["except" => ["create", "show", "edit"]]);
     Route::resource('loai_sp', 'Admin\LoaiSanPhamController', ["except" => ["create", "show", "edit"]]);
@@ -116,7 +121,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
     });
 
 
-    Route::get('ajax-request/products/search/{query}/{sale?}', 'Admin\SanPhamController@search');
+    Route::prefix('ajax-request')->group(function() {
+        Route::get('products/sale-search', 'Admin\SanPhamController@searchProductSale');
+        Route::get('statistic/account', 'Admin\StatisticController@getAccount');
+    });
 
     Route::get('/testing', 'Admin\SanPhamController@searchProductSale');
 });

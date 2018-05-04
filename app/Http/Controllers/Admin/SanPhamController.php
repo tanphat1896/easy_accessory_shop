@@ -85,10 +85,4 @@ class SanPhamController extends Controller {
 
         return response()->json(['success' => true]);
     }
-
-//    public function search($query) {
-//        $products = $this->sanPhamRepository->search($query);
-//
-//        return $products;
-//    }
 }

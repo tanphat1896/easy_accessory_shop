@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+use App\Acme\Behavior\AccountStatistic;
 use App\Acme\Behavior\Statistic;
 use App\Admin;
 use App\Helper\AuthHelper;
@@ -10,6 +11,7 @@ use App\Http\Controllers\Controller;
 class AdminController extends Controller
 {
     use Statistic;
+    use AccountStatistic;
     /**
      * Create a new controller instance.
      *
@@ -29,6 +31,6 @@ class AdminController extends Controller
         $brandingProducts = $this->getProductAmountByBranding();
         $ptypeProducts = $this->getProductAmountByType();
         $orders = $this->getOrdersStatus();
-        return view('admin', compact('brandingProducts', 'ptypeProducts', 'orders'));
+        return view('admin', compact('brandingProducts', 'ptypeProducts', 'orders', 'revenues'));
     }
 }
