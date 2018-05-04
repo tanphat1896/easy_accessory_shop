@@ -19,14 +19,16 @@ class NhapHangController extends Controller
 
     public function nhapHangIndex($adminID)
     {
-        $phieuNhaps = PhieuNhap::where('admin_id', $adminID)->get();
+        $phieuNhaps = PhieuNhap::where('admin_id', $adminID)
+            ->orderBy('id', 'desc')->paginate(10);
         $nhaCungCaps = NhaCungCap::all();
         return view('admin.nhap_hang.index.index', compact(['phieuNhaps','nhaCungCaps']));
     }
 
     public function index()
     {
-        $phieuNhaps = PhieuNhap::where('admin_id', AuthHelper::adminId())->get();
+        $phieuNhaps = PhieuNhap::where('admin_id', AuthHelper::adminId())
+            ->orderBy('id', 'desc')->paginate(10);
         $nhaCungCaps = NhaCungCap::all();
         return view('admin.nhap_hang.index.index', compact(['phieuNhaps','nhaCungCaps']));
     }
@@ -67,7 +69,7 @@ class NhapHangController extends Controller
      */
     public function show($id)
     {
-        $chiTietPhieuNhaps = ChiTietPhieuNhap::where('phieu_nhap_id',$id)->get();
+        $chiTietPhieuNhaps = PhieuNhap::find($id)->chiTietPhieuNhaps()->paginate(10);
         return view('admin.nhap_hang.san_pham.index', compact(['chiTietPhieuNhaps','id']));
     }
 

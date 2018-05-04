@@ -43,7 +43,7 @@
                     {{--(<span style="color: red">chưa thanh toán</span>)--}}
                 {{--@endif--}}
             {{--</td>--}}
-            <td>{{ App\ChiTietDonHang::where('don_hang_id', $donHang->id)->count() }}</td>
+            <td>{{ $donHang->chiTietDonHangs()->count() }}</td>
             <td>{{ number_format($donHang->tong_tien) }} đ</td>
             <td>
                 @if($donHang->tinh_trang == 0)
@@ -58,19 +58,16 @@
                 @endif
             </td>
             <td class="collapsing">
-                <a class="ui small blue label need-popup" href="{{ route('don_hang.show',[$donHang->id]) }}"
-                    data-content="Xem đơn">
+                <a class="ui small blue label" href="{{ route('don_hang.show',[$donHang->id]) }}">
                     <i class="eye open fitted icon"></i>
                 </a>
                 @if($donHang->tinh_trang == 0)
-                    <a class="ui small teal label need-popup" href="{{ route('duyet_don', [$donHang->id]) }}"
-                       onclick="return confirm('Bạn chắc chắn muốn duyệt đơn hàng này?')"
-                        data-content="Duyệt đơn">
+                    <a class="ui small teal label" href="{{ route('duyet_don', [$donHang->id]) }}"
+                       onclick="return confirm('Bạn chắc chắn muốn duyệt đơn hàng này?')">
                         <i class="check open fitted icon"></i>
                     </a>
-                    <a class="ui small orange label need-popup" href="{{ route('huy_don', [$donHang->id]) }}"
-                        onclick="return confirm('Bạn chắc chắn muốn hủy đơn hàng này?')"
-                        data-content="Hủy đơn">
+                    <a class="ui small orange label" href="{{ route('huy_don', [$donHang->id]) }}"
+                        onclick="return confirm('Bạn chắc chắn muốn hủy đơn hàng này?')">
                         <i class="remove open fitted icon"></i>
                     </a>
                 @endif

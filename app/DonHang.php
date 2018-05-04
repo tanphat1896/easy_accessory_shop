@@ -24,6 +24,14 @@ class DonHang extends Model
         'payment_type'
     ];
 
+    public function chiTietDonHangs()
+    {
+        return $this->hasMany(
+            ChiTietDonHang::class,
+            'don_hang_id',
+            'id');
+    }
+
     public function products() {
         return $this->belongsToMany(
             SanPham::class,
@@ -46,5 +54,14 @@ class DonHang extends Model
             'baokim' => 'Cổng Bảo Kim'
         ];
         return $payment[$this->hinh_thuc_thanh_toan];
+    }
+
+    public function tinhTrangThanhToan()
+    {
+        if ($this->hinh_thuc_thanh_toan != "cash")
+        {
+            $paymentType = array("", "(Thanh toán trực tiếp)", "(Thanh toán tạm giữ)");
+            return $paymentType[$this->payment_type];
+        }
     }
 }

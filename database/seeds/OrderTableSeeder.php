@@ -26,6 +26,7 @@ class OrderTableSeeder extends Seeder
     function getRow() {
         $faker = Faker\Factory::create();
         $date = self::getValidDate();
+        $status = array("cash", "baokim", "nganluong");
         return [
             'ma_don_hang' => strtoupper(uniqid('DH_')),
             'ten_nguoi_nhan' => $faker->name,
@@ -35,9 +36,12 @@ class OrderTableSeeder extends Seeder
             'tong_tien' => 0,//$faker->numberBetween(25000, 10000000),
             'ngay_dat_hang' => $date,
             'ngay_duyet_don' => $date,
-            'hinh_thuc_thanh_toan' => 'cash',
+            'hinh_thuc_thanh_toan' => $status[rand(0, 2)],
             'ghi_chu' => $faker->sentence,
-            'tinh_trang' => $date < '2018-1-1' ? '2' : random_int(1, 100)%3,
+            'tinh_trang' => rand(0, 2),
+//            'tinh_trang' => $date < '2018-1-1' ? '2' : random_int(1, 100)%3,
+            'payment_type' => rand(1, 2),
+            'payment_id' => "fsdfwe123123",
             'created_at' => $date,
             'updated_at' => $date
         ];

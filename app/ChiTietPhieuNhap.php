@@ -13,9 +13,18 @@ class ChiTietPhieuNhap extends Model
         return $this->belongsTo(PhieuNhap::class);
     }
 
-    public function sanPham() {
-        return $this->belongsTo(SanPham::class);
-//        return $this->belongsToMany(SanPham::class,'sanPhams_phieuNhaps',
-//            'phieu_nhap_id','san_pham_id');
+    public function soLuongSanPham()
+    {
+        return SanPham::find($this->san_pham_id)->so_luong;
+    }
+
+    public function tenSanPham()
+    {
+        return SanPham::find($this->san_pham_id)->ten_san_pham;
+    }
+
+    public function isDelete()
+    {
+        return ($this->da_xoa);
     }
 }

@@ -28,18 +28,6 @@
             </button>
 
             @include('admin.nhap_hang.index.table')
-
-            <button type="submit" class="ui small red delete button need-popup"
-                    data-content="Xóa các mục vừa chọn"
-                    onclick="return confirmDelete()"
-            >
-                <i class="delete fitted icon"></i>
-                <strong>Xóa </strong>
-            </button>
-            <button type="button" class="ui small blue button" onclick="$('#modal-them-phieu-nhap').modal('show')">
-                <i class="add fitted icon"></i>
-                <strong>Thêm mới </strong>
-            </button>
         </form>
 
         @include('admin.nhap_hang.index.modals')
