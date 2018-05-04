@@ -49,6 +49,10 @@ class AuthHelper {
         return self::admin()->name;
     }
 
+    public static function adminPhone() {
+	    return self::admin()->phone;
+    }
+
     public static function admin() {
 	    return self::adminGuard()->user();
     }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 use App\Acme\Behavior\AccountStatistic;
 use App\Acme\Behavior\Statistic;
+use App\Admin;
+use App\Helper\AuthHelper;
 use App\ThuongHieu;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;

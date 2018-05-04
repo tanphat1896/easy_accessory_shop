@@ -16,9 +16,17 @@ class NhapHangController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function nhapHangIndex($adminID)
+    {
+        $phieuNhaps = PhieuNhap::where('admin_id', $adminID)->get();
+        $nhaCungCaps = NhaCungCap::all();
+        return view('admin.nhap_hang.index.index', compact(['phieuNhaps','nhaCungCaps']));
+    }
+
     public function index()
     {
-        $phieuNhaps = PhieuNhap::all();
+        $phieuNhaps = PhieuNhap::where('admin_id', AuthHelper::adminId())->get();
         $nhaCungCaps = NhaCungCap::all();
         return view('admin.nhap_hang.index.index', compact(['phieuNhaps','nhaCungCaps']));
     }
