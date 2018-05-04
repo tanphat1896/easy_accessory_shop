@@ -21,14 +21,14 @@
 
         @foreach($phieuNhaps as $stt => $phieuNhap)
             <tr>
-                @if($phieuNhap->so_san_pham == 0)
+                @if($phieuNhap->isEmpty())
                     <td class="collapsing">
                         <div class="ui child checkbox">
                             <input type="checkbox" class="hidden" name="phieu-nhap-id[]" value="{{ $phieuNhap->id }}">
                         </div>
                     </td>
                 @else
-                    <td class="collapsing" data-tooltip="Còn sản phẩm"></td>
+                    <td class="collapsing"></td>
                 @endif
                 <td>{{ $stt + 1 }}</td>
                 <td>{{ \App\PhieuNhap::find($phieuNhap->id)->Admin->name }}</td>
@@ -61,6 +61,14 @@
         @endforeach
 
     </tbody>
+
+    @if (method_exists($phieuNhaps, 'render'))
+        <tfoot>
+        <tr class="center aligned"><th colspan="9">
+                {{ $phieuNhaps->render('vendor.pagination.smui')}}
+            </th></tr>
+        </tfoot>
+    @endif
 
 </table>
 

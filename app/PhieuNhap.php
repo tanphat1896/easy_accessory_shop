@@ -16,4 +16,17 @@ class PhieuNhap extends Model
     public function admin() {
         return $this->belongsTo(Admin::class);
     }
+
+    public function chiTietPhieuNhaps()
+    {
+        return $this->hasMany(
+            ChiTietPhieuNhap::class,
+            'phieu_nhap_id',
+            'id');
+    }
+
+    public function isEmpty()
+    {
+        return ($this->so_san_pham == 0);
+    }
 }

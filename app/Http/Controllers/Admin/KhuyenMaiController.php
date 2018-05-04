@@ -11,8 +11,7 @@ class KhuyenMaiController extends Controller
 {
     public function index(){
         $sales = KhuyenMai::where('parent_id', null)
-            ->orderBy('ngay_ket_thuc', 'desc')
-            ->get();
+            ->orderBy('ngay_ket_thuc', 'desc')->paginate(10);
 
         return view('admin.khuyen_mai.parent_sale.index', compact('sales'));
     }

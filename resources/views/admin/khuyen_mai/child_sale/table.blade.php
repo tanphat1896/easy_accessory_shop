@@ -39,4 +39,12 @@
         </tr>
     @endforeach
     </tbody>
+
+    @if (method_exists($parentSale, 'render'))
+        <tfoot>
+        <tr class="center aligned"><th colspan="9">
+                {{ $parentSale->render('vendor.pagination.smui')}}
+            </th></tr>
+        </tfoot>
+    @endif
 </table>

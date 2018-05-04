@@ -49,3 +49,4 @@
         {{ $brands->render('vendor.pagination.smui') }}
     </div>
 @endif
+

@@ -20,7 +20,7 @@
     <tbody>
 
     @foreach($chiTietPhieuNhaps as $stt => $chiTietPhieuNhap)
-        @if($chiTietPhieuNhap->da_xoa)
+        @if($chiTietPhieuNhap->isDelete())
             @continue
         @endif
 
@@ -33,10 +33,12 @@
             </td>
             <td>{{ $stt + 1 }}</td>
             <td><a href="{{ route('san_pham.show',[$chiTietPhieuNhap->san_pham_id]) }}">
-                    {{ \App\ChiTietPhieuNhap::find($chiTietPhieuNhap->id)->SanPham->ten_san_pham }}</a></td>
+                    {{ $chiTietPhieuNhap->tenSanPham() }}
+                </a>
+            </td>
             <td>{{ $chiTietPhieuNhap->so_luong }}</td>
             <td>{{ number_format($chiTietPhieuNhap->don_gia) }} đ</td>
-            <td>{{ \App\ChiTietPhieuNhap::find($chiTietPhieuNhap->id)->SanPham->so_luong }}</td>
+            <td>{{ $chiTietPhieuNhap->soLuongSanPham() }}</td>
             <td>
                 <a href="#" onclick="$( '{{ '#modal-sua-'.$chiTietPhieuNhap->id }}' ).modal('show')"
                    class="ui small green label">
@@ -47,5 +49,13 @@
     @endforeach
 
     </tbody>
+
+    @if (method_exists($chiTietPhieuNhaps, 'render'))
+        <tfoot>
+        <tr class="center aligned"><th colspan="9">
+                {{ $chiTietPhieuNhaps->render('vendor.pagination.smui')}}
+            </th></tr>
+        </tfoot>
+    @endif
 
 </table>

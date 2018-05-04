@@ -37,6 +37,7 @@ class NhapHangSeeder extends Seeder {
         return [
             'ngay_nhap' => $date,
             'admin_id' => random_int(1, 2),
+            'so_san_pham' => 3,
             'nha_cung_cap_id' => random_int(1, 2)
         ];
     }

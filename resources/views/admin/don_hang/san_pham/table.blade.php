@@ -14,11 +14,21 @@
         <tr>
             <td>{{ $stt + 1 }}</td>
             <td><a href="{{ route('san_pham.show', [$chiTietDonHang->san_pham_id]) }}">
-                    {{ \App\SanPham::find($chiTietDonHang->san_pham_id)->ten_san_pham }}</a></td>
+                    {{ $chiTietDonHang->tenSanPham() }}
+                </a>
+            </td>
             <td>{{ $chiTietDonHang->so_luong }}</td>
             <td>{{ number_format($chiTietDonHang->don_gia) }} đ</td>
-            <td>{{ number_format($chiTietDonHang->don_gia * $chiTietDonHang->so_luong) }} đ</td>
+            <td>{{ number_format($chiTietDonHang->tongTien()) }} đ</td>
         </tr>
     @endforeach
     </tbody>
+
+    @if (method_exists($chiTietDonHangs, 'render'))
+        <tfoot>
+        <tr class="center aligned"><th colspan="9">
+                {{ $chiTietDonHangs->render('vendor.pagination.smui')}}
+            </th></tr>
+        </tfoot>
+    @endif
 </table>

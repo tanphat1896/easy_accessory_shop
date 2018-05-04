@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 class NhaCungCapController extends Controller
 {
     public function index() {
-        $nhaCungCaps = NhaCungCap::all();
+        $nhaCungCaps = NhaCungCap::paginate(10);
 
         return view('admin.nha_cung_cap.index', compact('nhaCungCaps'));
     }

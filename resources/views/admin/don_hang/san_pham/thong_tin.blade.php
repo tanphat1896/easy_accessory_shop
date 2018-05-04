@@ -37,25 +37,8 @@
             <div class="inline field">
                 <label class="label-fixed">Hình thức thanh toán:</label>
                 <div class="static-input">
-                    @switch($donHang->hinh_thuc_thanh_toan)
-                        @case('cash')
-                            Trực tiếp
-                            @break
-                        @case('nganluong')
-                            Ngân lượng
-                            @break
-                        @case('baokim')
-                            Bảo kim
-                            @break
-                        @if($donHang->hinh_thuc_thanh_toan != 'cash')
-                            @if($donHang->payment_type == 1)
-                                (thanh toán trực tiếp)
-                            @elseif($donHang->payment_type == 2)
-                                (thanh toán tạm giữ)
-                            @endif
-                        @endif
-                    @endswitch
-
+                    {{ $donHang->paymentType() }}
+                    {{ $donHang->tinhTrangThanhToan() }}
                 </div>
             </div>
 

@@ -36,21 +36,6 @@
             <div class="ui divider small-td-margin hidden"></div>
 
             @include('admin.khuyen_mai.child_sale.table')
-
-            <button type="submit" class="ui small red delete button need-popup"
-                    data-content="Xóa các mục vừa chọn"
-                    onclick="return confirmDelete()"
-            >
-                <i class="delete fitted icon"></i>
-                <strong>Xóa </strong>
-            </button>
-
-            @if(! $parentSale->overdue())
-                <button type="button" class="ui small blue button" onclick="$('#modal-them-km').modal('show')">
-                    <i class="add fitted icon"></i>
-                    <strong>Thêm mới </strong>
-                </button>
-            @endif
         </form>
 
         @if (! $parentSale->overdue())
