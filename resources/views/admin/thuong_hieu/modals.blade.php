@@ -31,7 +31,7 @@
                     <input type="text" value="{{ $brand->ten_thuong_hieu }}" name="ten-thuong-hieu" required>
                 </div>
                 <div class="field">
-                    <button class="ui basic blue fluid button"><strong>Lưu</strong></button>
+                    <button class="ui blue fluid button"><strong>Lưu</strong></button>
                 </div>
             </form>
         </div>

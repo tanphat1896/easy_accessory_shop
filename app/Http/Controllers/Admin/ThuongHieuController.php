@@ -2,24 +2,27 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helper\PagingHelper;
 use App\Helper\StringHelper;
 use App\Http\Requests\ThuongHieuFormRequest;
 use App\ThuongHieu;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class ThuongHieuController extends Controller
-{
+class ThuongHieuController extends Controller {
 
-    public function index()
-    {
-        $brands = ThuongHieu::all();
+    public function index(Request $request) {
+        $brandName = $request->get('name') ?: '';
+
+        $brands = empty($brandName)
+            ? ThuongHieu::paginate(PagingHelper::PER_PAGE)
+            : ThuongHieu::where('slug', 'like', "%$brandName%")
+                ->paginate(PagingHelper::PER_PAGE);
 
         return view('admin.thuong_hieu.index')->withBrands($brands);
     }
 
-    public function store(ThuongHieuFormRequest $request)
-    {
+    public function store(ThuongHieuFormRequest $request) {
         $name = $request->get('ten-thuong-hieu');
         $slug = StringHelper::toSlug($name);
 
@@ -34,8 +37,7 @@ class ThuongHieuController extends Controller
         return back()->with('success', 'Thêm thành công');
     }
 
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         $brand = ThuongHieu::findOrFail($id);
 
         $brand->ten_thuong_hieu = $request->get('ten-thuong-hieu');
@@ -46,14 +48,7 @@ class ThuongHieuController extends Controller
         return back()->with('success', 'Cập nhật thành công');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Request $request)
-    {
+    public function destroy(Request $request) {
         $ids = $request->get('thuong-hieu-id');
 
         if (empty($ids))
@@ -71,6 +66,11 @@ class ThuongHieuController extends Controller
 
     private function canDelete($ids) {
         $errors = [];
+
+        if (!is_array($ids)) {
+            $brandIds[] = $ids;
+            $ids = $brandIds;
+        }
 
         foreach ($ids as $id) {
             $brand = ThuongHieu::findOrFail($id);
