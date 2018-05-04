@@ -49,6 +49,9 @@
     <a class="item {{Request::is('*/khuyen_mai') ? 'active-bar': '' }}" href="/admin/khuyen_mai">
         <i class="users icon icon-left"></i>Nhân viên </a>
 
+    <a class="item {{Request::is('*/cai_dat') ? 'active-bar': '' }}" href="/admin/cai_dat">
+        <i class="settings icon icon-left"></i>Cài đặt </a>
+
     <div class="ui accordion item no-padding">
         <div class="title item menu-item-padding color-white {{ Request::is('*noi_dung*') ? 'active-bar': ''}}">
             <i class="newspaper icon icon-left icon-accordion"></i>
