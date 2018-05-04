@@ -3,8 +3,12 @@
     <strong>{{ \App\Helper\AuthHelper::adminName() }}</strong>
     <i class="dropdown icon"></i>
     <div class="menu">
-        <a href="{{ route('admin.logout') }}" class="item">
+        <a onclick="$('#modal-edit-info').modal('show')" class="item">
+            <i class="edit icon"></i>Cập nhật thông tin</a>
+        <a href="#" class="item">
             <i class="sign out icon"></i>Đăng xuất</a>
         <a href="" class="item">Thông tin</a>
+
+        @include('admin.layouts.components.modals_edit')
     </div>
 </div>

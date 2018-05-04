@@ -43,7 +43,7 @@
     <a class="item {{Request::is('*/khuyen_mai') ? 'active-bar': '' }}" href="/admin/khuyen_mai">
         <i class="certificate icon icon-left"></i>Khuyến mãi </a>
 
-    <a class="item {{Request::is('*/khuyen_mai') ? 'active-bar': '' }}" href="/admin/khuyen_mai">
+    <a class="item {{Request::is('*/nhan_vien') ? 'active-bar': '' }}" href="/admin/nhan_vien">
         <i class="users icon icon-left"></i>Nhân viên </a>
 
     <div class="ui accordion item no-padding">

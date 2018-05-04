@@ -17,7 +17,8 @@ class DonHangController extends Controller
      */
     public function index()
     {
-        $donHangs = DonHang::all();
+//        $donHangs = DonHang::all();
+        $donHangs = DonHang::paginate(10);
 
         return view('admin.don_hang.index.index', compact('donHangs'));
     }

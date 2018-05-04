@@ -79,6 +79,8 @@
                         <strong>Đăng ký</strong>
                     </button>
                 </div>
+
+                <div class="ui divider hidden">
             </form>
         </div>
 @endsection
