@@ -2,6 +2,11 @@
 
 @section('title', 'Quản lý thương hiệu')
 
+@push('style')
+    <style>
+    </style>
+@endpush
+
 @section('content')
     <div class="ui blue raised segment">
         <h3 class="ui dividing header center aligned">Quản lý thương hiệu</h3>
@@ -27,30 +32,28 @@
                     <strong>Thêm mới </strong>
                 </button>
             </div>
-
             <div class="field force-right no-clear">
-                <div class="ui input right labeled">
-                    <input type="text" id="search-brand" placeholder="Tìm kiếm"
+
+                <div class="ui small input right labeled">
+
+                    @if (Request::has('name'))
+                        <i class="remove-input remove red icon pointer"
+                           onclick="redirectTo('{{ route('thuong_hieu.index') }}')"></i>
+                    @endif
+
+                    <input type="text" class="need-remove" id="search-brand" placeholder="Tìm kiếm"
                            onkeyup="pressEnter(event, searchBrand)" value="{{ Request::get('name') }}">
+
                     <a href="#" class="ui blue label"
-                        onclick="searchBrand()">
+                       onclick="searchBrand()">
                         <i class="search fitted icon"></i></a>
                 </div>
+
             </div>
 
-            @include('admin.thuong_hieu.table')
+            <div class="ui divider hidden clearing no-td-margin"></div>
 
-            {{--<button type="submit" class="ui small red delete button need-popup"--}}
-            {{--data-content="Xóa các mục vừa chọn"--}}
-            {{--onclick="return confirmDelete()"--}}
-            {{-->--}}
-            {{--<i class="delete fitted icon"></i>--}}
-            {{--<strong>Xóa </strong>--}}
-            {{--</button>--}}
-            {{--<button type="button" class="ui small blue button" onclick="$('#modal-them-thuong-hieu').modal('show')">--}}
-            {{--<i class="add fitted icon"></i>--}}
-            {{--<strong>Thêm mới </strong>--}}
-            {{--</button>--}}
+            @include('admin.thuong_hieu.table')
         </form>
 
         @include('admin.thuong_hieu.modals')
@@ -63,21 +66,14 @@
 
         bindSelectAll('chon-het-thuong-hieu');
 
+        let brandUrl = '{{ route('thuong_hieu.index') }}';
         $('.pagination a').click(function (e) {
             e.preventDefault();
-            searchBrand('page=' + e.target.innerText);
+            finding(brandUrl, 'search-brand', 'name', 'page=' + e.target.innerText);
         });
 
-        let searchBrand = function (page = null) {
-            let keyword = $('#search-brand').val();
-            let query = keyword.trim() === '' ? '' : '?name=' + keyword;
-            query += query === '' ? '?' + pageQuery(page) : '&' + pageQuery(page);
-
-            window.location.href = '{{ route('thuong_hieu.index') }}' + query;
-        };
-
-        function pageQuery(page) {
-            return page == null ? '' : page;
+        function searchBrand() {
+            finding(brandUrl, 'search-brand', 'name');
         }
     </script>
 @endpush

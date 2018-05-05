@@ -12,7 +12,8 @@
 */
 
 Route::get('/testing', function(){
-    return \App\Helper\Statistic::getRevenueByAllYear();
+    dd(password_verify('1111111', \App\Customer::find(1)->getAuthPassword()));
+//    return \App\Helper\Statistic::getRevenueByAllYear();
 });
 
 Route::get('/', 'Frontend\IndexController@index');
@@ -77,7 +78,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
     Route::get('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
 
 
-    Route::get('/account', 'Admin\StatisticController@account')->name('account');
+    Route::get('/thong_ke/thu_chi', 'Admin\StatisticController@account')->name('account');
 
 
     Route::resource('thuong_hieu', 'Admin\ThuongHieuController', ["except" => ["create", "show", "edit"]]);

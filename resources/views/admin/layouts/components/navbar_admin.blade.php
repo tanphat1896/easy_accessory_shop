@@ -5,7 +5,7 @@
     <div class="menu">
         <a onclick="$('#modal-edit-info').modal('show')" class="item">
             <i class="edit icon"></i>Cập nhật thông tin</a>
-        <a href="#" class="item">
+        <a href="{{ route('admin.logout') }}" class="item">
             <i class="sign out icon"></i>Đăng xuất</a>
         <a href="" class="item">Thông tin</a>
 

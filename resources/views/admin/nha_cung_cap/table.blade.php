@@ -26,10 +26,10 @@
             <td>{{ $nhaCungCap->dia_chi }}</td>
             <td>{{ $nhaCungCap->so_dien_thoai }}</td>
             {{--<td>{{ $brand->slug }}</td>--}}
-            <td class="collapsing">
-                <a href="#" class="ui green label"
+            <td class="center aligned">
+                <a href="#" class="ui tiny green label"
                         onclick="$('{{ "#modal-sua-" . $nhaCungCap->id }}').modal('show')">
-                    <i class="edit fitted icon"></i>
+                    <i class="pencil fitted icon"></i>
                 </a>
             </td>
         </tr>
