@@ -60,7 +60,8 @@
                     <span id="anh-dai-dien-name"></span>
                 </label>
                 <input type="file" name="anh-dai-dien" id="anh-dai-dien" style="display: none;"
-                       onchange="$('#anh-dai-dien-name').text($('#anh-dai-dien')[0].files[0].name)">
+                       onchange="$('#anh-dai-dien-name').text($('#anh-dai-dien')[0].files[0].name)"
+                       accept="image/x-png,image/jpeg">
             </div>
 
             <div class="ui divider"></div>
@@ -72,7 +73,7 @@
                     <ul class="ui list" id="ds-anh-chi-tiet"></ul>
                 </label>
                 <input type="file" multiple name="anh-chi-tiet[]" max="5" id="anh-chi-tiet" style="display: none;"
-                       onchange="updateFileNames()">
+                       onchange="updateFileNames()" accept="image/x-png,image/jpeg">
             </div>
         </div>
         <div class="row">

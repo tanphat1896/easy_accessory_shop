@@ -66,7 +66,7 @@
                                 @if (! Auth::guard('customer')->check())
                                     <span type="button" class="ui basic blue label pointer no-lr-margin small-td-margin"
                                             onclick="$('#modal-auth').modal('show');">
-                                        <strong>Đã có tài khoản?</strong>
+                                        Đã có tài khoản?
                                     </span>
                                 @endif
 
@@ -154,7 +154,7 @@
                 <tbody>
                 @foreach($products as $product)
                     <tr>
-                        <td>
+                        <td class="left aligned">
                             <img src="/{{ $product['product']->anh_dai_dien }}" class="ui mini image spaced">
                             {{ $product['product']->getName() }}
                         </td>

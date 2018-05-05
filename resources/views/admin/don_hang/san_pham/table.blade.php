@@ -23,12 +23,10 @@
         </tr>
     @endforeach
     </tbody>
-
-    @if (method_exists($chiTietDonHangs, 'render'))
-        <tfoot>
-        <tr class="center aligned"><th colspan="9">
-                {{ $chiTietDonHangs->render('vendor.pagination.smui')}}
-            </th></tr>
-        </tfoot>
-    @endif
 </table>
+
+@if (method_exists($chiTietDonHangs, 'render'))
+    <div class="ui basic segment center aligned no-padding">
+        {{ $chiTietDonHangs->render('vendor.pagination.smui')}}
+    </div>
+@endif

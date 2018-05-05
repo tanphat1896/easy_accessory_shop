@@ -3,7 +3,7 @@
             class="ui blue label pointer">Cập nhật</button>
 </h5>
 
-<table class="ui blue striped table">
+<table class="ui blue striped table celled">
     <thead>
     <tr><th>Thông số</th>
         <th>Giá trị</th></tr>

@@ -13,9 +13,6 @@
                         <div class="ui fluid link card center-aligned"
                              onclick="window.location.href='{{ '/chi-tiet/' . $plainProduct->slug }}'">
                             <div class="image">
-                                @if (!empty($plainProduct->gia_tri_km))
-                                    <span class="ui red right ribbon label"> -{{ $plainProduct->gia_tri_km }}%</span>
-                                @endif
                                 <img class="lazyload" data-src="{{ asset($plainProduct->anh_dai_dien) }}">
                             </div>
 
@@ -29,6 +26,9 @@
                                         <span class="old-price">{{ number_format($plainProduct->gia) }}đ</span>
                                         <span class="new-price">
                                             <strong>{{ number_format($plainProduct->gia*(1 - (float)$plainProduct->gia_tri_km/100)) }}đ</strong>
+                                        </span>
+                                        <span class="ui basic red small label">
+                                            -{{ $plainProduct->gia_tri_km }}%
                                         </span>
                                     @else
                                         <strong>{{ number_format($plainProduct->gia) }}đ</strong>

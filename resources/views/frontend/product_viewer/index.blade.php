@@ -18,13 +18,11 @@ $priceSale = $product->priceSale();
 
             <div class="ui grid stackable">
 
-                <div class="four wide column">
+                <div class="five wide column center-aligned">
 
                     @include('frontend.product_viewer.slider')
 
                 </div>
-
-                <div class="column"></div>
 
                 <div class="eleven wide column">
 

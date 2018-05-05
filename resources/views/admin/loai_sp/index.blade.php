@@ -10,38 +10,27 @@
 
         @include('admin.layouts.components.error_msg')
 
-        <form action="{{ route('loai_sp.destroy', [0]) }}" method="post">
+        <form action="{{ route('loai_sp.destroy', [0]) }}" method="post" class="ui form">
 
             {{ method_field('DELETE') }}
             {{ csrf_field() }}
 
-            <button type="submit" class="ui small red delete button need-popup"
-                    data-content="Xóa các mục vừa chọn"
-                    onclick="return confirmDelete()"
-            >
-                <i class="delete fitted icon"></i>
-                <strong>Xóa </strong>
-            </button>
-            <button type="button" class="ui small blue button" onclick="$('#modal-them-loai-sp').modal('show')">
-                <i class="add fitted icon"></i>
-                <strong>Thêm mới </strong>
-            </button>
-
-            <div class="ui divider small-td-margin hidden"></div>
+            <div class="field">
+                <button type="submit" class="ui small red delete button need-popup"
+                        data-content="Xóa các mục vừa chọn"
+                        onclick="return confirmDelete()"
+                >
+                    <i class="delete fitted icon"></i>
+                    <strong>Xóa </strong>
+                </button>
+                <button type="button" class="ui small blue button" onclick="$('#modal-them-loai-sp').modal('show')">
+                    <i class="add fitted icon"></i>
+                    <strong>Thêm mới </strong>
+                </button>
+            </div>
 
             @include('admin.loai_sp.table')
 
-            <button type="submit" class="ui small red delete button need-popup"
-                    data-content="Xóa các mục vừa chọn"
-                    onclick="return confirmDelete()"
-            >
-                <i class="delete fitted icon"></i>
-                <strong>Xóa </strong>
-            </button>
-            <button type="button" class="ui small blue button" onclick="$('#modal-them-loai-sp').modal('show')">
-                <i class="add fitted icon"></i>
-                <strong>Thêm mới </strong>
-            </button>
         </form>
 
         @include('admin.loai_sp.modals')

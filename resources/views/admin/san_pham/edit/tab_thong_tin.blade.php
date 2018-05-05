@@ -8,12 +8,12 @@
         <div class="ten wide column">
 
             <div class="inline field">
-                <label class="label-fixed">Tên sản phẩm</label>
+                <label class="label-fixed">Tên sản phẩm:</label>
                 <input type="text" name="ten-san-pham" value="{{ $sanPham->getName() }}">
             </div>
 
             <div class="inline field">
-                <label class="label-fixed">Loại sản phẩm</label>
+                <label class="label-fixed">Loại sản phẩm:</label>
                 <select name="loai-san-pham" class="ui search dropdown"
                         onchange="warningMessage('Cảnh báo', 'Tất cả các thông số kỹ thuật sẽ bị thay đổi')">
                     @foreach($loaiSanPhams as $loaiSanPham)
@@ -26,7 +26,7 @@
             </div>
 
             <div class="inline field">
-                <label class="label-fixed">Thương hiệu</label>
+                <label class="label-fixed">Thương hiệu:</label>
                 <select name="thuong-hieu" class="ui search dropdown">
                     @foreach($thuongHieus as $thuongHieu)
                         <option value="{{ $thuongHieu->id }}"
@@ -38,12 +38,12 @@
             </div>
 
             <div class="inline field">
-                <label class="label-fixed">Giá</label>
+                <label class="label-fixed">Giá:</label>
                 <input type="text" name="gia" value="{{ number_format($sanPham->giaMoiNhat()) }}">
             </div>
 
             <div class="inline field">
-                <label class="label-fixed">Tình trạng</label>
+                <label class="label-fixed">Tình trạng:</label>
                 <select name="tinh-trang" class="ui dropdown">
                     <option value="1" {{ $sanPham->tinh_trang > 0 ? 'selected': '' }}>
                         Đang kinh doanh
@@ -56,8 +56,9 @@
         </div>
 
         <div class="six wide column">
+
             <div class="field">
-                <label>Ảnh đại diện</label>
+                <label>Ảnh đại diện:</label>
                 <label for="anh-dai-dien">
                     <span class="ui blue compact label">Chọn file</span>
                     <span id="anh-dai-dien-name"></span>

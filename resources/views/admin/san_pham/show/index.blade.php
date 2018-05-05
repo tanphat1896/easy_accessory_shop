@@ -20,12 +20,14 @@
             <a class="item" data-tab="four">Ảnh chi tiết ({{ $sanPham->hinhAnhs->count() }})</a>
         </div>
 
+
         @include('admin.san_pham.show.tab_thong_tin')
 
         @include('admin.san_pham.show.tab_bai_viet')
 
         @include('admin.san_pham.show.tab_comments')
 
-        @include('admin.san_pham.edit.tab_anh')
+        @include('admin.san_pham.edit.detail_images')
+
     </div>
 @endsection

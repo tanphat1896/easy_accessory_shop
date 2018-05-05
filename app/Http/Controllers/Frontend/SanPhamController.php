@@ -26,9 +26,8 @@ class SanPhamController extends Controller
         $totalPerPage = 12;
 
         $products = $this->filtered($request)
-            ? $this->getProductsWithFilter($productType->id, $request->query(), $totalPerPage)
+            ? $this->getProductsWithFilter($productType->id, $request->query())
             : $this->getProducts($productType->id, $totalPerPage);
-
         return view('frontend.product_category.index', compact('products', 'productType'));
     }
 

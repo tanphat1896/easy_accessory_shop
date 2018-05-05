@@ -12,6 +12,8 @@ namespace App\Acme\Repository;
 use App\Acme\Behavior\GetProduct;
 use App\GiaSanPham;
 use App\Helper\ImageHelper;
+use App\Helper\Logging;
+use App\Helper\PagingHelper;
 use App\Helper\StringHelper;
 use App\HinhAnh;
 use App\LoaiSanPham;
@@ -30,17 +32,15 @@ class ProductRepository {
 
     private $sanPhams;
 
-//    private $reflectKey = ['th' => 'thuong_hieu_id', 'lsp' => 'loai_san_pham_id'];
-
     private $reflectClass = ['th' => 'ThuongHieu', 'lsp' => 'LoaiSanPham'];
 
     private $folderAnhSanPham = 'uploaded/img_product';
 
-    public function getSanPhams(Request $request, $perPage) {
+    public function getSanPhams(Request $request) {
         if ($this->filtered($request))
             return $this->getSanPhamWithFilter($request);
 
-        return $this->indexDataNoFiltered($perPage);
+        return $this->indexDataNoFiltered();
     }
 
     private function getSanPhamWithFilter(Request $request) {
@@ -48,14 +48,13 @@ class ProductRepository {
 
         $productTypeId = $this->getProductType($request);
 
-        $this->sanPhams = $this->getProductsWithFilter($productTypeId, $criteria);
+        $this->sanPhams = $this->getProductsWithFilter($productTypeId, $criteria, true);
 
 //        $condition = $this->buildWhereCondition($filters);
 //
 //        $filterData = $this->getFilterDataFrom($filters);
 //
 //        $this->sanPhams = SanPham::where($condition)->get();
-
         return $this->indexDataFiltered();
     }
 
@@ -107,10 +106,10 @@ class ProductRepository {
         return compact('criteria', 'sanPhams', 'thuongHieus', 'loaiSanPhams');
     }
 
-    private function indexDataNoFiltered($perPage) {
+    private function indexDataNoFiltered() {
         $filtered = false;
 
-        $sanPhams = SanPham::paginate($perPage);
+        $sanPhams = SanPham::paginate(PagingHelper::PER_PAGE);
 
         $thuongHieus = ThuongHieu::all();
 
@@ -186,6 +185,8 @@ class ProductRepository {
 
         if (!empty($anhChiTiets))
             return $this->storeAndAttachWith($anhChiTiets);
+
+        Logging::saveActivity('Tạo mới sản phẩm ' . $data['ten-san-pham']);
 
         return $this->sanPham->id;
     }

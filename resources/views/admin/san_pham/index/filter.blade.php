@@ -1,18 +1,17 @@
-<a class="ui green small button normal-td-margin" id="sp-filter">
+<a class="ui green small button" id="sp-filter">
     <i class="filter icon"></i>Bộ lọc</a>
 
 @if(!empty($criteria))
     @foreach($criteria as $key => $criterion)
         @if ($key == 't')
             @foreach($criterion as $each)
-                <span class="ui violet label">{{ $each['text'] }}</span>
+                <span class="ui small basic blue label">{{ $each['text'] }}</span>
             @endforeach
             @continue
         @endif
-        <span class="ui violet label">{{ $criterion['text'] }}</span>
+        <span class="ui small basic blue label">{{ $criterion['text'] }}</span>
     @endforeach
-
-    <a class="ui red label" href="{{ route('san_pham.index') }}"><i class="remove icon fitted"></i></a>
+    <a class="ui small red label" href="{{ route('san_pham.index') }}"><i class="remove icon fitted"></i></a>
 @endif
 
 
@@ -51,21 +50,39 @@
     </form>
 </div>
 
-<script>
-    let url = window.location.href;
-    url = url.replace(/\?.*/, '');
-    function filtering(e) {
-        e.preventDefault();
-        let productTypeId = document.getElementById('pt').value;
-        let query = "pt=" + productTypeId;
+@push('script')
+    <script>
 
-        let brandSlugs = document.querySelectorAll('#t option:checked');
-        let brandSlugChain = '';
-        brandSlugs = [...brandSlugs];
-        brandSlugs.forEach((brandSlug) => brandSlugChain += brandSlug.value + ";");
-        if (brandSlugChain.trim() !== '')
-            query += "&t=" + brandSlugChain;
+        let url = window.location.href;
+        let page = '';
+        let currentQuery = /\?(.*)/.exec(url);
+        currentQuery = currentQuery == null ? '' : currentQuery[1];
+        url = url.replace(/\?.*/, '');
 
-        window.location.href = url + "?" + query;
-    }
-</script>
+        $('.pagination a').click((e) => {
+            e.preventDefault();
+            page = "page=" + e.target.innerText;
+            currentQuery = currentQuery.replace(/&?page=\d{1,}/ig, '');
+            url += (currentQuery === '') ? `?${page}` : `?${currentQuery}&${page}`;
+            redirectTo(url);
+        });
+
+        function filtering(e) {
+            e.preventDefault();
+            let productTypeId = document.getElementById('pt').value;
+            let query = "pt=" + productTypeId;
+
+            let brandSlugs = document.querySelectorAll('#t option:checked');
+            let brandSlugChain = '';
+            brandSlugs = [...brandSlugs];
+            brandSlugs.forEach((brandSlug) => brandSlugChain += brandSlug.value + ";");
+
+            if (brandSlugChain.trim() !== '')
+                query += "&t=" + brandSlugChain;
+
+            query += (page === '') ? '' : `&${page}`;
+
+            window.location.href = url + "?" + query;
+        }
+    </script>
+@endpush

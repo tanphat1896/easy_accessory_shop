@@ -15,7 +15,7 @@ class NhanVienController extends Controller
      */
     public function index()
     {
-        $nhanViens = NhanVien::all();
+        $nhanViens = NhanVien::paginate(10);
 
         return view('admin.nhan_vien.index', compact('nhanViens'));
     }
@@ -38,6 +38,12 @@ class NhanVienController extends Controller
      */
     public function store(Request $request)
     {
+        $email = $request->get('email');
+        if (NhanVien::daTonTai($email))
+        {
+            return back()->with('errors', ["Email $email đã tồn tại"]);
+        }
+
         $nhanVien = new NhanVien();
         $nhanVien->name = $request->get('ten-nhan-vien');
         $nhanVien->email = $request->get('email');
@@ -68,7 +74,7 @@ class NhanVienController extends Controller
      */
     public function edit($id)
     {
-        //
+
     }
 
     /**
@@ -80,16 +86,22 @@ class NhanVienController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $email = NhanVien::find($id)->email;
+        $emailReq = $request->get('email');
+
         $nhanVien = NhanVien::findOrFail($id);
         $nhanVien->name = $request->get('ten-nhan-vien');
         $nhanVien->phone = $request->get('so-dien-thoai');
         if ($request->has('email'))
         {
-            $nhanVien->email = $request->get('email');
+            if (($email != $emailReq) && NhanVien::daTonTai($emailReq)) {
+                return back()->with('errors', ["Email $email đã tồn tại"]);
+            }
+            $nhanVien->email = $emailReq;
         }
         $nhanVien->update();
 
-        return back()->with('succcess', 'Cập nhật thông tin thành công');
+        return back()->with('success', 'Cập nhật thông tin thành công');
     }
 
     /**
@@ -98,6 +110,37 @@ class NhanVienController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    public function changePass(Request $request, $id)
+    {
+        $nhanVien = NhanVien::findOrFail($id);
+        $oldPassword = $request->get('oldPassword');
+        if (!password_verify($oldPassword, $nhanVien->password))
+        {
+            return back()->with('error', "Mật khẩu cũ không chính xác");
+        }
+        $password = $request->get('password');
+        $nhanVien->password = bcrypt($password);
+        $nhanVien->update();
+
+        return back()->with('success', 'Thay đổi mật khẩu thành công');
+    }
+
+    public function resetPass(Request $request, $id)
+    {
+        $nhanVien = NhanVien::findOrFail($id);
+        $password = $request->get('password');
+        $passwordConf = $request->get('password_confirmation');
+        if ($password != $passwordConf)
+        {
+            return back()->with('error', "Mật khẩu nhập lại không khớp");
+        }
+        $nhanVien->password = bcrypt($password);
+        $nhanVien->update();
+
+        return back()->with('success', 'Thay đổi mật khẩu thành công');
+    }
+
     public function destroy($id)
     {
         //

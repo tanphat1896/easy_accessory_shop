@@ -9,6 +9,7 @@
 namespace App\Acme\Behavior;
 
 
+use App\Helper\PagingHelper;
 use App\LoaiSanPham;
 use App\SanPham;
 use Illuminate\Support\Facades\DB;
@@ -43,14 +44,19 @@ trait GetProduct {
         return $products->paginate($perPage);
     }
 
-    public function getProductsWithFilter($productTypeId, $criteria, $perPage = null) {
+    public function getProductsWithFilter($productTypeId, $criteria, $needPaging = false) {
         $products = DB::table($this->table)
             ->join('gia_san_phams', "{$this->table}.id", '=', 'gia_san_phams.san_pham_id')
             ->where('gia_san_phams.active', 1);
 
         $products = $this->whereProductTypeId($products, $productTypeId);
 
-        $products = $this->bindFilterToBuilder($products, $criteria)->get();
+        $products = $this->bindFilterToBuilder($products, $criteria);
+
+
+        $products = $needPaging
+            ? $products->paginate(PagingHelper::PER_PAGE)
+            : $products->get();
 
         $criteria = $this->translatedFilters;
 

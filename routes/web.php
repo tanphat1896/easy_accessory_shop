@@ -51,6 +51,11 @@ Route::group(['middleware' => 'customer'], function() {
     Route::resource('/rating', 'Frontend\RatingController', ['only' => ['store']]);
 
     Route::resource('/comments', 'Frontend\CommentController', ['only' => ['store']]);
+
+    Route::post('/khach-hang/{id}/doi-thong-tin', 'Frontend\CustomerController@changeInfo')
+        ->name('customer-change-info');
+    Route::post('/khach-hang/{id}/doi-mat-khau', 'Frontend\CustomerController@changePass')
+        ->name('customer-change-pass');
 });
 
 
@@ -115,6 +120,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
 
     Route::resource('nhan_vien', 'Admin\NhanVienController');
     Route::post('nhan_vien/{id}/cap_nhat', 'Admin\NhanVienController@update')->name('cap_nhat_thong_tin');
+    Route::post('nhan_vien/{id}/reset_mat_khau', 'Admin\NhanVienController@resetPass')->name('reset_mat_khau');
+    Route::post('nhan_vien/{id}/change_mat_khau', 'Admin\NhanVienController@changePass')->name('change_mat_khau');
 
     Route::get('menu_state/{state}', function($state) {
         $store = App\CuaHang::first();

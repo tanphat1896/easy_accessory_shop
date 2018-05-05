@@ -18,12 +18,14 @@
                 <input type="password" name="password" placeholder="Tối thiểu 4 ký tự" value="111111">
             </div>
 
-            <div class="field center-aligned">
-                <a href="{{ route('password.request') }}">Quên mật khẩu?</a>
-            </div>
+            {{--<div class="field center-aligned">--}}
+                {{--<a href="{{ route('password.request') }}">Quên mật khẩu?</a>--}}
+            {{--</div>--}}
 
             <div class="field">
-                <button class="ui fluid blue button"><strong>Đăng nhập</strong></button>
+                <button class="ui fluid blue button" id="btn-login">
+                    <strong>Đăng nhập</strong>
+                </button>
             </div>
 
             <div class="field center-aligned">

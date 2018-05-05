@@ -8,10 +8,11 @@
         <th>Số điện thoại</th>
         <th>Ngày đặt hàng</th>
         {{--<th>Hình thức thanh toán</th>--}}
-        <th>Số sản phẩm</th>
+        <th>Số SP</th>
         <th>Tổng tiền</th>
         <th>Tình trạng</th>
-        <th class="collapsing">Hành động</th>
+        <th class="collapsing">Duyệt</th>
+        <th class="collapsing">Hủy</th>
     </tr>
     </thead>
 
@@ -21,7 +22,11 @@
         <tr>
             <input type="hidden" name="don-hang-id[]" value="{{ $donHang->id }}">
             <td>{{ $stt + 1 }}</td>
-            <td class="collapsing">{{ $donHang->ma_don_hang }}</td>
+            <td class="collapsing">
+                <a href="{{ route('don_hang.show', [$donHang->id]) }}">
+                    {{ $donHang->ma_don_hang }}
+                </a>
+            </td>
             <td>{{ $donHang->ten_nguoi_nhan }}</td>
             <td>{{ $donHang->sdt_nguoi_nhan }}</td>
             <td>{{ $donHang->ngay_dat_hang }}</td>
@@ -57,35 +62,37 @@
                     <span style="color: green"><strong>Đã giao hàng</strong></span>
                 @endif
             </td>
-            <td class="collapsing">
-                <a class="ui small blue label" href="{{ route('don_hang.show',[$donHang->id]) }}">
-                    <i class="eye open fitted icon"></i>
-                </a>
+            {{--<td>--}}
+                {{--<a class="ui small blue label" href="{{ route('don_hang.show', [$donHang->id]) }}">--}}
+                    {{--<i class="eye open fitted icon"></i>--}}
+                {{--</a>--}}
+            {{--</td>--}}
+            <td>
                 @if($donHang->tinh_trang == 0)
                     <a class="ui small teal label" href="{{ route('duyet_don', [$donHang->id]) }}"
                        onclick="return confirm('Bạn chắc chắn muốn duyệt đơn hàng này?')">
                         <i class="check open fitted icon"></i>
                     </a>
+                @endif
+            </td>
+            <td>
+                @if($donHang->tinh_trang == 0)
                     <a class="ui small orange label" href="{{ route('huy_don', [$donHang->id]) }}"
-                        onclick="return confirm('Bạn chắc chắn muốn hủy đơn hàng này?')">
+                       onclick="return confirm('Bạn chắc chắn muốn hủy đơn hàng này?')">
                         <i class="remove open fitted icon"></i>
                     </a>
                 @endif
             </td>
         </tr>
     @endforeach
-
     </tbody>
-
-    @if (method_exists($donHangs, 'render'))
-        <tfoot>
-        <tr class="center aligned"><th colspan="9">
-                {{ $donHangs->render('vendor.pagination.smui')}}
-            </th></tr>
-        </tfoot>
-    @endif
-
 </table>
+
+@if (method_exists($donHangs, 'render'))
+    <div class="ui basic segment center aligned no-padding">
+        {{ $donHangs->render('vendor.pagination.smui')}}
+    </div>
+@endif
 
 @push('script')
     <script>

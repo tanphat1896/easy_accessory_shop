@@ -77,3 +77,17 @@ function bindDataTable(tableId, onlyPaging = false) {
     let search = $('.dataTables_filter.ui.input');
     $(search).find('input').attr('placeholder', 'Tìm kiếm').detach().appendTo($(search));
 }
+
+function finding(url, inputId, fieldName, page = null) {
+    let keyword = $("#" + inputId).val();
+    let query = keyword.trim() === '' ? '' : `?${fieldName}=${keyword}`;
+
+    query += pageQuery(query, page);
+
+    window.location.href = url + query;
+}
+
+function pageQuery(query, page) {
+    let operator = query === '' ? '?' : '&';
+    return page == null ? '' : operator + page;
+}

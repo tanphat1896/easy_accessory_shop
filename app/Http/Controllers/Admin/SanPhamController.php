@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Acme\Behavior\SearchProductSale;
 use App\Acme\Repository\ProductRepository;
+use App\Helper\Logging;
 use App\LoaiSanPham;
 use App\SanPham;
 use App\ThuongHieu;
@@ -20,8 +21,7 @@ class SanPhamController extends Controller {
     }
 
     public function index(Request $request) {
-        $perPage = 10;
-        $data = $this->sanPhamRepository->getSanPhams($request, $perPage);
+        $data = $this->sanPhamRepository->getSanPhams($request);
 
         return view('admin.san_pham.index.index', $data);
     }

@@ -3,7 +3,7 @@
         <strong>Xin hãy kiểm tra lại</strong>
         <ul class="list">
             @foreach(Session::get('errors') as $error)
-                <li>{{ $error }}</li>
+                <li>{!! $error !!}</li>
             @endforeach
         </ul>
         <i class="close icon" onclick="$(this).closest('.message').transition('fade')"></i>

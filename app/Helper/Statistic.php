@@ -13,6 +13,7 @@ use App\BinhLuan;
 use App\DonHang;
 use App\SanPham;
 use App\ThuongHieu;
+use Illuminate\Support\Facades\DB;
 
 class Statistic {
     use AccountStatistic;
@@ -46,12 +47,21 @@ class Statistic {
 
     private static function totalOrderByType($type) {
         $types = [
+            'complete' => 2,
             'check' => 1,
-            'uncheck' => 0,
-            'cancel' => -1
+            'uncheck' => 0
         ];
 
         return DonHang::where('tinh_trang', $types[$type])->get()->count();
+    }
+
+    public static function totalRevenueByMonth($month) {
+        $thisYear = date('Y');
+        $revenue = DB::table('don_hangs')
+            ->selectRaw('round(sum(tong_tien)/1000000.0, 2) as total')
+            ->whereBetween('ngay_duyet_don', ["$thisYear-$month-1", "$thisYear-$month-31"])
+            ->first();
+        return $revenue->total ?: 0;
     }
 
     public static function convertToChartData($source, $columns = [], $axisLabels = []) {

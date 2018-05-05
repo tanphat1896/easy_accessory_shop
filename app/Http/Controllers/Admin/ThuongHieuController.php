@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helper\Logging;
 use App\Helper\PagingHelper;
 use App\Helper\StringHelper;
 use App\Http\Requests\ThuongHieuFormRequest;
@@ -13,6 +14,7 @@ class ThuongHieuController extends Controller {
 
     public function index(Request $request) {
         $brandName = $request->get('name') ?: '';
+        $brandName = StringHelper::toSlug($brandName);
 
         $brands = empty($brandName)
             ? ThuongHieu::paginate(PagingHelper::PER_PAGE)
@@ -34,6 +36,8 @@ class ThuongHieuController extends Controller {
             'slug' => $slug
         ]);
 
+        Logging::saveActivity('Vừa tạo thương hiệu ' . $name);
+
         return back()->with('success', 'Thêm thành công');
     }
 
@@ -44,6 +48,8 @@ class ThuongHieuController extends Controller {
         $brand->slug = StringHelper::toSlug($brand->ten_thuong_hieu);
 
         $brand->update();
+
+        Logging::saveActivity('Cập nhật thương hiệu ' . $brand->ten_thuong_hieu);
 
         return back()->with('success', 'Cập nhật thành công');
     }
@@ -60,6 +66,8 @@ class ThuongHieuController extends Controller {
             return back()->with('errors', $errors);
 
         ThuongHieu::destroy($ids);
+
+        Logging::saveActivity('Xóa thương hiệu');
 
         return back()->with('success', 'Xóa thành công');
     }

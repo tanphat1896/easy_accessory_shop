@@ -5,7 +5,12 @@
     <div class="content">
         <h3 class="ui dividing header">Lịch sử giá</h3>
         <table class="ui very compact striped table">
-            <thead><tr><th>Ngày cập nhật</th><th>Giá thành</th></tr></thead>
+            <thead>
+            <tr>
+                <th>Ngày cập nhật</th>
+                <th>Giá thành</th>
+            </tr>
+            </thead>
             <tbody>
             @foreach($sanPham->gia as $gia)
                 <tr>
@@ -53,9 +58,11 @@
 {{--modal thong so ky thuat--}}
 <div class="ui mini fade modal" id="modal-cap-nhat-tskt">
     <i class="close icon"></i>
-    <div class="content">
-        <h3 class="ui dividing header">Cập nhật thông số kỹ thuật</h3>
-        <form action="{{ route('thong_so_ky_thuat', [$sanPham->id]) }}" method="post" class="ui form" id="form-gia">
+    <div class="header">
+        Cập nhật thông số kỹ thuật
+    </div>
+    <div class="scrolling content">
+        <form action="{{ route('thong_so_ky_thuat', [$sanPham->id]) }}" method="post" class="ui tiny form">
             {{ csrf_field() }}
 
             @foreach($sanPham->thongSos as $stt => $thongSo)
@@ -66,7 +73,7 @@
             @endforeach
             <div class="field">
                 <div class="ui basic segment right aligned no-margin no-padding">
-                    <button class="ui blue small button">Lưu lại</button>
+                    <button class="ui blue tiny button">Lưu lại</button>
                 </div>
             </div>
         </form>
@@ -81,10 +88,10 @@
                     rules: [
                         {type: 'empty', prompt: 'Không được bỏ trống'},
                         {type: 'regExp[/^[,.\s0-9]+$/igm]', prompt: 'Sai định dạng'}
-                        ]
+                    ]
                 }
             },
-            inline:true
+            inline: true
         })
     </script>
 @endpush

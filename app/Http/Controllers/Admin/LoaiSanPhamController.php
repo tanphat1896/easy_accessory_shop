@@ -80,9 +80,18 @@ class LoaiSanPhamController extends Controller
             if ($loaiSanPham->khongCoSanPham())
                 continue;
 
-            $errors[] = "Loại sản phẩm " . $loaiSanPham->ten_loai . " còn sản phẩm";
+            $errors[] = "Loại sản phẩm "
+                . $this->createLinkToProduct($loaiSanPham)
+                . " còn sản phẩm liên kết";
         }
 
         return $errors;
+    }
+
+    private function createLinkToProduct($productType) {
+        return "<a href='"
+            . route('san_pham.index') . "?pt="
+            . $productType->id
+            . "'>{$productType->ten_loai}</a>";
     }
 }

@@ -7,27 +7,34 @@
 
             <div class="field">
                 <label for="ten-nhan-vien">Họ và tên</label>
-                <input type="text" id="ten-nhan-vien" name="ten-nhan-vien" required>
+                <input type="text" id="ten-nhan-vien" name="ten-nhan-vien"
+                       value="Nguyễn Thị {{ rand(1, 1000) }}"
+                       maxlength="50" required>
             </div>
 
             <div class="field">
                 <label for="email">Email</label>
-                <input type="text" id="email" name="email" required>
+                <input type="email" id="email" name="email"
+                       value="nguyenthi{{ rand(1, 1000) }}@gmail.com"
+                       maxlength="100" required>
             </div>
 
             <div class="field">
                 <label for="so-dien-thoai">Số điện thoại</label>
-                <input type="text" id="so-dien-thoai" name="so-dien-thoai" required>
+                <input type="text" id="so-dien-thoai" name="so-dien-thoai"
+                       value="0132012312"
+                       maxlength="11" required>
             </div>
 
             <div class="field">
                 <label for="password">Mật khẩu</label>
-                <input type="password" id="password" name="password" min="6" max="32" required>
+                <input type="password" id="pass" name="password" minlength="6" maxlength="32" required>
             </div>
 
             <div class="field">
                 <label for="password_confirmation">Nhập lại mật khẩu</label>
-                <input type="password" id="password_confirmation" name="password_confirmation" min="6" max="32" required>
+                <input type="password" id="pass_confirmation" name="password_confirmation"
+                       minlength="6" maxlength="32" required>
             </div>
 
             <div class="field">
@@ -36,6 +43,24 @@
         </form>
     </div>
 </div>
+
+@push('script')
+    <script>
+        var pass = document.getElementById("pass")
+            , confirm_pass = document.getElementById("pass_confirmation");
+
+        function validatePass(){
+            if(pass.value != confirm_pass.value) {
+                confirm_pass.setCustomValidity("Mật khẩu nhập lại không khớp!");
+            } else {
+                confirm_pass.setCustomValidity('');
+            }
+        }
+
+        pass.onchange = validatePass;
+        confirm_pass.onkeyup = validatePass;
+    </script>
+@endpush
 
 @foreach($nhanViens as $stt => $nhanVien)
     <div class="ui mini vertical flip modal" id="{{ "modal-sua-" . $nhanVien->id }}">
@@ -49,17 +74,20 @@
 
                 <div class="field">
                     <label>Tên nhân viên</label>
-                    <input type="text" value="{{ $nhanVien->name }}" name="ten-nhan-vien" required>
+                    <input type="text" value="{{ $nhanVien->name }}" name="ten-nhan-vien"
+                           maxlength="50" required>
                 </div>
 
                 <div class="field">
                     <label>Email</label>
-                    <input type="text" value="{{ $nhanVien->email }}" name="email" required>
+                    <input type="email" value="{{ $nhanVien->email }}" name="email"
+                           maxlength="100" required>
                 </div>
 
                 <div class="field">
                     <label>Số điện thoại</label>
-                    <input type="text" value="{{ $nhanVien->phone }}" name="so-dien-thoai" required>
+                    <input type="text" value="{{ $nhanVien->phone }}" name="so-dien-thoai"
+                           maxlength="11" required>
                 </div>
                 <div class="field">
                     <button class="ui blue fluid button"><strong>Lưu</strong></button>
@@ -68,21 +96,3 @@
         </div>
     </div>
 @endforeach
-
-@push('script')
-    <script>
-        var password = document.getElementById("password")
-            , confirm_password = document.getElementById("password_confirmation");
-
-        function validatePassword(){
-            if(password.value != confirm_password.value) {
-                confirm_password.setCustomValidity("Mật khẩu nhập lại không khớp!");
-            } else {
-                confirm_password.setCustomValidity('');
-            }
-        }
-
-        password.onchange = validatePassword;
-        confirm_password.onkeyup = validatePassword;
-    </script>
-@endpush

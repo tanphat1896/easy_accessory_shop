@@ -41,11 +41,10 @@ trait AccountStatistic {
     }
 
     public static function getTotalRevenue($startDate = null, $endDate = null) {
-        $condition = self::buildWhereCondition($startDate, $endDate);
-        $total = DB::table('don_hangs')->sum('tong_tien')
-            ->where($condition)->get();
+        $total = DB::table('don_hangs');
+        $total = self::buildWhereCondition($total, $startDate, $endDate);
 
-        return $total;
+        return $total->sum('tong_tien');
     }
 
     private function getAccountByYear(Request $request) {
@@ -150,11 +149,7 @@ trait AccountStatistic {
         return $output;
     }
 
-    public static function getCost($year = null, $moth = null, $day = null) {
-
-    }
-
-    private static function buildWhereCondition($startDate, $endDate) {
+    private static function buildWhereCondition($builder, $startDate, $endDate) {
         $condition = [];
         if (!empty($startDate))
             $condition[] = ['ngay_duyet_don', '>=', $startDate];
@@ -162,6 +157,9 @@ trait AccountStatistic {
         if (!empty($endDate))
             $condition[] = ['ngay_duyet_don', '<=', $endDate];
 
-        return $condition;
+        if (empty($condition))
+            return $builder;
+
+        return $builder->where($condition);
     }
 }

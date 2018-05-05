@@ -24,6 +24,18 @@ class AuthHelper {
 	    return self::user()->email;
     }
 
+    public static function userName() {
+        return self::user()->name;
+    }
+
+    public static function userPhone() {
+        return self::user()->phone;
+    }
+
+    public static function userAddress() {
+        return self::user()->address;
+    }
+
     public static function user() {
         return self::userGuard()->user();
     }

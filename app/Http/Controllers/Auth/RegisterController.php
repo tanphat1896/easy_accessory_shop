@@ -51,10 +51,7 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data,[
-            'name' => 'required|string|max:50',
             'email' => 'required|string|email|max:100|unique:customers',
-            'password' => 'required|string|min:6|max:30|confirmed',
-            'phone' => 'required|string|max:11',
         ], [
             'required' => ':attribute không được để trống!',
             'max' => ':attribute không được quá :max ký tự!',
@@ -62,10 +59,6 @@ class RegisterController extends Controller
             'unique' => ':attribute đã tồn tại!',
             'confirmed' => ':attribute nhập lại không khớp!',
             'min' => ':attribute không được ít hơn :min ký tự!',
-        ], [
-            'name' => 'Họ tên',
-            'password' => 'Mật khẩu',
-            'phone' => 'Số điện thoại',
         ]);
     }
 
@@ -84,6 +77,7 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
             'phone' => $data['phone'],
             'username' => substr($data['email'],0,strpos($data['email'],'@')),
+            'address' => $data['address'],
         ]);
     }
 }

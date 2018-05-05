@@ -24,7 +24,7 @@ class CustomerLoginController extends Controller {
         $this->validateLogin($request);
 
         if (! $this->attemptLogin($request))
-            return redirect('/')->with('error', 'Đăng nhập thất bại, thử lại sau');
+            return redirect('/')->with('error', 'Sai tài khoản hoặc mật khẩu!');
 
         FrontendHelper::migrateToMemberCart();
 

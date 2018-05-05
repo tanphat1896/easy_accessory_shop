@@ -17,10 +17,8 @@
             <i class="angle left icon"></i>
         </a>
 
-    <a href="/" class="icon item need-popup" target="_blank" 
-        data-content="Trang khách hàng" 
-        data-position="bottom left">
-        <i class="home icon"></i></a>
+    <a href="/" class="icon item need-popup" target="_blank">
+        Trang khách hàng</a>
 
     <div class="right menu">
 

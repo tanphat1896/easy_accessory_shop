@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 use App\Helper\AuthHelper;
+use App\Helper\Logging;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
@@ -27,6 +28,7 @@ class AdminLoginController extends Controller
             // Attempt to log the user in
             if (Auth::guard('admin')->attempt(['username' => $request->email, 'password' => $request->password], $request->remember)) {
                 // if successful, then redirect to their intended location
+                Logging::saveActivity('Đăng nhập hệ thống');
                 return redirect()->intended(route('admin.dashboard'));
             }
             // if unsuccessful, then redirect back to the login with the form data
@@ -42,6 +44,7 @@ class AdminLoginController extends Controller
             // Attempt to log the user in
             if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
                 // if successful, then redirect to their intended location
+                Logging::saveActivity('Đăng nhập hệ thống');
                 return redirect()->intended(route('admin.dashboard'));
             }
             // if unsuccessful, then redirect back to the login with the form data
@@ -54,7 +57,7 @@ class AdminLoginController extends Controller
 
         $request->session()->invalidate();
 
-        return redirect('/');
+        return redirect('/admin');
     }
 
     private function guard() {

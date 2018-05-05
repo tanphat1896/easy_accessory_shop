@@ -13,6 +13,14 @@
 .no-margin-right {
     margin-right: 0 !important;
 }
+.no-td-margin {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+.no-td-padding {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
 
 .no-lr-margin {
     margin-left: 0 !important;
@@ -163,13 +171,13 @@
 }
 .static-input {
     /*border: 1px solid red;*/
-    /*display: inline;*/
+    display: inline-block;
     /*width: 200px !important;*/
-    padding: 0.67em 0;
+    padding: 0.5em 0;
 }
 
 .static .label-fixed {
-    width: 200px !important;
+    width: 130px !important;
     /*text-align: left !important;*/
 }
 
@@ -211,6 +219,9 @@
 .force-right {
     float: right !important;
 }
+.form .field.no-clear {
+    clear: unset !important;
+}
 
 .short-space {
     margin: 0 20px !important;
@@ -225,4 +236,13 @@
 
 .ui.range{
     min-width: 200px;
+}
+
+.remove-input {
+    position: absolute;
+    top: 8px;
+    left: 5px;
+}
+.need-remove {
+    padding-left: 25px !important;
 }

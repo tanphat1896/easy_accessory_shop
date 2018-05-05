@@ -20,4 +20,5 @@
     @yield('content')
 </div>
 
+@include('sharing.components.scrolltop_button')
 </body>
