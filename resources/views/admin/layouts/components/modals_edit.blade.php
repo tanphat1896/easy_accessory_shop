@@ -7,12 +7,14 @@
 
             <div class="field">
                 <label>Tên nhân viên</label>
-                <input type="text" value="{{ \App\Helper\AuthHelper::adminName() }}" name="ten-nhan-vien" required>
+                <input type="text" value="{{ \App\Helper\AuthHelper::adminName() }}" name="ten-nhan-vien"
+                       maxlength="50" required>
             </div>
 
             <div class="field">
                 <label>Số điện thoại</label>
-                <input type="text" value="{{ \App\Helper\AuthHelper::adminPhone() }}" name="so-dien-thoai" required>
+                <input type="text" value="{{ \App\Helper\AuthHelper::adminPhone() }}" name="so-dien-thoai"
+                       maxlength="11" required>
             </div>
             <div class="field">
                 <button class="ui blue fluid button"><strong>Lưu</strong></button>

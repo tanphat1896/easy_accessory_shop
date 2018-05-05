@@ -12,8 +12,7 @@
         <th>Số lượng</th>
         <th>Đơn giá</th>
         <th>Tồn kho</th>
-        {{--<th>Từ khóa tìm kiếm</th>--}}
-        <th class="collapsing">Thao tác</th>
+        <th class="collapsing">Sửa</th>
     </tr>
     </thead>
 
@@ -47,15 +46,11 @@
             </td>
         </tr>
     @endforeach
-
     </tbody>
-
-    @if (method_exists($chiTietPhieuNhaps, 'render'))
-        <tfoot>
-        <tr class="center aligned"><th colspan="9">
-                {{ $chiTietPhieuNhaps->render('vendor.pagination.smui')}}
-            </th></tr>
-        </tfoot>
-    @endif
-
 </table>
+
+@if (method_exists($chiTietPhieuNhaps, 'render'))
+    <div class="ui basic segment center aligned no-padding">
+        {{ $chiTietPhieuNhaps->render('vendor.pagination.smui')}}
+    </div>
+@endif

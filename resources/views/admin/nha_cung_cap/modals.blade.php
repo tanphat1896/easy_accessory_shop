@@ -7,17 +7,17 @@
 
             <div class="field">
                 <label for="ten-ncc">Tên nhà cung cấp</label>
-                <input type="text" id="ten-ncc" name="ten-ncc" required>
+                <input type="text" id="ten-ncc" name="ten-ncc" maxlength="50" required>
             </div>
 
             <div class="field">
                 <label for="dia-chi">Địa chỉ</label>
-                <input type="text" id="dia-chi" name="dia-chi" required>
+                <input type="text" id="dia-chi" name="dia-chi" maxlength="255" required>
             </div>
 
             <div class="field">
                 <label for="so-dien-thoai">Số điện thoại</label>
-                <input type="text" id="so-dien-thoai" name="so-dien-thoai" required>
+                <input type="text" id="so-dien-thoai" name="so-dien-thoai" maxlength="11" required>
             </div>
 
             <div class="field">
@@ -39,20 +39,21 @@
 
                 <div class="field">
                     <label>Tên nhà cung cấp</label>
-                    <input type="text" value="{{ $nhaCungCap->ten_ncc }}" name="ten-ncc" required>
+                    <input type="text" value="{{ $nhaCungCap->ten_ncc }}" name="ten-ncc" maxlength="50" required>
                 </div>
 
                 <div class="field">
                     <label>Địa chỉ</label>
-                    <input type="text" value="{{ $nhaCungCap->dia_chi }}" name="dia-chi" required>
+                    <input type="text" value="{{ $nhaCungCap->dia_chi }}" name="dia-chi" maxlength="255" required>
                 </div>
 
                 <div class="field">
                     <label>Số điện thoại</label>
-                    <input type="text" value="{{ $nhaCungCap->so_dien_thoai }}" name="so-dien-thoai" required>
+                    <input type="text" value="{{ $nhaCungCap->so_dien_thoai }}" name="so-dien-thoai"
+                           maxlength="11" required>
                 </div>
                 <div class="field">
-                    <button class="ui basic blue fluid button"><strong>Lưu</strong></button>
+                    <button class="ui blue fluid button"><strong>Lưu</strong></button>
                 </div>
             </form>
         </div>

@@ -10,8 +10,7 @@
         <th>Tên nhà cung cấp</th>
         <th>Địa chỉ</th>
         <th>Số điện thoại</th>
-        {{--<th>Từ khóa tìm kiếm</th>--}}
-        <th class="collapsing">Hành động</th>
+        <th class="collapsing">Sửa</th>
     </tr>
     </thead>
     <tbody>
@@ -37,3 +36,8 @@
     </tbody>
 </table>
 
+@if (method_exists($nhaCungCaps, 'render'))
+    <div class="ui basic segment center aligned no-padding">
+        {{ $nhaCungCaps->render('vendor.pagination.smui')}}
+    </div>
+@endif

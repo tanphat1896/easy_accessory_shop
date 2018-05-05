@@ -12,7 +12,8 @@
         <th>Email</th>
         <th>Số điện thoại</th>
         <th>Tài khoản</th>
-        <th>Thao tác</th>
+        <th class="collapsing">Sửa</th>
+        <th class="collapsing center-aligned">Đặt lại MK</th>
     </tr>
     </thead>
 
@@ -40,21 +41,27 @@
                    class="ui small green label">
                     <i class="edit fitted icon"></i>
                 </a>
-                <a href="#"
-                class="ui small blue label need-popup" data-content="Đặt lại mật khẩu"
-                   onclick="$( '{{ '#modal-reset-'.$nhanVien->id }}' ).modal('show')">
-                <i class="refresh open fitted icon"></i>
-                </a>
                 {{--<a href="{{ route('nhap_hang.show',[$phieuNhap->id]) }}" class="ui small blue label">Xem</a>--}}
                 {{--<a href="#" class="ui small teal label"--}}
                 {{--onclick="$( '{{ '#modal-sua-'.$phieuNhap->id }}' ).modal('show')">Sửa</a>--}}
             </td>
+            <td class="center-aligned">
+                <a href="#"
+                   class="ui small blue label"
+                   onclick="$( '{{ '#modal-reset-'.$nhanVien->id }}' ).modal('show')">
+                    <i class="refresh open fitted icon"></i>
+                </a>
+            </td>
         </tr>
     @endforeach
-
     </tbody>
-
 </table>
+
+@if (method_exists($nhanViens, 'render'))
+    <div class="ui basic segment center aligned no-padding">
+        {{ $nhanViens->render('vendor.pagination.smui')}}
+    </div>
+@endif
 
 @push('script')
     <script>

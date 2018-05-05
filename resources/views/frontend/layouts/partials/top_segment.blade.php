@@ -11,12 +11,25 @@
     </div>
 
     @include('frontend.layouts.partials.search_computer')
+    @include('admin.layouts.components.success_msg')
 
     <div class="ui inverted blue basic segment right floated no-margin">
         @if (Auth::guard('customer')->check())
+
+            @include('frontend.customer.modal_change_info')
+            @include('frontend.customer.modal_change_password')
+
             <div class="ui white small dropdown button">
                 <i class="user icon"></i><strong>{{ Auth::guard('customer')->user()->name }}</strong>
                 <div class="menu">
+                    <a class="item" onclick="$('#modal-change-info').modal('show')">
+                        <i class="edit icon"></i>
+                        Cập nhật thông tin
+                    </a>
+                    <a class="item" onclick="$('#modal-change-password').modal('show')">
+                        <i class="refresh icon"></i>
+                        Đổi mật khẩu
+                    </a>
 
                     <a class="item" href="{{ route('customer.history') }}">
                         <i class="history icon"></i>

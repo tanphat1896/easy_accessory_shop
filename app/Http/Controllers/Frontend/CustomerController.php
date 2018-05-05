@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Acme\Behavior\GetOrder;
+use App\Customer;
 use App\DonHang;
 use App\Helper\AuthHelper;
 use Illuminate\Http\Request;
@@ -35,5 +36,31 @@ class CustomerController extends Controller
             return true;
 
         return $order->customer_id != AuthHelper::userId();
+    }
+
+    public function changeInfo(Request $request, $id)
+    {
+        $customer = Customer::findOrFail($id);
+        $customer->name = $request->get('customer-name');
+        $customer->phone = $request->get('customer-phone');
+        $customer->address = $request->get('customer-address');
+        $customer->update();
+
+        return back()->with('success', 'Cập nhật thông tin thành công');
+    }
+
+    public function changePass(Request $request, $id)
+    {
+        $customer = Customer::findOrFail($id);
+        $oldPassword = $request->get('oldPassword');
+        if (!password_verify($oldPassword, $customer->password))
+        {
+            return back()->with('error', "Mật khẩu cũ không chính xác");
+        }
+        $password = $request->get('password');
+        $customer->password = bcrypt($password);
+        $customer->update();
+
+        return back()->with('success', 'Thay đổi mật khẩu thành công');
     }
 }

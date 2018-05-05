@@ -11,9 +11,10 @@
         <th>Người nhập hàng</th>
         <th>Ngày nhập</th>
         <th>Nhà cung cấp</th>
-        <th class="collapsing">Số lượng sản phẩm</th>
+        <th class="collapsing">Số sản phẩm</th>
         <th>Tình trạng</th>
-        <th>Thao tác</th>
+        <th class="collapsing">Xem</th>
+        <th class="collapsing">Sửa</th>
     </tr>
     </thead>
 
@@ -44,33 +45,28 @@
                         <span style="color: red"> Chưa cập nhật vào kho</span>
                     @endif
                 </td>
-                <td  class="collapsing">
+                <td>
                     <a href="{{ route('nhap_hang.show',[$phieuNhap->id]) }}"
                        class="ui small blue label">
                         <i class="eye open fitted icon"></i>
                     </a>
+                </td>
+                <td>
                     <a href="#" onclick="$( '{{ '#modal-sua-'.$phieuNhap->id }}' ).modal('show')"
                        class="ui small green label">
                         <i class="edit fitted icon"></i>
                     </a>
-                    {{--<a href="{{ route('nhap_hang.show',[$phieuNhap->id]) }}" class="ui small blue label">Xem</a>--}}
-                    {{--<a href="#" class="ui small teal label"--}}
-                       {{--onclick="$( '{{ '#modal-sua-'.$phieuNhap->id }}' ).modal('show')">Sửa</a>--}}
                 </td>
             </tr>
         @endforeach
-
     </tbody>
-
-    @if (method_exists($phieuNhaps, 'render'))
-        <tfoot>
-        <tr class="center aligned"><th colspan="9">
-                {{ $phieuNhaps->render('vendor.pagination.smui')}}
-            </th></tr>
-        </tfoot>
-    @endif
-
 </table>
+
+@if (method_exists($phieuNhaps, 'render'))
+    <div class="ui basic segment center aligned no-padding">
+        {{ $phieuNhaps->render('vendor.pagination.smui')}}
+    </div>
+@endif
 
 @push('script')
     <script>

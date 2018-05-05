@@ -31,12 +31,10 @@
         </tr>
     @endforeach
     </tbody>
-
-    @if (method_exists($brands, 'render'))
-        <tfoot>
-        <tr class="center aligned"><th colspan="9">
-                {{ $brands->render('vendor.pagination.smui')}}
-            </th></tr>
-        </tfoot>
-    @endif
 </table>
+
+@if (method_exists($brands, 'render'))
+    <div class="ui basic segment center aligned no-padding">
+        {{ $brands->render('vendor.pagination.smui')}}
+    </div>
+@endif
