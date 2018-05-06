@@ -93,7 +93,8 @@ class DonHangController extends Controller
 
     public function printOrder($id) {
         $donHang = DonHang::find($id);
-        $pdf = PDF::loadView('admin.don_hang.san_pham.order_preview', compact('donHang'));
+        $chiTietDonHangs = ChiTietDonHang::where('don_hang_id', $id)->get();
+        $pdf = PDF::loadView('admin.don_hang.san_pham.order_preview', compact(['donHang', 'chiTietDonHangs']));
         return $pdf->stream();
     }
 }
