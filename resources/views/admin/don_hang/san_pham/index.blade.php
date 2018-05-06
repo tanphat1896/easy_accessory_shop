@@ -23,7 +23,10 @@
                 </a>
             @endif
 
-            <a href="{{ URL::previous() }}" class="ui label" style="float: right"><i class="print open fitted icon"></i> In</a>
+            <a href="{{ route('print_order', [$donHang->id]) }}" class="ui label" style="float: right" target="_blank">
+                <i class="print open fitted icon"></i>
+                Xuất hóa đơn
+            </a>
 
         </h3>
 

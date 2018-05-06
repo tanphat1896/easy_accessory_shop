@@ -22,6 +22,7 @@ class CreateDonHangsTable extends Migration
             $table->string('dia_chi', 500);
             $table->integer('customer_id')->nullable()->unsigned();
             $table->double('tong_tien');
+            $table->double('phi_van_chuyen');
             $table->string('ghi_chu',500)->nullable();
             $table->tinyInteger('tinh_trang')->default(0);
             $table->dateTime('ngay_dat_hang');

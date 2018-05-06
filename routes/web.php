@@ -168,6 +168,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
         ->middleware('donhang');
     Route::get('huy_don/{id}', 'Admin\DonHangController@huyDon')->name('huy_don')
         ->middleware('donhang');
+    Route::get('don_hang/{id}/print', 'Admin\DonHangController@printOrder')->name('print_order')
+        ->middleware('donhang');
 
     /**
         Nhan vien
@@ -188,7 +190,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
         $store->wide_menu = $state%2;
         $store->save();
     });
-
 
     Route::prefix('ajax-request')->group(function() {
         Route::get('products/sale-search', 'Admin\SanPhamController@searchProductSale');

@@ -9,6 +9,7 @@ use App\SanPham;
 use Faker\Provider\DateTime;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class DonHangController extends Controller
 {
@@ -88,5 +89,11 @@ class DonHangController extends Controller
         }
         DonHang::destroy($id);
         return redirect('/admin/don_hang')->with('success', 'Hủy đơn hàng thành công');
+    }
+
+    public function printOrder($id) {
+        $donHang = DonHang::find($id);
+        $pdf = PDF::loadView('admin.don_hang.san_pham.order_preview', compact('donHang'));
+        return $pdf->stream();
     }
 }

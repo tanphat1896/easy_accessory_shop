@@ -34,6 +34,7 @@ class OrderTableSeeder extends Seeder
             'sdt_nguoi_nhan' => substr($faker->phoneNumber, 0, 11),
             'dia_chi' => $faker->address,
             'tong_tien' => 0,//$faker->numberBetween(25000, 10000000),
+            'phi_van_chuyen' => 10,
             'ngay_dat_hang' => $date,
             'ngay_duyet_don' => $date,
             'hinh_thuc_thanh_toan' => $status[rand(0, 2)],

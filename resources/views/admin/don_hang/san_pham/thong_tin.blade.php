@@ -26,20 +26,30 @@
                 <label class="label-fixed">Địa chỉ nhận hàng:</label>
                 <div class="static-input">{{ $donHang->dia_chi }}</div>
             </div>
-        </div>
 
-        <div class=" column">
             <div class="inline field">
                 <label class="label-fixed">Ngày đặt hàng:</label>
                 <div class="static-input">{{ $donHang->formatDate('ngay_dat_hang') }}</div>
             </div>
+        </div>
 
+        <div class=" column">
             <div class="inline field">
                 <label class="label-fixed">Hình thức thanh toán:</label>
                 <div class="static-input">
                     {{ $donHang->paymentType() }}
                     {{ $donHang->tinhTrangThanhToan() }}
                 </div>
+            </div>
+
+            <div class="inline field">
+                <label class="label-fixed">Tổng tiền:</label>
+                <div class="static-input">{{ $donHang->tong_tien }}</div>
+            </div>
+
+            <div class="inline field">
+                <label class="label-fixed">Phí vận chuyển:</label>
+                <div class="static-input">{{ $donHang->phi_van_chuyen }}</div>
             </div>
 
             <div class="inline field">
