@@ -65,7 +65,7 @@
         <p>Don vi ban hang: <strong>Easy Accessory Shop</strong></p>
         <p>Ten khach hang: <strong>{{ $donHang->vn_to_en($donHang->ten_nguoi_nhan) }}</strong></p>
         <p>Dia chi: {{ $donHang->vn_to_en($donHang->dia_chi) }}</p>
-        <p>Dien thoai: {{ $donHang->dien_thoai }}</p>
+        <p>Dien thoai: {{ $donHang->sdt_nguoi_nhan }}</p>
         <p>Ghi chu: {{ $donHang->ghi_chu }}</p>
         <p>Hinh thuc thanh toan: {{ $donHang->vn_to_en($donHang->paymentType()) }}</p>
     </div>
