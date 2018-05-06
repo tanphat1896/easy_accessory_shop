@@ -8,7 +8,7 @@
         </div>
     </div>
     <div class="six wide column">
-        <table class="ui compact table celled striped center aligned" id="order-amount-table">
+        <table class="ui very compact table celled striped center aligned" id="order-amount-table">
             <thead>
             <tr>
                 <th id="order-amount-duration"></th>

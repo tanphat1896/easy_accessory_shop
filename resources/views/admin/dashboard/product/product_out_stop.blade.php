@@ -1,3 +1,4 @@
+
 <div class="ui bottom attached tab segment" data-tab="third">
     <div class="ui two column grid">
         <div class="column">
@@ -9,10 +10,10 @@
                 <tbody>
                 @foreach($outProducts as $idx => $product)
                     <tr>
-                        <td>{{ $idx + 1 }}</td>
+                        <td class="center aligned">{{ $idx + 1 }}</td>
                         <td>
-                            <img src="{{ $product->anh_dai_dien }}" class="ui mini image">
-                            <a href="{{ route('san_pham.show', [$product->slug]) }}">
+                            <img src="/{{ $product->anh_dai_dien }}" class="ui mini image spaced">
+                            <a href="{{ route('san_pham.show', [$product->id]) }}">
                                 {{ $product->ten_san_pham }}
                             </a>
                         </td>
@@ -31,10 +32,10 @@
                 <tbody>
                 @foreach($stopProducts as $idx => $product)
                     <tr>
-                        <td>{{ $idx + 1 }}</td>
+                        <td class="center aligned">{{ $idx + 1 }}</td>
                         <td>
-                            <img src="{{ $product->anh_dai_dien }}" class="ui mini image">
-                            <a href="{{ route('san_pham.show', [$product->slug]) }}">
+                            <img src="/{{ $product->anh_dai_dien }}" class="ui mini image spaced">
+                            <a href="{{ route('san_pham.show', [$product->id]) }}">
                                 {{ $product->ten_san_pham }}
                             </a>
                         </td>

@@ -14,7 +14,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         date_default_timezone_set('Asia/Ho_Chi_Minh');
-        \Debugbar::disable();
+//        \Debugbar::disable();
     }
 
     /**

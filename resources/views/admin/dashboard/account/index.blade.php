@@ -7,6 +7,12 @@
 
         <h3 class="ui dividing header">Thống kê doanh thu</h3>
 
+        @include('admin.dashboard.account.today')
+
+        <div class="ui divider"></div>
+
+        <h4 class="ui header">Biểu đồ thống kê</h4>
+
         <form class="ui tiny form" onsubmit="renderChart(event)">
             <div class="inline fields">
                 <div class="field" id="select-type">
@@ -62,14 +68,18 @@
             </div>
         </form>
         
-        <div class="ui padded grid">
+        <div class="ui grid">
 
             <div class="ten wide column">
+
+                <h5 class="ui header">Giá trị mua bán theo thời gian (Đơn vị: triệu đồng)</h5>
 
                 @include('admin.dashboard.account.revenue')
 
             </div>
             <div class="six wide column">
+
+                <h5 class="ui header">&nbsp;</h5>
 
                 @include('admin.dashboard.account.table')
 

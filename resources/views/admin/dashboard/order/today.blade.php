@@ -22,7 +22,7 @@
                 <span id="total-order">0</span>
             </div>
             <div class="label">
-                Đơn hàng
+                Tổng số đơn hàng
             </div>
         </div>
         <div class="statistic">

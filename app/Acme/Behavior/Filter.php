@@ -21,14 +21,16 @@ trait Filter {
         't' => 'thuong_hieu',
         'min' => 'gia',
         'max' => 'gia',
-        'name' => 'san_phams.slug'
+        'name' => 'san_phams.slug',
+        'amt' => 'so_luong'
     ];
 
     private $whereMethods = [
         'whereBrand',
         'wherePriceMin',
         'wherePriceMax',
-        'whereName'
+        'whereName',
+        'whereAmount'
     ];
 
     private $translatedFilters = [];
@@ -146,5 +148,17 @@ trait Filter {
             'like',
             "%{$name}%"
         );
+    }
+
+    private function whereAmount($builder, $criteria) {
+        if (! isset($criteria['amt']))
+            return $builder;
+
+        $this->translatedFilters['amt'] = [
+            "text" => $criteria['amt'] == '0' ? 'Hết hàng' : "Không quá " . $criteria['amt'] . " Sp",
+            "val" => $criteria['amt']
+        ];
+
+        return $builder->where($this->reflectKey['amt'], '<=', $criteria['amt']);
     }
 }

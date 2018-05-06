@@ -1,4 +1,4 @@
-<table class="ui compact table celled striped center aligned" id="account-table">
+<table class="ui very compact table celled striped center aligned" id="account-table">
     <thead>
     <tr><th id="duration"></th><th>Mua vào</th><th>Bán ra</th><th>Hiệu số</th></tr>
     </thead>

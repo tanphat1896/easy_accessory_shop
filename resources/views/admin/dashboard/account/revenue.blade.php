@@ -39,7 +39,7 @@
             let chartId = 'revenue-chart';
             let query = getQueryData();
 
-            console.log(query);
+            // console.log(query);
 
             axios.get('/admin/ajax-request/statistic/account?' + query)
                 .then(rs => {
@@ -57,9 +57,9 @@
             quarter = $('#quarter').val();
             dayStart = $('#day-start').val();
             dayEnd = $('#day-end').val();
+
             let data = {type, year, month, quarter, dayStart, dayEnd};
             return Object.keys(data).map(key => (key + "=" + data[key])).join('&');
-
         }
 
         let ctx, chart = null;
@@ -96,7 +96,7 @@
         };
 
         function createLineChart(id, source) {
-            console.log(source);
+            // console.log(source);
             if (ctx == null)
                 ctx = document.getElementById(id).getContext('2d');
 

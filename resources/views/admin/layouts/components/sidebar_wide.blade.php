@@ -32,8 +32,9 @@
                     <a href="{{ route('order') }}" class="title item {{ Request::is('*thong_ke/don_hang') ? 'active': '' }}">
                         <i class="clipboard icon icon-left"></i>Đơn hàng</a>
 
-                    <a class="title item">
-                        <i class="warehouse icon icon-left"></i>Tồn kho</a>
+                    <a href="{{ route('product_stt') }}"
+                       class="title item {{ Request::is('*thong_ke/san_pham') ? 'active' : '' }}">
+                        <i class="warehouse icon icon-left"></i>Sản phẩm</a>
                 </div>
             </div>
         </div>
@@ -50,7 +51,7 @@
     @endif
 
     @if($nhanVien->checkQuyen(4))
-        <a class="item {{ Request::is('*san_pham*') ? 'active-bar': '' }}" href="{{ route('san_pham.index') }}">
+        <a class="item {{ Request::is('*admin/san_pham*') ? 'active-bar': '' }}" href="{{ route('san_pham.index') }}">
             <i class="box icon icon-left"></i>Sản phẩm</a>
     @endif
 
@@ -65,7 +66,7 @@
     @endif
 
     @if($nhanVien->checkQuyen(7))
-        <a class="item {{Request::is('*/admin/don_hang*') ? 'active-bar': '' }}" href="/admin/don_hang">
+        <a class="item {{Request::is('*admin/don_hang*') ? 'active-bar': '' }}" href="/admin/don_hang">
             <i class="clipboard icon icon-left"></i>Đơn hàng </a>
     @endif
 

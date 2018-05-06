@@ -120,6 +120,9 @@ trait OrderStatistic {
         $start = $request->get('dayStart') ?: date('d');
         $end = $request->get('dayEnd') ?: date('d');
 
+        if ($start > $end)
+            $end = $start;
+
         for($i = $start; $i <= $end; $i++)
             $this->fill['day'][] = $i;
 

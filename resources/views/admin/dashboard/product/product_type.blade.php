@@ -1,13 +1,22 @@
+
+<h4 class="ui header">Sản phẩm theo loại</h4>
+
 <div class="ui grid stackable">
     <div class="ten wide column">
-        <canvas id="product-type-chart"></canvas>
+        <div class="ui segment">
+            <canvas id="product-type-chart"></canvas>
+        </div>
     </div>
 
     <div class="six wide column">
-        <table class="ui very compact table striped ">
+        <table class="ui very compact table celled striped center aligned" id="product-type-table">
             <thead>
-            <tr><th>Loại sản phẩm</th><th>Số lượng</th></tr>
+            <tr><th>STT</th><th>Loại sản phẩm</th><th>Số lượng</th></tr>
             </thead>
+            <tbody></tbody>
+            <tfoot>
+            <tr><th colspan="2"><strong>Tổng cộng</strong></th><th>{{ $total }}</th></tr>
+            </tfoot>
         </table>
     </div>
 </div>
@@ -16,10 +25,14 @@
     <script>
         let types = JSON.parse('{!! $productTypes !!}');
         let labels = [], data = [];
-        types.forEach((type) => {
+        let tbody = '';
+        types.forEach((type, idx) => {
             labels.push(type.label);
             data.push(type.value);
+            tbody += tableRow(idx, type);
         });
+
+        $('#product-type-table').find('tbody').html(tbody);
 
         let ctx = document.getElementById("product-type-chart").getContext('2d');
         let myChart = new Chart(ctx, {
@@ -66,5 +79,9 @@
                 }
             }
         });
+
+        function tableRow(idx, data) {
+            return `<tr><td>${idx+1}</td><td class='left aligned'>${data.label}</td><td>${data.value}</td></tr>`;
+        }
     </script>
 @endpush

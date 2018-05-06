@@ -17,7 +17,8 @@ trait AccountStatistic {
     private $reflectMethod = [
         'year' => 'getAccountByYear',
         'quarter' => 'getAccountByQuarter',
-        'month' => 'getAccountByMonth'
+        'month' => 'getAccountByMonth',
+        'day' => 'getAccountByDay'
     ];
 
     private $fill = [
@@ -45,16 +46,16 @@ trait AccountStatistic {
         return $total->sum('tong_tien');
     }
 
-    public function getAccount(Request $request, $orderType = 'delivery') {
+    public function getAccount(Request $request) {
         $type = $request->get('type') ?: null;
-        $statusCode = $this->statusCodes[$orderType];
+        $deliveryCode = 2;
 
         if (empty($type))
             return response()->json(null);
 
         $method = $this->reflectMethod[$type];
 
-        $data = $this->$method($request, $statusCode);
+        $data = $this->$method($request, $deliveryCode);
 
         $output = $this->standardizeOutput($data);
 
@@ -62,10 +63,10 @@ trait AccountStatistic {
 //        return view('home');
     }
 
-    private function getAccountByYear(Request $request, $statusCode) {
+    private function getAccountByYear(Request $request, $deliveryCode) {
         $yearRevenues = DB::table('don_hangs')
             ->selectRaw('year(ngay_duyet_don) as year, round(sum(tong_tien)/1000000.0, 2) as total')
-            ->where('tinh_trang', $statusCode)
+            ->where('tinh_trang', $deliveryCode)
             ->groupBy(DB::raw('year(ngay_duyet_don)'))
             ->get();
 
@@ -81,12 +82,13 @@ trait AccountStatistic {
         );
     }
 
-    private function getAccountByMonth(Request $request, $statusCode) {
+    private function getAccountByMonth(Request $request, $deliveryCode) {
         $year = $request->get('year') ?: date('Y');
 
         $monthRevenues = DB::table('don_hangs')
                 ->selectRaw('month(ngay_duyet_don) as month, round(sum(tong_tien)/1000000.0, 2) as total')
                 ->whereBetween('ngay_duyet_don', ["$year-1-1", "$year-12-31"])
+                ->where('tinh_trang', $deliveryCode)
                 ->groupBy(DB::raw('month(ngay_duyet_don)'))->get();
 
         $monthBuyings = DB::table('chi_tiet_phieu_nhaps as c')
@@ -124,19 +126,66 @@ trait AccountStatistic {
         );
     }
 
-    private function getRevenues($durationType, $durationValue, $statusCode) {
+    private function getRevenues($durationType, $durationValue, $deliveryCode) {
         $builder = DB::table('don_hangs')
             ->selectRaw("$durationType(ngay_duyet_don) as $durationType, round(sum(tong_tien)/1000000.0, 2) as total")
             ->whereBetween('ngay_duyet_don', ["$durationValue-1-1", "$durationValue-12-31"])
+            ->where('tinh_trang', $deliveryCode)
             ->groupBy(DB::raw("$durationType(ngay_duyet_don)"));
-
-        $builder = self::buildWhereCondition($builder, 'tinh_trang', $statusCode);
 
         return $builder->get();
     }
 
-    private function getBuyings() {
+    private function getAccountByDay(Request $request) {
+        $year = $request->get('year') ?: date('Y');
+        $month = $request->get('month') ?: date('m');
+        $start = $request->get('dayStart') ?: date('d');
+        $end = $request->get('dayEnd') ?: date('d');
 
+        if ($end < $start)
+            $end = $start;
+
+        for($i = $start; $i <= $end; $i++)
+            $this->fill['day'][] = $i;
+
+        $revenues = $this->dayRevenuesBuilder($year, $month, $start, $end)->get();
+
+        $buyings = $this->dayBuyingsBuilder($year, $month, $start, $end)->get();
+
+        $source = ['revenues' => $revenues, 'buyings' => $buyings];
+
+        return $this->standardizeData(
+            $this->fillMissingDuration($source, 'day', 'day'),
+            ['day', 'total'],
+            ['Ngày', 'Triệu đồng']
+        );
+    }
+
+    private function dayRevenuesBuilder($year, $month, $start, $end) {
+        $revenues = DB::table('don_hangs')
+            ->selectRaw('day(ngay_duyet_don) as day, round(sum(tong_tien)/1000000.0, 2) as total')
+            ->whereBetween('ngay_duyet_don', [
+                "$year-$month-$start 00:00:00",
+                "$year-$month-$end 23:59:59"
+            ])
+            ->where('tinh_trang', 2)
+            ->groupBy(DB::raw('day(ngay_duyet_don)'));
+
+        return $revenues;
+    }
+
+    private function dayBuyingsBuilder($year, $month, $start, $end) {
+
+        $buyings = DB::table('chi_tiet_phieu_nhaps as c')
+            ->join('phieu_nhaps as p', 'p.id', '=', 'c.phieu_nhap_id')
+            ->selectRaw('day(ngay_nhap) as day, round(sum(so_luong*don_gia)/1000000.0, 2) as total')
+            ->whereBetween('ngay_nhap', [
+                "$year-$month-$start 00:00:00",
+                "$year-$month-$end 23:59:59"
+            ])
+            ->groupBy(DB::raw('day(ngay_nhap)'));
+
+        return $buyings;
     }
 
     private function fillMissingDuration($source, $type, $column) {

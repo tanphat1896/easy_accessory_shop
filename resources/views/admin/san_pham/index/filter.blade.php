@@ -45,6 +45,11 @@
         </div>
 
         <div class="field">
+            <label for="">Số lượng không quá</label>
+            <input type="text" id="amt">
+        </div>
+
+        <div class="field">
             <button class="ui fluid green label pointer">Lọc</button>
         </div>
     </form>
@@ -79,6 +84,10 @@
 
             if (brandSlugChain.trim() !== '')
                 query += "&t=" + brandSlugChain;
+
+            let amount = document.getElementById('amt').value.trim();
+            amount = /^\d+$/.test(amount) ? amount : '';
+            query += (amount == '') ? '' : `&amt=${amount}`;
 
             query += (page === '') ? '' : `&${page}`;
 

@@ -89,6 +89,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
         ->middleware('thongke');
     Route::get('/thong_ke/don_hang', 'Admin\StatisticController@order')->name('order')
         ->middleware('thongke');
+    Route::get('/thong_ke/san_pham', 'Admin\StatisticController@product')->name('product_stt')
+        ->middleware('thongke');
 
     /**
         Thuong hieu
@@ -197,6 +199,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
         Route::get('products/sale-search', 'Admin\SanPhamController@searchProductSale');
         Route::get('statistic/account', 'Admin\StatisticController@getAccount');
         Route::get('statistic/order', 'Admin\StatisticController@getOrder');
+        Route::get('statistic/product', 'Admin\StatisticController@getHotOrUnsoldProducts');
     });
 
     Route::get('/testing', 'Admin\SanPhamController@searchProductSale');

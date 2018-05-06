@@ -246,6 +246,6 @@
     padding-left: 25px !important;
 }
 
-.statistic .label {
+.statistic .label, .statistic .value {
     text-transform: none !important;
 }

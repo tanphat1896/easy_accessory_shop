@@ -8,7 +8,7 @@
         </div>
     </div>
     <div class="six wide column">
-        <table class="ui compact table celled striped center aligned" id="order-rev-table">
+        <table class="ui very compact table celled striped center aligned" id="order-rev-table">
             <thead>
             <tr>
                 <th id="order-rev-duration"></th>

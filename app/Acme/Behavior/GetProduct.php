@@ -9,9 +9,11 @@
 namespace App\Acme\Behavior;
 
 
+use App\DonHang;
 use App\Helper\PagingHelper;
 use App\LoaiSanPham;
 use App\SanPham;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 trait GetProduct {
@@ -153,5 +155,45 @@ trait GetProduct {
         $capacity = empty($matches[1]) ? 0 : $matches[1];
 
         return $capacity;
+    }
+
+    public function getStopBusinessProducts() {
+        $products = DB::table('san_phams')
+            ->where('tinh_trang', 0)
+            ->get();
+
+        return $products;
+    }
+
+    public function getOutOfStockProducts() {
+        $products = DB::table('san_phams')
+            ->where('so_luong', 0)
+            ->get();
+
+        return $products;
+    }
+
+    public function getHotOrUnsoldProducts(Request $request) {
+        $methods = ['hot' => 'getHotProducts', 'unsold' => 'getUnsoldProducts'];
+        $type = $request->get('type') ?: 'hot';
+        $totalMonth = $request->get('m') ?: 3;
+        $limit = $request->get('lim') ?: 10;
+
+        return $this->{$methods[$type]}($totalMonth, $limit);
+    }
+
+    public function getHotProducts($totalMonth, $limit = 10) {
+        $date = date('Y-m-d', strtotime("-$totalMonth months")) . " 00:00:00";
+
+        $builder = DB::table('chi_tiet_don_hangs as c')
+            ->join('don_hangs as d', 'c.don_hang_id', '=', 'd.id')
+            ->join('san_phams as s', 's.id', '=', 'c.san_pham_id')
+            ->selectRaw('s.*, san_pham_id, sum(c.so_luong) as total')
+            ->where('ngay_dat_hang', '>=', $date)
+            ->groupBy('san_pham_id')
+            ->orderBy('total', 'desc')
+            ->limit($limit);
+
+        return $builder->get();
     }
 }
