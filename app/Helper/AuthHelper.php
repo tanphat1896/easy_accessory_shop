@@ -73,4 +73,8 @@ class AuthHelper {
 	    $guard = Auth::guard('admin');
 	    return $guard;
     }
+
+    public static function isAdmin() {
+	    return self::admin()->vai_tro == 0;
+    }
 }

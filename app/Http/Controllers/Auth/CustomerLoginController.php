@@ -21,7 +21,7 @@ class CustomerLoginController extends Controller {
 
     public function login(Request $request) {
 
-        $this->validateLogin($request);
+        //$this->validateLogin($request);
 
         if (! $this->attemptLogin($request))
             return redirect('/')->with('error', 'Sai tài khoản hoặc mật khẩu!');
@@ -31,18 +31,21 @@ class CustomerLoginController extends Controller {
         return $this->sendLoginResponse($request);
     }
 
-    private function validateLogin(Request $request) {
-        $this->validate($request, [
-            'email' => 'required|email',
-            'password' => 'required|min:6'
-        ]);
-    }
+//    private function validateLogin(Request $request) {
+//        $this->validate($request, [
+//            'email' => 'required|email',
+//            'password' => 'required|min:6'
+//        ]);
+//    }
 
     private function attemptLogin(Request $request) {
-        return $this->guard()->attempt([
+        return ($this->guard()->attempt([
             'email' => $request->email,
             'password' => $request->password
-        ]);
+        ]) || $this->guard()->attempt([
+                'username' => $request->email,
+                'password' => $request->password
+            ]));
     }
 
     private function sendLoginResponse(Request $request) {

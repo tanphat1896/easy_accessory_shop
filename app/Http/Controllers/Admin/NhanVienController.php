@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\NhanVien;
+use App\PhanQuyen;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -51,6 +52,9 @@ class NhanVienController extends Controller
         $nhanVien->username = substr($request->get('email'),0,strpos($request->get('email'),'@'));
         $nhanVien->password = bcrypt($request->get('password'));
         $nhanVien->save();
+
+        $quyenHanIds = $request->get('quyen');
+        $nhanVien->quyenHans()->sync($quyenHanIds);
 
         return back()->with('success', 'Thêm nhân viên thành công');
     }
@@ -101,6 +105,9 @@ class NhanVienController extends Controller
         }
         $nhanVien->update();
 
+        $quyenHanIds = $request->get('quyen');
+        $nhanVien->quyenHans()->sync($quyenHanIds);
+
         return back()->with('success', 'Cập nhật thông tin thành công');
     }
 
@@ -110,6 +117,16 @@ class NhanVienController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    public function changeInfo(Request $request, $id)
+    {
+        $nhanVien = NhanVien::findOrFail($id);
+        $nhanVien->name = $request->get('ten-nhan-vien');
+        $nhanVien->phone = $request->get('so-dien-thoai');
+        $nhanVien->update();
+
+        return back()->with('success', 'Cập nhật thông tin thành công');
+    }
 
     public function changePass(Request $request, $id)
     {

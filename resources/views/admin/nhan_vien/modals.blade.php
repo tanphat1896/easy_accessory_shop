@@ -38,31 +38,26 @@
             </div>
 
             <div class="field">
+                <label for="thong-so">Quyền hạn</label>
+                <select name="quyen[]" multiple id="quyen" class="ui search dropdown">
+                    @foreach(\App\PhanQuyen::all() as $quyen)
+                        <option value="{{ $quyen->id }}">{{ $quyen->ten_quyen }}</option>
+                    @endforeach
+                </select>
+
+            </div>
+
+            <div class="field">
                 <button class="ui blue fluid button"><strong>Lưu</strong></button>
             </div>
         </form>
     </div>
 </div>
 
-@push('script')
-    <script>
-        var pass = document.getElementById("pass")
-            , confirm_pass = document.getElementById("pass_confirmation");
-
-        function validatePass(){
-            if(pass.value != confirm_pass.value) {
-                confirm_pass.setCustomValidity("Mật khẩu nhập lại không khớp!");
-            } else {
-                confirm_pass.setCustomValidity('');
-            }
-        }
-
-        pass.onchange = validatePass;
-        confirm_pass.onkeyup = validatePass;
-    </script>
-@endpush
-
 @foreach($nhanViens as $stt => $nhanVien)
+    @if($nhanVien->isAdmin())
+        @continue
+    @endif
     <div class="ui mini vertical flip modal" id="{{ "modal-sua-" . $nhanVien->id }}">
         <div class="blue header">Sửa thông tin nhân viên</div>
         <div class="content">
@@ -89,6 +84,21 @@
                     <input type="text" value="{{ $nhanVien->phone }}" name="so-dien-thoai"
                            maxlength="11" required>
                 </div>
+
+                @if(!$nhanVien->isAdmin())
+                    <div class="field">
+                        <label for="thong-so">Quyền hạn</label>
+                        <select name="quyen[]" multiple id="quyen" class="ui search dropdown">
+                            @foreach(\App\PhanQuyen::all() as $quyen)
+                                <option value="{{ $quyen->id }}"
+                                        {{ $quyen->matchedIds($nhanVien->quyenHans)
+                                            ? 'selected': '' }} >
+                                    {{ $quyen->ten_quyen }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                @endif
                 <div class="field">
                     <button class="ui blue fluid button"><strong>Lưu</strong></button>
                 </div>
@@ -96,3 +106,21 @@
         </div>
     </div>
 @endforeach
+
+@push('script')
+    <script>
+        var pass = document.getElementById("pass")
+            , confirm_pass = document.getElementById("pass_confirmation");
+
+        function validatePass(){
+            if(pass.value != confirm_pass.value) {
+                confirm_pass.setCustomValidity("Mật khẩu nhập lại không khớp!");
+            } else {
+                confirm_pass.setCustomValidity('');
+            }
+        }
+
+        pass.onchange = validatePass;
+        confirm_pass.onkeyup = validatePass;
+    </script>
+@endpush

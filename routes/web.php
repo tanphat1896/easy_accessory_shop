@@ -82,46 +82,106 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
     Route::get('/', 'Admin\AdminController@index')->name('admin.dashboard');
     Route::get('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
 
+    /**
+        Thong ke
+     */
+    Route::get('/thong_ke/thu_chi', 'Admin\StatisticController@account')->name('account')
+        ->middleware('thongke');
 
-    Route::get('/thong_ke/thu_chi', 'Admin\StatisticController@account')->name('account');
+    /**
+        Thuong hieu
+     */
+    Route::resource('thuong_hieu', 'Admin\ThuongHieuController', ["except" => ["create", "show", "edit"]])
+        ->middleware('thuonghieu');
+    Route::get('brands', 'Admin\ThuongHieuController@brands')
+        ->middleware('thuonghieu');
 
+    /**
+        Loai san pham
+     */
+    Route::resource('loai_sp', 'Admin\LoaiSanPhamController', ["except" => ["create", "show", "edit"]])
+        ->middleware('loaisp');
 
-    Route::resource('thuong_hieu', 'Admin\ThuongHieuController', ["except" => ["create", "show", "edit"]]);
-    Route::get('brands', 'Admin\ThuongHieuController@brands');
-    Route::resource('loai_sp', 'Admin\LoaiSanPhamController', ["except" => ["create", "show", "edit"]]);
-    Route::resource('nha_cung_cap', 'Admin\NhaCungCapController', ["except" => ["create", "show", "edit"]]);
-    Route::resource('khuyen_mai', 'Admin\KhuyenMaiController', ["except" => ["create", "edit"]]);
-    Route::resource('khuyen_mai', 'Admin\KhuyenMaiController', ["except" => ["create", "edit"]]);
-    Route::resource('chi_tiet_km', 'Admin\ChiTietKMController', ["only" => ["store", "destroy"]]);
+    /**
+        Nha cung cap
+     */
+    Route::resource('nha_cung_cap', 'Admin\NhaCungCapController', ["except" => ["create", "show", "edit"]])
+        ->middleware('nhacungcap');
 
+    /**
+        Khuyen mai
+     */
+    Route::resource('khuyen_mai', 'Admin\KhuyenMaiController', ["except" => ["create", "edit"]])
+        ->middleware('khuyenmai');
+    Route::resource('chi_tiet_km', 'Admin\ChiTietKMController', ["only" => ["store", "destroy"]])
+        ->middleware('khuyenmai');
 
-    Route::resource('noi_dung/slider', 'Admin\SliderController', ['only' => ['index', 'store', 'destroy']]);
-    Route::resource('noi_dung/menu', 'Admin\MenuController', ['only' => ['index', 'store', 'destroy']]);
-    Route::resource('noi_dung/info', 'Admin\ShopInfoController', ['only' => ['index', 'store']]);
-    Route::resource('noi_dung/news', 'Admin\NewsController');
+    /**
+        Noi dung
+     */
+    Route::resource('noi_dung/slider', 'Admin\SliderController', ['only' => ['index', 'store', 'destroy']])
+        ->middleware('noidung');
+    Route::resource('noi_dung/menu', 'Admin\MenuController', ['only' => ['index', 'store', 'destroy']])
+        ->middleware('noidung');
+    Route::resource('noi_dung/info', 'Admin\ShopInfoController', ['only' => ['index', 'store']])
+        ->middleware('noidung');
+    Route::resource('noi_dung/news', 'Admin\NewsController')
+        ->middleware('noidung');
 
+    /**
+        San pham
+     */
+    Route::resource('san_pham', 'Admin\SanPhamController')
+        ->middleware('sanpham');
+    Route::post('san_pham/{id}/resume', 'Admin\SanPhamController@resume')->name('san_pham.resume')
+        ->middleware('sanpham');
+    Route::post('gia_san_pham/{sanpham_id}', 'Admin\GiaSanPhamController@store')->name('gia_san_pham.store')
+        ->middleware('sanpham');
+    Route::post('thong_so_ky_thuat/{sanpham_id}', 'Admin\ThongSoKyThuatController@update')
+        ->name('thong_so_ky_thuat')->middleware('sanpham');
+    Route::resource('anh_san_pham', 'Admin\AnhSanPhamController', ['only' => ['store', 'destroy']])
+        ->middleware('sanpham');
 
-    Route::resource('san_pham', 'Admin\SanPhamController');
-    Route::post('san_pham/{id}/resume', 'Admin\SanPhamController@resume')->name('san_pham.resume');
-    Route::post('gia_san_pham/{sanpham_id}', 'Admin\GiaSanPhamController@store')->name('gia_san_pham.store');
-    Route::post('thong_so_ky_thuat/{sanpham_id}', 'Admin\ThongSoKyThuatController@update')->name('thong_so_ky_thuat');
-    Route::resource('anh_san_pham', 'Admin\AnhSanPhamController', ['only' => ['store', 'destroy']]);
+    /**
+        Binh luan
+     */
     Route::resource('binh_luan', 'Admin\CommentController', ['only' => ['store', 'destroy', 'update']]);
 
+    /**
+        Nhap hang
+     */
+    Route::resource('nhap_hang','Admin\NhapHangController')
+        ->middleware('nhaphang');
+    Route::get('nhap_hang/{adminID}/index', 'Admin\NhapHangController@nhapHangIndex')->name('nhap_hang_index')
+        ->middleware('nhaphang');
+    Route::resource('chi_tiet_nhap_hang', 'Admin\CTNHController', ['only' => ['update', 'store', 'destroy']])
+        ->middleware('nhaphang');
+    Route::get('cap_nhat_so_luong/{id}', 'Admin\CTNHController@productUpdate')->name('cap_nhat_so_luong')
+        ->middleware('nhaphang');
 
-    Route::resource('nhap_hang','Admin\NhapHangController');
-    Route::get('nhap_hang/{adminID}/index', 'Admin\NhapHangController@nhapHangIndex')->name('nhap_hang_index');
-    Route::resource('chi_tiet_nhap_hang', 'Admin\CTNHController', ['only' => ['update', 'store', 'destroy']]);
-    Route::get('cap_nhat_so_luong/{id}', 'Admin\CTNHController@productUpdate')->name('cap_nhat_so_luong');
+    /**
+        Don hang
+     */
+    Route::resource('don_hang', 'Admin\DonHangController', ['only' => ['index', 'show', 'update', 'edit']])
+        ->middleware('donhang');
+    Route::get('duyet_don/{id}', 'Admin\DonHangController@duyetDon')->name('duyet_don')
+        ->middleware('donhang');
+    Route::get('huy_don/{id}', 'Admin\DonHangController@huyDon')->name('huy_don')
+        ->middleware('donhang');
 
-    Route::resource('don_hang', 'Admin\DonHangController', ['only' => ['index', 'show', 'update', 'edit']]);
-    Route::get('duyet_don/{id}', 'Admin\DonHangController@duyetDon')->name('duyet_don');
-    Route::get('huy_don/{id}', 'Admin\DonHangController@huyDon')->name('huy_don');
-
-    Route::resource('nhan_vien', 'Admin\NhanVienController');
-    Route::post('nhan_vien/{id}/cap_nhat', 'Admin\NhanVienController@update')->name('cap_nhat_thong_tin');
-    Route::post('nhan_vien/{id}/reset_mat_khau', 'Admin\NhanVienController@resetPass')->name('reset_mat_khau');
+    /**
+        Nhan vien
+     */
+    Route::resource('nhan_vien', 'Admin\NhanVienController')
+        ->middleware('nhanvien');
+    Route::post('nhan_vien/{id}/cap_nhat_thong_tin', 'Admin\NhanVienController@changeInfo')->name('cap_nhat_thong_tin');
+    Route::post('nhan_vien/{id}/reset_mat_khau', 'Admin\NhanVienController@resetPass')->name('reset_mat_khau')
+        ->middleware('nhanvien');
     Route::post('nhan_vien/{id}/change_mat_khau', 'Admin\NhanVienController@changePass')->name('change_mat_khau');
+
+    Route::get('error', function () {
+        return view('admin.errors.404');
+    })->name('error');
 
     Route::get('menu_state/{state}', function($state) {
         $store = App\CuaHang::first();

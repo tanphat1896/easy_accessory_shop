@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\ChiTietPhieuNhap;
 use App\Helper\AuthHelper;
 use App\NhaCungCap;
+use App\NhanVien;
 use App\PhieuNhap;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;

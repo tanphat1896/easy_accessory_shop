@@ -17,14 +17,16 @@ class AdminSeeder extends Seeder
                 'email' => 'nguyentrongcp@gmail.com',
                 'phone' => '01639883047',
                 'username' => 'nguyentrong',
-                'password' => bcrypt('111111')
+                'password' => bcrypt('111111'),
+                'vai_tro' => 1
             ],
             [
                 'name' => 'Mr. Blo bla',
                 'email' => 'blabla@gmail.com',
                 'phone' => '01639883047',
                 'username' => 'blabla',
-                'password' => bcrypt('111111')
+                'password' => bcrypt('111111'),
+                'vai_tro' => 0
             ],
 
         ]);

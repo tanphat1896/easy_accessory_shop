@@ -20,6 +20,7 @@ class CreateAdminsTable extends Migration
             $table->string('phone',11);
             $table->string('username',16)->unique();
             $table->string('password');
+            $table->tinyInteger('vai_tro')->default(1);
             $table->rememberToken();
             $table->timestamps();
         });

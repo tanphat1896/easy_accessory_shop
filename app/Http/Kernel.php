@@ -4,6 +4,17 @@ namespace App\Http;
 
 use App\Http\Middleware\AuthAdminMiddleware;
 use App\Http\Middleware\AuthCustomerMiddleware;
+use App\Http\Middleware\CaiDatAu;
+use App\Http\Middleware\DonHangAu;
+use App\Http\Middleware\KhuyenMaiAu;
+use App\Http\Middleware\LoaiSPAu;
+use App\Http\Middleware\NhaCungCapAu;
+use App\Http\Middleware\NhanVienAu;
+use App\Http\Middleware\NhapHangAu;
+use App\Http\Middleware\NoiDungAu;
+use App\Http\Middleware\SanPhamAu;
+use App\Http\Middleware\ThongKeAu;
+use App\Http\Middleware\ThuongHieuAu;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -63,5 +74,16 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'customer' => AuthCustomerMiddleware::class,
         'admin' => AuthAdminMiddleware::class,
+        'thongke' => ThongKeAu::class,
+        'caidat' => CaiDatAu::class,
+        'donhang' => DonHangAu::class,
+        'khuyenmai' => KhuyenMaiAu::class,
+        'loaisp' => LoaiSPAu::class,
+        'nhacungcap' => NhaCungCapAu::class,
+        'nhanvien' => NhanVienAu::class,
+        'nhaphang' => NhapHangAu::class,
+        'noidung' => NoiDungAu::class,
+        'sanpham' => SanPhamAu::class,
+        'thuonghieu' => ThuongHieuAu::class,
     ];
 }

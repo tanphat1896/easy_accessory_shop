@@ -20,6 +20,9 @@
     <tbody>
 
     @foreach($nhanViens as $stt => $nhanVien)
+        @if($nhanVien->isAdmin())
+            @continue
+        @endif
         <tr>
             <td class="collapsing">
                 <div class="ui child checkbox">

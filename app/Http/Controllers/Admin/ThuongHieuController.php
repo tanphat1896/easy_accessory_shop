@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helper\AuthHelper;
 use App\Helper\Logging;
 use App\Helper\PagingHelper;
 use App\Helper\StringHelper;
 use App\Http\Requests\ThuongHieuFormRequest;
+use App\NhanVien;
 use App\ThuongHieu;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -13,6 +15,11 @@ use App\Http\Controllers\Controller;
 class ThuongHieuController extends Controller {
 
     public function index(Request $request) {
+        if (!NhanVien::find(AuthHelper::adminId())->checkQuyen(2))
+        {
+            return view('admin.errors.404');
+        }
+
         $brandName = $request->get('name') ?: '';
         $brandName = StringHelper::toSlug($brandName);
 

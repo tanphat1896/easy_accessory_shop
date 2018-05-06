@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
              ProductSpecTableSeeder::class,
              OrderTableSeeder::class,
              OrderDetailTableSeeder::class,
+             QuyenSeeder::class,
          ]);
     }
 }
