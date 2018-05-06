@@ -69,5 +69,3 @@
         @endforeach
     </div>
 </div>
-
-@include('admin.san_pham.show.modals')

@@ -205,7 +205,6 @@
     color: #fff!important;
     border-left: 2px solid #2185d0;
 }
-
 .pointer {
     cursor: pointer !important;
 }
@@ -245,4 +244,8 @@
 }
 .need-remove {
     padding-left: 25px !important;
+}
+
+.statistic .label {
+    text-transform: none !important;
 }

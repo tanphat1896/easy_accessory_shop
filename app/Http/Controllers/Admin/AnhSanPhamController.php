@@ -37,16 +37,15 @@ class AnhSanPhamController extends Controller
         $ids = $request->get('hinh-anh-id');
 
         if (empty($ids))
-            return back();
-
+            return response()->json(true);
 
         $deleted = ImageHelper::deleteAnhChiTietFromStorage($ids);
 
         if (!$deleted)
-            return back()->with('errors', ["Hãy thử lại sau"]);
+            return response()->json(false);
 
         HinhAnh::destroy($ids);
 
-        return back()->with('success', 'Xóa thành công');
+        return response()->json(true);
     }
 }

@@ -62,14 +62,14 @@
                     <img src="/{{ $sanPham->anh_dai_dien }}" class="ui bordered small image">
                 </div>
 
-                {{--<div class="field">--}}
-                    {{--<label for="">Ảnh chi tiết</label>--}}
-                    {{--<div class="ui tiny bordered images">--}}
-                        {{--@foreach($sanPham->hinhAnhs as $anh)--}}
-                            {{--<img src="/{{ $anh->lien_ket }}" class="ui image">--}}
-                        {{--@endforeach--}}
-                    {{--</div>--}}
-                {{--</div>--}}
+                <div class="field">
+                    <label for="">Ảnh chi tiết</label>
+                    <div class="ui tiny bordered images">
+                        @foreach($sanPham->hinhAnhs as $anh)
+                            <img src="/{{ $anh->lien_ket }}" class="ui image">
+                        @endforeach
+                    </div>
+                </div>
 
             </div>
         </div>

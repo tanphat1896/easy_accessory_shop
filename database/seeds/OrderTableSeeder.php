@@ -12,7 +12,7 @@ class OrderTableSeeder extends Seeder
     public function run()
     {
         $rows = [];
-        for ($i = 0; $i < 200; $i++)
+        for ($i = 0; $i < 497; $i++)
             $rows[] = $this->getRow();
 
         $rows = array_sort($rows, function($row) {
@@ -38,7 +38,7 @@ class OrderTableSeeder extends Seeder
             'ngay_duyet_don' => $date,
             'hinh_thuc_thanh_toan' => $status[rand(0, 2)],
             'ghi_chu' => $faker->sentence,
-            'tinh_trang' => rand(0, 2),
+            'tinh_trang' => strtotime($date) < strtotime("2018-1-1 00:00:01") ? 2: rand(0, 2),
 //            'tinh_trang' => $date < '2018-1-1' ? '2' : random_int(1, 100)%3,
             'payment_type' => rand(1, 2),
             'payment_id' => "fsdfwe123123",

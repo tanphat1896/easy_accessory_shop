@@ -8,8 +8,9 @@
 @push('script')
     <script>
         let orders = JSON.parse('{!! $orders !!}');
+        console.log(orders);
         let orderColors = ['#FFA2A2', '#C3F66D','#6DBBF6'];
-        buildChart('order-chart', 'line', orders, 'tinh_trang', orderColors);
+        buildChart('order-chart', 'pie', orders, 'label', orderColors);
 {{--        let revenues = JSON.parse('{!! $revenues !!}');--}}
         // let orderColors = ['#FFA2A2', '#C3F66D','#6DBBF6'];
         // buildChart('order-chart', 'line', orders, 'tinh_trang', orderColors);

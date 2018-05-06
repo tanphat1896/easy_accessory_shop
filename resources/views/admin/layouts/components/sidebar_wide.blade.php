@@ -29,6 +29,9 @@
                     <a href="{{ route('account') }}" class="title item {{ Request::is('*thu_chi') ? 'active': '' }}">
                         <i class="dollar icon icon-left"></i>Thu chi</a>
 
+                    <a href="{{ route('order') }}" class="title item {{ Request::is('*thong_ke/don_hang') ? 'active': '' }}">
+                        <i class="clipboard icon icon-left"></i>Đơn hàng</a>
+
                     <a class="title item">
                         <i class="warehouse icon icon-left"></i>Tồn kho</a>
                 </div>
@@ -62,7 +65,7 @@
     @endif
 
     @if($nhanVien->checkQuyen(7))
-        <a class="item {{Request::is('*/don_hang*') ? 'active-bar': '' }}" href="/admin/don_hang">
+        <a class="item {{Request::is('*/admin/don_hang*') ? 'active-bar': '' }}" href="/admin/don_hang">
             <i class="clipboard icon icon-left"></i>Đơn hàng </a>
     @endif
 

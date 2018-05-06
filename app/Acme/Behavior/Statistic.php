@@ -35,14 +35,13 @@ trait Statistic {
         $status = [
             1 => 'Đã duyệt',
             0 => 'Chưa duyệt',
-            -1 => 'Đã hủy',
             2 => 'Đã giao hàng'
         ];
         $orders = DB::table('don_hangs')
-            ->select('tinh_trang', DB::raw('count(*) as total'))
+            ->selectRaw("tinh_trang as label, count(*) as total")
             ->groupBy('tinh_trang')->get();
         foreach ($orders as &$order) {
-            $order->tinh_trang = $status[$order->tinh_trang];
+            $order->label = $status[$order->label];
         }
 
         return $orders;

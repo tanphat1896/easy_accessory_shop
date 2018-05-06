@@ -66,3 +66,5 @@
         </div>
     </div>
 @endforeach
+
+@include('admin.khuyen_mai.checkdate_script')

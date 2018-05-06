@@ -100,7 +100,7 @@
         function buildTableRowHtml(index, product) {
             let tr = '<tr>';
             tr += buildCheckboxFor(product);
-            tr += `<td>${index}</td>`;
+            tr += `<td>${index + 1}</td>`;
             tr += `<td>${product.name}</td>`;
             return tr + '</tr>';
         }

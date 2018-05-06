@@ -10,7 +10,7 @@
         <th>Tên chương trình khuyến mãi</th>
         <th>Ngày bắt đầu</th>
         <th>Ngày kết thúc</th>
-        <th>Hành động</th>
+        <th class=" collapsing">Hành động</th>
     </tr>
     </thead>
     <tbody>
@@ -25,16 +25,16 @@
             <td class="left aligned">{{ $sale->ten_km }}</td>
             <td>{{ $sale->start() }}</td>
             <td>{{ $sale->end() }}</td>
-            <td class="left aligned collapsing">
+            <td class="left aligned">
                 <a href="{{ route('khuyen_mai.show', [$sale->id]) }}"
-                   class="ui blue label">
+                   class="ui tiny blue label">
                     <i class="eye open fitted icon"></i>
                 </a>
 
                 @if(! $sale->overdue())
-                    <button type="button" class="ui green label pointer"
+                    <button type="button" class="ui tiny green label pointer"
                             onclick="$('{{ "#modal-sua-" . $sale->id }}').modal('show')">
-                        <i class="edit fitted icon"></i>
+                        <i class="pencil fitted icon"></i>
                     </button>
                 @endif
             </td>

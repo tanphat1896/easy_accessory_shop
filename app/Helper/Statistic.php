@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\DB;
 class Statistic {
     use AccountStatistic;
 
-    const CHART_FIELDS = ['label', 'value'];
+    const CHART_FIELDS = ['label', 'value', 'extra'];
 
     const reflectClass = [
         'product' => 'SanPham',

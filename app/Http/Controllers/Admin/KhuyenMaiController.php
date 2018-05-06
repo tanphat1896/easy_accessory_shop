@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\KhuyenMai;
 use App\LoaiSanPham;
+use App\Model\ChiTietKhuyenMai;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -54,6 +55,17 @@ class KhuyenMaiController extends Controller
     public function destroy(Request $request) {
         KhuyenMai::destroy($request->get('khuyen-mai-id'));
 
+        if ($request->has('sale-id'))
+            $this->destroySaleDetail($request);
+
         return back()->with('success', 'Xóa thành công');
+    }
+
+    private function destroySaleDetail(Request $request) {
+        $sale = KhuyenMai::findOrFail($request->get('sale-id'));
+
+        $productIds = $request->get('product-id') ?: [];
+
+        $sale->products()->detach($productIds);
     }
 }

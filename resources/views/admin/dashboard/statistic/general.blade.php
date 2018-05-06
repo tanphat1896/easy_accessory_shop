@@ -1,10 +1,4 @@
-@push('style')
-    <style>
-        .statistic .label {
-            text-transform: none !important;
-        }
-    </style>
-@endpush
+
 <div class="ui segment">
     <div class="ui mini four statistics">
         <div class="statistic">
@@ -39,8 +33,8 @@
 
         <div class="statistic">
             <div class="value">
-                <i class="dollar icon"></i>
-                {{ \App\Helper\StringHelper::toCurrencyString(\App\Helper\Statistic::getTotalRevenue(), '') }}
+                VNĐ
+                {{ \App\Helper\StringHelper::toCurrencyString(\App\Helper\Statistic::getTotalRevenue('delivery'), '') }}
             </div>
             <div class="label">
                 Doanh thu

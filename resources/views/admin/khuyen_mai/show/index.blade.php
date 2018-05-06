@@ -3,6 +3,8 @@
 @section('title', 'Chi tiết khuyến mãi')
 
 @section('content')
+    @include('sharing.components.message')
+    @include('sharing.components.error')
     <div class="ui blue raised segment">
         <h3 class="ui dividing header">
 
@@ -32,12 +34,15 @@
             {{ method_field('DELETE') }}
             {{ csrf_field() }}
 
+            <input type="hidden" name="sale-id" value="{{ $sale->id }}">
+
             <button type="submit" class="ui small red delete button need-popup"
                     data-content="Xóa các mục vừa chọn"
-                    onclick="return confirmDelete()"
-            >
+                    onclick="return confirmDelete()">
+
                 <i class="delete fitted icon"></i>
                 <strong>Xóa </strong>
+
             </button>
 
             @if (! $sale->overdue())
@@ -50,21 +55,6 @@
             <div class="ui divider small-td-margin hidden"></div>
 
             @include('admin.khuyen_mai.show.table_sale_products')
-
-            <button type="submit" class="ui small red delete button need-popup"
-                    data-content="Xóa các mục vừa chọn"
-                    onclick="return confirmDelete()"
-            >
-                <i class="delete fitted icon"></i>
-                <strong>Xóa </strong>
-            </button>
-
-            @if (! $sale->overdue())
-                <button type="button" class="ui small blue button" onclick="$('#modal-add-product').modal('show')">
-                    <i class="add fitted icon"></i>
-                    <strong>Thêm sản phẩm</strong>
-                </button>
-            @endif
 
         </form>
 

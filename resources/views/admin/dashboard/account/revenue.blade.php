@@ -39,7 +39,7 @@
             let chartId = 'revenue-chart';
             let query = getQueryData();
 
-            // console.log(query);
+            console.log(query);
 
             axios.get('/admin/ajax-request/statistic/account?' + query)
                 .then(rs => {
