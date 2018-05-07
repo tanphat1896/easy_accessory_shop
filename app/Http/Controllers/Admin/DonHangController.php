@@ -21,7 +21,7 @@ class DonHangController extends Controller
     public function index()
     {
 //        $donHangs = DonHang::all();
-        $donHangs = DonHang::orderBy('tinh_trang', 'asc')->paginate(10);
+        $donHangs = DonHang::orderBy('ngay_dat_hang', 'desc')->paginate(10);
 
         return view('admin.don_hang.index.index', compact('donHangs'));
     }

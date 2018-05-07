@@ -4,7 +4,8 @@
     <style type="text/css">
         .wrapper {
             padding: 20px;
-            font-family: Arial;
+            font-family: 'DejaVu Sans';
+            font-size: 14px;
         }
         p {
             margin: 5px;
@@ -56,18 +57,18 @@
 <div class="wrapper">
     <div class="date">{{ date('Y-m-d') }}</div>
     <div class="header-wrapper">
-        <p><strong>HOA DON BAN HANG</strong></p>
-        <p>Ngay: <strong>{{ date('Y-m-d H:i:s') }}</strong> </p>
-        <p>Ma don hang: <strong>{{ $donHang->ma_don_hang }}</strong></p>
+        <p><strong>HÓA ĐƠN BÁN HÀNG</strong></p>
+        <p>Ngày: <strong>{{ date('Y-m-d H:i:s') }}</strong> </p>
+        <p>Mã đơn hàng: <strong>{{ $donHang->ma_don_hang }}</strong></p>
     </div>
 
     <div class="info">
-        <p>Don vi ban hang: <strong>Easy Accessory Shop</strong></p>
-        <p>Ten khach hang: <strong>{{ $donHang->vn_to_en($donHang->ten_nguoi_nhan) }}</strong></p>
-        <p>Dia chi: {{ $donHang->vn_to_en($donHang->dia_chi) }}</p>
-        <p>Dien thoai: {{ $donHang->sdt_nguoi_nhan }}</p>
-        <p>Ghi chu: {{ $donHang->ghi_chu }}</p>
-        <p>Hinh thuc thanh toan: {{ $donHang->vn_to_en($donHang->paymentType()) }}</p>
+        <p>Đơn vị bán hàng: <strong>Easy Accessory Shop</strong></p>
+        <p>Tên khách hàng: <strong>{{ $donHang->ten_nguoi_nhan }}</strong></p>
+        <p>Địa chỉ: {{ $donHang->dia_chi }}</p>
+        <p>Điện thoại: {{ $donHang->sdt_nguoi_nhan }}</p>
+        <p>Ghi chú: {{ $donHang->ghi_chu }}</p>
+        <p>Hình thức thanh toán: {{ $donHang->paymentType() }}</p>
     </div>
 
     <div class="product-table">
@@ -75,24 +76,32 @@
             <thead>
             <tr>
                 <th>STT</th>
-                <th>Ten san pham</th>
-                <th>So luong</th>
-                <th>Don gia</th>
-                <th>Khuyen mai</th>
-                <th>Thanh tien</th>
+                <th>Tên sản phẩm</th>
+                <th>Số lượng</th>
+                <th>Đơn giá</th>
+                <th>Khuyến mãi</th>
+                <th>Thành tiền</th>
             </tr>
             </thead>
             <tbody>
             @foreach($chiTietDonHangs as $stt => $chiTietDonHang)
                 <tr>
                     <td>{{ $stt + 1 }}</td>
-                    <td>{{ $donHang->vn_to_en($chiTietDonHang->tenSanPham()) }}</td>
+                    <td>{{ $chiTietDonHang->tenSanPham() }}</td>
                     <td>{{ $chiTietDonHang->so_luong }}</td>
-                    <td>{{ number_format($chiTietDonHang->don_gia) }} VND</td>
+                    <td>{{ number_format($chiTietDonHang->don_gia) }} đ</td>
                     <td>{{ $chiTietDonHang->giam_gia }}%</td>
-                    <td>{{ number_format($chiTietDonHang->tongTien()) }} VND</td>
+                    <td>{{ number_format($chiTietDonHang->tongTien()) }} đ</td>
                 </tr>
             @endforeach
+            <tr>
+                <td colspan="6" class="right-aligned">
+                    <p>Tổng tiền hàng (đã có thuế): <strong>{{ number_format($donHang->tong_tien) }} đ</strong></p>
+                    <p>Thuế GTGT (10%): <strong>{{ number_format($donHang->tong_tien * 0.1) }} đ</strong></p>
+                    <p>Phí vận chuyển: <strong>{{ number_format($donHang->phi_van_chuyen) }} đ</strong></p>
+                    <p>Tổng cộng: <strong>{{ number_format($donHang->tong_tien + $donHang->phi_van_chuyen) }} đ</strong></p>
+                </td>
+            </tr>
             </tbody>
         </table>
     </div>

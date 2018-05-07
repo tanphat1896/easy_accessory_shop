@@ -44,7 +44,7 @@
 
             <div class="inline field">
                 <label class="label-fixed">Tổng tiền:</label>
-                <div class="static-input">{{ $donHang->tong_tien }}</div>
+                <div class="static-input">{{ number_format($donHang->tong_tien) }} đ</div>
             </div>
 
             <div class="inline field">
