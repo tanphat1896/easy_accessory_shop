@@ -5,7 +5,7 @@
         .wrapper {
             padding: 20px;
             font-family: 'DejaVu Sans';
-            font-size: 14px;
+            font-size: 12px;
         }
         p {
             margin: 5px;
@@ -96,8 +96,8 @@
             @endforeach
             <tr>
                 <td colspan="6" class="right-aligned">
-                    <p>Tổng tiền hàng (đã có thuế): <strong>{{ number_format($donHang->tong_tien) }} đ</strong></p>
                     <p>Thuế GTGT (10%): <strong>{{ number_format($donHang->tong_tien * 0.1) }} đ</strong></p>
+                    <p>Tổng tiền hàng (đã có thuế): <strong>{{ number_format($donHang->tong_tien) }} đ</strong></p>
                     <p>Phí vận chuyển: <strong>{{ number_format($donHang->phi_van_chuyen) }} đ</strong></p>
                     <p>Tổng cộng: <strong>{{ number_format($donHang->tong_tien + $donHang->phi_van_chuyen) }} đ</strong></p>
                 </td>

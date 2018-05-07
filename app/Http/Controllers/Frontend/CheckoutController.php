@@ -53,21 +53,15 @@ class CheckoutController extends Controller
     public function store(Request $request) {
         $data = $this->neededData($request);
 
-        $this->checkIfCanCheckout($data);
+        $canCheckout = $this->checkIfCanCheckout($data);
+
+        if (!$canCheckout)
+            return redirect()->back()->with('error', $this->errorText);
 
         if ($this->notCashPayment($data['hinh_thuc_thanh_toan']))
             return $this->processOnlinePayment($data);
 
-        $order = $this->saveOrder($data);
-
-        if (!empty($order))
-            $this->cleanCart();
-
-        return redirect()->route('checkout.result')
-            ->with([
-                'orderCode' => $order->ma_don_hang,
-                'name' => $order->ten_nguoi_nhan
-            ]);
+        return $this->createNewOrder($data);
     }
 
     private function neededData(Request $request) {
@@ -98,8 +92,20 @@ class CheckoutController extends Controller
     private function checkIfCanCheckout(array $data) {
         $canCheckout = $this->availabelSyncingProducts($data['syncingProducts']);
 
-        if (!$canCheckout)
-            return back()->with('error', 'Số lượng không đủ để đặt hàng ');
+        return $canCheckout;
+    }
+
+    private function createNewOrder($data) {
+        $order = $this->saveOrder($data);
+
+        if (!empty($order))
+            $this->cleanCart();
+
+        return redirect()->route('checkout.result')
+            ->with([
+                'orderCode' => $order->ma_don_hang,
+                'name' => $order->ten_nguoi_nhan
+            ]);
     }
 
     private function cleanCart() {

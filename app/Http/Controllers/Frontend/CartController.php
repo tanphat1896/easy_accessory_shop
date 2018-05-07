@@ -51,7 +51,6 @@ class CartController extends Controller
 
     public function updateAmount(Request $request, $productSlug) {
         $errorText = $this->cartRepository->updateAmount($request, $productSlug);
-
         return empty($errorText)
             ? back()
             : back()->with('error', $errorText);

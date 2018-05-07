@@ -54,6 +54,10 @@ class MemberCart extends Cart {
     }
 
     public function addProduct($product, $amount) {
+
+        if (! $this->availableAmount($product->slug, $amount))
+            return $this->errorText;
+
         $oldAmount = $this->getAmountIfCartHas($product);
 
         if ($oldAmount > 0){
@@ -94,7 +98,7 @@ class MemberCart extends Cart {
         $product = SanPham::whereSlug($productSlug)->first();
 
         if (! $this->availableAmount($product->id, $amount))
-            return self::ERROR_TEXT['NOT_ENOUGH'];
+            return $this->errorText;
 
         $this->updateAmountExistProduct($product, $amount);
 

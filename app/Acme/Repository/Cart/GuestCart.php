@@ -41,6 +41,9 @@ class GuestCart extends Cart {
         $amount = $this->increaseAmountIfProductExist($product, $amount);
         $cost = $amount * $product->priceSale();
 
+        if (! $this->availableAmount($product->slug, $amount))
+            return $this->errorText;
+
         $this->products[$product->slug] = compact('product', 'amount' ,'cost');
 
         session(['cart' => $this->products]);
@@ -76,7 +79,7 @@ class GuestCart extends Cart {
             return self::ERROR_TEXT['NOT_EXIST'];
 
         if (!$this->availableAmount($productSlug, $amount))
-            return self::ERROR_TEXT['NOT_ENOUGH'];;
+            return $this->errorText;
 
         $productBunch = $this->products[$productSlug];
 

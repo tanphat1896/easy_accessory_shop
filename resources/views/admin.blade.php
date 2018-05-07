@@ -18,9 +18,9 @@
             @include('admin.dashboard.statistic.order')
         </div>
 
-        <div class="column">
+	{{-- 	<div class="column">
             @include('admin.dashboard.statistic.branding')
-        </div>
+        </div> --}}
 
         <div class="column">
             @include('admin.dashboard.statistic.product_type')
