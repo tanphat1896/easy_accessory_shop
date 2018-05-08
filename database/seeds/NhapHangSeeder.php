@@ -31,13 +31,13 @@ class NhapHangSeeder extends Seeder {
         DB::table('phieu_nhaps')->insert($rows);
     }
 
-
     function getRow() {
         $date = OrderTableSeeder::getValidDate();
+        $id = random_int(1, 10);
         return [
             'ngay_nhap' => $date,
-            'admin_id' => random_int(1, 2),
-            'ten_nhan_vien' => 'Nguyễn Trọng',
+            'admin_id' => $id,
+            'ten_nhan_vien' => \App\Admin::find($id)->name,
             'so_san_pham' => 3,
             'nha_cung_cap_id' => random_int(1, 2)
         ];

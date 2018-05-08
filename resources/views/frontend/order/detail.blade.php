@@ -7,7 +7,7 @@
             <i class="history open fitted icon"></i> Lịch sử</a>
     @endif
 
-    @if(!$order->daHuy())
+    @if($order->chuaDuyet())
         <a href="{{ route('customer.huydon', [$order->id]) }}" class="ui orange label"
            onclick="return confirm('Bạn chắc chắn muốn hủy đơn hàng?')">
             <i class="trash open fitted icon"></i> Hủy đơn

@@ -26,7 +26,7 @@
         <tr>
             <td class="collapsing">
                 <div class="ui child checkbox">
-                    <input type="checkbox" class="hidden" name="phieu-nhap-id[]" value="{{ $nhanVien->id }}">
+                    <input type="checkbox" class="hidden" name="nhan-vien-id[]" value="{{ $nhanVien->id }}">
                 </div>
             </td>
             <td>{{ $stt + 1 }}</td>

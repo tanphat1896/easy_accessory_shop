@@ -10,7 +10,7 @@
 
             Đơn hàng "{{ $donHang->ma_don_hang }}"
 
-            @if($donHang->tinh_trang == 0)
+            @if($donHang->chuaDuyet())
                 <a href="{{ route('duyet_don', [$donHang->id]) }}" class="ui teal label"
                 onclick="return confirm('Bạn chắc chắn muốn duyệt đơn hàng này?')">
                     <i class="check open fitted icon"></i>
@@ -38,7 +38,7 @@
         @include('admin.don_hang.san_pham.thong_tin')
         @include('admin.don_hang.san_pham.table')
 
-        @if($donHang->tinh_trang == 0)
+        @if($donHang->chuaDuyet())
             <a href="{{ route('duyet_don', [$donHang->id]) }}" class="ui teal label"
                onclick="return confirm('Bạn chắc chắn muốn duyệt đơn hàng này?')">
                 <i class="check open fitted icon"></i>

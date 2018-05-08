@@ -30,24 +30,6 @@
             <td>{{ $donHang->ten_nguoi_nhan }}</td>
             <td>{{ $donHang->sdt_nguoi_nhan }}</td>
             <td>{{ $donHang->ngay_dat_hang }}</td>
-            {{--<td>--}}
-                {{--@switch($donHang->hinh_thuc_thanh_toan)--}}
-                    {{--@case('cash')--}}
-                        {{--Trực tiếp khi nhận hàng--}}
-                        {{--@break--}}
-                    {{--@case('nganluong')--}}
-                        {{--Qua ngân lượng--}}
-                        {{--@break--}}
-                    {{--@case('baokim')--}}
-                        {{--Qua bảo kim--}}
-                        {{--@break--}}
-                {{--@endswitch--}}
-                {{--@if(($donHang->tinh_trang_thanh_toan == 1)&&($donHang->hinh_thuc_thanh_toan != 'cash'))--}}
-                    {{--(<span style="color: green">đã thanh toán</span>)--}}
-                {{--@elseif(($donHang->tinh_trang_thanh_toan == 0)&&($donHang->hinh_thuc_thanh_toan != 'cash'))--}}
-                    {{--(<span style="color: red">chưa thanh toán</span>)--}}
-                {{--@endif--}}
-            {{--</td>--}}
             <td>{{ $donHang->chiTietDonHangs()->count() }}</td>
             <td>{{ number_format($donHang->tong_tien) }} đ</td>
             <td>
@@ -57,12 +39,12 @@
                 @elseif($donHang->chuaDuyet())
                     <i class="warning open fitted orange icon"></i>
                     <span style="color: orange" ><strong> Chưa duyệt</strong></span>
-                @elseif($donHang->daDuyet())
-                    <i class="wait teal open fitted red icon"></i>
-                    <span style="color: teal"><strong>Đang vận chuyển</strong></span>
-                @else
+                @elseif($donHang->tinh_trang == 2)
                     <i class="check green open fitted red icon"></i>
                     <span style="color: green"><strong>Đã giao hàng</strong></span>
+                @else
+                    <i class="wait teal open fitted red icon"></i>
+                    <span style="color: teal"><strong>Đang vận chuyển</strong></span>
                 @endif
             </td>
             {{--<td>--}}
@@ -82,7 +64,7 @@
                 @if($donHang->chuaDuyet())
                     <a class="ui small orange label" href="{{ route('huy_don', [$donHang->id]) }}"
                        onclick="return confirm('Bạn chắc chắn muốn hủy đơn hàng này?')">
-                        <i class="remove open fitted icon"></i>
+                        <i class="trash open fitted icon"></i>
                     </a>
                 @elseif($donHang->daHuy())
                     <a class="ui small red label" href="{{ route('huy_don', [$donHang->id]) }}"

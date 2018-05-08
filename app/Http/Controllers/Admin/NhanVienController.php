@@ -158,8 +158,11 @@ class NhanVienController extends Controller
         return back()->with('success', 'Thay đổi mật khẩu thành công');
     }
 
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $ids = $request->get('nhan-vien-id');
+        NhanVien::destroy($ids);
+
+        return back()->with('success', 'Xóa nhân viên thành công');
     }
 }

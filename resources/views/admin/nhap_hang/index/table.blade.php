@@ -32,9 +32,9 @@
                     <td class="collapsing"></td>
                 @endif
                 <td>{{ $stt + 1 }}</td>
-                <td>{{ \App\PhieuNhap::find($phieuNhap->id)->Admin->name }}</td>
+                <td>{{ $phieuNhap->tenNhanVien() }}</td>
                 <td>{{ $phieuNhap->ngay_nhap }}</td>
-                <td>{{ \App\PhieuNhap::find($phieuNhap->id)->NhaCungCap->ten_ncc }}</td>
+                <td>{{ $phieuNhap->nhaCungCap->ten_ncc }}</td>
                 <td>{{ $phieuNhap->so_san_pham }}</td>
                 <td>
                     @if ($phieuNhap->da_cap_nhat == true)

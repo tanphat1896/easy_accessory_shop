@@ -29,4 +29,11 @@ class PhieuNhap extends Model
     {
         return ($this->so_san_pham == 0);
     }
+
+    public function tenNhanVien()
+    {
+        return (empty($this->admin_id) ?
+            ($this->ten_nhan_vien) :
+            ($this->admin->name));
+    }
 }
