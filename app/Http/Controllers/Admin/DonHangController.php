@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\ChiTietDonHang;
 use App\ChiTietGioHang;
 use App\DonHang;
+use App\Helper\AuthHelper;
 use App\SanPham;
 use Faker\Provider\DateTime;
 use Illuminate\Http\Request;
@@ -21,7 +22,7 @@ class DonHangController extends Controller
     public function index()
     {
 //        $donHangs = DonHang::all();
-        $donHangs = DonHang::orderBy('ngay_dat_hang', 'desc')->paginate(10);
+        $donHangs = DonHang::orderBy('tinh_trang', 'asc')->orderBy('ngay_dat_hang', 'desc')->paginate(10);
 
         return view('admin.don_hang.index.index', compact('donHangs'));
     }
@@ -74,22 +75,43 @@ class DonHangController extends Controller
         $donHang = DonHang::findOrFail($id);
         $donHang->tinh_trang = 1;
         $donHang->ngay_duyet_don = date('Y-m-d H:i:s');
+        $donHang->admin_id = AuthHelper::adminId();
         $donHang->update();
 
         return back()->with('success', 'Duyệt đơn hàng thành công');
     }
 
     public function huyDon($id) {
+        $donHang = DonHang::findOrFail($id);
+        if ($donHang->daHuy())
+        {
+            $donHang->delete();
+            return back()->with('success', 'Xóa đơn hàng thành công');
+        }
+
         $chiTietDonHangs = ChiTietDonHang::where('don_hang_id', $id)->get();
         foreach ($chiTietDonHangs as $key => $chiTietDonHang) {
             $sanPham = SanPham::findOrFail($chiTietDonHang->san_pham_id);
             $sanPham->so_luong += $chiTietDonHang->so_luong;
             $sanPham->update();
-            ChiTietDonHang::destroy($chiTietDonHang->id);
         }
-        DonHang::destroy($id);
-        return redirect('/admin/don_hang')->with('success', 'Hủy đơn hàng thành công');
+
+        $donHang->tinh_trang = 3;
+        $donHang->update();
+        return back()->with('success', 'Hủy đơn hàng thành công');
     }
+
+//    public function huyDon($id) {
+//        $chiTietDonHangs = ChiTietDonHang::where('don_hang_id', $id)->get();
+//        foreach ($chiTietDonHangs as $key => $chiTietDonHang) {
+//            $sanPham = SanPham::findOrFail($chiTietDonHang->san_pham_id);
+//            $sanPham->so_luong += $chiTietDonHang->so_luong;
+//            $sanPham->update();
+//            ChiTietDonHang::destroy($chiTietDonHang->id);
+//        }
+//        DonHang::destroy($id);
+//        return redirect('/admin/don_hang')->with('success', 'Hủy đơn hàng thành công');
+//    }
 
     public function printOrder($id) {
         $donHang = DonHang::find($id);

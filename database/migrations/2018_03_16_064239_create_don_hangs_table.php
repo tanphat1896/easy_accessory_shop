@@ -27,6 +27,8 @@ class CreateDonHangsTable extends Migration
             $table->tinyInteger('tinh_trang')->default(0);
             $table->dateTime('ngay_dat_hang');
             $table->dateTime('ngay_duyet_don')->nullable();
+            $table->integer('admin_id')->unsigned()->nullable();
+            $table->string('nguoi_duyet', 50)->nullable();
             $table->enum('hinh_thuc_thanh_toan', ['cash', 'baokim', 'nganluong']);
             $table->string('payment_id', 100)->nullable();
             $table->tinyInteger('payment_type')->nullable();

@@ -16,7 +16,8 @@ class CreatePhieuNhapsTable extends Migration
         Schema::create('phieu_nhaps', function (Blueprint $table) {
             $table->increments('id');
             $table->date('ngay_nhap');
-            $table->integer('admin_id')->unsigned();
+            $table->integer('admin_id')->unsigned()->nullable();
+            $table->string('ten_nhan_vien', 50);
             $table->integer('nha_cung_cap_id')->unsigned();
             $table->integer('so_san_pham')->default(0);
             $table->boolean('da_cap_nhat')->default(true);

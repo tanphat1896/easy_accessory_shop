@@ -32,6 +32,11 @@ class DonHang extends Model
             'id');
     }
 
+    public function admin()
+    {
+        return $this->belongsTo(Admin::class);
+    }
+
     public function products() {
         return $this->belongsToMany(
             SanPham::class,
@@ -40,7 +45,7 @@ class DonHang extends Model
 
     public function statusHtml() {
         $statusText = [
-            -1 => '<i class="close red icon"></i> Đã hủy',
+            3 => '<i class="close red icon"></i> Đã hủy',
             0 => '<i class="spinner blue icon"></i> Chưa duyệt',
             1 => '<i class="green check icon"></i> Đã duyệt'];
 
@@ -72,5 +77,22 @@ class DonHang extends Model
             'baokim' => 'Cong bao kim'
         ];
         return $payment[$this->hinh_thuc_thanh_toan];
+    }
+
+    public function daHuy() {
+        return $this->tinh_trang == 3;
+    }
+
+    public function daDuyet() {
+        return ($this->tinh_trang == 1) || ($this->tinh_trang == 2);
+    }
+
+    public function chuaDuyet() {
+        return $this->tinh_trang == 0;
+    }
+
+    public function nguoiDuyet()
+    {
+        return (empty($this->admin_id)?($this->nguoi_duyet):($this->admin->name));
     }
 }

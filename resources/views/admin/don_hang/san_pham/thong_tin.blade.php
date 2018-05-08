@@ -57,7 +57,7 @@
                 <div class="static-input">{{ $donHang->ghi_chu }}</div>
             </div>
 
-            @if($donHang->tinh_trang > 0)
+            @if($donHang->daDuyet())
                 <div class="inline field">
                     <label class="label-fixed">Tình trạng giao hàng:</label>
                     <div class="static-input">
@@ -85,6 +85,13 @@
                 <div class="inline field">
                     <label class="label-fixed">Mã giao dịch:</label>
                     <div class="static-input">{{ $donHang->payment_id }}</div>
+                </div>
+            @endif
+
+            @if($donHang->daDuyet())
+                <div class="inline field">
+                    <label class="label-fixed">Người duyệt đơn:</label>
+                    <div class="static-input">{{ $donHang->nguoiDuyet() }}</div>
                 </div>
             @endif
         </div>

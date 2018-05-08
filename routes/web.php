@@ -47,6 +47,8 @@ Route::group(['middleware' => 'customer'], function() {
         ->name('customer.history');
     Route::get('/khach-hang/don-hang/{code}', 'Frontend\CustomerController@getOrderDetailTable')
         ->name('customer.orderDetail');
+    Route::get('/khach-hang/don-hang/{id}/huy-don', 'Frontend\OrderController@huyDon')
+        ->name('customer.huydon');
 
     Route::resource('/rating', 'Frontend\RatingController', ['only' => ['store']]);
 

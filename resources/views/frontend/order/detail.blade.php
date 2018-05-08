@@ -1,21 +1,15 @@
 <h3 class="ui header dividing no-margin">
     Đơn hàng: {{ $order->ma_don_hang }}
-    <a href="{{ route('customer.history') }}" class="ui blue label">Lịch sử</a>
+    <a href="{{ route('customer.history') }}" class="ui blue label">
+        <i class="history open fitted icon"></i> Lịch sử
+    </a>
+    @if(!$order->daHuy())
+        <a href="{{ route('customer.huydon', [$order->id]) }}" class="ui orange label"
+           onclick="return confirm('Bạn chắc chắn muốn hủy đơn hàng?')">
+            <i class="trash open fitted icon"></i> Hủy đơn
+        </a>
+    @endif
 </h3>
-{{--<div class="ui four column padded stackable divided grid">--}}
-    {{--<div class="column">--}}
-        {{--<strong>Khách hàng:</strong> {{ $order->ten_nguoi_nhan }}--}}
-    {{--</div>--}}
-    {{--<div class="column">--}}
-        {{--<strong>Tình trạng:</strong> {!! $order->statusHtml() !!}--}}
-    {{--</div>--}}
-    {{--<div class="column">--}}
-        {{--<strong>Số tiền:</strong> {{ \App\Helper\StringHelper::toCurrencyString($order->tong_tien) }}--}}
-    {{--</div>--}}
-    {{--<div class="column">--}}
-        {{--<strong>Hình thức thanh toán:</strong> {{ $order->paymentType() }}--}}
-    {{--</div>--}}
-{{--</div>--}}
 
 @include('frontend.order.receiver_detail_table')
 

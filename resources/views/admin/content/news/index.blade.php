@@ -54,8 +54,12 @@
                         <td class="left aligned">{{ $news->tieu_de }}</td>
                         <td class="collapsing">{{ \App\Helper\StringHelper::longDate($news->created_at) }}</td>
                         <td>
-                            <a href="{{ route('news.show', [$news->id]) }}" class="ui tiny blue label">Xem</a>
-                            <a href="{{ route('news.edit', [$news->id]) }}" class="ui tiny green label">Sửa</a>
+                            <a href="{{ route('news.show', [$news->id]) }}" class="ui small blue label">
+                                <i class="eye open fitted icon"></i>
+                            </a>
+                            <a href="{{ route('news.edit', [$news->id]) }}" class="ui small green label">
+                                <i class="edit open fitted icon"></i>
+                            </a>
                         </td>
                     </tr>
                 @endforeach

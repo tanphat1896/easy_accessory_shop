@@ -51,10 +51,13 @@
             <td>{{ $donHang->chiTietDonHangs()->count() }}</td>
             <td>{{ number_format($donHang->tong_tien) }} đ</td>
             <td>
-                @if($donHang->tinh_trang == 0)
-                    <i class="warning open fitted red icon"></i>
-                    <span style="color: red" ><strong> Chưa duyệt</strong></span>
-                @elseif($donHang->tinh_trang == 1)
+                @if($donHang->daHuy())
+                    <i class="delete open fitted icon"></i>
+                    <strong> Đã hủy</strong>
+                @elseif($donHang->chuaDuyet())
+                    <i class="warning open fitted orange icon"></i>
+                    <span style="color: orange" ><strong> Chưa duyệt</strong></span>
+                @elseif($donHang->daDuyet())
                     <i class="wait teal open fitted red icon"></i>
                     <span style="color: teal"><strong>Đang vận chuyển</strong></span>
                 @else
@@ -68,7 +71,7 @@
                 {{--</a>--}}
             {{--</td>--}}
             <td>
-                @if($donHang->tinh_trang == 0)
+                @if($donHang->chuaDuyet())
                     <a class="ui small teal label" href="{{ route('duyet_don', [$donHang->id]) }}"
                        onclick="return confirm('Bạn chắc chắn muốn duyệt đơn hàng này?')">
                         <i class="check open fitted icon"></i>
@@ -76,9 +79,14 @@
                 @endif
             </td>
             <td>
-                @if($donHang->tinh_trang == 0)
+                @if($donHang->chuaDuyet())
                     <a class="ui small orange label" href="{{ route('huy_don', [$donHang->id]) }}"
                        onclick="return confirm('Bạn chắc chắn muốn hủy đơn hàng này?')">
+                        <i class="remove open fitted icon"></i>
+                    </a>
+                @elseif($donHang->daHuy())
+                    <a class="ui small red label" href="{{ route('huy_don', [$donHang->id]) }}"
+                       onclick="return confirm('Bạn chắc chắn muốn xóa đơn hàng này?')">
                         <i class="remove open fitted icon"></i>
                     </a>
                 @endif

@@ -28,8 +28,14 @@ class NhapHangController extends Controller
 
     public function index()
     {
-        $phieuNhaps = PhieuNhap::where('admin_id', AuthHelper::adminId())
-            ->orderBy('id', 'desc')->paginate(10);
+        if (AuthHelper::isAdmin())
+        {
+            $phieuNhaps = PhieuNhap::orderBy('admin_id', 'desc')->orderBy('id', 'desc')->paginate(10);
+        }
+        else
+        {
+            $phieuNhaps = PhieuNhap::where('admin_id', AuthHelper::adminId())->orderBy('id', 'desc')->paginate(10);
+        }
         $nhaCungCaps = NhaCungCap::all();
         return view('admin.nhap_hang.index.index', compact(['phieuNhaps','nhaCungCaps']));
     }
@@ -57,6 +63,7 @@ class NhapHangController extends Controller
         $phieuNhap->nha_cung_cap_id = $request->get('ten-ncc');
         $phieuNhap->ngay_nhap = $request->get('ngay-nhap');
         $phieuNhap->admin_id = AuthHelper::adminId();
+        $phieuNhap->ten_nhan_vien = AuthHelper::adminName();
         $phieuNhap->save();
 
         return back()->with('success', 'Thêm phiếu nhập thành công');
