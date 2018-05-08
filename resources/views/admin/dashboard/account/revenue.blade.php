@@ -96,14 +96,14 @@
                     borderColor: window.chartColors.red,
                     backgroundColor: window.chartColors.lred,
                     data: [],
-                    borderWidth: 1
+                    borderWidth: 2
                 }, {
                     type: 'bar',
                     label: 'Bán ra',
                     borderColor: window.chartColors.blue,
                     backgroundColor: window.chartColors.lblue,
                     data: [],
-                    borderWidth: 1
+                    borderWidth: 2
                 }]
             },
             options: {

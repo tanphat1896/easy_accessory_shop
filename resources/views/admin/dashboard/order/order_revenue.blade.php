@@ -32,20 +32,22 @@
                 datasets: [{
                     type: 'bar',
                     label: 'Chưa duyệt',
-                    backgroundColor: window.chartColors.red,
+                    backgroundColor: window.chartColors.lred,
+                    borderColor:  window.chartColors.red,
                     data: [],
-                    borderColor: 'white',
                     borderWidth: 2
                 }, {
                     type: 'bar',
                     label: 'Đã duyệt',
-                    backgroundColor: window.chartColors.blue,
+                    backgroundColor: window.chartColors.lblue,
+                    borderColor:  window.chartColors.blue,
                     data: [],
                     borderWidth: 2
                 }, {
                     type: 'bar',
                     label: 'Đã giao hàng',
-                    backgroundColor: window.chartColors.green,
+                    backgroundColor: window.chartColors.lgreen,
+                    borderColor:  window.chartColors.green,
                     data: [],
                     borderWidth: 2
                 }]

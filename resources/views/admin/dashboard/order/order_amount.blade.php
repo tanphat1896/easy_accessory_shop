@@ -34,10 +34,17 @@
             red: 'rgb(255, 99, 132)',
             orange: 'rgb(255, 159, 64)',
             yellow: 'rgb(255, 205, 86)',
-            green: '#3CB371',
+            green: 'rgb(60, 179, 113)',
             blue: 'rgb(54, 162, 235)',
             purple: 'rgb(153, 102, 255)',
-            grey: 'rgb(201, 203, 207)'
+            grey: 'rgb(201, 203, 207)',
+            lred: 'rgba(255, 99, 132, .2)',
+            lorange: 'rgba(255, 159, 64, .2)',
+            lyellow: 'rgba(255, 205, 86, .2)',
+            lgreen: 'rgba(60, 179, 113, .2)',
+            lblue: 'rgba(54, 162, 235, .2)',
+            lpurple: 'rgba(153, 102, 255, .2)',
+            lgrey: 'rgba(201, 203, 207, .2)'
         };
 
         renderChart();
@@ -104,20 +111,22 @@
                 datasets: [{
                     type: 'bar',
                     label: 'Chưa duyệt',
-                    backgroundColor: window.chartColors.red,
+                    backgroundColor: window.chartColors.lred,
+                    borderColor:  window.chartColors.red,
                     data: [],
-                    borderColor: 'white',
                     borderWidth: 2
                 }, {
                     type: 'bar',
                     label: 'Đã duyệt',
-                    backgroundColor: window.chartColors.blue,
+                    backgroundColor: window.chartColors.lblue,
+                    borderColor:  window.chartColors.blue,
                     data: [],
                     borderWidth: 2
                 }, {
                     type: 'bar',
                     label: 'Đã giao hàng',
-                    backgroundColor: window.chartColors.green,
+                    backgroundColor: window.chartColors.lgreen,
+                    borderColor:  window.chartColors.green,
                     data: [],
                     borderWidth: 2
                 }]
@@ -174,10 +183,10 @@
             (chart == null) ? chart = new Chart(ctx, config) : chart.update();
         }
 
-        function getValidValue(item, useExtraVal) {
+        function getValidValue(item, useExtraVal = false) {
             if (item == null)
                 return 0;
-            return useExtraVal ? item.value: item.extra;
+            return useExtraVal ? item.extra: item.value;
         }
 
         function renderTable(source) {

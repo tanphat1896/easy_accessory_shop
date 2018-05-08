@@ -19,7 +19,7 @@
         <div class="statistic">
             <div class="value">
                 <i class="dolly yellow circular icon"></i>
-                <span id="total-buying">0</span>
+                <span id="total-buying">0</span>đ
             </div>
             <div class="label">
                 Mua vào
@@ -28,7 +28,7 @@
         <div class="statistic">
             <div class="value">
                 <i class="shipping fast green circular icon"></i>
-                <span id="total-revenue">0</span>
+                <span id="total-revenue">0</span>đ
             </div>
             <div class="label">
                 Bán ra
@@ -37,7 +37,7 @@
         <div class="statistic">
             <div class="value">
                 <i class="bottom right corner blue chart line circular icon"></i>
-                <span id="redundant">0</span>
+                <span id="redundant">0</span>đ
             </div>
             <div class="label">
                 Hiệu số
@@ -82,12 +82,13 @@
         }
 
         function updateStatistic(data) {
-            console.log(data);
+            // console.log(data);
             let revenue = data.revenues[0];
             let buying = data.buyings[0];
-            $('#total-buying').text(toCurrency(val(buying.value, 6)) + "đ");
-            $('#total-revenue').text(toCurrency(val(revenue.value, 6)) + "đ");
-            $('#redundant').text(toCurrency(val(revenue.value - buying.value, 6)) + "đ");
+
+            $('#total-buying').text(roundCurrency(val(buying.value, 6)));
+            $('#total-revenue').text(roundCurrency(val(revenue.value, 6)));
+            $('#redundant').text(roundCurrency(val(revenue.value - buying.value, 6)));
         }
 
         function val(value, factor = 0) {

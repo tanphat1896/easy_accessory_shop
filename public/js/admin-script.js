@@ -112,3 +112,14 @@ function toAscii(str) {
 
     return str;
 }
+
+function roundCurrency(amount) {
+    amount = amount.toFixed(2).replace(/\.\d+/, '');
+    let million = false;
+    if (amount.length > 7){
+        million = true;
+        amount = parseFloat(amount)/1000000;
+    }
+
+    return toCurrency(amount) + (million ? " tr": '');
+}
