@@ -5,7 +5,9 @@
 @push('style')
     <style>
         .ui.top.attached.tabular {
-            border: none !important;
+            border-width: 0 0 1px 0 !important;
+            border-color: lightgray;
+            border-style: solid;
         }
         .bottom.attached.tab.segment {
             border: none !important;
@@ -34,6 +36,8 @@
         @include('admin.dashboard.product.product_out_stop')
 
     </div>
+
+    @include('admin.dashboard.account.export')
 @endsection
 
 

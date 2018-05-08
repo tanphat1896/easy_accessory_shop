@@ -57,7 +57,7 @@ trait ProductStatistic {
         $total = DB::table('san_phams')->count();
         $outOfStock = DB::table('san_phams')->where('so_luong', 0)->count();
         $stopBusiness = DB::table('san_phams')->where('tinh_trang', 0)->count();
-        $new = DB::table('san_phams')->where('so_luong', '>', 8)->count();
+        $new = $this->getNewProducts(null)->count();
         $sale = $this->getProductAmountOnSale();
 
         return compact('total', 'new', 'outOfStock', 'sale', 'stopBusiness');

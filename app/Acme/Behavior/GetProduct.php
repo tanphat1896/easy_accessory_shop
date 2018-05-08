@@ -95,6 +95,8 @@ trait GetProduct {
     }
 
     public function getNewProducts($limit = 6, $perPage = 0) {
+        $newProductAmountRule = 20;
+
         $tbPrice = 'gia_san_phams';
         $tbSale = 'khuyen_mais';
         $tbProdSale = 'chi_tiet_khuyen_mais';
@@ -107,13 +109,13 @@ trait GetProduct {
             ->where([
                 ['gia_san_phams.active', 1],
                 ['ngay_ket_thuc', '>=', date('Y-m-d')],
-                ['so_luong', '>', 8]
+                ['so_luong', '>', $newProductAmountRule]
             ])
             ->orWhere([
                 ['gia_san_phams.active', 1],
                 ['ngay_ket_thuc', null],
-                ['so_luong', '>', 8]
-            ]);
+                ['so_luong', '>', $newProductAmountRule]
+            ])->orderBy('ngay_tao', 'desc');
 
         if (!empty($limit))
             $products = $products->limit($limit);
@@ -159,6 +161,7 @@ trait GetProduct {
 
     public function getStopBusinessProducts() {
         $products = DB::table('san_phams')
+            ->selectRaw('id, ten_san_pham, anh_dai_dien')
             ->where('tinh_trang', 0)
             ->get();
 
@@ -167,6 +170,7 @@ trait GetProduct {
 
     public function getOutOfStockProducts() {
         $products = DB::table('san_phams')
+            ->selectRaw('id, ten_san_pham, anh_dai_dien')
             ->where('so_luong', 0)
             ->get();
 
@@ -188,9 +192,10 @@ trait GetProduct {
         $builder = DB::table('chi_tiet_don_hangs as c')
             ->join('don_hangs as d', 'c.don_hang_id', '=', 'd.id')
             ->join('san_phams as s', 's.id', '=', 'c.san_pham_id')
-            ->selectRaw('s.*, san_pham_id, sum(c.so_luong) as total')
+            ->selectRaw('s.ten_san_pham, s.anh_dai_dien, 
+                        san_pham_id as id, sum(c.so_luong) as total')
             ->where('ngay_dat_hang', '>=', $date)
-            ->groupBy('san_pham_id')
+            ->groupBy('id')
             ->orderBy('total', 'desc')
             ->limit($limit);
 

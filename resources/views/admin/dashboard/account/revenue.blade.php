@@ -5,12 +5,22 @@
 
 @push('script')
     <script>
+        // dữ liệu cho xuất pdf
+        let title = 'Thống kê thu chi theo ';
+        let cols = [], rows = [];
+
+
+        let type, year, month, quarter, dayStart, dayEnd;
+
         window.chartColors = {
             red: 'rgb(255, 99, 132)',
+            lred: 'rgba(255, 99, 132, .2)',
             orange: 'rgb(255, 159, 64)',
             yellow: 'rgb(255, 205, 86)',
+            lyellow: 'rgba(255, 205, 86, .2)',
             green: '#3CB371',
             blue: 'rgb(54, 162, 235)',
+            lblue: 'rgb(54, 162, 235, .2)',
             purple: 'rgb(153, 102, 255)',
             grey: 'rgb(201, 203, 207)'
         };
@@ -36,6 +46,8 @@
             if (e !== null)
                 e.preventDefault();
 
+            cleanData();
+
             let chartId = 'revenue-chart';
             let query = getQueryData();
 
@@ -49,8 +61,13 @@
                 .catch(err => console.log(err));
         }
 
+        function cleanData() {
+            cols = ['Mua vao', 'Ban ra', 'Hieu so'];
+            title = 'Thống kê thu chi theo ';
+            rows = [];
+        }
+
         function getQueryData() {
-            let type, year, month, quarter, dayStart, dayEnd;
             type = $('#type').val();
             year = $('#year').val();
             month = $('#month').val();
@@ -76,16 +93,17 @@
                 }, {
                     type: 'bar',
                     label: 'Mua vào',
-                    backgroundColor: window.chartColors.red,
+                    borderColor: window.chartColors.red,
+                    backgroundColor: window.chartColors.lred,
                     data: [],
-                    borderColor: 'white',
-                    borderWidth: 2
+                    borderWidth: 1
                 }, {
                     type: 'bar',
                     label: 'Bán ra',
-                    backgroundColor: window.chartColors.blue,
+                    borderColor: window.chartColors.blue,
+                    backgroundColor: window.chartColors.lblue,
                     data: [],
-                    borderWidth: 2
+                    borderWidth: 1
                 }]
             },
             options: {
@@ -119,13 +137,24 @@
                 values.redundancies.push({
                     x: i + 1,
                     y: (rev - buy).toFixed(2)
-                })
+                });
+
+                // them data cho export
+                rows.push([revenues[i].label, buy, rev, (rev-buy).toFixed(2)]);
             }
 
             let scales = {
                 xAxes: [{display: true, scaleLabel: {display: true, labelString: source.axes.x}}],
                 yAxes: [{display: true, scaleLabel: {display: true, labelString: source.axes.y}}]
             };
+
+            // them ten cot
+            cols.unshift(toAscii(source.axes.x));
+            title += source.axes.x.toLowerCase();
+            if (type == 'month' || type == 'quarter')
+                title += ' nam ' + year;
+            if (type == 'day')
+                title += ' trong thang ' + month + "/" + year;
 
             config.data.labels = labels;
             config.data.datasets[0].data = values.redundancies;

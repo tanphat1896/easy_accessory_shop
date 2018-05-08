@@ -47,7 +47,9 @@ class DonHang extends Model
         $statusText = [
             3 => '<i class="close red icon"></i> Đã hủy',
             0 => '<i class="spinner blue icon"></i> Chưa duyệt',
-            1 => '<i class="green check icon"></i> Đã duyệt'];
+            1 => '<i class="teal shipping fast icon"></i> Đang vận chuyển',
+            2 => '<i class="green check icon"></i> Đã giao hàng'
+        ];
 
         return $statusText[$this->tinh_trang];
     }

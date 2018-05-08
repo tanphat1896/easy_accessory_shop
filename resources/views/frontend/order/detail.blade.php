@@ -1,8 +1,12 @@
 <h3 class="ui header dividing no-margin">
     Đơn hàng: {{ $order->ma_don_hang }}
-    <a href="{{ route('customer.history') }}" class="ui blue label">
-        <i class="history open fitted icon"></i> Lịch sử
-    </a>
+
+
+    @if (\App\Helper\AuthHelper::userLogged())
+        <a href="{{ route('customer.history') }}" class="ui blue label">
+            <i class="history open fitted icon"></i> Lịch sử</a>
+    @endif
+
     @if(!$order->daHuy())
         <a href="{{ route('customer.huydon', [$order->id]) }}" class="ui orange label"
            onclick="return confirm('Bạn chắc chắn muốn hủy đơn hàng?')">

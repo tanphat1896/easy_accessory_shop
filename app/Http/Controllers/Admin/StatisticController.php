@@ -14,10 +14,10 @@ use App\Http\Controllers\Controller;
 
 class StatisticController extends Controller
 {
+    use GetProduct;
     use AccountStatistic;
     use OrderStatistic;
     use ProductStatistic;
-    use GetProduct;
     public function account() {
         return view('admin.dashboard.account.index');
     }

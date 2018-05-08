@@ -43,7 +43,7 @@
                                     {{ method_field('PUT') }}
                                     <div class="field limit-size">
                                         <input type="number" value="{{ $productBunch['amount'] }}"
-                                               name="amount" min="1" max="20"
+                                               name="amount" min="1" max="5"
                                                class="small-lr-padding"
                                                onchange="$('#{{ 'form-update-amount' . $idx }}').submit()">
                                     </div>

@@ -26,12 +26,15 @@
                 buyingSum += parseFloat(buyings[i].value);
                 roi += (revenues[i].value - buyings[i].value);
             }
+
             tbody += `<tr>
                 <td><strong>Tổng cộng:</strong></td>
                 <td><strong>${buyingSum.toFixed(2)}</strong></td>
                 <td><strong>${revenueSum.toFixed(2)}</strong></td>
                 <td><strong>${roi.toFixed(2)}</strong></td>
             </tr>`;
+
+            rows.push(['Tong cong', buyingSum.toFixed(2), revenueSum.toFixed(2), roi.toFixed(2)]);
             return tbody;
         }
 

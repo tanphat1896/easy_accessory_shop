@@ -1,6 +1,14 @@
 <div class="ui bottom attached tab segment {{ Request::has('lim') ? 'active' : '' }}" data-tab="second">
     <h5 class="ui dividing header">
         Top {{ Request::get('lim') ?: 10 }} sản phẩm mua nhiều trong vòng {{ Request::get('m') ?: 3 }} tháng
+
+        <span class="pointer force-right"
+              onclick="showExport(
+                  toAscii('Top {{ Request::get('lim') ?: 10 }} sản phẩm mua nhiều trong vòng {{ Request::get('m') ?: 3 }} tháng'),
+                  hotProductCols,
+                  hotProductRows)">
+            <i class="file pdf outline icon red small-lr-margin"></i>PDF
+        </span>
     </h5>
     <form action="" method="get" class="ui tiny form">
         <div class="inline fields">
@@ -58,6 +66,17 @@
 
 @push('script')
     <script>
-        bindDataTable('product-hot-table', true)
+        bindDataTable('product-hot-table', true);
+
+        let hotProductCols = ['STT', 'Ten san pham', 'Luot mua'];
+        let hotProductRows = [];
+        let products = JSON.parse('{!!  $hotProducts  !!}');
+        products.forEach((product, idx) => {
+            hotProductRows.push([
+                idx + 1,
+                toAscii(product.ten_san_pham),
+                product.total
+            ]);
+        });
     </script>
 @endpush

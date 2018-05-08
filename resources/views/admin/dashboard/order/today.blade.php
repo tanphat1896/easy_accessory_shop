@@ -63,8 +63,7 @@
         </div>
         <div class="statistic">
             <div class="value">
-                VND
-                <span id="total-revenue">0</span>
+                <span id="total-revenue">0</span>đ
             </div>
             <div class="label">
                 Tổng tiền
@@ -114,8 +113,15 @@
             let uncheck = data.uncheck[0];
             let checked = data.checked[0];
             let delivered = data.delivered[0];
+
+            let total = (val(uncheck.extra, 6) + val(checked.extra, 6) + val(delivered.extra, 6))
+                .toFixed(2)
+                .replace(/\.\d+/, '');
+            if (total.length > 7)
+                total = parseFloat(total)/1000000 + " tr";
+
             $('#total-order').text(val(uncheck.value) + val(checked.value) + val(delivered.value));
-            $('#total-revenue').text(toCurrency(val(uncheck.extra, 6) + val(checked.extra, 6) + val(delivered.extra, 6)));
+            $('#total-revenue').text(toCurrency(total));
             $('#uncheck-order').text(uncheck.value);
             $('#checked-order').text(checked.value);
             $('#delivered-order').text(delivered.value);

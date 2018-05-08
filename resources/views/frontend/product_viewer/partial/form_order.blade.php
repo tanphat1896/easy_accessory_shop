@@ -4,7 +4,8 @@
 
     <div class="field limit-size">
         <label for="">Số lượng (Còn <span class="red-text">{{ $product->so_luong }}</span> sản phẩm)</label>
-        <input type="number" value="1" min="1" max="{{ $product->so_luong }}" name="amount" id="amount"
+        <input type="number" value="1" min="1"
+               max="{{ $product->so_luong <= 5 ? $product->so_luong : 5  }}" name="amount" id="amount"
                onchange="updateTotalPrice()">
     </div>
 
