@@ -9,7 +9,7 @@
 
             <label for="ten-san-pham">Sản phẩm</label>
             <div class="field">
-                <select id="ten-san-pham" name="ten-san-pham" class="ui dropdown">
+                <select id="ten-san-pham" name="ten-san-pham" class="ui search dropdown">
                     @foreach(\App\SanPham::all() as $sanPham)
                         {{ $check = false }}
                         @foreach($chiTietPhieuNhaps as $chiTietPhieuNhap)
