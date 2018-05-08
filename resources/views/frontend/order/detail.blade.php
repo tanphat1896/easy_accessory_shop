@@ -1,6 +1,8 @@
 <h3 class="ui header dividing no-margin">
     Đơn hàng: {{ $order->ma_don_hang }}
-    <a href="{{ route('customer.history') }}" class="ui blue label">Lịch sử</a>
+    @if (\App\Helper\AuthHelper::userLogged())
+        <a href="{{ route('customer.history') }}" class="ui blue label">Lịch sử</a>
+    @endif
 </h3>
 {{--<div class="ui four column padded stackable divided grid">--}}
     {{--<div class="column">--}}

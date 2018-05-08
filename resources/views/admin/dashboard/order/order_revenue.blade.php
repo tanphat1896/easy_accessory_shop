@@ -83,6 +83,9 @@
                 yAxes: [{display: true, scaleLabel: {display: true, labelString: "Triệu đồng"}}]
             };
 
+            // them ten cot
+            revCols.unshift(toAscii(source.axes.x));
+
             revConfig.data.labels = labels;
             revConfig.data.datasets[0].data = values.uncheck;
             revConfig.data.datasets[1].data = values.checked;
@@ -116,6 +119,9 @@
                 <td><strong>${checkSum.toFixed(2)}</strong></td>
                 <td><strong>${delSum.toFixed(2)}</strong></td>
             </tr>`;
+
+            revRows.push(['Tong cong', uncheckSum.toFixed(2), checkSum.toFixed(2), delSum.toFixed(2)]);
+
             return tbody;
         }
 
@@ -129,6 +135,9 @@
                 <td>${c.extra}</td>
                 <td>${d.extra}</td>
             </tr>`;
+
+            revRows.push([u.label, u.extra, c.extra, d.extra]);
+
             return tr;
         }
     </script>

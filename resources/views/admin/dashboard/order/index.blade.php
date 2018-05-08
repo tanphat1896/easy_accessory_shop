@@ -11,7 +11,20 @@
 
         <div class="ui divider"></div>
 
-        <h4 class="ui header">Biểu đồ thống kê</h4>
+        <h4 class="ui header">Biểu đồ thống kê
+
+            <span class=" force-right pointer"
+                  onclick="showExportMultiple(
+                  '',
+                  'Thong ke theo so luong don hang',
+                  amountCols, amountRows,
+                  'Thong ke theo gia tri don hang (DV: trieu dong)',
+                  revCols, revRows
+              )">
+            <i class="file pdf outline red icon fitted"></i>
+            PDF
+        </span>
+        </h4>
         <form class="ui tiny form" onsubmit="renderChart(event)">
             <div class="inline fields">
                 <div class="field" id="select-type">
@@ -77,6 +90,8 @@
 
         </div>
     </div>
+
+    @include('admin.dashboard.account.export')
 @endsection
 
 

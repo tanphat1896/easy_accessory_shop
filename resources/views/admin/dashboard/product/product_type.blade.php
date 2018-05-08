@@ -1,21 +1,33 @@
-
-<h4 class="ui header">Sản phẩm theo loại</h4>
-
 <div class="ui grid stackable">
     <div class="ten wide column">
+        <h4 class="ui header">Sản phẩm theo loại</h4>
         <div class="ui segment">
             <canvas id="product-type-chart"></canvas>
         </div>
     </div>
 
     <div class="six wide column">
+        <h4 class="ui header right aligned">
+            <span class="pointer"
+                  {{--onclick="showExport('Thong ke so luong san pham theo loai', cols, rows)">--}}
+                  onclick="showExport('Thong ke so luong san pham theo loai', cols, rows)">
+            <i class="file pdf outline red icon fitted"></i>
+            PDF
+        </span></h4>
         <table class="ui very compact table celled striped center aligned" id="product-type-table">
             <thead>
-            <tr><th>STT</th><th>Loại sản phẩm</th><th>Số lượng</th></tr>
+            <tr>
+                <th>STT</th>
+                <th>Loại sản phẩm</th>
+                <th>Số lượng</th>
+            </tr>
             </thead>
             <tbody></tbody>
             <tfoot>
-            <tr><th colspan="2"><strong>Tổng cộng</strong></th><th>{{ $total }}</th></tr>
+            <tr>
+                <th colspan="2"><strong>Tổng cộng</strong></th>
+                <th>{{ $total }}</th>
+            </tr>
             </tfoot>
         </table>
     </div>
@@ -23,6 +35,9 @@
 
 @push('script')
     <script>
+        let cols = ['STT', 'Loai', 'So luong'];
+        let rows = [];
+
         let types = JSON.parse('{!! $productTypes !!}');
         let labels = [], data = [];
         let tbody = '';
@@ -30,6 +45,7 @@
             labels.push(type.label);
             data.push(type.value);
             tbody += tableRow(idx, type);
+            rows.push([idx+1, toAscii(type.label), type.value]);
         });
 
         $('#product-type-table').find('tbody').html(tbody);
@@ -81,7 +97,7 @@
         });
 
         function tableRow(idx, data) {
-            return `<tr><td>${idx+1}</td><td class='left aligned'>${data.label}</td><td>${data.value}</td></tr>`;
+            return `<tr><td>${idx + 1}</td><td class='left aligned'>${data.label}</td><td>${data.value}</td></tr>`;
         }
     </script>
 @endpush

@@ -1,11 +1,11 @@
 @extends('admin.layouts.master')
 
-@section('title', 'Tài chính')
+@section('title', 'Thu chi')
 
 @section('content')
     <div class="ui blue raised segment">
 
-        <h3 class="ui dividing header">Thống kê doanh thu</h3>
+        <h3 class="ui dividing header">Thống kê thu chi</h3>
 
         @include('admin.dashboard.account.today')
 
@@ -79,20 +79,16 @@
             </div>
             <div class="six wide column">
 
-                <h5 class="ui header">&nbsp;</h5>
+                <h5 class="ui header right aligned">
+                    <span onclick="showExport(title, cols, rows)" class="pointer">
+                        <i class="file pdf outline red large icon small-lr-margin"></i>PDF
+                    </span>
+                </h5>
 
                 @include('admin.dashboard.account.table')
 
             </div>
         </div>
-        @include('admin.dashboard.account.paying')
+        @include('admin.dashboard.account.export')
     </div>
 @endsection
-
-
-
-@push('script')
-    <script>
-
-    </script>
-@endpush

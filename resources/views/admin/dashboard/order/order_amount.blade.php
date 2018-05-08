@@ -24,6 +24,12 @@
 
 @push('script')
     <script>
+        let title = 'Thong ke don hang theo ';
+        let amountCols = ['Chua duyet', 'Da duyet', 'Da giao hang'];
+        let amountRows = [];
+        let revCols = ['Chua duyet', 'Da duyet', 'Da giao hang'];
+        let revRows = [];
+
         window.chartColors = {
             red: 'rgb(255, 99, 132)',
             orange: 'rgb(255, 159, 64)',
@@ -57,7 +63,7 @@
 
             let query = getQueryData();
 
-            console.log(query);
+            cleanData();
 
             axios.get('/admin/ajax-request/statistic/order?' + query)
                 .then(rs => {
@@ -80,6 +86,14 @@
             let data = {type, year, month, quarter, dayStart, dayEnd};
             return Object.keys(data).map(key => (key + "=" + data[key])).join('&');
 
+        }
+
+        function cleanData() {
+            title = 'Thong ke don hang theo ';
+            amountCols = ['Chua duyet', 'Da duyet', 'Da giao hang'];
+            amountRows = [];
+            revCols = ['Chua duyet', 'Da duyet', 'Da giao hang'];
+            revRows = [];
         }
 
         let ctx, chart = null;
@@ -134,12 +148,22 @@
                 values.uncheck.push(unck);
                 values.checked.push(ck);
                 values.delivered.push(deli);
+
             }
 
             let scales = {
                 xAxes: [{display: true, scaleLabel: {display: true, labelString: source.axes.x}}],
                 yAxes: [{display: true, scaleLabel: {display: true, labelString: source.axes.y}}]
             };
+
+            // them ten cot
+            amountCols.unshift(toAscii(source.axes.x));
+            title += source.axes.x.toLowerCase();
+            if (type == 'month' || type == 'quarter')
+                title += ' nam ' + year;
+            if (type == 'day')
+                title += ' trong thang ' + month + "/" + year;
+            title = toAscii(title);
 
             config.data.labels = labels;
             config.data.datasets[0].data = values.uncheck;
@@ -180,6 +204,9 @@
                 <td><strong>${checkSum}</strong></td>
                 <td><strong>${delSum}</strong></td>
             </tr>`;
+
+            amountRows.push(['Tong cong', uncheckSum, checkSum, delSum]);
+
             return tbody;
         }
 
@@ -193,6 +220,8 @@
                 <td>${c.value}</td>
                 <td>${d.value}</td>
             </tr>`;
+
+            amountRows.push([u.label, u.value, c.value, d.value]);
             return tr;
         }
     </script>
