@@ -11,9 +11,11 @@ class OrderTableSeeder extends Seeder
      */
     public function run()
     {
+        $data = json_decode(Info::INFO, true);
+
         $rows = [];
         for ($i = 0; $i < 497; $i++)
-            $rows[] = $this->getRow();
+            $rows[] = $this->getRow($i, $data);
 
         $rows = array_sort($rows, function($row) {
             return $row['ngay_dat_hang'];
@@ -23,22 +25,24 @@ class OrderTableSeeder extends Seeder
     }
 
 
-    function getRow() {
+    function getRow($i, $data) {
         $faker = Faker\Factory::create('vi_VN');
         $date = self::getValidDate();
         $status = array("cash", "baokim", "nganluong");
+        $receiver = $data[$i];
+        $admin = $data[998-$i];
         return [
             'ma_don_hang' => strtoupper(uniqid('DH_')),
-            'ten_nguoi_nhan' => $faker->name,
-            'email_nguoi_nhan' => $faker->safeEmail,
-            'sdt_nguoi_nhan' => substr($faker->phoneNumber, 0, 11),
-            'dia_chi' => $faker->address,
+            'ten_nguoi_nhan' => $receiver['name'],
+            'email_nguoi_nhan' =>strtolower( $receiver['email']),
+            'sdt_nguoi_nhan' => preg_replace('/(\s|\(|\))/i', '', $receiver['phone']),
+            'dia_chi' => $receiver['address'],
             'tong_tien' => 0,//$faker->numberBetween(25000, 10000000),
             'phi_van_chuyen' => 10,
             'ngay_dat_hang' => $date,
             'ngay_duyet_don' => $date,
             'admin_id' => rand(1, 2),
-            'nguoi_duyet' => $faker->name,
+            'nguoi_duyet' => $admin['name'],
             'hinh_thuc_thanh_toan' => $status[rand(0, 2)],
             'ghi_chu' => $faker->sentence,
             'tinh_trang' => strtotime($date) < strtotime("2018-1-1 00:00:01") ? 2: rand(0, 2),
