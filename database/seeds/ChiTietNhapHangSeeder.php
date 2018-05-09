@@ -42,6 +42,10 @@ class ChiTietNhapHangSeeder extends Seeder
 
         $totalReceipt = DB::table('phieu_nhaps')->count();
         for ($i = 1; $i <= $totalReceipt; $i++) {
+            if (empty(\App\PhieuNhap::find($i)->phieu_nhap_id))
+            {
+                continue;
+            }
             $totalProduct = 3;
             $ids = [];
             for($j = 0; $j < $totalProduct; $j++) {
