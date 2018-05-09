@@ -32,6 +32,11 @@ class OrderController extends Controller
     {
         $donHang = DonHang::findOrFail($id);
 
+        if ($donHang->daDuyet())
+        {
+            return back()->with('error', 'Đơn hàng đang được vận chuyển. Không thể hủy');
+        }
+
         $chiTietDonHangs = ChiTietDonHang::where('don_hang_id', $id)->get();
         foreach ($chiTietDonHangs as $key => $chiTietDonHang) {
             $sanPham = SanPham::findOrFail($chiTietDonHang->san_pham_id);

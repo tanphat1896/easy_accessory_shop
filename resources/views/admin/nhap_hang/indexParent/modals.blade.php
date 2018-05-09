@@ -7,7 +7,8 @@
 
             <div class="field">
                 <label for="dia-chi">Ngày nhập</label>
-                <input type="date" id="ngay-nhap" name="ngay-nhap" value="{{ date('Y-m-d') }}" max="{{ date('Y-m-d') }}" required>
+                <input type="date" id="ngay-nhap" name="ngay-nhap" value="{{ date('Y-m-d') }}"
+                       max="{{ date('Y-m-d') }}" required>
             </div>
 
             <div class="field">

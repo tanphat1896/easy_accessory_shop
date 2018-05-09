@@ -8,8 +8,12 @@
 
         <div class="field force-left no-clear">
             @include('admin.don_hang.san_pham.filter')
+            @if(Request::has('tinh-trang'))
+                <a class="ui small red label" href="{{ route('don_hang.index') }}">
+                    <i class="remove open fitted icon"></i> Xóa lọc
+                </a>
+            @endif
         </div>
-
 
         <div class="field force-right no-clear">
 

@@ -7,7 +7,7 @@
 
             <div class="field">
                 <label for="ten-ncc">Tên nhà cung cấp</label>
-                <input type="text" id="ten-ncc" name="ten-ncc" maxlength="50" required>
+                <input type="text" id="ten-ncc" name="ten-ncc" maxlength="255" required>
             </div>
 
             <div class="field">
@@ -17,7 +17,7 @@
 
             <div class="field">
                 <label for="so-dien-thoai">Số điện thoại</label>
-                <input type="text" id="so-dien-thoai" name="so-dien-thoai" maxlength="11" required>
+                <input type="text" id="so-dien-thoai" name="so-dien-thoai" maxlength="15" required>
             </div>
 
             <div class="field">
@@ -39,7 +39,7 @@
 
                 <div class="field">
                     <label>Tên nhà cung cấp</label>
-                    <input type="text" value="{{ $nhaCungCap->ten_ncc }}" name="ten-ncc" maxlength="50" required>
+                    <input type="text" value="{{ $nhaCungCap->ten_ncc }}" name="ten-ncc" maxlength="255" required>
                 </div>
 
                 <div class="field">
@@ -50,7 +50,7 @@
                 <div class="field">
                     <label>Số điện thoại</label>
                     <input type="text" value="{{ $nhaCungCap->so_dien_thoai }}" name="so-dien-thoai"
-                           maxlength="11" required>
+                           maxlength="15" required>
                 </div>
                 <div class="field">
                     <button class="ui blue fluid button"><strong>Lưu</strong></button>

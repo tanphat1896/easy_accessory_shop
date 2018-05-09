@@ -53,9 +53,11 @@ class NhapHangSeeder extends Seeder {
 
     function getRowChild() {
         $id = random_int(1, 20);
+        $date = \App\PhieuNhap::find($id)->ngay_nhap;
         return [
             'phieu_nhap_id' => $id,
             'so_san_pham' => 3,
+            'ngay_nhap' => $date,
             'nha_cung_cap_id' => random_int(1, 9)
         ];
     }

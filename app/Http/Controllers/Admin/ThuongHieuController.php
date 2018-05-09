@@ -24,8 +24,8 @@ class ThuongHieuController extends Controller {
         $brandName = StringHelper::toSlug($brandName);
 
         $brands = empty($brandName)
-            ? ThuongHieu::paginate(PagingHelper::PER_PAGE)
-            : ThuongHieu::where('slug', 'like', "%$brandName%")
+            ? ThuongHieu::orderBy('id', 'desc')->paginate(PagingHelper::PER_PAGE)
+            : ThuongHieu::where('slug', 'like', "%$brandName%")->orderBy('id', 'desc')
                 ->paginate(PagingHelper::PER_PAGE);
 
         return view('admin.thuong_hieu.index')->withBrands($brands);
