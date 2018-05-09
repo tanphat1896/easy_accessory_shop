@@ -28,14 +28,14 @@
 @endpush
 
 <link rel="stylesheet" href="{{ asset('plugin/zoom/smooth-products/smoothproducts.css') }}">
-
+    
 <div class="sp-wrap">
-    <a href="/{{ $product->anh_dai_dien }}">
-        <img width="100%" src="/{{ $product->anh_dai_dien }}" alt="{{ $product->getName() }}">
+    <a href="/{{ str_replace('\\', '/', $product->anh_dai_dien) }}">
+        <img width="100%" src="/{{ str_replace('\\', '/', $product->anh_dai_dien) }}" alt="{{ $product->getName() }}">
     </a>
     @foreach($product->hinhAnhs as $anh)
-        <a href="/{{ $anh->lien_ket }}">
-            <img src="/{{ $anh->lien_ket }}" alt="{{ $product->getName() }}">
+        <a href="/{{ str_replace('\\', '/', $anh->lien_ket) }}">
+            <img src="/{{ str_replace('\\', '/', $anh->lien_ket) }}" alt="{{ $product->getName() }}">
         </a>
     @endforeach
 </div>
