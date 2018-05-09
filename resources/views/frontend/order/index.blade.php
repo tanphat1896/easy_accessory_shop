@@ -4,6 +4,7 @@
 
 @section('content')
     <div class="ui basic segment layout-padding">
+        @include('sharing.components.error')
 
         @if (empty($order))
             <h3 class="ui header dividing">Kiểm tra đơn hàng:</h3>

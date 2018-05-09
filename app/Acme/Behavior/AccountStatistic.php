@@ -64,6 +64,9 @@ trait AccountStatistic {
     }
 
     private function getAccountByYear(Request $request, $deliveryCode) {
+        for ($i = 2014; $i <= date('Y'); $i++)
+            $this->fill['year'][] = $i;
+
         $yearRevenues = DB::table('don_hangs')
             ->selectRaw('year(ngay_duyet_don) as year, round(sum(tong_tien)/1000000.0, 2) as total')
             ->where('tinh_trang', $deliveryCode)
@@ -73,10 +76,15 @@ trait AccountStatistic {
         $yearBuyings = DB::table('chi_tiet_phieu_nhaps as c')
             ->join('phieu_nhaps as p', 'p.id', '=', 'c.phieu_nhap_id')
             ->selectRaw('year(ngay_nhap) as year, round(sum(so_luong*don_gia)/1000000.0, 2) as total')
-            ->groupBy(DB::raw('year(ngay_nhap)'))->get();
+            ->whereNotNull('p.phieu_nhap_id')
+            ->groupBy(DB::raw('year(ngay_nhap)'))
+            ->havingRaw('year is not null')
+            ->get();
+
+        $source = ['revenues' => $yearRevenues, 'buyings' => $yearBuyings];
 
         return $this->standardizeData(
-            ['revenues' => $yearRevenues, 'buyings' => $yearBuyings],
+            $this->fillMissingDuration($source, 'year', 'year'),
             ['year', 'total'],
             ['Năm', 'Triệu đồng']
         );

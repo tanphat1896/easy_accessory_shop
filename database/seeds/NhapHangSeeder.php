@@ -35,7 +35,7 @@ class NhapHangSeeder extends Seeder {
             $rows[] = $this->getRowChild();
 
         $rows = array_sort($rows, function ($row) {
-            return $row['nha_cung_cap_id'];
+            return $row['ngay_nhap'];
         });
 
         DB::table('phieu_nhaps')->insert($rows);

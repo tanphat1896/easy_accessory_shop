@@ -3,6 +3,8 @@
 @section('title', 'Lịch sử mua hàng')
 
 @section('content')
+    @include('sharing.components.error')
+
     <div class="layout-padding">
         <h3 class="ui dividing header small-bot-margin">Lịch sử đơn hàng
             <i class="spinner loading icon" id="loader" style="display: none;"></i>
