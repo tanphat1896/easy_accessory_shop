@@ -109,10 +109,7 @@
             <i class="users icon icon-left"></i>Nhân viên </a>
     @endif
 
-    @if($nhanVien->isAdmin())
-        <a class="item {{Request::is('*/cai_dat') ? 'active-bar': '' }}" href="/admin/cai_dat">
-            <i class="settings icon icon-left"></i>Cài đặt </a>
-    @endif
+
 </div>
 
 
