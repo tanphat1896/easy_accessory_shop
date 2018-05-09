@@ -15,13 +15,15 @@ class CreatePhieuNhapsTable extends Migration
     {
         Schema::create('phieu_nhaps', function (Blueprint $table) {
             $table->increments('id');
-            $table->date('ngay_nhap');
+            $table->date('ngay_nhap')->nullable();
             $table->integer('admin_id')->unsigned()->nullable();
-            $table->string('ten_nhan_vien', 50);
-            $table->integer('nha_cung_cap_id')->unsigned();
-            $table->integer('so_san_pham')->default(0);
+            $table->string('ten_nhan_vien', 50)->nullable();
+            $table->integer('nha_cung_cap_id')->unsigned()->nullable();
+            $table->integer('so_san_pham')->nullable()->default(0);
             $table->boolean('da_cap_nhat')->default(true);
+            $table->integer('phieu_nhap_id')->unsigned()->nullable();
             $table->foreign('nha_cung_cap_id','fk_pn_ncc')->references('id')->on('nha_cung_caps');
+            $table->foreign('phieu_nhap_id','fk_pn_pn')->references('id')->on('phieu_nhaps');
             $table->timestamps();
         });
     }

@@ -158,6 +158,12 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
      */
     Route::resource('nhap_hang','Admin\NhapHangController')
         ->middleware('nhaphang');
+    Route::get('nhap_hang/child/{id}', 'Admin\NhapHangController@showChild')->name('nhap_hang_index_child')
+        ->middleware('nhaphang');
+    Route::post('nhap_hang/child/{id}/them', 'Admin\NhapHangController@createChild')->name('nhap_hang_them_child')
+        ->middleware('nhaphang');
+    Route::post('nhap_hang/child/{id}/sua', 'Admin\NhapHangController@updateChild')->name('nhap_hang_sua_child')
+        ->middleware('nhaphang');
     Route::get('nhap_hang/{adminID}/index', 'Admin\NhapHangController@nhapHangIndex')->name('nhap_hang_index')
         ->middleware('nhaphang');
     Route::resource('chi_tiet_nhap_hang', 'Admin\CTNHController', ['only' => ['update', 'store', 'destroy']])
@@ -176,6 +182,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
         ->middleware('donhang');
     Route::get('don_hang/{id}/print', 'Admin\DonHangController@printOrder')->name('print_order')
         ->middleware('donhang');
+    Route::get('don_hang/search', 'Admin\DonHangController@search')->name('don_hang.search');
 
     /**
         Nhan vien

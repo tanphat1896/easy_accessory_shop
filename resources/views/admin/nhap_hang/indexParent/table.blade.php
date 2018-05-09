@@ -10,8 +10,7 @@
         <th class="collapsing">STT</th>
         <th>Người nhập hàng</th>
         <th>Ngày nhập</th>
-        <th>Nhà cung cấp</th>
-        <th class="collapsing">Số sản phẩm</th>
+        <th>Số nhà cung cấp</th>
         <th>Tình trạng</th>
         <th class="collapsing">Xem</th>
         <th class="collapsing">Sửa</th>
@@ -22,7 +21,7 @@
 
         @foreach($phieuNhaps as $stt => $phieuNhap)
             <tr>
-                @if($phieuNhap->isEmpty())
+                @if($phieuNhap->soNCC() == 0)
                     <td class="collapsing">
                         <div class="ui child checkbox">
                             <input type="checkbox" class="hidden" name="phieu-nhap-id[]" value="{{ $phieuNhap->id }}">
@@ -34,10 +33,11 @@
                 <td>{{ $stt + 1 }}</td>
                 <td>{{ $phieuNhap->tenNhanVien() }}</td>
                 <td>{{ $phieuNhap->ngay_nhap }}</td>
-                <td>{{ $phieuNhap->nhaCungCap->ten_ncc }}</td>
-                <td>{{ $phieuNhap->so_san_pham }}</td>
                 <td>
-                    @if ($phieuNhap->da_cap_nhat == true)
+                    {{ $phieuNhap->soNCC() }}
+                </td>
+                <td>
+                    @if ($phieuNhap->daCapNhat())
                         <i class="check fitted green icon"></i>
                         <span style="color: green"> Đã cập nhật vào kho</span>
                     @else
@@ -46,7 +46,7 @@
                     @endif
                 </td>
                 <td>
-                    <a href="{{ route('nhap_hang.show',[$phieuNhap->id]) }}"
+                    <a href="{{ route('nhap_hang_index_child',[$phieuNhap->id]) }}"
                        class="ui small blue label">
                         <i class="eye open fitted icon"></i>
                     </a>

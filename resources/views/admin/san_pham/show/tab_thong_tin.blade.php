@@ -32,6 +32,13 @@
                 </div>
 
                 <div class="inline field">
+                    <label class="label-fixed">Số lượng</label>
+                    <div class="static-input">
+                        <strong>{{ $sanPham->so_luong }}</strong>
+                    </div>
+                </div>
+
+                <div class="inline field">
                     <label class="label-fixed">Tình trạng</label>
                     <div class="static-input">{{ $sanPham->tinhTrang() }}</div>
                 </div>

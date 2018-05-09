@@ -9,10 +9,8 @@
         $nhanVien = \App\NhanVien::find(\App\Helper\AuthHelper::adminId());
     @endphp
 
-    @if($nhanVien->isAdmin())
-        <a href="/admin" class="title item {{ Request::is('admin') ? 'active': '' }}">
-            <i class="dashboard icon icon-left"></i>Tổng quan</a>
-    @endif
+    <a href="/admin" class="title item {{ Request::is('admin') ? 'active': '' }}">
+        <i class="dashboard icon icon-left"></i>Tổng quan</a>
 
 
 

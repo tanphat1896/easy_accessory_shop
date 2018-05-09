@@ -44,7 +44,6 @@
                         <option value="{{ $quyen->id }}">{{ $quyen->ten_quyen }}</option>
                     @endforeach
                 </select>
-
             </div>
 
             <div class="field">

@@ -9,6 +9,7 @@ use App\NhanVien;
 use App\PhieuNhap;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use PhpParser\Node\Stmt\Foreach_;
 
 class NhapHangController extends Controller
 {
@@ -21,23 +22,24 @@ class NhapHangController extends Controller
     public function nhapHangIndex($adminID)
     {
         $phieuNhaps = PhieuNhap::where('admin_id', $adminID)
-            ->orderBy('id', 'desc')->paginate(10);
+            ->orderBy('ngay_nhap', 'desc')->paginate(10);
         $nhaCungCaps = NhaCungCap::all();
-        return view('admin.nhap_hang.index.index', compact(['phieuNhaps','nhaCungCaps']));
+        return view('admin.nhap_hang.indexParent.index', compact(['phieuNhaps','nhaCungCaps']));
     }
 
     public function index()
     {
         if (AuthHelper::isAdmin())
         {
-            $phieuNhaps = PhieuNhap::orderBy('admin_id', 'desc')->orderBy('id', 'desc')->paginate(10);
+            $phieuNhaps = PhieuNhap::where('phieu_nhap_id', null)->orderBy('ngay_nhap', 'desc')
+                ->orderBy('id', 'desc')->paginate(10);
         }
         else
         {
             $phieuNhaps = PhieuNhap::where('admin_id', AuthHelper::adminId())->orderBy('id', 'desc')->paginate(10);
         }
         $nhaCungCaps = NhaCungCap::all();
-        return view('admin.nhap_hang.index.index', compact(['phieuNhaps','nhaCungCaps']));
+        return view('admin.nhap_hang.indexParent.index', compact(['phieuNhaps','nhaCungCaps']));
     }
 
     /**
@@ -45,9 +47,9 @@ class NhapHangController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request, $id)
     {
-        //
+
     }
 
     /**
@@ -58,13 +60,23 @@ class NhapHangController extends Controller
      */
     public function store(Request $request)
     {
-        //
         $phieuNhap = new PhieuNhap();
-        $phieuNhap->nha_cung_cap_id = $request->get('ten-ncc');
         $phieuNhap->ngay_nhap = $request->get('ngay-nhap');
         $phieuNhap->admin_id = AuthHelper::adminId();
         $phieuNhap->ten_nhan_vien = AuthHelper::adminName();
         $phieuNhap->save();
+
+        if ($request->has('nha-cung-cap'))
+        {
+            $ncc_ids = $request->get('nha-cung-cap');
+            foreach ($ncc_ids as $ncc_id)
+            {
+                $phieuNhapChild = new PhieuNhap();
+                $phieuNhapChild->nha_cung_cap_id = $ncc_id;
+                $phieuNhapChild->phieu_nhap_id = $phieuNhap->id;
+                $phieuNhapChild->save();
+            }
+        }
 
         return back()->with('success', 'Thêm phiếu nhập thành công');
     }
@@ -77,8 +89,18 @@ class NhapHangController extends Controller
      */
     public function show($id)
     {
+        $idParent = PhieuNhap::find($id)->phieu_nhap_id;
         $chiTietPhieuNhaps = PhieuNhap::find($id)->chiTietPhieuNhaps()->paginate(10);
-        return view('admin.nhap_hang.san_pham.index', compact(['chiTietPhieuNhaps','id']));
+        return view('admin.nhap_hang.san_pham.index', compact(['chiTietPhieuNhaps','id', 'idParent']));
+    }
+
+    public function showChild($id)
+    {
+        $phieuNhapParent = PhieuNhap::find($id);
+        $phieuNhaps = $phieuNhapParent->getChild();
+        $nhaCungCaps = NhaCungCap::all();
+
+        return view('admin.nhap_hang.indexChild.index', compact(['phieuNhaps', 'phieuNhapParent', 'nhaCungCaps']));
     }
 
     /**
@@ -87,9 +109,9 @@ class NhapHangController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
-        //
+
     }
 
     /**
@@ -102,9 +124,7 @@ class NhapHangController extends Controller
     public function update(Request $request, $id)
     {
         $phieuNhap = PhieuNhap::findOrFail($id);
-        $phieuNhap->nha_cung_cap_id = $request->get('ten-ncc');
         $phieuNhap->ngay_nhap = $request->get('ngay-nhap');
-        $phieuNhap->tai_khoan_id = 2;
         $phieuNhap->update();
 
         return back()->with('success', 'Cập nhật thành công');
@@ -122,5 +142,27 @@ class NhapHangController extends Controller
         PhieuNhap::destroy($ids);
 
         return back()->with('success', 'Xóa thành công');
+    }
+
+    public function createChild(Request $request, $id)
+    {
+        foreach ($request->get('nha-cung-cap') as $ncc_id)
+        {
+            $phieuNhap = New PhieuNhap();
+            $phieuNhap->nha_cung_cap_id = $ncc_id;
+            $phieuNhap->phieu_nhap_id = $id;
+            $phieuNhap->save();
+        }
+
+        return back()->with('success', 'Thêm phiếu nhập thành công');
+    }
+
+    public function updateChild(Request $request, $id)
+    {
+        $phieuNhap = PhieuNhap::findOrFail($id);
+        $phieuNhap->nha_cung_cap_id = $request->get('nha-cung-cap');
+        $phieuNhap->update();
+
+        return back()->with('success', 'Cập nhật phiếu nhập thành công');
     }
 }

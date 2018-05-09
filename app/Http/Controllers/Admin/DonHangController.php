@@ -19,8 +19,24 @@ class DonHangController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->has('key-word')){
+            $id = $request->get('key-word');
+            $donHangs = DonHang::where('ma_don_hang', 'like', "%$id%")->get();
+
+            return view('admin.don_hang.index.index', compact('donHangs'));
+        }
+        elseif ($request->has('tinh-trang'))
+        {
+            $id = $request->get('tinh-trang');
+            if ($id < 0) {
+                return back();
+            }
+            $donHangs = DonHang::where('tinh_trang', $id)->orderBy('ngay_dat_hang', 'desc')->paginate(10);
+
+            return view('admin.don_hang.index.index', compact('donHangs'));
+        }
 //        $donHangs = DonHang::all();
         $donHangs = DonHang::orderBy('tinh_trang', 'asc')->orderBy('ngay_dat_hang', 'desc')->paginate(10);
 
@@ -118,5 +134,16 @@ class DonHangController extends Controller
         $chiTietDonHangs = ChiTietDonHang::where('don_hang_id', $id)->get();
         $pdf = PDF::loadView('admin.don_hang.san_pham.order_preview', compact(['donHang', 'chiTietDonHangs']));
         return $pdf->stream();
+    }
+
+    public function search(Request $request)
+    {
+        $code = $request->get('key-word');
+        dd($code);
+
+        $donHangs = DonHang::where('tinh_trang', $code)->orderBy('tinh_trang', 'asc')
+            ->orderBy('ngay_dat_hang', 'desc')->paginate(10);
+
+        return view('admin.don_hang.index.index', compact('donHangs'));
     }
 }

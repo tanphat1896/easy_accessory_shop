@@ -6,22 +6,17 @@
             {{ csrf_field() }}
 
             <div class="field">
-                <label for="ten-ncc">Nhà cung cấp</label>
-                <select id="ten-ncc" name="ten-ncc" class="ui dropdown">
-                    @foreach($nhaCungCaps as $nhaCungCap)
-                        <option value="{{ $nhaCungCap->id }}">
-                            {{ $nhaCungCap->ten_ncc }}
-                        </option>
-                    @endforeach
-                </select>
+                <label for="dia-chi">Ngày nhập</label>
+                <input type="date" id="ngay-nhap" name="ngay-nhap" value="{{ date('Y-m-d') }}" max="{{ date('Y-m-d') }}" required>
             </div>
 
             <div class="field">
-                <label for="dia-chi">Ngày nhập</label>
-                <input type="date" id="ngay-nhap" name="ngay-nhap" value="{{ date('Y-m-d') }}" max="{{ date('Y-m-d') }}" required>
-                {{--<script>--}}
-                    {{--document.querySelector("#ngay-nhap").valueAsDate = new Date()--}}
-                {{--</script>--}}
+                <label for="thong-so">Nhà cung cấp</label>
+                <select name="nha-cung-cap[]" multiple id="nha-cung-cap" class="ui dropdown">
+                    @foreach($nhaCungCaps as $nhaCungCap)
+                        <option value="{{ $nhaCungCap->id }}">{{ $nhaCungCap->ten_ncc }}</option>
+                    @endforeach
+                </select>
             </div>
 
             <div class="field">
@@ -40,18 +35,6 @@
                 {{ csrf_field() }}
 
                 {{ method_field('PUT') }}
-
-                <div class="field">
-                    <label for="ten-ncc">Nhà cung cấp</label>
-                    <select id="ten-ncc" name="ten-ncc">
-                        @foreach($nhaCungCaps as $nhaCungCap)
-                            <option value="{{ $nhaCungCap->id }}"
-                                    {{ ($phieuNhap->nha_cung_cap_id == $nhaCungCap->id) ? 'selected' : '' }}>
-                                {{ $nhaCungCap->ten_ncc }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
 
                 <div class="field">
                     <label for="dia-chi">Ngày nhập</label>

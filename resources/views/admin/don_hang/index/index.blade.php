@@ -6,11 +6,28 @@
 
         <h3 class="ui dividing header center aligned">Quản lý đơn hàng</h3>
 
+        <div class="field force-left no-clear">
+            @include('admin.don_hang.san_pham.filter')
+        </div>
+
+
+        <div class="field force-right no-clear">
+
+            @include('admin.don_hang.san_pham.search')
+
+        </div>
+
+        <div class="ui divider hidden small-td-margin clearing">
+
+        </div>
+
         @include('admin.layouts.components.success_msg')
 
         @include('admin.layouts.components.error_msg')
 
         @include('admin.don_hang.index.table')
+
+
     </div>
 @endsection
 

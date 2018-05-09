@@ -5,7 +5,7 @@
 @section('content')
     <div class="ui blue raised segment">
         <h3 class="ui dividing header">
-            <a href="{{ route('nhap_hang.index') }}" class="need-popup" data-content="Danh sách phiếu nhập">
+            <a href="{{ route('nhap_hang_index_child', [$idParent]) }}" class="need-popup" data-content="Danh sách phiếu nhập">
                 <i class="blue small angle double left circular fitted icon"></i></a>
             Chi tiết phiếu nhập
             @if(\App\PhieuNhap::find($id)->da_cap_nhat == false)

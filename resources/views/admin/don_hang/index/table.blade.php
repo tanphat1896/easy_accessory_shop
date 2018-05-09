@@ -87,5 +87,20 @@
 @push('script')
     <script>
         // bindDataTable('bang-nhap-hang');
+
+
+        let url = window.location.href;
+        let page = '';
+        let currentQuery = /\?(.*)/.exec(url);
+        currentQuery = currentQuery == null ? '' : currentQuery[1];
+        url = url.replace(/\?.*/, '');
+
+        $('.pagination a').click((e) => {
+            e.preventDefault();
+            page = "page=" + e.target.innerText;
+            currentQuery = currentQuery.replace(/&?page=\d{1,}/ig, '');
+            url += (currentQuery === '') ? `?${page}` : `?${currentQuery}&${page}`;
+            redirectTo(url);
+        });
     </script>
 @endpush

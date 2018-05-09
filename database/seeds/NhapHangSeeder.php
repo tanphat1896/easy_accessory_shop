@@ -21,25 +21,42 @@ class NhapHangSeeder extends Seeder {
 //        ]);
 
         $rows = [];
-        for ($i = 0; $i < 57; $i++)
-            $rows[] = $this->getRow();
+        for ($i = 0; $i < 20; $i++)
+            $rows[] = $this->getRowParent();
 
         $rows = array_sort($rows, function ($row) {
             return $row['ngay_nhap'];
         });
 
         DB::table('phieu_nhaps')->insert($rows);
+
+        $rows = [];
+        for ($i = 0; $i < 100; $i++)
+            $rows[] = $this->getRowChild();
+
+        $rows = array_sort($rows, function ($row) {
+            return $row['nha_cung_cap_id'];
+        });
+
+        DB::table('phieu_nhaps')->insert($rows);
     }
 
-    function getRow() {
+    function getRowParent() {
         $date = OrderTableSeeder::getValidDate();
         $id = random_int(1, 10);
         return [
             'ngay_nhap' => $date,
             'admin_id' => $id,
-            'ten_nhan_vien' => \App\Admin::find($id)->name,
+            'ten_nhan_vien' => \App\Admin::find($id)->name
+        ];
+    }
+
+    function getRowChild() {
+        $id = random_int(1, 20);
+        return [
+            'phieu_nhap_id' => $id,
             'so_san_pham' => 3,
-            'nha_cung_cap_id' => random_int(1, 2)
+            'nha_cung_cap_id' => random_int(1, 9)
         ];
     }
 }
